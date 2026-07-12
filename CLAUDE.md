@@ -1,10 +1,9 @@
-# Job Application Assistant for [YOUR_NAME]
+# Job Application Assistant for Pham Hai Nam
 
-<!-- SETUP: This file is populated by running /setup -->
-<!-- After running /setup, all [PLACEHOLDER] tokens will be replaced with your actual information -->
+<!-- Populated by /setup on 2026-07-12 from documents/cv/CV_Pham_Hai_Nam_Software_Engineer.pdf -->
 
 ## Role
-This repo is a job application workspace. Claude acts as a career advisor and application assistant for [YOUR_NAME], helping with:
+This repo is a job application workspace. Claude acts as a career advisor and application assistant for Pham Hai Nam, helping with:
 1. **Job fit evaluation** - Assess job postings against your profile (skills, experience, behavioral traits)
 2. **CV tailoring** - Adapt existing CV templates (LaTeX/moderncv) to target specific roles
 3. **Cover letter writing** - Draft targeted cover letters using existing templates (LaTeX)
@@ -13,68 +12,66 @@ This repo is a job application workspace. Claude acts as a career advisor and ap
 
 ## Candidate Profile
 
-<!-- This section is auto-populated by /setup. You can also fill it in manually. -->
+Full structured profile: `.claude/skills/job-application-assistant/01-candidate-profile.md`
 
 ### Identity
-- **Name:** [YOUR_NAME]
-- **Location:** [YOUR_CITY], [YOUR_COUNTRY] ([YOUR_COMMUTE_CONSTRAINTS])
-- **Languages:** [YOUR_LANGUAGES]
-- **Status:** [YOUR_EMPLOYMENT_STATUS]
-- **LinkedIn headline:** "[YOUR_LINKEDIN_HEADLINE]"
+- **Name:** Pham Hai Nam (Phạm Hải Nam), b. 15/07/2003
+- **Location:** Ha Noi, Vietnam (Ha Noi onsite/hybrid, or remote — VN and offshore. Not relocating to HCMC/Da Nang unless fully remote.)
+- **Contact:** 0346294259 · namphamhai7@gmail.com · https://github.com/phamnam2003
+- **Languages:** Vietnamese (native), English (professional working — technical reading/writing)
+- **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
+- **LinkedIn headline:** "Backend Developer | Go · Kafka · Kubernetes | Fullstack with React"
 
 ### Education
-<!-- List your degrees, most recent first -->
-- **[DEGREE_LEVEL] in [FIELD]** ([YEAR_START]-[YEAR_END]) - [INSTITUTION]
-  - Thesis: "[THESIS_TITLE]"
-  - Topics: [KEY_TOPICS]
+- **Engineer's degree (Kỹ sư) in Information Technology** — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
+  - Topics: software engineering, data structures & algorithms, databases, computer networks, web development
 
 ### Professional Experience
-<!-- List your roles, most recent first -->
-- **[JOB_TITLE]** ([START_DATE] - [END_DATE]) - **[COMPANY]** ([LOCATION])
-  - [KEY_RESPONSIBILITY_1]
-  - [KEY_RESPONSIBILITY_2]
-  - [KEY_ACHIEVEMENT]
+- **Frontend and Backend Developer** (11/2025 – Present) - **AIONtech** (Ha Noi)
+  - Dependency injection with Uber Dig and Fx to improve scalability and maintainability of Go backend services
+  - Background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows
+  - Architected system design (DB modeling + backend stack) on the SkyReality real-estate platform and the C06 document-AI system; backend work on Sacombank's Smart Teller Machine
+- **Frontend and Backend Developer** (06/2024 – 10/2025) - **Leeon Group** (Ha Noi)
+  - Took ownership of an existing Go codebase from departing team members — maintained, debugged, and enhanced production projects wired into CI/CD
+  - RabbitMQ, Redis (cache/pub-sub/streams), Ristretto, Worker Pool pattern, gRPC with mutual TLS
+  - Stood up the observability stack: Prometheus, Grafana, Loki, OpenTelemetry
+- **Full-stack Developer** (07/2023 – 02/2024) - **TLGEO** (Ha Noi)
+  - Vue.js/Next.js UIs; ExpressJS and Strapi APIs; PostgreSQL + PostGIS spatial data; Mapbox for government mapping/agriculture projects
+- **Frontend Intern** (04/2023 – 06/2023) - **Lalasoft** (Ha Noi)
+  - Redux Core/Toolkit, Ant Design; internal tools as Chrome Extensions
 
 ### Technical Skills
-- **Primary:** [YOUR_PRIMARY_SKILLS]
-- **Secondary:** [YOUR_SECONDARY_SKILLS]
-- **Domain:** [YOUR_DOMAIN_EXPERTISE]
-- **Software:** [YOUR_TOOLS_AND_SOFTWARE]
+- **Primary:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), TypeScript/JavaScript (ReactJS, Next.js, Vue.js, Redux/Redux Toolkit, Recoil), Node.js (Express, Strapi), RESTful APIs, microservices
+- **Secondary:** Kafka, RabbitMQ, Redis, PostgreSQL/MySQL/Oracle/MongoDB/ScyllaDB, Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress), OpenTelemetry, Prometheus/Grafana/Loki, ArgoCD, GitHub Actions, GitLab Runners, Nginx, Python (Selenium, Scrapy)
+- **Domain:** Fintech/banking (Sacombank STM, AION Bank), government/public sector (C06 — Ministry of Public Security), real-estate CRM, geospatial (PostGIS, Mapbox)
+- **Software:** Claude Code, GitHub Copilot, Spec-Kit, Git, Linux (Ubuntu/Arch/CentOS), MinIO/SeaweedFS/RustFS
 
 ### Certifications
-<!-- List relevant certifications with dates -->
-- **[CERTIFICATION_NAME]** - [HOURS]h - completed [DATE]
+*(none on file — add if applicable)*
 
 ### Publications
-<!-- List peer-reviewed publications, if any -->
-- [AUTHOR_LIST] ([YEAR]). [TITLE]. [JOURNAL].
+*(none)*
 
 ### Awards
-<!-- List relevant awards, hackathons, competitions -->
-- [AWARD_NAME] - [EVENT] ([YEAR])
+*(none on file — add if applicable)*
 
 ### Behavioral Profile
-<!-- Your behavioral assessment results (PI, DISC, Myers-Briggs, or self-assessment) -->
-- **[TRAIT_1]** - [DESCRIPTION]
-- **[TRAIT_2]** - [DESCRIPTION]
-- **Strengths:** [YOUR_STRENGTHS]
-- **Growth areas:** [YOUR_GROWTH_AREAS]
-- **Thrives in:** [YOUR_IDEAL_ENVIRONMENT]
+*(Not yet assessed. Run `/setup --section behavioral`, or drop a LinkedIn export / reference letters into `documents/` and re-run `/setup` so this can be inferred from real signal rather than guessed.)*
 
 ### What Excites You
-<!-- What motivates you professionally -->
-- [PASSION_1]
-- [PASSION_2]
+*(To confirm — placeholder inferred from CV trajectory, correct it if wrong)*
+- Owning system design end-to-end: database modeling and backend stack decisions, not just ticket work
+- Distributed, event-driven systems at scale — Kafka, gRPC, worker pools, observability
 
 ### Target Sectors
-<!-- Industries and companies you're targeting -->
-- [SECTOR_1]: [EXAMPLE_COMPANIES]
-- [SECTOR_2]: [EXAMPLE_COMPANIES]
+*(To confirm)*
+- Fintech / banking: strongest domain evidence (Sacombank STM, AION Bank)
+- Product & tech companies, startups: Go/microservices backend teams
 
 ### Deal-breakers
-<!-- Hard constraints on job search -->
-- [DEALBREAKER_1]
-- [DEALBREAKER_2]
+- Location: nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation)
+- Level: no intern/fresher roles; target is Mid-level (Junior acceptable)
+- Remote/offshore roles requiring US-hours timezone overlap
 
 ## Repo Structure
 - `cv/` - LaTeX CV variants (moderncv template, banking style)
