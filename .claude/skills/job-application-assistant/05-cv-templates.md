@@ -105,12 +105,16 @@ Write 5-7 lines that function as an "elevator pitch": a concise, compelling intr
 
 **Create 2-3 profile statement templates for your main role types:**
 
-<!-- SETUP: These are populated based on your background -->
-**For [YOUR_PRIMARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_1]
+<!-- Populated by /setup on 2026-07-15 for Pham Hai Nam. Tune per posting; keep to 3-4 lines. -->
 
-**For [YOUR_SECONDARY_ROLE_TYPE] roles:**
-> [YOUR_PROFILE_STATEMENT_TEMPLATE_2]
+**For Backend / architecture-ownership roles (primary):**
+> Backend engineer with ~2 years building production Go services (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across fintech and public-sector systems. Owned architecture and database modeling end to end on a real-estate lead platform and a document-AI system for the Ministry of Public Security. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD).
+
+**For pure-backend / distributed-systems roles:**
+> Go backend developer focused on distributed, event-driven systems: Kafka and RabbitMQ messaging, Redis cache/pub-sub/streams, gRPC with mutual TLS and interceptors, and the Worker Pool pattern for background processing. Delivered async import/export pipelines and traceability improvements on Sacombank's Smart Teller Machine, and maintains open-source Go references covering gRPC down to the TLS layer and 20 Gang-of-Four patterns.
+
+**For Fullstack (React + Go) roles:**
+> Fullstack developer who has shipped both sides of production systems: ReactJS/Next.js/Vue frontends (Redux, Redux Toolkit, Recoil, Tailwind, Ant Design) and Go/Node.js backends (Gin, gRPC, Express, Strapi). Strongest on the backend — event-driven microservices, PostgreSQL data modeling, and system-design ownership — while staying fluent in the component-based frontend architecture that consumes those APIs.
 
 ### Core Competencies / Skills Section (Best Practice)
 Reorder and emphasize based on the role. Use bold category labels.

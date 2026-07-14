@@ -124,12 +124,17 @@ site:weworkremotely.com golang OR "back-end" developer
 Timezone check is mandatory on these - reject anything requiring US-hours overlap unless the
 user explicitly opts in.
 
-### Priority 5: Adjacent - DevOps / Platform / Cloud
+### Priority 5 (opt-in only): DevOps / Platform / Cloud — NOT a target
 
-Pivot lane. The CV genuinely supports this (Docker, Kubernetes + Calico/Cilium/Envoy/Nginx
-Ingress, ArgoCD/GitOps, OpenTelemetry, Prometheus/Grafana/Loki, self-hosted GitLab Runners,
-GitHub Actions), though there is no formal DevOps job title yet - expect these to be a stretch
-at mid-level and to compete against candidates with platform-team titles.
+**Deprioritized as of 2026-07-15 setup.** Pham confirmed he does *not* want DevOps/Platform/SRE
+as a job title, even though he has the skills and enjoys the work. Infra is a **strength to sell
+inside a backend role**, not a role to chase. Do **not** run these in the default `/scrape` pass;
+only run them if the user explicitly asks (`/scrape devops`). When surfaced, flag every result as
+an off-target stretch.
+
+The CV genuinely supports this (Docker, Kubernetes + Calico/Cilium/Envoy/Nginx Ingress,
+ArgoCD/GitOps, OpenTelemetry, Prometheus/Grafana/Loki, self-hosted GitLab Runners, GitHub
+Actions), but the title mismatch is deliberate — see `04-job-evaluation.md` career goals.
 
 ```
 site:itviec.com "DevOps Engineer" Kubernetes ha-noi

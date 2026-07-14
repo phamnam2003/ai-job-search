@@ -1,8 +1,8 @@
-%% Example CV - [YOUR_NAME]
-%% Comprehensive overview of all competencies, experience, and achievements.
-%% Use as a master reference when tailoring role-specific CVs.
+%% Master CV - Pham Hai Nam
+%% Comprehensive overview of all competencies, experience, and projects.
+%% Use as a master reference when tailoring role-specific CVs (cv/main_<company>.tex).
 %%
-%% SETUP: Run /setup to populate this with your actual information.
+%% Populated by /setup on 2026-07-15.
 %% Compile with: lualatex main_example.tex
 %% (pdflatex often fails on modern MiKTeX with fontawesome5 font-expansion errors.)
 
@@ -18,24 +18,25 @@
 \renewcommand*{\sectionstyle}[1]{{\sectionfont\color{color1}#1}}
 
 \usepackage[utf8]{inputenc}
+\usepackage{needspace}
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
     filecolor=magenta,
     urlcolor=blue,
-    pdftitle={[YOUR_NAME] - CV},
+    pdftitle={Pham Hai Nam - CV},
     pdfpagemode=FullScreen,
 }
 \usepackage[scale=0.80]{geometry}
 \usepackage{import}
 
 % personal data
-\name{[First]}{[Last]}
-\address{[Your Address, City, Country]}{}{}
-\phone[mobile]{[+XX XXXXXXXXXX]}
-\email{[your.email@example.com]}
-\extrainfo{\href{[https://linkedin.com/in/your-profile]}{LinkedIn}, \href{[https://github.com/your-username]}{GitHub}}
+\name{Pham Hai}{Nam}
+\address{Ha Noi, Vietnam}{}{}
+\phone[mobile]{0346294259}
+\email{namphamhai7@gmail.com}
+\extrainfo{\href{https://github.com/phamnam2003}{github.com/phamnam2003}}
 
 \begin{document}
 
@@ -46,7 +47,7 @@
 % ============================================================
 
 \vspace{6pt}
-\small{[Write a 3-5 line profile statement tailored to the role you're applying for. Focus on what makes you uniquely qualified. Example: "Data scientist with a PhD in [field] and X years of industry experience. Combines deep domain expertise in [domain] with strong applied machine learning and Python development skills. Experienced in developing end-to-end ML pipelines, from data ingestion to stakeholder-facing dashboards."]}
+\small{Backend engineer with around two years building production Go services (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across fintech and public-sector systems. Owned architecture and database modeling end to end on a real-estate lead platform and a document-AI system for the Ministry of Public Security. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD). Also ships the React/Next/Vue frontends that consume these APIs.}
 
 % ============================================================
 %     CORE COMPETENCIES
@@ -56,15 +57,17 @@
 \vspace{1pt}
 \begin{itemize}
 
-\item \textbf{[Skill Category 1]}: [Specific skills, frameworks, tools. Be concrete.]
+\item \textbf{Go backend}: Gin, gRPC (mutual TLS, interceptors, streaming), Worker Pool, dependency injection (uber-go/dig, Fx); RESTful APIs and microservices; unit and integration testing.
 
-\item \textbf{[Skill Category 2]}: [Specific skills, frameworks, tools.]
+\item \textbf{Distributed \& event-driven}: Apache Kafka and RabbitMQ messaging, Redis (cache, pub/sub, streams), Asynq, Ristretto; asynchronous import/export pipelines and background processing.
 
-\item \textbf{[Skill Category 3]}: [Specific skills, frameworks, tools.]
+\item \textbf{Data}: PostgreSQL (incl. PostGIS), MySQL, Oracle, SQLite, MongoDB, ScyllaDB/Cassandra; database modeling and transaction management; sqlc for type-safe queries.
 
-\item \textbf{[Skill Category 4]}: [Domain expertise, methods, approaches.]
+\item \textbf{Infrastructure \& observability}: Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress); OpenTelemetry, Prometheus, Grafana, Loki; GitHub Actions, GitLab Runners, ArgoCD; object storage (MinIO, SeaweedFS, S3-compatible).
 
-\item \textbf{[Skill Category 5]}: [Tools, platforms, software.]
+\item \textbf{Frontend}: TypeScript/JavaScript with ReactJS, Next.js, Vue.js; Redux, Redux Toolkit, Recoil; Tailwind CSS, Ant Design.
+
+\item \textbf{Security \& AI-assisted development}: PASETO, TOTP/2FA, TLS/mTLS and crypto fundamentals; Claude Code, GitHub Copilot, and Spec-Kit spec-driven workflows.
 
 \end{itemize}
 
@@ -77,31 +80,92 @@
 \begin{itemize}
 
 % --- Most Recent Role ---
-\item{\cventry{[YYYY--Present]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{11/2025--Present}{Frontend and Backend Developer}{AIONtech}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
-    \item [Achievement or responsibility 1 - be specific, use numbers where possible]
-    \item [Achievement or responsibility 2]
-    \item [Achievement or responsibility 3]
-    \item [Achievement or responsibility 4]
+    \item Implemented dependency injection with uber-go/dig and Fx to improve scalability and maintainability of Go backend services.
+    \item Refactored and optimized internal packages to improve performance and strengthen application safety.
+    \item Built background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows.
+    \item Contributed to the design of scalable software systems and architectures.
 \end{itemize}}}
 
 \vspace{3pt}
 
 % --- Previous Role ---
-\item{\cventry{[YYYY--YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{06/2024--10/2025}{Frontend and Backend Developer}{Leeon Group}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
-    \item [Achievement or responsibility 1]
-    \item [Achievement or responsibility 2]
-    \item [Achievement or responsibility 3]
+    \item Took ownership of an inherited production Go codebase from departing team members; maintained, debugged, and enhanced projects wired into CI/CD.
+    \item Implemented messaging and caching: RabbitMQ, Redis (cache/pub-sub/streams), Ristretto, and the Worker Pool pattern for background tasks.
+    \item Worked with gRPC in depth (mutual TLS, metadata, interceptors, streaming); secured services with SSL/TLS certificates in Docker.
+    \item Stood up the observability stack: Prometheus, Grafana, Loki, and OpenTelemetry for unified traces, metrics, and logs.
+    \item Built ReactJS web applications with Tailwind CSS and Ant Design.
 \end{itemize}}}
 
 \vspace{3pt}
 
 % --- Earlier Role ---
-\item{\cventry{[YYYY--YYYY]}{[Job Title]}{[Company]}{[City, Country]}{}{\vspace{1pt}
+\needspace{5\baselineskip}
+\item{\cventry{07/2023--02/2024}{Full-stack Developer}{TLGEO}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
-    \item [Achievement or responsibility 1]
-    \item [Achievement or responsibility 2]
+    \item Built UIs with Vue.js and Next.js; developed and consumed APIs with ExpressJS and Strapi.
+    \item Contributed to system design using PostgreSQL with the PostGIS extension for spatial data; used Mapbox for government mapping and agriculture projects.
+    \item Handled deployment on Linux/Ubuntu Server with SSH and Nginx.
+\end{itemize}}}
+
+\vspace{3pt}
+
+% --- Oldest Role ---
+\needspace{5\baselineskip}
+\item{\cventry{04/2023--06/2023}{Frontend Intern}{Lalasoft}{Ha Noi, Vietnam}{}{\vspace{1pt}
+\begin{itemize}
+    \item Applied Redux Core, Redux Toolkit, and Ant Design to ongoing company projects.
+    \item Researched and built small internal tools as Chrome Extensions.
+\end{itemize}}}
+
+\end{itemize}
+
+% ============================================================
+%     SELECTED PROJECTS
+% ============================================================
+
+\section{Selected Projects}
+\vspace{3pt}
+\begin{itemize}
+
+\needspace{4\baselineskip}
+\item{\cventry{03/2026--Present}{SkyReality --- Real-estate lead platform}{Backend Developer, team of 7}{}{}{\vspace{1pt}
+\begin{itemize}
+    \item Architected the system: database modeling and backend stack decisions.
+    \item Integrated webhook event processing from Zalo, Slack, and Telegram bots; implemented OAuth2 Google Sign-In and multipart upload with checksum verification.
+    \item Stack: Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\needspace{4\baselineskip}
+\item{\cventry{11/2025--01/2026}{Sacombank Smart Teller Machine (STM)}{Backend Developer, team of 8}{}{}{\vspace{1pt}
+\begin{itemize}
+    \item Built asynchronous import/export pipelines and added step-level transaction logging across STM workflows.
+    \item Resolved duplicate-data issues and removed background-processing bottlenecks; applied dependency injection for testability.
+    \item Stack: Go (Gin), Kafka, Oracle, SQLite, Prometheus, Grafana, Docker.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\needspace{4\baselineskip}
+\item{\cventry{12/2025--Present}{Document AI for C06, Ministry of Public Security}{Backend Developer, team of 9}{}{}{\vspace{1pt}
+\begin{itemize}
+    \item Architected the system: database modeling and backend stack decisions for an AI document-summarization and task-generation platform.
+    \item Stack: Go (Gin), Kafka, PostgreSQL, Python, Docker, Kubernetes.
+\end{itemize}}}
+
+\vspace{3pt}
+
+\needspace{4\baselineskip}
+\item{\cventry{Open source}{github.com/phamnam2003}{Go references \& study repos}{}{}{\vspace{1pt}
+\begin{itemize}
+    \item gRPC reference built from the protocol up (all four method types, interceptors, insecure/TLS/mTLS); \texttt{challenges} repo with 20 Gang-of-Four patterns and 18+ algorithm solutions in Go; \texttt{go-2fa} TOTP implementation.
 \end{itemize}}}
 
 \end{itemize}
@@ -114,14 +178,9 @@
 \vspace{1pt}
 \begin{itemize}
 
-\item{\cventry{[YYYY--YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-Thesis: ``[Thesis Title].'' [Brief description of research focus.]
-}}
-
-\vspace{3pt}
-
-\item{\cventry{[YYYY--YYYY]}{[Degree] in [Field]}{[Institution]}{[City, Country]}{}{\vspace{1pt}
-[Brief description or key topics.]
+\needspace{3\baselineskip}
+\item{\cventry{2021--2026}{Engineer's degree, Information Technology}{Hanoi Open University (HOU)}{Ha Noi, Vietnam}{}{\vspace{1pt}
+Software engineering, data structures \& algorithms, databases, computer networks, web development.
 }}
 
 \end{itemize}
@@ -133,27 +192,7 @@ Thesis: ``[Thesis Title].'' [Brief description of research focus.]
 \section{Languages}
 \vspace{1pt}
 \begin{itemize}
-\item [Language 1] (native), [Language 2] (fluent), [Language 3] (intermediate).
-\end{itemize}
-
-% ============================================================
-%     PUBLICATIONS (optional)
-% ============================================================
-
-\section{Publications}
-\vspace{1pt}
-\begin{itemize}
-\item [Author(s)] ([Year]). [Title]. [Journal/Conference]. \href{[DOI_URL]}{DOI link}
-\end{itemize}
-
-% ============================================================
-%     HONORS AND AWARDS (optional)
-% ============================================================
-
-\section{Honors and Awards}
-\vspace{1pt}
-\begin{itemize}
-\item{\textbf{[Award Name]} -- [Event/Organization] ([Year]).}
+\item Vietnamese (native); English (professional working --- technical reading and writing).
 \end{itemize}
 
 % ============================================================

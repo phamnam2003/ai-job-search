@@ -23,7 +23,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **LinkedIn headline:** "Backend Developer | Go · Kafka · Kubernetes | Fullstack with React"
 
 ### Education
-- **Engineer's degree (Kỹ sư) in Information Technology** — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
+- **Engineer's degree (Kỹ sư) in Information Technology** (2021 – 2026) — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
   - Topics: software engineering, data structures & algorithms, databases, computer networks, web development
 
 ### Professional Experience
@@ -59,12 +59,14 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 *(Not yet assessed. Run `/setup --section behavioral`, or drop a LinkedIn export / reference letters into `documents/` and re-run `/setup` so this can be inferred from real signal rather than guessed.)*
 
 ### What Excites You
-*(To confirm — placeholder inferred from CV trajectory, correct it if wrong)*
+*(Confirmed via /setup 2026-07-15)*
 - Owning system design end-to-end: database modeling and backend stack decisions, not just ticket work
-- Distributed, event-driven systems at scale — Kafka, gRPC, worker pools, observability
+- Distributed, event-driven systems — Kafka, gRPC, worker pools, async pipelines
+- Performance profiling and optimization
+- Infra, Kubernetes, and observability — enjoyed as a *strength to bring*, NOT as a job title (see deal-breakers)
 
 ### Target Sectors
-*(To confirm)*
+*(Confirmed via /setup 2026-07-15 — priority: backend with architecture ownership; pure-backend and fullstack are valid nets)*
 - Fintech / banking: strongest domain evidence (Sacombank STM, AION Bank)
 - Product & tech companies, startups: Go/microservices backend teams
 
@@ -72,6 +74,10 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - Location: nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation)
 - Level: no intern/fresher roles; target is Mid-level (Junior acceptable)
 - Remote/offshore roles requiring US-hours timezone overlap
+- English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups)
+- **Not** a DevOps/Platform/SRE job title (has the skills and enjoys the work, but does not want it as the role)
+- Drains to avoid: ticket-only work with no design input; legacy maintenance with no new build
+- Salary floor: **15M VND/month, negotiable** — flag postings clearly below this
 
 ## Repo Structure
 - `cv/` - LaTeX CV variants (moderncv template, banking style)

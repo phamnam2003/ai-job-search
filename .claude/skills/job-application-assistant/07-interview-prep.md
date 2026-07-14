@@ -35,6 +35,52 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 
 <!-- Add more STAR examples as needed. Aim for 4-6 covering different competencies. -->
 
+## STAR Candidates (Complete Manually)
+
+<!-- Seeded by /setup on 2026-07-15 from CV projects + behavioral answers. The Situation/Task/
+     Action are drafted from real work; fill each **Result** with a concrete outcome or metric
+     before using in an interview. Do not invent numbers. -->
+
+### Architecture ownership on SkyReality (system design & DB modeling)
+**Source:** CV — SkyReality, backend developer, team of 7 (03/2026–present)
+**What happened:** Given a new real-estate lead-management platform, you owned the database model and backend stack decisions, then built the core modules and webhook-based event ingestion from Zalo/Slack/Telegram.
+**Why it matters:** Best evidence for "you will own the backend" / system-design / data-modeling questions, and for how you make architectural decisions (your stated "research deeply, then commit" style).
+**S/T/A/R stub:**
+- Situation: New platform, greenfield backend, small team; leads arrive from multiple external channels (Zalo, Slack, Telegram) and marketing campaigns.
+- Task: Decide the data model and backend architecture, then deliver scalable core modules and reliable event ingestion.
+- Action: Modeled the schema in PostgreSQL; chose Gin + Kafka + Redis + uber-go/dig; built webhook event processing, OAuth2 Google Sign-In, and multipart upload with checksum verification.
+- Result: _(fill: e.g. leads/day ingested, number of channels automated, latency, what the design enabled the team to ship next)_
+
+### Async pipelines & bottleneck removal on Sacombank STM (performance / distributed)
+**Source:** CV — Sacombank Smart Teller Machine, backend developer, team of 8 (11/2025–01/2026)
+**What happened:** On a live self-service banking system, you rebuilt data import/export as async pipelines, added step-level transaction logging, and resolved duplicate-data issues that were causing performance bottlenecks.
+**Why it matters:** Strongest story for performance/optimization, event-driven design, and working in a regulated fintech context. Good answer for "tell me about a time you fixed a performance problem."
+**S/T/A/R stub:**
+- Situation: STM export/reporting was slow and reconciliation was error-prone; background processing had duplicate-data issues and bottlenecks.
+- Task: Improve scalability and reliability of import/export and make transactions traceable.
+- Action: Built asynchronous import/export pipelines (Kafka), added step-level logging across STM workflows, applied dependency injection to decouple components, and fixed the duplicate-data root cause.
+- Result: _(fill: e.g. export time before/after, duplicate rate eliminated, reconciliation effort saved)_
+
+### Taking over an inherited Go codebase (ownership of ambiguous work)
+**Source:** CV — Leeon Group, frontend & backend developer (06/2024–10/2025)
+**What happened:** Team members left and you took ownership of an existing production Go codebase wired into CI/CD — maintaining, debugging, and enhancing it, then stood up the full observability stack.
+**Why it matters:** Answers "tell me about a time you had to own something unfamiliar" and the maintenance/legacy question honestly (you're fine inheriting code when there's real engineering to do, not pure maintenance).
+**S/T/A/R stub:**
+- Situation: Original authors departed; production Go services needed to keep running and improving with no handover.
+- Task: Understand, stabilize, and extend the codebase without breaking the products depending on it.
+- Action: Read into the code, fixed and enhanced production projects in CI/CD; added RabbitMQ/Redis/Ristretto, Worker Pool background processing, gRPC with mTLS; built Prometheus/Grafana/Loki + OpenTelemetry observability.
+- Result: _(fill: e.g. uptime/incidents, features shipped, what observability caught)_
+
+### Depth-first learning: gRPC & the challenges repo (self-directed learning)
+**Source:** GitHub — go-http-server/grpc, phamnam2003/challenges
+**What happened:** You built gRPC from the protocol up (all four method types, interceptors, three TLS modes, underlying crypto) and authored a structured Go curriculum (20 GoF patterns, 18+ algorithm solutions, Kafka/ScyllaDB/OTel deep dives).
+**Why it matters:** Direct ammunition for design-pattern and DSA rounds, and for "how do you learn something new?" Shows the research-then-commit style with concrete artifacts.
+**S/T/A/R stub:**
+- Situation: Wanted to understand gRPC and distributed-systems building blocks beyond surface API use.
+- Task: Learn them well enough to build and explain from first principles.
+- Action: Implemented gRPC down to TLS/AEAD/Diffie-Hellman; wrote all 20 GoF patterns in Go; documented architecture in Mermaid.
+- Result: _(fill: how you've reused this at work — e.g. gRPC mTLS at Leeon Group, a pattern you applied to a real design)_
+
 ## Common Tough Questions
 
 ### "Why did you leave [previous company]?"

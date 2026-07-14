@@ -18,7 +18,7 @@
 
 | Degree | Period | Institution | Key Topics |
 |--------|--------|-------------|------------|
-| **Engineer's degree (Kỹ sư), Information Technology** | *(confirm years)* | **Hanoi Open University (HOU) — Trường Đại học Mở Hà Nội** | Software engineering, data structures & algorithms, databases, computer networks, web development |
+| **Engineer's degree (Kỹ sư), Information Technology** | 2021 – 2026 | **Hanoi Open University (HOU) — Trường Đại học Mở Hà Nội** | Software engineering, data structures & algorithms, databases, computer networks, web development |
 
 ## Professional Experience
 
@@ -121,6 +121,7 @@ A structured, self-authored curriculum rather than a scratch repo.
 - **Go** (strong): Gin, gRPC (mTLS, interceptors, streaming), Worker Pool, dependency injection (uber-go/dig, Fx)
 - **Node.js**: Express, Strapi
 - RESTful API design; microservices architecture
+- **Testing:** unit and integration tests for business logic, REST APIs, and database interactions in Go and Node.js *(CV — Overview)*
 - **gRPC / Protocol Buffers (in depth):** all four method types — unary, server streaming, client streaming, bidirectional streaming; interceptors for rate-limiting, authentication, and authorization; `protoc` toolchain (`protoc-gen-go`, `protoc-gen-go-grpc`); HTTP/2 transport *(GitHub — go-http-server/grpc)*
 - **Go concurrency patterns:** goroutines, channels, `sync` package, PubSub, multiplexing/fan-in *(GitHub — phamnam2003/challenges)*
 - **Software design:** 20 Gang-of-Four design patterns implemented in Go — 9 behavioral, 4 creational, 7 structural *(GitHub — phamnam2003/challenges)*
