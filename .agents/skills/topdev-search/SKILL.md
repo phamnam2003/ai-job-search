@@ -11,6 +11,7 @@ description: >
   việc làm IT, việc làm lập trình, tìm việc IT Hà Nội, tuyển lập trình viên, việc làm Golang,
   tuyển dụng công nghệ thông tin.
 context: fork
+enabled: true  # set to false to keep this portal installed but have /scrape skip it
 allowed-tools: Bash(bun run .agents/skills/topdev-search/cli/src/cli.ts *)
 ---
 

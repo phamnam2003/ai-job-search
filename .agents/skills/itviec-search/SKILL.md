@@ -14,6 +14,7 @@ description: >
   developer, tìm việc IT, tuyển dụng IT Hồ Chí Minh, việc làm fullstack, tuyển
   lập trình viên Hà Nội.
 context: fork
+enabled: true  # set to false to keep this portal installed but have /scrape skip it
 allowed-tools: Bash(bun run .agents/skills/itviec-search/cli/src/cli.ts *)
 ---
 
