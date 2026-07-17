@@ -23,8 +23,8 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 |--------|-----|-------|
 | **ITviec** | `itviec.com` | ⚡ **CLI installed** (`itviec-search`). Highest-signal IT board in VN, curated, English-friendly. Slug URLs: `itviec.com/it-jobs/<skill>/ha-noi` |
 | **TopDev** | `topdev.vn` | ⚡ **CLI installed** (`topdev-search`, open JSON API). IT-only, strong for Go/backend. |
-| **VietnamDevs** | `vietnamdevs.com` | Hand-verified postings, mid-level and above, many offshore/remote-USD roles |
-| **ITNavi** | `itnavi.com.vn` | Smaller but decent Go/backend coverage: `itnavi.com.vn/job/Golang` |
+| **VietnamDevs** | `vietnamdevs.com` | ⚡ **CLI installed** (`vietnamdevs-search`). Hand-verified, English-friendly, offshore/remote-USD roles. `-q` uses fixed category slugs (golang, back-end, nodejs…) |
+| **ITNavi** | `itnavi.com.vn` | ⚡ **CLI installed** (`itnavi-search`). Small board, decent Go/backend; real Hanoi roles (HDBank, VNG). |
 | **Cake** (ex-CakeResume) | `cake.me` | Taiwan/APAC talent network, English-friendly. **WebSearch-only** — job pages Cloudflare-walled, no CLI. `cake.me/jobs/Vietnam` |
 | **Devwork** | `devwork.vn` | Hanoi-based express IT recruitment (headhunter network); frontend/backend/DevOps roles. `devwork.vn/viec-lam` |
 
@@ -32,7 +32,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 
 | Portal | URL | Notes |
 |--------|-----|-------|
-| **TopCV** | `topcv.vn` | Largest volume in VN, strongest for junior/mid. Slug: `topcv.vn/tim-viec-lam-<role>` |
+| **TopCV** | `topcv.vn` | ⚡ **CLI installed** (`topcv-search`). Largest volume in VN; strong Hanoi backend/fintech results. (Shells out to curl to pass TopCV's WAF.) |
 | **VietnamWorks** | `vietnamworks.com` | Largest general portal, good for product companies & banks |
 | **CareerViet** | `careerviet.vn` | Mid-size general board, decent IT listings (rebranded from CareerBuilder VN in 2024; `careerbuilder.vn` redirects here) |
 | **LinkedIn** | `linkedin.com/jobs` | **Has an installed CLI** (`.agents/skills/linkedin-search/`) - use it as the primary mechanism. Best channel for remote/offshore |
@@ -52,7 +52,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 - `linkedin.com/jobs` with `Remote` + `Vietnam` / `Asia` filters
 - `vietnamdevs.com` (remote tag)
 - `wellfound.com` (ex-AngelList) - startup remote roles open to APAC
-- `remoteok.com` / `weworkremotely.com` - filter for `Go` / `Golang` / `Backend`, check timezone requirements
+- ⚡ **CLI installed:** `remoteok.com` (`remoteok-search`, JSON API — title-precise `-q`, `--tag` for broad; feed skews non-tech day-to-day) and `weworkremotely.com` (`weworkremotely-search`, RSS — detail falls back to feed body since WWR job pages are Cloudflare-walled). Check timezone on both.
 - `cake.me/jobs/Vietnam` - APAC network, remote + hybrid, English-friendly
 - `arc.dev/en-vn/remote-jobs` - vetted remote dev roles, global (timezone-check mandatory)
 - `glassdoor.com` - aggregates remote VN dev roles, plus company reviews and salary data (doubles as company research)
@@ -62,14 +62,19 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 
 **Installed portal CLIs** (structured results + dedup, faster than WebSearch — prefer these):
 - **LinkedIn** — `.agents/skills/linkedin-search/`
-- **ITviec** — `.agents/skills/itviec-search/` (added 2026-07-17; server-rendered HTML, salary sign-in-gated)
-- **TopDev** — `.agents/skills/topdev-search/` (added 2026-07-17; open JSON API `api.topdev.vn`)
+- **ITviec** — `.agents/skills/itviec-search/` (SSR HTML; salary sign-in-gated)
+- **TopDev** — `.agents/skills/topdev-search/` (open JSON API `api.topdev.vn`)
+- **TopCV** — `.agents/skills/topcv-search/` (added 2026-07-17; SSR HTML via curl; largest VN volume, strong Hanoi backend)
+- **VietnamDevs** — `.agents/skills/vietnamdevs-search/` (added 2026-07-17; SSR HTML; `-q` = fixed category slugs)
+- **ITNavi** — `.agents/skills/itnavi-search/` (added 2026-07-17; SSR HTML + `get-job-by-id` enrich)
+- **RemoteOK** — `.agents/skills/remoteok-search/` (added 2026-07-17; JSON API; title-precise `-q`, `--tag` for broad)
+- **WeWorkRemotely** — `.agents/skills/weworkremotely-search/` (added 2026-07-17; RSS feeds, remote-only)
 
-The other Vietnamese portals have no CLI, so `/scrape` hits them via `WebSearch` with the `site:`
-queries below. To add more CLI coverage, scaffold with:
+The remaining Vietnamese portals have no CLI, so `/scrape` hits them via `WebSearch` with the
+`site:` queries below. To add more CLI coverage, scaffold with:
 
 ```
-/add-portal topcv.vn
+/add-portal vietnamworks.com
 /add-portal vieclam24h.vn
 ```
 
@@ -117,6 +122,9 @@ bun run .agents/skills/linkedin-search/cli/src/cli.ts search --keywords "Golang 
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search --keywords "Go Backend Engineer" --location "Vietnam" --remote
 bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
 bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "backend" --limit 20 --format table
+bun run .agents/skills/topcv-search/cli/src/cli.ts search -q "backend" -l "ha-noi" --format table
+bun run .agents/skills/itnavi-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
+bun run .agents/skills/vietnamdevs-search/cli/src/cli.ts search -q "golang" --format table
 ```
 
 ### Priority 2: Fullstack Developer (React/Next + Go/Node)
