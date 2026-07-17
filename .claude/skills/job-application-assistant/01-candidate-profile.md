@@ -1,3 +1,7 @@
+---
+framework_version: 1.0.0
+---
+
 # Candidate Profile
 
 <!-- Populated by /setup on 2026-07-12 from documents/cv/CV_Pham_Hai_Nam_Software_Engineer.pdf -->

@@ -1,3 +1,7 @@
+---
+framework_version: 1.0.0
+---
+
 # Behavioral Profile
 
 <!-- Rewritten by /setup on 2026-07-15 from Pham Hai Nam's own answers to the setup
