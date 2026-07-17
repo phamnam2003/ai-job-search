@@ -1,6 +1,13 @@
 # Search Queries for Job Scraper
 
 <!-- Populated by /setup on 2026-07-12 for Pham Hai Nam (Backend/Fullstack, Ha Noi + Remote) -->
+<!-- Expanded 2026-07-17: added Cake, Devwork, Vieclam24h, JobsGO, CareerLink, Joboko, Arc.dev,
+     Glassdoor + freelance/Japan-bridge notes (all domains verified via web search). -->
+<!-- Reconfirmed 2026-07-17: target FE + BE + Fullstack as co-equal active nets (broad, adaptable
+     skillset). DevOps/infra (CI/CD, Docker, K8s) is a SUPPLEMENTARY STRENGTH to surface inside
+     backend/fullstack roles, NOT a target job title — Priority 5 stays opt-in/off-target. -->
+<!-- 2026-07-17: installed CLIs for ITviec (itviec-search) + TopDev (topdev-search) via /add-portal;
+     Cake skipped (Cloudflare-walled, WebSearch-only). -->
 
 ## Search Sites
 
@@ -8,10 +15,12 @@
 
 | Portal | URL | Notes |
 |--------|-----|-------|
-| **ITviec** | `itviec.com` | Highest-signal IT board in VN. Curated, English-friendly, good salary transparency. Supports clean slug URLs: `itviec.com/it-jobs/<skill>/ha-noi` |
-| **TopDev** | `topdev.vn` | IT-only, strong for Go/backend. Slug: `topdev.vn/viec-lam-it/golang-kt203` |
+| **ITviec** | `itviec.com` | ⚡ **CLI installed** (`itviec-search`). Highest-signal IT board in VN, curated, English-friendly. Slug URLs: `itviec.com/it-jobs/<skill>/ha-noi` |
+| **TopDev** | `topdev.vn` | ⚡ **CLI installed** (`topdev-search`, open JSON API). IT-only, strong for Go/backend. |
 | **VietnamDevs** | `vietnamdevs.com` | Hand-verified postings, mid-level and above, many offshore/remote-USD roles |
 | **ITNavi** | `itnavi.com.vn` | Smaller but decent Go/backend coverage: `itnavi.com.vn/job/Golang` |
+| **Cake** (ex-CakeResume) | `cake.me` | Taiwan/APAC talent network, English-friendly. **WebSearch-only** — job pages Cloudflare-walled, no CLI. `cake.me/jobs/Vietnam` |
+| **Devwork** | `devwork.vn` | Hanoi-based express IT recruitment (headhunter network); frontend/backend/DevOps roles. `devwork.vn/viec-lam` |
 
 ### Primary (general boards with large IT sections)
 
@@ -19,10 +28,18 @@
 |--------|-----|-------|
 | **TopCV** | `topcv.vn` | Largest volume in VN, strongest for junior/mid. Slug: `topcv.vn/tim-viec-lam-<role>` |
 | **VietnamWorks** | `vietnamworks.com` | Largest general portal, good for product companies & banks |
-| **CareerViet** | `careerviet.vn` | Mid-size general board, decent IT listings |
+| **CareerViet** | `careerviet.vn` | Mid-size general board, decent IT listings (rebranded from CareerBuilder VN in 2024; `careerbuilder.vn` redirects here) |
 | **LinkedIn** | `linkedin.com/jobs` | **Has an installed CLI** (`.agents/skills/linkedin-search/`) - use it as the primary mechanism. Best channel for remote/offshore |
 | **Indeed VN** | `vn.indeed.com` | Aggregator - useful for catching what the others miss |
 | **Glints** | `glints.com/vn` | Startup-heavy, SEA regional, remote-friendly |
+| **Vieclam24h** | `vieclam24h.vn` | High volume; absorbed MyWork, TimViecNhanh, Viectotnhat. Broad - filter hard to IT |
+| **JobsGO** | `jobsgo.vn` | ~2M candidates, mobile-first; usable mid-level IT section |
+| **CareerLink** | `careerlink.vn` | Est. 2006; stronger for senior/experienced roles, has an IT-Software category |
+| **Joboko** | `joboko.com` | Aggregator (ex-GoodCV) - catches listings cross-posted from other boards |
+
+**Junior-skewed, use sparingly** (mostly fresher/entry volume, below target level): `123job.vn`, `timviec365.vn`, `ybox.vn`. Only mine these if a broad pass comes up thin.
+
+**Japan-bridge / offshore-JP** (need Japanese or live English, off-target given the English constraint - surface only as a deliberate stretch): `hr1tech.com` (BrSE/IT-comtor heavy), `growupwork.com`.
 
 ### Remote / offshore (USD-paying)
 
@@ -30,18 +47,28 @@
 - `vietnamdevs.com` (remote tag)
 - `wellfound.com` (ex-AngelList) - startup remote roles open to APAC
 - `remoteok.com` / `weworkremotely.com` - filter for `Go` / `Golang` / `Backend`, check timezone requirements
+- `cake.me/jobs/Vietnam` - APAC network, remote + hybrid, English-friendly
+- `arc.dev/en-vn/remote-jobs` - vetted remote dev roles, global (timezone-check mandatory)
+- `glassdoor.com` - aggregates remote VN dev roles, plus company reviews and salary data (doubles as company research)
+- Freelance/contract USD (only if open to non-permanent work): `toptal.com`, `lemon.io`, `gun.io`, `workana.com`, `vlance.vn`
 
 ### Tooling note
 
-Only **LinkedIn** has an installed portal CLI. The Vietnamese portals above have no CLI, so
-`/scrape` will hit them via `WebSearch` with the `site:` queries below. To get proper CLI
-coverage (structured results, dedup, date filters), scaffold them with:
+**Installed portal CLIs** (structured results + dedup, faster than WebSearch — prefer these):
+- **LinkedIn** — `.agents/skills/linkedin-search/`
+- **ITviec** — `.agents/skills/itviec-search/` (added 2026-07-17; server-rendered HTML, salary sign-in-gated)
+- **TopDev** — `.agents/skills/topdev-search/` (added 2026-07-17; open JSON API `api.topdev.vn`)
+
+The other Vietnamese portals have no CLI, so `/scrape` hits them via `WebSearch` with the `site:`
+queries below. To add more CLI coverage, scaffold with:
 
 ```
-/add-portal itviec.com
-/add-portal topdev.vn
 /add-portal topcv.vn
+/add-portal vieclam24h.vn
 ```
+
+**Cake** (`cake.me`) was evaluated 2026-07-17 but can't get a zero-dependency CLI — its job and
+detail pages are behind a Cloudflare JS challenge (403). Reach it via `site:cake.me` WebSearch only.
 
 The Danish CLIs already in `.agents/skills/` (jobindex, jobbank, jobdanmark, jobnet, freehire)
 are **not applicable** to this profile - `/scrape` should skip them.
@@ -70,13 +97,20 @@ site:vietnamdevs.com Golang backend
 site:linkedin.com/jobs "Golang Developer" Hanoi Vietnam
 site:linkedin.com/jobs "Backend Engineer" Go Vietnam
 site:careerviet.vn Golang OR "Backend Developer" Hà Nội
+site:cake.me "Backend Engineer" OR "Golang" Vietnam
+site:devwork.vn Golang OR Backend
+site:vieclam24h.vn "Backend Developer" OR Golang Hà Nội
+site:jobsgo.vn "Backend Developer" Golang Hà Nội
+site:careerlink.vn "Backend Developer" OR Golang Hà Nội
 ```
 
-LinkedIn CLI equivalent (preferred over WebSearch):
+Installed-CLI equivalents (preferred over WebSearch — structured, deduped, faster):
 
 ```
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search --keywords "Golang Backend Developer" --location "Hanoi, Vietnam"
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search --keywords "Go Backend Engineer" --location "Vietnam" --remote
+bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
+bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "backend" --limit 20 --format table
 ```
 
 ### Priority 2: Fullstack Developer (React/Next + Go/Node)
@@ -119,6 +153,8 @@ site:vietnamdevs.com remote golang OR backend
 site:wellfound.com Golang backend remote
 site:remoteok.com golang backend
 site:weworkremotely.com golang OR "back-end" developer
+site:cake.me "Backend" remote Vietnam OR Asia
+site:arc.dev Golang OR backend remote
 ```
 
 Timezone check is mandatory on these - reject anything requiring US-hours overlap unless the
@@ -131,6 +167,10 @@ as a job title, even though he has the skills and enjoys the work. Infra is a **
 inside a backend role**, not a role to chase. Do **not** run these in the default `/scrape` pass;
 only run them if the user explicitly asks (`/scrape devops`). When surfaced, flag every result as
 an off-target stretch.
+
+**Reconfirmed 2026-07-17.** Pham restated it directly: he can write CI/CD, Docker, and Kubernetes,
+but is *not* a "main DevOps" — keep it supplementary. The infra-as-strength queries folded into
+Priority 6 target backend/fullstack roles that *value* infra; they are not DevOps-title searches.
 
 The CV genuinely supports this (Docker, Kubernetes + Calico/Cilium/Envoy/Nginx Ingress,
 ArgoCD/GitOps, OpenTelemetry, Prometheus/Grafana/Loki, self-hosted GitLab Runners, GitHub
@@ -157,7 +197,16 @@ site:topcv.vn "Software Engineer" Golang OR NodeJS Hà Nội
 site:vietnamworks.com fintech "Backend Engineer" Hà Nội
 site:linkedin.com/jobs "Software Engineer" Go Kafka Hanoi
 site:itviec.com "Software Engineer" banking OR fintech ha-noi
+site:itviec.com "Backend" (Kubernetes OR Docker OR "CI/CD") ha-noi
+site:topdev.vn Golang (Kubernetes OR DevOps OR "CI/CD")
+site:linkedin.com/jobs "Backend Engineer" Kubernetes Go Hanoi
+site:itviec.com "Fullstack" (Docker OR Kubernetes) ha-noi
 ```
+
+**Infra-as-strength, not DevOps-title** (2026-07-17): the four Kubernetes/Docker/CI-CD lines above
+target *backend/fullstack* roles that treat infra as a plus. They are NOT DevOps/SRE-title searches
+(those live in Priority 5, off-target). Match them to backend/fullstack postings; never surface a
+DevOps-Engineer title from this block.
 
 ---
 

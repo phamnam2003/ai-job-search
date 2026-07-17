@@ -1,0 +1,20 @@
+{
+  "name": "itviec-cli",
+  "version": "1.0.0",
+  "description": "CLI for searching IT jobs on ITviec (itviec.com), Vietnam's leading IT job board — server-rendered public pages, no authentication, zero runtime dependencies. Personal use only.",
+  "type": "module",
+  "main": "src/cli.ts",
+  "bin": {
+    "itviec-search": "src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "test": "bun test --timeout 30000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/bun": "latest"
+  }
+}
