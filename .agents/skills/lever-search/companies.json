@@ -1,0 +1,31 @@
+{
+  "_comment": [
+    "Lever has NO global search API — each employer hosts its own board under a",
+    "company token. This file is the fan-out list: `search` queries every company here.",
+    "",
+    "Add a company: take the token from its board URL (jobs.lever.co/<token>), then verify:",
+    "  curl -s 'https://api.lever.co/v0/postings/<token>?mode=json&limit=1' | head -c 300",
+    "A 200 with a non-empty JSON array means the token is good. An unknown token returns",
+    "{\"ok\":false,\"error\":\"Document not found\"}; a real board with no open roles returns [].",
+    "",
+    "Every token below was verified live on 2026-07-20. Note `leverdemo` is Lever's own",
+    "demo board — it returns hundreds of fake postings and is deliberately excluded.",
+    "",
+    "Lever's public API is thinner on APAC/Vietnam employers than Ashby is; see SKILL.md."
+  ],
+  "companies": [
+    { "token": "amanotes", "name": "Amanotes", "region": "Vietnam (Ho Chi Minh City)", "tags": ["vietnam", "apac", "asia-hours", "mobile"] },
+    { "token": "ninjavan", "name": "Ninja Van", "region": "Southeast Asia (incl. Vietnam)", "tags": ["apac", "asia-hours", "logistics"] },
+    { "token": "coins", "name": "Coins.ph", "region": "Philippines / APAC", "tags": ["apac", "asia-hours", "fintech", "crypto"] },
+    { "token": "nium", "name": "Nium", "region": "Singapore / APAC", "tags": ["apac", "asia-hours", "fintech"] },
+    { "token": "binance", "name": "Binance", "region": "Global remote (APAC-friendly)", "tags": ["remote-first", "apac", "fintech", "crypto", "go"] },
+    { "token": "celestia", "name": "Celestia Labs", "region": "Global remote", "tags": ["remote-first", "distributed-systems", "crypto", "go"] },
+    { "token": "sysdig", "name": "Sysdig", "region": "Global remote", "tags": ["remote-first", "kubernetes", "infra", "go"] },
+    { "token": "sonarsource", "name": "SonarSource", "region": "Europe (EU hours)", "tags": ["eu-hours", "devtools"] },
+    { "token": "ledger", "name": "Ledger", "region": "Europe (EU hours)", "tags": ["eu-hours", "fintech", "crypto"] },
+    { "token": "voodoo", "name": "Voodoo", "region": "Europe (EU hours)", "tags": ["eu-hours", "mobile"] },
+    { "token": "spotify", "name": "Spotify", "region": "Europe / Global (hybrid hubs)", "tags": ["eu-hours", "backend"] },
+    { "token": "palantir", "name": "Palantir", "region": "US / Europe (hybrid)", "tags": ["backend"] },
+    { "token": "ro", "name": "Ro", "region": "United States (US hours)", "tags": ["us-hours", "health"] }
+  ]
+}

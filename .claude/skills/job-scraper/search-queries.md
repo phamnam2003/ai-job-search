@@ -69,6 +69,20 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 - **ITNavi** — `.agents/skills/itnavi-search/` (added 2026-07-17; SSR HTML + `get-job-by-id` enrich)
 - **RemoteOK** — `.agents/skills/remoteok-search/` (added 2026-07-17; JSON API; title-precise `-q`, `--tag` for broad)
 - **WeWorkRemotely** — `.agents/skills/weworkremotely-search/` (added 2026-07-17; RSS feeds, remote-only)
+- **Greenhouse** — `.agents/skills/greenhouse-search/` (added 2026-07-20; public Job Board API; **ATS fan-out**)
+- **Lever** — `.agents/skills/lever-search/` (added 2026-07-20; public v0 postings API; **ATS fan-out**; best VN/APAC coverage of the three)
+- **Ashby** — `.agents/skills/ashby-search/` (added 2026-07-20; public Posting API; **ATS fan-out**; densest Go/infra coverage)
+
+**The three ATS CLIs work differently from every other portal here.** Greenhouse, Lever, and
+Ashby are applicant tracking systems, not job boards — they have **no global search endpoint**.
+Each searches only the company boards listed in that skill's `companies.json`, so their coverage
+is a curated list, not the whole platform. Two consequences for `/scrape`:
+
+1. A relevant company that is not in `companies.json` will never appear, no matter how well the
+   query matches. Add its board token to the file to fix that (each `companies.json` header
+   comment explains how to find and verify one).
+2. The `site:` fallback queries below are **not redundant** for these three — they reach
+   companies outside the curated lists, which is exactly the blind spot the CLIs have.
 
 The remaining Vietnamese portals have no CLI, so `/scrape` hits them via `WebSearch` with the
 `site:` queries below. To add more CLI coverage, scaffold with:
@@ -113,6 +127,18 @@ site:devwork.vn Golang OR Backend
 site:vieclam24h.vn "Backend Developer" OR Golang Hà Nội
 site:jobsgo.vn "Backend Developer" Golang Hà Nội
 site:careerlink.vn "Backend Developer" OR Golang Hà Nội
+```
+
+ATS boards — these reach companies **outside** the curated `companies.json` fan-out lists,
+so run them in addition to the Greenhouse/Lever/Ashby CLIs, not instead of them:
+
+```
+site:boards.greenhouse.io "Golang" OR "Go Engineer" remote
+site:job-boards.greenhouse.io "Backend Engineer" Go remote
+site:jobs.lever.co "Golang" OR "Go Developer" Vietnam OR remote
+site:jobs.lever.co "Backend Engineer" Vietnam
+site:jobs.ashbyhq.com "Golang" OR "Go Engineer" remote
+site:jobs.ashbyhq.com "Backend Engineer" Kubernetes OR Kafka remote
 ```
 
 Installed-CLI equivalents (preferred over WebSearch — structured, deduped, faster):
