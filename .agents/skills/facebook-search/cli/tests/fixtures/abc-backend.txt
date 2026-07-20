@@ -1,0 +1,9 @@
+🔥 CÔNG TY ABC TECH TUYỂN DỤNG GẤP 🔥
+Vị trí: Backend Developer (Golang)
+📍 Địa điểm: Hà Nội (Cầu Giấy)
+💰 Lương: 20 - 35 triệu + thưởng
+Yêu cầu:
+- 2+ năm kinh nghiệm Golang, Kafka, PostgreSQL
+- Biết Docker, Kubernetes là lợi thế
+⏰ Hạn nộp: 30/08/2026
+Ứng tuyển: gửi CV qua https://www.facebook.com/abctech/posts/1234567890123456

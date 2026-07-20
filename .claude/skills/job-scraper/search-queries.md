@@ -72,6 +72,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 - **Greenhouse** — `.agents/skills/greenhouse-search/` (added 2026-07-20; public Job Board API; **ATS fan-out**)
 - **Lever** — `.agents/skills/lever-search/` (added 2026-07-20; public v0 postings API; **ATS fan-out**; best VN/APAC coverage of the three)
 - **Ashby** — `.agents/skills/ashby-search/` (added 2026-07-20; public Posting API; **ATS fan-out**; densest Go/infra coverage)
+- **Facebook** — `.agents/skills/facebook-search/` (added 2026-07-20; **zero-network hybrid**, NOT a scraper). Facebook is login-walled and its ToS forbids automation, so this skill never fetches Facebook. Instead: `links` builds Facebook search/group URLs for you to open yourself, and `search` parses recruitment posts you paste into `facebook-search/inbox/` into structured jobs. `/scrape` runs `search` over the inbox and dedups the results; run `links` yourself to find posts to paste. See its SKILL.md.
 
 **The three ATS CLIs work differently from every other portal here.** Greenhouse, Lever, and
 Ashby are applicant tracking systems, not job boards — they have **no global search endpoint**.

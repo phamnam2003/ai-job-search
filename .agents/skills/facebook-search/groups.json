@@ -1,0 +1,19 @@
+{
+  "_comment": "Whitelist of Facebook groups the `links` command builds per-group search URLs for (mirrors the companies.json pattern of the Greenhouse/Lever/Ashby skills). `id` is the numeric id OR the vanity slug from a group's URL (facebook.com/groups/<ID-or-slug>/) — both work in the /groups/<id>/search/?q= URL. Nothing here is fetched; ids only shape browse URLs you open yourself. The seed list below was verified from public web-search result URLs on 2026-07-20 (identifiers real as of then; Facebook group URLs can change, and viewing/joining requires your own login). To add a group: open it, copy the id/slug from the URL, add an { \"id\", \"name\" } entry.",
+  "groups": [
+    { "id": "jobsitvietnam", "name": "Backend & Frontend Developer Vietnam (Jobs)" },
+    { "id": "vieclamitvietnam", "name": "Việc làm IT Việt Nam" },
+    { "id": "laptrinhvienit", "name": "Tuyển dụng - Tìm việc IT" },
+    { "id": "tuyendunglaptrinh", "name": "Tuyển Dụng Lập Trình Viên" },
+    { "id": "jobseeker.vn", "name": "IT Jobs (Vietnam)" },
+    { "id": "179755015999381", "name": "Việc Làm Lập Trình Viên - DevOps - Freelancer IT Việt Nam" },
+    { "id": "5097678227028214", "name": "IT Remote/Freelancer/Parttime Jobs in Vietnam" },
+    { "id": "ithotjobs.tuyendungit.vieclamcntt.susudev", "name": "IT Jobs - Tuyển Dụng IT - Việc làm CNTT - AI engineer" },
+    { "id": "976679876378945", "name": "Tuyển dụng NodeJS/ReactJS VietNam" },
+    { "id": "golang.org.vn", "name": "Golang Vietnam (community)" },
+    { "id": "congdongnodejsvn", "name": "NodeJS Việt Nam (community)" },
+    { "id": "vuejsvietnam", "name": "Official Vue.js Vietnam (community)" },
+    { "id": "vuevietnam", "name": "VueJS Việt Nam - VUE.VN (community)" },
+    { "id": "laptrinhonline.vn", "name": "CodeFresher - Lập trình online (Fullstack JS/React)" }
+  ]
+}

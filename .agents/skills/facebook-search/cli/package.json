@@ -1,0 +1,20 @@
+{
+  "name": "facebook-cli",
+  "version": "1.0.0",
+  "description": "Zero-network CLI that builds Facebook job-search links and parses manually-pasted Vietnamese recruitment posts into structured jobs. Never contacts Facebook (login-walled, ToS forbids scraping). Personal use.",
+  "type": "module",
+  "main": "src/cli.ts",
+  "bin": {
+    "facebook-search": "src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "test": "bun test --timeout 30000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^7.0.0",
+    "@types/bun": "latest"
+  }
+}
