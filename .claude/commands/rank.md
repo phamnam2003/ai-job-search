@@ -16,6 +16,7 @@ Follow these steps **in order**.
 - A focus area (e.g. `/rank data science`) → rank only jobs whose title or stored fit-notes match the focus
 - `--all` → re-rank every job that has not been applied to, including previously ranked ones (useful after the profile changes)
 - `--top <N>` → shortlist size (default 5)
+- `--detailed` → present the full shortlist / below-threshold / excluded layout with the per-job "why these ranked highest" narrative. The default is the consolidated single-table view (see Step 5). Composes with the other flags.
 
 ---
 
@@ -85,6 +86,28 @@ Do not modify `job_search_tracker.csv` - that file records applications, and `/r
 ---
 
 ## Step 5: Present the Shortlist
+
+**Default view — consolidated table.** Present the result as ONE table covering **every scored job**, sorted by score descending. This is the compact, at-a-glance format the user reads first:
+
+```
+## Job Ranking - YYYY-MM-DD
+
+Ranked <N> new postings (<Z> expired/unfetchable listed below).
+
+| Rank | Score | Title | Company | Note (fit / gap) |
+|------|-------|-------|---------|------------------|
+| 1 | 77 · Strong | ... | ... | **Fit:** <what matches JD↔CV>. **Gap:** <what's honestly missing>. |
+
+_Expired / unfetchable (not scored):_ <Title> at <Company> - <reason>; ...
+_Excluded (location FAIL):_ <Title> at <Company> - requires relocation; ...
+```
+
+- **Score cell** carries both the number and the verdict band, e.g. `77 · Strong`, `48 · Moderate`, `29 · Poor`. Add a `⚠` after the band for a location `FLAG` or a level/deal-breaker stretch, and `🔥` for a deadline within 7 days.
+- **Note cell** merges the agent's strengths and gaps into one `**Fit:** … **Gap:** …` sentence pair - this is the "what matches vs. what's missing between JD and CV" column. Keep it to ~1-2 sentences each.
+- **Note language follows the user's working language for chat** (e.g. Vietnamese), since the table is an on-screen triage aid, not an application artifact - this does not touch the English-only CV/cover-letter rule.
+- `expired`/unfetchable jobs go on the one-line list below the table (never scored, never guessed). Location `FAIL` jobs are still vetoed from the ranking - list them on the excluded line with the reason, do not rank them.
+
+**`--detailed` view — full layout.** When the user passes `--detailed`, use the three-section layout instead, which adds the per-job narrative:
 
 ```
 ## Job Ranking - YYYY-MM-DD
