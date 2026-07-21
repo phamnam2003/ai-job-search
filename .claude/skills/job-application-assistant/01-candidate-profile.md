@@ -182,7 +182,11 @@ A structured, self-authored curriculum rather than a scratch repo.
 *(none)*
 
 ## Awards
-*(none listed — add if applicable)*
+- **2nd prize, Faculty-level Student Scientific Research (2024)** — Hanoi Open University (HOU). Topic: Agile in software development.
+- **Encouragement (merit) scholarship** — awarded 3 terms.
+
+<!-- GPA 3.09/4.0 on record but intentionally OMITTED from CVs (below the ~3.2 "impressive" threshold; candidate has ~3 yrs experience so GPA carries little weight). Provide only if an application form requires it. -->
+
 
 ## References
 *(none listed — drop reference letters into `documents/references/` and re-run `/setup` to fold them in)*

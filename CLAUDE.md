@@ -54,7 +54,9 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 *(none)*
 
 ### Awards
-*(none on file — add if applicable)*
+- **2nd prize, Faculty-level Student Scientific Research (2024)** — Hanoi Open University. Topic: Agile in software development
+- **Encouragement (merit) scholarship** — awarded 3 terms
+- *(GPA 3.09/4.0 on record but omitted from CVs — below the ~3.2 threshold and low weight given ~3 yrs experience; supply only if an application form requires it)*
 
 ### Behavioral Profile
 *(Not yet assessed. Run `/setup --section behavioral`, or drop a LinkedIn export / reference letters into `documents/` and re-run `/setup` so this can be inferred from real signal rather than guessed.)*
