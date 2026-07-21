@@ -14,6 +14,10 @@
     { "id": "congdongnodejsvn", "name": "NodeJS Việt Nam (community)" },
     { "id": "vuejsvietnam", "name": "Official Vue.js Vietnam (community)" },
     { "id": "vuevietnam", "name": "VueJS Việt Nam - VUE.VN (community)" },
-    { "id": "laptrinhonline.vn", "name": "CodeFresher - Lập trình online (Fullstack JS/React)" }
+    { "id": "laptrinhonline.vn", "name": "CodeFresher - Lập trình online (Fullstack JS/React)" },
+    { "id": "510343223601357", "name": "Facebook group 510343223601357 (rename me)" },
+    { "id": "324510375696370", "name": "Facebook group 324510375696370 (rename me)" },
+    { "id": "vgolang", "name": "VGolang - Golang Vietnam" },
+    { "id": "2009114886023067", "name": "Facebook group 2009114886023067 (rename me)" }
   ]
 }
