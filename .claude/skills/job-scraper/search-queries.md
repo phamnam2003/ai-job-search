@@ -33,7 +33,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 | Portal | URL | Notes |
 |--------|-----|-------|
 | **TopCV** | `topcv.vn` | ⚡ **CLI installed** (`topcv-search`). Largest volume in VN; strong Hanoi backend/fintech results. (Shells out to curl to pass TopCV's WAF.) |
-| **VietnamWorks** | `vietnamworks.com` | Largest general portal, good for product companies & banks |
+| **VietnamWorks** | `vietnamworks.com` | ⚡ **CLI installed** (`vietnamworks-search`, public POST/JSON microservice). Largest general portal, good for product companies & banks. Newest-first; client-side `-l`/`--jobage`. |
 | **CareerViet** | `careerviet.vn` | Mid-size general board, decent IT listings (rebranded from CareerBuilder VN in 2024; `careerbuilder.vn` redirects here) |
 | **LinkedIn** | `linkedin.com/jobs` | **Has an installed CLI** (`.agents/skills/linkedin-search/`) - use it as the primary mechanism. Best channel for remote/offshore |
 | **Indeed VN** | `vn.indeed.com` | Aggregator - useful for catching what the others miss |
@@ -69,6 +69,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 - **ITNavi** — `.agents/skills/itnavi-search/` (added 2026-07-17; SSR HTML + `get-job-by-id` enrich)
 - **RemoteOK** — `.agents/skills/remoteok-search/` (added 2026-07-17; JSON API; title-precise `-q`, `--tag` for broad)
 - **WeWorkRemotely** — `.agents/skills/weworkremotely-search/` (added 2026-07-17; RSS feeds, remote-only)
+- **VietnamWorks** — `.agents/skills/vietnamworks-search/` (added 2026-07-22; public POST/JSON microservice `ms.vietnamworks.com`; general board — strong for product companies/banks/fintech; newest-first, client-side `-l`/`--jobage`)
 - **Greenhouse** — `.agents/skills/greenhouse-search/` (added 2026-07-20; public Job Board API; **ATS fan-out**)
 - **Lever** — `.agents/skills/lever-search/` (added 2026-07-20; public v0 postings API; **ATS fan-out**; best VN/APAC coverage of the three)
 - **Ashby** — `.agents/skills/ashby-search/` (added 2026-07-20; public Posting API; **ATS fan-out**; densest Go/infra coverage)

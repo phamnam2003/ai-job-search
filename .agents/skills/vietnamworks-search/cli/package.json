@@ -1,0 +1,20 @@
+{
+  "name": "vietnamworks-cli",
+  "version": "1.0.0",
+  "description": "CLI for searching jobs on VietnamWorks (vietnamworks.com), a major Vietnamese job board, via its public job-search microservice — no authentication, zero runtime dependencies. Personal use only.",
+  "type": "module",
+  "main": "src/cli.ts",
+  "bin": {
+    "vietnamworks-search": "src/cli.ts"
+  },
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "test": "bun test --timeout 30000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^7.0.0",
+    "@types/bun": "latest"
+  }
+}
