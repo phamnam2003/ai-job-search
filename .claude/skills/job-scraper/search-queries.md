@@ -274,11 +274,18 @@ Target bands: **Middle / Mid-level** (primary) and **Junior** (secondary).
 
 ## Date Filter
 
-Only include jobs posted within the last 14 days, or with an application deadline that has not
-yet passed. If a posting date cannot be determined, include it but flag as "date unknown".
+**The application deadline (`Hạn nộp`) is the primary gate — the posting date is secondary.**
+
+- **Deadline drives inclusion:** include any job whose application deadline has **not yet passed**,
+  regardless of how old the posting is. Exclude jobs whose deadline has already passed.
+- **Posting age is a soft bound, not a hard cutoff:** as a rule of thumb a posting older than
+  **~1 month (30 days)** is stale enough to drop *when no deadline is stated* — but if a still-open
+  deadline is present, keep the job even if it was posted longer ago.
+- If neither a posting date nor a deadline can be determined, include the job but flag it as
+  "date unknown".
 
 Vietnamese portals often show `Cập nhật DD/MM/YYYY` or `Hạn nộp hồ sơ: DD/MM/YYYY` - parse both,
-and treat `Hạn nộp` as the deadline.
+and treat `Hạn nộp` as the deadline (the field that matters most here).
 
 ## Language Note
 
