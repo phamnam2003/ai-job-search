@@ -26,6 +26,9 @@ salary_data.json
 **/job_scraper/seen_jobs.json
 **/job_scraper/notion_sync.json
 **/job_scraper/*.md
+# Per-run scratch: batch/detail JSON, .err logs and the ad-hoc scripts that
+# process them. Holds scraped postings, so it is personal data too.
+**/job_scraper/tmp/
 *_BehavioralReport.pdf
 linkedin_Profile.pdf
 
