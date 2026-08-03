@@ -26,7 +26,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 | **VietnamDevs** | `vietnamdevs.com` | ⚡ **CLI installed** (`vietnamdevs-search`). Hand-verified, English-friendly, offshore/remote-USD roles. `-q` uses fixed category slugs (golang, back-end, nodejs…) |
 | **ITNavi** | `itnavi.com.vn` | ⚡ **CLI installed** (`itnavi-search`). Small board, decent Go/backend; real Hanoi roles (HDBank, VNG). |
 | **Cake** (ex-CakeResume) | `cake.me` | Taiwan/APAC talent network, English-friendly. **WebSearch-only** — job pages Cloudflare-walled, no CLI. `cake.me/jobs/Vietnam` |
-| **Devwork** | `devwork.vn` | Hanoi-based express IT recruitment (headhunter network); frontend/backend/DevOps roles. `devwork.vn/viec-lam` |
+| **Devwork** | `devwork.vn` | ⚡ **CLI installed** (`devwork-search`). Hanoi IT recruitment/referral network. Small volume but **publishes salary bands on the card**, plus seniority + years-of-experience on detail. `-q` uses fixed technology tags. |
 
 ### Primary (general boards with large IT sections)
 
@@ -34,14 +34,14 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 |--------|-----|-------|
 | **TopCV** | `topcv.vn` | ⚡ **CLI installed** (`topcv-search`). Largest volume in VN; strong Hanoi backend/fintech results. (Shells out to curl to pass TopCV's WAF.) |
 | **VietnamWorks** | `vietnamworks.com` | ⚡ **CLI installed** (`vietnamworks-search`, public POST/JSON microservice). Largest general portal, good for product companies & banks. Newest-first; client-side `-l`/`--jobage`. |
-| **CareerViet** | `careerviet.vn` | Mid-size general board, decent IT listings (rebranded from CareerBuilder VN in 2024; `careerbuilder.vn` redirects here) |
+| **CareerViet** | `careerviet.vn` | ⚡ **CLI installed** (`careerviet-search`). Rebrand of CareerBuilder VN (`careerbuilder.vn` redirects here). **Search results carry the application deadline (`Hạn nộp`)**, so `--open-only` filters with no detail fetches. Strong on banking/fintech engineering. |
 | **LinkedIn** | `linkedin.com/jobs` | **Has an installed CLI** (`.agents/skills/linkedin-search/`) - use it as the primary mechanism. Best channel for remote/offshore |
 | **Indeed VN** | `vn.indeed.com` | Aggregator - useful for catching what the others miss |
 | **Glints** | `glints.com/vn` | Startup-heavy, SEA regional, remote-friendly |
 | **Vieclam24h** | `vieclam24h.vn` | High volume; absorbed MyWork, TimViecNhanh, Viectotnhat. Broad - filter hard to IT |
-| **JobsGO** | `jobsgo.vn` | ~2M candidates, mobile-first; usable mid-level IT section |
-| **CareerLink** | `careerlink.vn` | Est. 2006; stronger for senior/experienced roles, has an IT-Software category |
-| **Joboko** | `joboko.com` | Aggregator (ex-GoodCV) - catches listings cross-posted from other boards |
+| **JobsGO** | `jobsgo.vn` | ❌ **Unreachable** — every path, including `robots.txt`, sits behind a Cloudflare *managed challenge* (403). No CLI is possible without defeating a bot-detection control. Evaluated 2026-08-04. |
+| **CareerLink** | `careerlink.vn` | ❌ **Excluded by the site's own policy** — `robots.txt` names `ClaudeBot`, `Claude-Web`, `anthropic-ai` and `GPTBot` with `Disallow: /`. Reachable by a human browser; do not build or run automated access. Evaluated 2026-08-04. |
+| **Joboko** | `vn.joboko.com` | ⚡ **CLI installed** (`joboko-search`). Aggregator (ex-GoodCV) — catches cross-posted listings. **Index skews stale and expired postings stay live**: always pass `--open-only` and check the `expired` field on detail. |
 
 **Junior-skewed, use sparingly** (mostly fresher/entry volume, below target level): `123job.vn`, `timviec365.vn`, `ybox.vn`. Only mine these if a broad pass comes up thin.
 
@@ -73,6 +73,9 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 - **Greenhouse** — `.agents/skills/greenhouse-search/` (added 2026-07-20; public Job Board API; **ATS fan-out**)
 - **Lever** — `.agents/skills/lever-search/` (added 2026-07-20; public v0 postings API; **ATS fan-out**; best VN/APAC coverage of the three)
 - **Ashby** — `.agents/skills/ashby-search/` (added 2026-07-20; public Posting API; **ATS fan-out**; densest Go/infra coverage)
+- **CareerViet** — `.agents/skills/careerviet-search/` (added 2026-08-04; SSR HTML, path-based search; **deadline on the search card**; JSON-LD on detail)
+- **Devwork** — `.agents/skills/devwork-search/` (added 2026-08-04; SSR HTML; `-q` = fixed technology tags; **salary bands on the card**, seniority + years on detail)
+- **Joboko** — `.agents/skills/joboko-search/` (added 2026-08-04; SSR HTML + JSON-LD on detail; aggregator — use `--open-only`, `?p=` pagination, pre-generated keyword slugs only)
 - **Facebook** — `.agents/skills/facebook-search/` (added 2026-07-20; **zero-network hybrid**, NOT a scraper). Facebook is login-walled and its ToS forbids automation, so this skill never fetches Facebook. Instead: `links` builds Facebook search/group URLs for you to open yourself, and `search` parses recruitment posts you paste into `facebook-search/inbox/` into structured jobs. `/scrape` runs `search` over the inbox and dedups the results; run `links` yourself to find posts to paste. See its SKILL.md.
 
 **The three ATS CLIs work differently from every other portal here.** Greenhouse, Lever, and
