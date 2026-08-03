@@ -17,7 +17,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 ### Identity
 - **Name:** Pham Hai Nam (Phạm Hải Nam), b. 15/07/2003
 - **Location:** Ha Noi, Vietnam (Ha Noi onsite/hybrid, or remote — VN and offshore. Not relocating to HCMC/Da Nang unless fully remote.)
-- **Contact:** 0346294259 · namphamhai7@gmail.com · https://github.com/phamnam2003
+- **Contact:** 0346294259 · namphamhai7@gmail.com · https://github.com/phamnam2003 · https://www.linkedin.com/in/pham-nam-153ab9259/
 - **Languages:** Vietnamese (native), English (professional working — technical reading/writing)
 - **CV language:** English <!-- English unless your market expects otherwise; /setup asks -->
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities

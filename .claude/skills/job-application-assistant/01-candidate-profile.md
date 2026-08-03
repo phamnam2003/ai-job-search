@@ -13,7 +13,7 @@ framework_version: 1.0.0
 - **Phone:** 0346294259
 - **Email:** namphamhai7@gmail.com
 - **GitHub:** https://github.com/phamnam2003
-- **LinkedIn:** *(not on CV — add if you have one)*
+- **LinkedIn:** https://www.linkedin.com/in/pham-nam-153ab9259/
 - **Languages:** Vietnamese (native), English (professional working — technical reading/writing)
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **Constraints:** Ha Noi onsite/hybrid, or remote (VN and offshore). Not relocating to HCMC/Da Nang unless fully remote.
