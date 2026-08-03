@@ -256,11 +256,32 @@ DevOps-Engineer title from this block.
 
 Target bands: **Middle / Mid-level** (primary) and **Junior** (secondary).
 
-- **Include:** Junior, Middle, Mid-level, Mid-Senior (if 2-4 yrs listed), "Developer" with no band
-- **Include with caution:** Senior roles asking for 3+ years - the profile has ~3 years plus two
-  projects where he owned system design, so these are worth a look. Flag them as a stretch.
-- **Exclude:** Senior roles demanding 5+ years, Tech Lead, Engineering Manager, Principal, Architect
-- **Exclude:** Intern and Fresher roles - below the current level
+**Tightened 2026-07-29.** Pham confirmed he is not at senior level yet, and the previous
+"include Senior with caution if 3+ yrs" clause was diluting every `/scrape` and `/rank` run —
+18 of 57 ranked postings in the 07-29 batch were Senior/Staff/Principal titles he cannot
+realistically land. Seniority is now a **hard title-level filter**, not a judgement call.
+
+- **Include:** Junior, Middle, Mid-level, "Developer" / "Engineer" with no band stated,
+  Mid-Senior when the posting itself lists 2-4 yrs
+- **Exclude (hard, by title):** any posting whose title contains **Senior, Sr., Staff,
+  Principal, Lead, Tech Lead, Team Lead, Head of, Manager, or Architect** — drop it at Step 2
+  regardless of how well the stack matches. A Go/Kafka posting titled "Senior Backend Engineer"
+  is still excluded; the stack match does not buy an exemption.
+- **Exception — range titles keep:** VN employers often open one req across two bands.
+  `[Middle, Senior] BackEnd Engineer`, `Backend Engineer (Junior+/Senior)`, `Middle/Senior
+  Fullstack Developer`, `Senior, Junior: ReactJS, Java`. When the title names **Junior or
+  Middle alongside** Senior, the req is open at his level — **keep it** and treat it as the
+  lower band. Only drop titles where Senior or above is the *sole* band.
+- **Exclude (hard):** Intern, Fresher, Trainee, Graduate, Accelerator/Talent-Program and other
+  early-career tracks — below the current level.
+- **Untitled roles demanding 5+ years:** keep, but flag as a stretch. A plain "Backend Developer"
+  posting that happens to ask for 5 yrs is still worth a look — the *title band* is what's being
+  filtered, not the years line.
+
+**Where this is enforced:** portal CLIs and WebSearch have no reliable negative-keyword syntax,
+so the filter is applied **after fetching**, at `/scrape` Step 2 — excluded postings are written
+to `seen_jobs.json` with `"status": "skipped"` (so dedup still works and they never resurface)
+and are **not** presented in the Step 5 table. `/rank` therefore never sees them.
 
 ## Location Filter
 

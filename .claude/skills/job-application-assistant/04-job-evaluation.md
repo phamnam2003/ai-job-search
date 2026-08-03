@@ -30,6 +30,23 @@ If the candidate's permit also constrains *hours* or *start date* (a student vis
 
 A role that fails this gate is not scored and not drafted. Everything below applies only to roles that pass it.
 
+## Seniority Gate — run before scoring
+
+A hard filter, like eligibility. Added 2026-07-29: Pham has ~3 years of experience and is **not** at senior level. Senior-titled postings were flooding `/scrape` and `/rank`, crowding out the mid-level roles he can actually land.
+
+| Posting title contains | Verdict |
+|------------------------|---------|
+| **Senior, Sr., Staff, Principal, Lead, Tech Lead, Team Lead, Head of, Manager, Architect** as the *only* band | **FAIL — do not score, do not draft.** A strong stack match does not buy an exemption. |
+| **Intern, Fresher, Trainee, Graduate**, or an early-career accelerator/talent program | **FAIL** — below the current level. |
+| Junior, Middle, Mid-level, or a plain "Developer" / "Engineer" with no band | **PASS** |
+| Mid-Senior | **PASS** if the posting lists 2–4 yrs; **FAIL** if it lists 5+ |
+
+**Range titles pass.** Vietnamese employers routinely open one req across two bands — `[Middle, Senior] BackEnd Engineer`, `Backend Engineer (Junior+/Senior)`, `Middle/Senior Fullstack Developer`, `Senior, Junior: ReactJS, Java`. If the title names Junior or Middle *alongside* Senior, the req is open at his level: **PASS**, and apply to the lower band. Only a title where Senior (or above) is the sole band fails the gate.
+
+**The filter is on the title band, not the years line.** A plain "Backend Developer" posting that asks for 5+ years still passes the gate — score it normally and note the years gap under Experience Match. It is the *title* that determines whether an application is realistic.
+
+If the user explicitly asks to evaluate a senior posting anyway, score it but open the evaluation with the seniority gap stated plainly.
+
 ## Scoring Dimensions
 
 Evaluate each job posting against these five dimensions:

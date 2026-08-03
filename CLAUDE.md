@@ -75,7 +75,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 
 ### Deal-breakers
 - Location: nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation)
-- Level: no intern/fresher roles; target is Mid-level (Junior acceptable)
+- Level: target is Mid-level (Junior acceptable). Excluded in both directions — no Intern/Fresher/Trainee/Graduate below, and no Senior/Sr./Staff/Principal/Lead/Manager/Architect titles above (~3 yrs experience; senior titles are not realistic yet and dilute the scrape)
 - Remote/offshore roles requiring US-hours timezone overlap
 - English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups)
 - **Not** a DevOps/Platform/SRE job title (has the skills and enjoys the work, but does not want it as the role)
