@@ -104,7 +104,42 @@ The cover letter is **not a CV repetition**. It should be forward-looking:
 - Lead with project management, mentoring, course development
 - Frame advanced degrees as evidence of independent project delivery
 
-## Multi-language Applications
-- Default to the language of the job posting
-- Cover letters in the posting's language should feel natural, not translated
-- Slightly warmer, more personal tone may be acceptable in some languages
+## Language — English only (hard rule)
+
+**Every generated artifact is written in English: CV *and* cover letter, regardless of the job
+posting's language.** A Vietnamese posting still gets an English cover letter.
+
+This overrides the generic "match the posting's language" advice that appears in `/apply` Step 2
+and elsewhere. Two reasons it is settled:
+
+1. The candidate wants one consistent English document set, reusable across postings.
+2. `cover.cls` ships Lato/Raleway subsets that lack Vietnamese diacritic glyphs — a Vietnamese
+   letter renders with missing or broken characters.
+
+Set on 2026-07-20, after a Vietnamese cover letter drafted for the TeenUp posting was rejected as
+invalid. All ten archived applications in `documents/applications/` are English, including the
+Vietnamese-language postings (TeenUp, LoogIX).
+
+**Still read the posting in its own language.** Keyword matching for ATS is done against the
+posting's original terms (see `05-cv-templates.md`); only the *output* is English.
+
+## Patterns Observed in Past Applications
+
+<!-- Extracted by /setup on 2026-08-03 from the 10 cover letters in documents/applications/.
+     These describe what has actually been sent, not new rules. -->
+
+- **Salutation ladder** (10/10 letters follow it):
+  - Named contact known → `Dear Ms. Nga and the LoogIX hiring team,`
+  - Company known, contact unknown → `Dear <Company> Hiring Team,` (8 of 10)
+  - Neither → `Dear Hiring Manager,`
+- **Opening formula** (10/10): `I am applying for the <exact posting title> role`, followed
+  immediately by a concrete skill connection — never a paragraph of throat-clearing. Where the
+  role has a parenthetical stack, it is reproduced verbatim: *"the Software Engineer (Python,
+  Golang, TypeScript) role"*.
+- **Mirror-the-JD device** (5/10): a sentence that reflects the posting back as routine work —
+  *"Your requirements read like my daily work"*, *"The description reads like the work I do
+  best"*, *"The problems in your job description are the ones I work on daily"*. Effective, but
+  it is now a recognisable tic; vary the wording rather than reusing a phrase verbatim.
+- **Honest-gap paragraph** (10/10): every letter names the genuine gaps rather than hiding them
+  (Flink, SignalR, Firebase, managed cloud, C/C++), each bridged to the nearest real experience.
+  Keep this — it is consistent with the no-overstatement rule above.

@@ -151,10 +151,15 @@ The font wrapper is mandatory — if you just move `\begin{itemize}` outside `\l
 - Underscore: `\_`
 - Ampersand: `\&`
 
-### Non-English Cover Letters
-- Same template structure, just write content in the posting's language
-- Adjust date format to local convention
-- Adjust closing to local convention (e.g. "Med venlig hilsen," for Danish)
+### Non-English Postings — the letter stays English
+- **Write the cover letter in English even when the posting is in another language.** See the
+  "Language — English only" rule in `03-writing-style.md`; it overrides `/apply` Step 2.
+- Do not translate the letter into Vietnamese. Beyond the consistency reason, `cover.cls` loads
+  Lato/Raleway subsets with no Vietnamese diacritic glyphs, so the output renders broken.
+- Proper nouns keep their native spelling and diacritics (company names, a contact's name, the
+  office address). If a name carries Vietnamese diacritics, verify it renders in the compiled
+  PDF; fall back to the undiacriticised spelling the company itself uses in Latin script.
+- Keep the English date format and the English closing (`Sincerely,`).
 
 ## Checklist Before Finalizing
 - [ ] No em-dashes (use commas or periods instead)
@@ -165,7 +170,7 @@ The font wrapper is mandatory — if you just move `\begin{itemize}` outside `\l
 - [ ] Company name and role are correct throughout
 - [ ] Date is current
 - [ ] Fits on one page
-- [ ] Language matches the job posting language
+- [ ] Letter is written in English, whatever language the posting used
 - [ ] Salutation is appropriate (named person if possible)
 - [ ] Headline is engaging and specific, not generic
 

@@ -88,11 +88,11 @@ Also read the most recent existing CV and cover letter files for concrete struct
 - **Grounding Audit:** Before writing to disk, audit all tailored bullet points against the union of three sources: `.claude/skills/job-application-assistant/01-candidate-profile.md` + the master CV (`cv/main_example.tex`) + `CLAUDE.md`'s Candidate Profile section to verify that all dates, roles, and metrics match exactly (zero profile drift or fabrication).
 
 ### Cover Letter (`cover_letters/cover_<company>_<role><COVER_EXT>`)
-- **Match the language of the job posting** (Danish posting -> Danish cover letter, English posting -> English cover letter)
+- **Always write the cover letter in English**, whatever language the posting is in. A Vietnamese posting still gets an English letter — see the "Language — English only" rule in `03-writing-style.md`. Read the posting in its own language for keywords; the output is English.
 - Follow the structure from `06-cover-letter-templates.md`
 - Use the `cover.cls` template
 - Tailor the opening paragraph to the specific role and company
-- Address to a named person if available in the posting, otherwise "Dear Hiring Manager" (or equivalent in posting language)
+- Address to a named person if available in the posting, otherwise "Dear Hiring Manager"
 - Keep to approximately one page
 - Any mention of agentic coding or AI tooling must reference **Claude Code** by name
 
