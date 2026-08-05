@@ -1,5 +1,5 @@
 ---
-framework_version: 1.1.0
+framework_version: 1.2.2
 ---
 
 # Job Evaluation Framework
@@ -46,6 +46,24 @@ A hard filter, like eligibility. Added 2026-07-29: Pham has ~3 years of experien
 **The filter is on the title band, not the years line.** A plain "Backend Developer" posting that asks for 5+ years still passes the gate — score it normally and note the years gap under Experience Match. It is the *title* that determines whether an application is realistic.
 
 If the user explicitly asks to evaluate a senior posting anyway, score it but open the evaluation with the seniority gap stated plainly.
+
+## Language Gate — run before scoring
+
+No dimension or gate anywhere in this framework currently checks a posting's language requirements against what the candidate actually speaks - it is not one of the five Scoring Dimensions below, not a field `/scrape` or `/rank` track, and not something `/apply`'s language detection (Step 1, which already extracts a posting's required language generically) has anywhere to report to. This gate adds that check, structured the same way as the Eligibility Gate above: read the posting, classify against profile data, and treat a hard mismatch as FAIL before scoring.
+
+Read the posting's language requirements as stated for **the role itself** — not the language the ad happens to be written in. A posting written in a language you don't work in, for a role that only needs languages you do work in on the job, passes fine; only an explicit job-condition requirement ("fluent X required," "must communicate with the Y team in Z") triggers this check. For each language the posting requires as a job condition, compare it against your Languages table in CLAUDE.md / `01-candidate-profile.md`:
+
+| Posting requirement vs. your Languages table | Verdict |
+|---|---|
+| Requires a language **not on your table at all** (e.g. "fluent Polish required," "must communicate with the Warsaw team in Russian," and you list no Polish/Russian row) | **FAIL — hard stop.** Do not score, do not draft. Quote the exact requirement line. |
+| Requires a language you **do** list, but the posting's stated bar (as written — "fluent," "native," "C1+," "business-level") reads as plausibly **higher** than your declared level | **FLAG, then proceed.** Not a fail. Score and draft normally, but surface the gap explicitly in your report to the user (quote both the posting's requirement and your declared level) so they can judge it themselves — bars like "fluent" vary a lot by company and geography, and a recruiter may be flexible. Never silently drop the posting and never silently treat it as a clean pass. |
+| Requires a language you list, at or below your declared level (or the posting doesn't specify a level at all — just names the language) | **PASS.** No note needed. |
+
+Judge the level comparison the same way you judge everything else in this framework: read both sides as written and reason about it, don't force either into a rigid scale — CEFR letters, LinkedIn-style buckets ("professional working proficiency"), and plain-English words ("conversational," "fluent," "native") all appear in the wild and don't map onto each other precisely. When genuinely unsure whether a stated bar exceeds the candidate's level, prefer FLAG over a silent PASS — the human is meant to be the tiebreaker, not the gate.
+
+**Worked example:** a candidate whose Languages table lists Spanish (Native) and English (B1/B2). A posting requiring "fluent Russian" → **FAIL**, Russian isn't declared at all. A posting requiring "fluent English" → **FLAG**, English is declared but "fluent" plausibly exceeds B1/B2 — score and draft the application, but tell the candidate this posting's bar may be a stretch and let them decide. A posting requiring "conversational English" or unspecified English → **PASS**, B1/B2 clears a "conversational" bar cleanly.
+
+**Profile override for Pham (from CLAUDE.md deal-breakers):** English is declared as *technical reading/writing only, not live/conversational*. A posting that requires **live** English as a job condition — client-facing communication, English-first interviews, US-hours standups with an English-speaking team — escalates from **FLAG** to **FAIL**. A posting that merely requires reading English docs, writing English code comments/tickets, or states an unspecified "English" requirement still **PASSES**. Vietnamese-language postings always pass.
 
 ## Scoring Dimensions
 

@@ -1,5 +1,5 @@
 ---
-framework_version: 1.0.0
+framework_version: 1.1.1
 ---
 
 # Candidate Profile
@@ -14,9 +14,19 @@ framework_version: 1.0.0
 - **Email:** namphamhai7@gmail.com
 - **GitHub:** https://github.com/phamnam2003
 - **LinkedIn:** https://www.linkedin.com/in/pham-nam-153ab9259/
-- **Languages:** Vietnamese (native), English (professional working — technical reading/writing)
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **Constraints:** Ha Noi onsite/hybrid, or remote (VN and offshore). Not relocating to HCMC/Da Nang unless fully remote.
+
+### Languages
+<!-- Every language you can work in professionally, with your honest level. Used by the
+Language Gate in 04-job-evaluation.md and by job-scraper/search-queries.md's query-language
+generation. Omit any language you don't actually work in - an undeclared language is treated as
+a hard no, not a gap to smooth over. -->
+
+| Language | Level | Notes |
+|----------|-------|-------|
+| Vietnamese | Native | Primary working language |
+| English | Professional working | Technical reading/writing. **Not** live/conversational — roles requiring client-facing English, English-first interviews or US-hours standups are a hard deal-breaker (see CLAUDE.md) |
 
 ## Education
 

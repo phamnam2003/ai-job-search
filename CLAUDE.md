@@ -18,7 +18,16 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **Name:** Pham Hai Nam (Phạm Hải Nam), b. 15/07/2003
 - **Location:** Ha Noi, Vietnam (Ha Noi onsite/hybrid, or remote — VN and offshore. Not relocating to HCMC/Da Nang unless fully remote.)
 - **Contact:** 0346294259 · namphamhai7@gmail.com · https://github.com/phamnam2003 · https://www.linkedin.com/in/pham-nam-153ab9259/
-- **Languages:** Vietnamese (native), English (professional working — technical reading/writing)
+- **Languages:**
+  | Language | Level |
+  |----------|-------|
+  | Vietnamese | Native |
+  | English | Professional working — technical reading/writing; not live/conversational |
+  <!-- Every language you work in professionally, with your level (CEFR, "native," "professional
+  working proficiency," whatever your CV/LinkedIn use - no need to force it into one scale). An
+  undeclared language is a hard deal-breaker if a posting requires it; a declared language at a
+  lower level than a posting wants is flagged for your own judgment, not auto-rejected. See
+  04-job-evaluation.md's Language Gate. -->
 - **CV language:** English <!-- English unless your market expects otherwise; /setup asks -->
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **LinkedIn headline:** "Backend Developer | Go · Kafka · Kubernetes | Fullstack with React"
@@ -74,10 +83,14 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - Product & tech companies, startups: Go/microservices backend teams
 
 ### Deal-breakers
+<!-- Hard constraints on job search. Baseline language requirements are handled separately and
+automatically from the Languages table above (see 04-job-evaluation.md's Language Gate) - don't
+duplicate them here. The live-English line below is a deliberate *override*, not a duplicate: the
+gate would only FLAG an English-fluency bar, and Pham wants those excluded outright. -->
 - Location: nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation)
 - Level: target is Mid-level (Junior acceptable). Excluded in both directions — no Intern/Fresher/Trainee/Graduate below, and no Senior/Sr./Staff/Principal/Lead/Manager/Architect titles above (~3 yrs experience; senior titles are not realistic yet and dilute the scrape)
 - Remote/offshore roles requiring US-hours timezone overlap
-- English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups)
+- English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups). Overrides the Language Gate's FLAG verdict to a hard exclude.
 - **Not** a DevOps/Platform/SRE job title (has the skills and enjoys the work, but does not want it as the role)
 - Drains to avoid: ticket-only work with no design input; legacy maintenance with no new build
 - Salary floor: **15M VND/month, negotiable** — flag postings clearly below this
