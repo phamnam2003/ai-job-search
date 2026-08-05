@@ -14,68 +14,133 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 
 ## Ready-Made STAR Examples
 
-*(None finished yet. The four stubs below are drafted from real work — fill in each **Result**
-and they graduate into this section. Aim for 4-6 covering different competencies.)*
+<!-- Seeded by /setup on 2026-07-15 from CV projects + behavioral answers. Results filled in on
+     2026-08-05 from Pham Hai Nam's own account of each project. Every figure below came from him;
+     none are estimated or inferred. Do not add numbers here without asking him first. -->
 
-## STAR Candidates (Complete Manually)
+**Interview order — lead with the strongest:**
 
-<!-- Seeded by /setup on 2026-07-15 from CV projects + behavioral answers. The Situation/Task/
-     Action are drafted from real work; fill each **Result** with a concrete outcome or metric
-     before using in an interview. Do not invent numbers. -->
+1. **Sacombank STM** — the only story with hard numbers. Use it for performance, debugging, and distributed-systems questions.
+2. **SkyReality** — design ownership. Use it for system-design and "you will own the backend" questions.
+3. **Leeon Group** — taking over a codebase with no handover. Use it for ambiguity and onboarding questions, and for Go concurrency (race conditions in live services).
+4. **gRPC / challenges** — this is a *learning* answer, not an achievement answer. Never present it as work experience.
 
 ### Architecture ownership on SkyReality (system design & DB modeling)
 **Source:** CV — SkyReality, backend developer, team of 7 (03/2026–present)
 **What happened:** Given a new real-estate lead-management platform, you owned the database model and backend stack decisions, then built the core modules and webhook-based event ingestion from Zalo/Slack/Telegram.
 **Why it matters:** Best evidence for "you will own the backend" / system-design / data-modeling questions, and for how you make architectural decisions (your stated "research deeply, then commit" style).
-**S/T/A/R stub:**
-- Situation: New platform, greenfield backend, small team; leads arrive from multiple external channels (Zalo, Slack, Telegram) and marketing campaigns.
-- Task: Decide the data model and backend architecture, then deliver scalable core modules and reliable event ingestion.
-- Action: Modeled the schema in PostgreSQL; chose Gin + Kafka + Redis + uber-go/dig; built webhook event processing, OAuth2 Google Sign-In, and multipart upload with checksum verification.
-- Result: _(fill: e.g. leads/day ingested, number of channels automated, latency, what the design enabled the team to ship next)_
+**S/T/A/R:**
+- Situation: New real-estate lead platform, greenfield backend, team of 7. The product had to reach a partner demo, and the business requirements were not fully specified up front.
+- Task: Decide the data model and backend architecture, and deliver something that met the demo's business requirements rather than just compiled.
+- Action: Researched competitors' platforms first to work out what the product actually had to do, then derived the system design from that. Modeled the schema in PostgreSQL; chose Gin + Kafka + Redis + uber-go/dig; built webhook event processing, OAuth2 Google Sign-In, and multipart upload with checksum verification.
+- Result: The demo succeeded, and the product is still being presented to further partners. Getting the design right up front is what let the team ship features fast enough to finish the product on time. The webhook layer became the foundation the team is now building AI bots on, collecting messages from Slack, Zalo and Telegram groups.
+
+> **Honesty note — no production metrics exist.** The platform is at demo stage, so there is no lead volume, throughput or latency figure to give. If asked, say so plainly: *"It hasn't gone to production yet, so I don't have traffic numbers. What I can tell you is the design decisions and why I made them."* Do not reach for a number here; the design reasoning is the substance of this answer anyway.
 
 ### Async pipelines & bottleneck removal on Sacombank STM (performance / distributed)
 **Source:** CV — Sacombank Smart Teller Machine, backend developer, team of 8 (11/2025–01/2026)
 **What happened:** On a live self-service banking system, you rebuilt data import/export as async pipelines, added step-level transaction logging, and resolved duplicate-data issues that were causing performance bottlenecks.
-**Why it matters:** Strongest story for performance/optimization, event-driven design, and working in a regulated fintech context. Good answer for "tell me about a time you fixed a performance problem."
-**S/T/A/R stub:**
-- Situation: STM export/reporting was slow and reconciliation was error-prone; background processing had duplicate-data issues and bottlenecks.
-- Task: Improve scalability and reliability of import/export and make transactions traceable.
-- Action: Built asynchronous import/export pipelines (Kafka), added step-level logging across STM workflows, applied dependency injection to decouple components, and fixed the duplicate-data root cause.
-- Result: _(fill: e.g. export time before/after, duplicate rate eliminated, reconciliation effort saved)_
+**Why it matters:** **Your strongest story, by a wide margin.** It is the only one with hard before/after numbers, it has a real root-cause diagnosis, and it happened on a live banking system. Use it for "tell me about a time you fixed a performance problem", for debugging questions, and for anything about working under production constraints.
+**S/T/A/R:**
+- Situation: STM data export was failing outright, not just running slowly. The export job either timed out or was OOM-killed, so there were times when no file could be produced at all. When it did complete, the output contained heavy duplication.
+- Task: Make export actually finish reliably, and make the output usable for reconciliation.
+- Action: Diagnosed the root cause as memory pressure — the query path was holding far too much data in memory across successive query rounds. Split the queries into pages so memory stayed bounded, and filtered duplicate records out of the export path. Also built asynchronous import/export pipelines, added step-level transaction logging across STM workflows, and applied dependency injection to decouple the components.
+- Result: On the same dataset, the export went from **167.8 MB to 16 MB** — roughly a 90% reduction, almost all of it duplicate records that should never have been there. **OOM kills were eliminated** by the query pagination, and timeouts essentially stopped occurring.
+
+> **Delivering this one:** lead with the failure, not the fix — "the export was getting OOM-killed, so sometimes there was simply no file" is a much stronger opening than "I optimized an export". The 167.8 MB → 16 MB figure is your single most quotable number; state it once, clearly, and let them ask the follow-up. Be ready for "how did you find it?" — the answer is that the symptom was memory, and the two causes (unbounded query result sets, and duplicate rows) were separate problems that both showed up as the same crash.
 
 ### Taking over an inherited Go codebase (ownership of ambiguous work)
 **Source:** CV — Leeon Group, frontend & backend developer (06/2024–10/2025)
-**What happened:** Team members left and you took ownership of an existing production Go codebase wired into CI/CD — maintaining, debugging, and enhancing it, then stood up the full observability stack.
-**Why it matters:** Answers "tell me about a time you had to own something unfamiliar" and the maintenance/legacy question honestly (you're fine inheriting code when there's real engineering to do, not pure maintenance).
-**S/T/A/R stub:**
-- Situation: Original authors departed; production Go services needed to keep running and improving with no handover.
-- Task: Understand, stabilize, and extend the codebase without breaking the products depending on it.
-- Action: Read into the code, fixed and enhanced production projects in CI/CD; added RabbitMQ/Redis/Ristretto, Worker Pool background processing, gRPC with mTLS; built Prometheus/Grafana/Loki + OpenTelemetry observability.
-- Result: _(fill: e.g. uptime/incidents, features shipped, what observability caught)_
+**What happened:** Team members left with no handover. You took over an unfamiliar production Go codebase, learned it from the code itself, and kept it running — maintaining, debugging and fixing defects in live services, including race conditions.
+**Why it matters:** Answers "tell me about a time you had to own something unfamiliar" and "how do you get up to speed". The race-condition work is a genuine Go concurrency credential on its own — it is a hard class of bug to find, and interviewers who write Go know that.
+**S/T/A/R:**
+- Situation: The original authors left. Production Go services wired into CI/CD had to keep running, and there was no documentation and no handover — the code was the only source of truth.
+- Task: Take over the codebase and keep the products depending on it working, safely, without the people who wrote it.
+- Action: Read into the code to learn its conventions and structure rather than rewriting to your own style, then maintained and debugged it in production — including race conditions in the concurrent paths. Over the same period you built out the observability stack (Prometheus, Grafana, Loki, OpenTelemetry) and worked with RabbitMQ, Redis/Ristretto, the Worker Pool pattern and gRPC with mTLS.
+- Result: The services stayed running under your ownership with no handover from the original team, and the race conditions you found and fixed were real concurrency defects in code that was already live.
 
-### Depth-first learning: gRPC & the challenges repo (self-directed learning)
+> **One boundary to hold: this was maintenance, not new feature development.** If asked "what did you build there?", the honest answer is that the build work at Leeon was the observability stack and the messaging/caching layer, not new features in the inherited codebase — the inherited work was keeping it correct and running.
+>
+> **Turn that into your advantage.** Maintenance with no new build is a stated drain for you, and this role is exactly where that came from. It is a clean, non-negative link to the "why are you looking?" answer: you have done the keep-it-alive work, you did it properly, and now you want to be building. That reads as self-knowledge rather than complaint.
+
+### Depth-first self-study: gRPC and the challenges repo (how you learn)
+
 **Source:** GitHub — go-http-server/grpc, phamnam2003/challenges
 **What happened:** You built gRPC from the protocol up (all four method types, interceptors, three TLS modes, underlying crypto) and authored a structured Go curriculum (20 GoF patterns, 18+ algorithm solutions, Kafka/ScyllaDB/OTel deep dives).
-**Why it matters:** Direct ammunition for design-pattern and DSA rounds, and for "how do you learn something new?" Shows the research-then-commit style with concrete artifacts.
-**S/T/A/R stub:**
-- Situation: Wanted to understand gRPC and distributed-systems building blocks beyond surface API use.
-- Task: Learn them well enough to build and explain from first principles.
-- Action: Implemented gRPC down to TLS/AEAD/Diffie-Hellman; wrote all 20 GoF patterns in Go; documented architecture in Mermaid.
-- Result: _(fill: how you've reused this at work — e.g. gRPC mTLS at Leeon Group, a pattern you applied to a real design)_
+**Why it matters:** This is your answer to *"how do you learn something new?"* and your ammunition for design-pattern and DSA rounds. It is **not** an achievement story and must never be presented as work experience.
+**S/T/A/R:**
+- Situation: You wanted to understand gRPC and the distributed-systems building blocks properly, not just call the client API.
+- Task: Learn them well enough to build them and explain them from first principles.
+- Action: Implemented gRPC down to TLS/AEAD/Diffie-Hellman; worked through mTLS configuration, retry configuration, telemetry and interceptors; wrote all 20 Gang-of-Four patterns in Go; documented the architecture in Mermaid.
+- Result: Working knowledge of how gRPC actually behaves on the wire — the configuration surface for mTLS, retries and telemetry — plus a solid grasp of the design patterns. **These repositories are self-study**, done alongside the applied gRPC/mTLS work in the Leeon Group role. They are public, so the claim is verifiable, which is what gives it weight.
+
+> **Say "these repos were self-study" out loud.** Volunteering the boundary is what makes the rest of your answers credible — an interviewer who catches you blurring study and production work will discount everything else you said. Delivered honestly it is a genuine strength: very few mid-level candidates can explain gRPC below the API surface, and the repo proves you can.
+
+> 🎯 **Rehearse the gRPC/mTLS bullet specifically.** You have said you are not 100% confident on it, and it is the single most likely bullet on your CV to be drilled — a backend interviewer sees "mutual TLS, metadata, interceptors, streaming" and goes straight at it. Three questions to have solid answers for before any interview:
+> 1. *"Walk me through what mTLS actually does that TLS doesn't."* — client presents a certificate too, so the server authenticates the caller rather than just the caller authenticating the server. You have the crypto background for this from the repo; make sure you can say it in two sentences.
+> 2. *"What did you use interceptors for?"* — answer from the real work at Leeon, not from the repo. If the honest answer is logging and auth, say logging and auth.
+> 3. *"Why gRPC instead of REST here?"* — the standard answer is typed contracts, streaming, and lower overhead on internal service-to-service calls. Be ready to say where it would have been the wrong choice too; that reads as judgement rather than enthusiasm.
+>
+> If a question goes past what you did, the safe move is the boundary sentence: *"That part I know from building it myself rather than from production — here's what I understand about it."* That answer never loses you a role. A bluff that collapses does.
 
 ## Common Tough Questions
 
-### "Why did you leave [previous company]?"
-> [PREPARE YOUR ANSWER - be honest, forward-looking, no negativity about former employer]
+<!-- Drafted by /setup on 2026-08-05. Written in English to match this file; the interviews these
+     target are Vietnamese-language (see the Languages table in 01-candidate-profile.md), so
+     rehearse your own Vietnamese phrasing from these points rather than translating live. -->
+
+### "Why are you leaving AIONtech after only ~9 months?"
+
+This is the version you will actually be asked — you started 11/2025 and are looking in 08/2026. Do not wait for the softer "why did you leave your previous company"; short tenure is visible on the CV and the interviewer will go straight at it.
+
+**Three rules:** answer the tenure question directly instead of dodging into a general career story; frame it as moving *toward* something, never away from a problem; never criticise AIONtech, a manager, or a colleague. Also do not volunteer that you are applying broadly or that an earlier round went badly.
+
+**Recommended framing — role scope (grounded in your actual title):**
+> My title at AIONtech is Frontend and Backend Developer, and the work genuinely spans both. The part I want to build a career on is the backend and the architecture: on SkyReality and the C06 document-AI system I owned the database model and the backend stack decisions, and that is the work I want to do full-time rather than half-time. I'm not leaving because something went wrong — I'm looking for a role where backend architecture is the whole job, not half of it.
+
+This works because it is checkable: the split title is on your CV, and the architecture ownership is on your CV too. It explains the timing without blaming anyone.
+
+**Alternative framings if the above is not your real reason** — pick the true one and rewrite in your own words:
+- *System depth:* you want to work on distributed/event-driven systems at a larger scale than your current scope allows.
+- *Compensation/stability:* legitimate, but weak as the *stated* reason. Use only if asked directly about salary motivation.
+
+**Do not use:** "there was no growth", "the process was chaotic", "I didn't get along with…". All three read as risk, whether or not they are true.
+
+> ⚠️ **Confirm before using.** The recommended framing above is built from your CV, not from a reason you have told me. If it is not the true one, replace it — an invented motive collapses under one follow-up question.
 
 ### "You don't have [specific skill/experience]."
-> [PREPARE YOUR ANSWER - acknowledge the gap, bridge to adjacent experience, show willingness to learn]
+
+**Structure:** name the gap plainly (1 sentence) → the nearest real thing you have done → evidence you close gaps fast → a concrete timeline. Never bluff; the follow-up question is always deeper than the claim.
+
+**Your real gaps, with the bridge for each:**
+
+| Gap | Bridge |
+|-----|--------|
+| Managed cloud (AWS/GCP/Azure) | You have run Kubernetes yourself — Calico and Cilium CNI, Envoy Gateway, Nginx Ingress, ArgoCD GitOps, and a full Prometheus/Grafana/Loki/OpenTelemetry stack. The concepts transfer directly; what you lack is the specific console and the managed-service names, which is days, not months. |
+| Rust, C/C++ | Say plainly you have not shipped either. Bridge to the systems-level understanding you *do* have: gRPC built from the protocol up through TLS 1.0–1.3, AEAD, Diffie-Hellman and mutual TLS. |
+| Flink / stream processing frameworks | You have production Kafka (offset strategies, admin client, `franz-go`) and have built async import/export pipelines on Sacombank STM. The messaging substrate is familiar; the framework is not. |
+| Formal leadership / mentoring | You have owned technical direction — architecture and data modeling on two systems — without a people-management title. Say exactly that, and that you want to grow into mentorship. |
+
+**Your evidence for "I close gaps fast"** — use this once, not in every answer: the `challenges` repository is a self-authored curriculum (20 Gang-of-Four patterns in Go, 18+ algorithm solutions, deep dives into Kafka, ScyllaDB, OpenTelemetry, Kubernetes). It is public and verifiable, which is what makes the claim land.
 
 ### "Where do you see yourself in 5 years?"
-> [PREPARE YOUR ANSWER - show ambition aligned with the role's growth path]
+
+> I want to be the person who owns the architecture of a system end to end — the data model, the service boundaries, the failure modes — and can defend those decisions to a team that pushes back on them. I have already made those calls on two systems at a small scale; in five years I want to be making them on something considerably larger, and to be the person other engineers bring their designs to. I care more about technical depth and ownership than about a management title.
+
+**Why this works for you:** it matches your stated direction (architecture ownership), it is honest about where you are now (small scale), and the closing line quietly rules out the Lead/Manager track you have excluded — without sounding uninterested in growth.
+
+**Adjust per posting:** if the role explicitly has a tech-lead path, soften the last sentence to "growing into technical leadership" rather than rejecting it outright.
 
 ### "What's your biggest weakness?"
-> [PREPARE YOUR ANSWER - genuine weakness with concrete mitigation strategy]
+
+**Use this one — it is genuine and it has a real mitigation:**
+> My instinct is to research a problem down to its foundations before I commit to a design. On expensive-to-reverse decisions — a data model, a service boundary — that is exactly right, and it is why the designs I have shipped have not needed rewriting. But I have applied it to decisions that did not deserve it, and been slower to start than I should have been. What I do now is timebox the research and ship a thin vertical slice early to validate the shape, then save the deep pass for the decisions that genuinely cannot be undone.
+
+This is a real trait from your behavioral profile, not a disguised strength, and the mitigation is specific rather than "I'm working on it".
+
+**Backup answer if they push for a second one:** most of your visible work has been solo or near-solo, so your code-review and collaboration record is thinner than your technical record. Mitigation: you actively want a team with a strong review culture, and you treat design pushback as the point rather than an obstacle.
+
+> ⚠️ **Do not use English as your weakness answer** in a Vietnamese-language interview. It is a real limitation, but volunteering it invites the interviewer to reconsider the role's language requirements — a scope you have already filtered out at the search stage. Answer honestly if asked directly; do not raise it yourself.
 
 ### "Why this company specifically?"
 > Customize per company. Must reference: specific projects, company values, market position, or team structure. Never give a generic answer.

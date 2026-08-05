@@ -32,7 +32,7 @@ a hard no, not a gap to smooth over. -->
 
 | Degree | Period | Institution | Key Topics |
 |--------|--------|-------------|------------|
-| **Engineer's degree (Kỹ sư), Information Technology** | 2021 – 2026 | **Hanoi Open University (HOU) — Trường Đại học Mở Hà Nội** | Software engineering, data structures & algorithms, databases, computer networks, web development |
+| **Engineer's degree (Kỹ sư), Information Technology** | 2021 – 2026 (**graduated**) | **Hanoi Open University (HOU) — Trường Đại học Mở Hà Nội** | Software engineering, data structures & algorithms, databases, computer networks, web development |
 
 ## Professional Experience
 

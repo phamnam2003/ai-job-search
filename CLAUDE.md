@@ -33,7 +33,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **LinkedIn headline:** "Backend Developer | Go · Kafka · Kubernetes | Fullstack with React"
 
 ### Education
-- **Engineer's degree (Kỹ sư) in Information Technology** (2021 – 2026) — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
+- **Engineer's degree (Kỹ sư) in Information Technology** (2021 – 2026, **graduated**) — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
   - Topics: software engineering, data structures & algorithms, databases, computer networks, web development
 
 ### Professional Experience
