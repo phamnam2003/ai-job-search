@@ -41,6 +41,8 @@ Ha Noi, Vietnam
 - Implemented dependency injection with Uber Dig and Fx framework to improve scalability and maintainability of Go backend services
 - Refactored and optimized internal packages to improve performance and strengthen application safety
 - Implemented background processing with Redis Pub/Sub and Apache Kafka to support business workflows and event-driven logic
+- Pushed realtime updates to clients over WebSocket and Server-Sent Events (SSE)
+- Built background task workers and scheduled cron jobs for recurring and long-running operations
 - Contributed to the design and optimization of scalable software systems and architectures
 
 ### Frontend and Backend Developer — Leeon Group (06/2024 – 10/2025)
@@ -76,6 +78,7 @@ Platform for managing real-estate leads across marketing campaigns.
 - Developed and structured core backend modules for scalability and maintainability
 - Integrated webhook-based event processing from Zalo, Slack, and Telegram bots to automate data collection and workflow triggers
 - Implemented OAuth2 authentication with Google Sign-In
+- Delivered realtime client updates over WebSocket and Server-Sent Events (SSE); ran recurring and long-running work through background task workers and cron jobs
 - Implemented multipart object upload with checksum verification
 - **Stack:** Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig
 
@@ -83,6 +86,7 @@ Platform for managing real-estate leads across marketing campaigns.
 AI-powered document summarization and task-generation system.
 - Architected the system: database modeling and backend technology stack decisions
 - Developed and structured core backend modules for scalability and maintainability
+- Implemented realtime client updates over WebSocket and Server-Sent Events (SSE), with background task workers and cron jobs for recurring and long-running processing
 - **Stack:** Go (Gin), Kafka, PostgreSQL, Python, Docker, Kubernetes
 
 ### STM (Smart Teller Machine) — Sacombank (11/2025 – 01/2026) — Backend Developer, team of 8
@@ -91,6 +95,7 @@ Self-service banking system: cash deposit, withdrawal, and account services.
 - Diagnosed a failing export (OOM kills and timeouts) down to unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output — **same dataset went from 167.8 MB to 16 MB (~90% smaller), OOM kills eliminated and timeouts stopped**
 - Enhanced transaction traceability with step-level logging across STM workflows
 - Built asynchronous import/export pipelines to improve scalability and reliability
+- Added realtime client updates over WebSocket and Server-Sent Events (SSE), plus cron-scheduled background jobs alongside the async import/export workers
 - Applied dependency injection to decouple core components and improve testability
 - **Stack:** Go (Gin), Kafka, Oracle Database, SQLite, Prometheus, Grafana, Docker
 
@@ -143,7 +148,8 @@ A structured, self-authored curriculum rather than a scratch repo.
 - **Clean architecture layering:** `api/` / `cmd/` / `internal/` / `worker/` / `plugin/pkg/` separation *(GitHub — go-http-server/temp)*
 - **sqlc** — type-safe Go code generation from SQL *(GitHub — go-http-server/temp)*
 - **validator/v10** — request input validation *(GitHub — go-http-server/temp)*
-- **WebSocket** — realtime communication *(GitHub — profile bio)*
+- **Realtime delivery:** WebSocket and Server-Sent Events (SSE) for pushing updates to clients *(CV — AIONtech projects; GitHub — profile bio)*
+- **Background & scheduled execution:** background task workers and cron jobs for recurring and long-running operations *(CV — AIONtech projects)*
 
 ### Security & Authentication
 - **PASETO** — token signing with asymmetric keys *(GitHub — go-http-server/temp)*

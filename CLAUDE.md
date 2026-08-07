@@ -40,6 +40,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **Frontend and Backend Developer** (11/2025 – Present) - **AIONtech** (Ha Noi)
   - Dependency injection with Uber Dig and Fx to improve scalability and maintainability of Go backend services
   - Background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows
+  - Realtime client push over WebSocket and SSE; background task workers and scheduled cron jobs
   - Architected system design (DB modeling + backend stack) on the SkyReality real-estate platform and the C06 document-AI system; backend work on Sacombank's Smart Teller Machine
 - **Frontend and Backend Developer** (06/2024 – 10/2025) - **Leeon Group** (Ha Noi)
   - Took ownership of an existing Go codebase from departing team members — maintained, debugged, and enhanced production projects wired into CI/CD
@@ -51,7 +52,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
   - Redux Core/Toolkit, Ant Design; internal tools as Chrome Extensions
 
 ### Technical Skills
-- **Primary:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), TypeScript/JavaScript (ReactJS, Next.js, Vue.js, Redux/Redux Toolkit, Recoil), Node.js (Express, Strapi), RESTful APIs, microservices
+- **Primary:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), TypeScript/JavaScript (ReactJS, Next.js, Vue.js, Redux/Redux Toolkit, Recoil), Node.js (Express, Strapi), RESTful APIs, WebSocket/SSE, background workers & cron jobs, microservices
 - **Secondary:** Kafka, RabbitMQ, Redis, PostgreSQL/MySQL/Oracle/MongoDB/ScyllaDB, Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress), OpenTelemetry, Prometheus/Grafana/Loki, ArgoCD, GitHub Actions, GitLab Runners, Nginx, Python (Selenium, Scrapy)
 - **Domain:** Fintech/banking (Sacombank STM, AION Bank), government/public sector (C06 — Ministry of Public Security), real-estate CRM, geospatial (PostGIS, Mapbox)
 - **Software:** Claude Code, GitHub Copilot, Spec-Kit, Git, Linux (Ubuntu/Arch/CentOS), MinIO/SeaweedFS/RustFS
