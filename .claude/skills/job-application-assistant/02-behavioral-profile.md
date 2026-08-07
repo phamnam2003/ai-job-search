@@ -44,7 +44,7 @@ calls on real projects at ~3 years of experience.
   him into: he wants backend/architecture as the title, with infra as a capability he brings.
 
 - **Systematic self-directed learning** *[Inferred from GitHub — phamnam2003/challenges]* — The
-  `challenges` repo is a self-authored curriculum (18+ algorithm solutions, all 20 GoF patterns
+  `challenges` repo is a self-authored curriculum (18+ algorithm solutions, 20 GoF patterns
   in Go, deep dives into Kafka/ScyllaDB/OpenTelemetry/Kubernetes). Learning is structured and
   finished, not started and abandoned.
 
