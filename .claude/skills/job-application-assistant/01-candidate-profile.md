@@ -88,9 +88,9 @@ AI-powered document summarization and task-generation system.
 ### STM (Smart Teller Machine) — Sacombank (11/2025 – 01/2026) — Backend Developer, team of 8
 Self-service banking system: cash deposit, withdrawal, and account services.
 - Refactored STM data export to Excel, improving operational reporting and reconciliation
+- Diagnosed a failing export (OOM kills and timeouts) down to unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output — **same dataset went from 167.8 MB to 16 MB (~90% smaller), OOM kills eliminated and timeouts stopped**
 - Enhanced transaction traceability with step-level logging across STM workflows
 - Built asynchronous import/export pipelines to improve scalability and reliability
-- Resolved duplicate-data issues and optimized background processing to remove performance bottlenecks
 - Applied dependency injection to decouple core components and improve testability
 - **Stack:** Go (Gin), Kafka, Oracle Database, SQLite, Prometheus, Grafana, Docker
 
