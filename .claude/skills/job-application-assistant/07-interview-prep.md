@@ -89,6 +89,34 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
      target are Vietnamese-language (see the Languages table in 01-candidate-profile.md), so
      rehearse your own Vietnamese phrasing from these points rather than translating live. -->
 
+### "Giới thiệu về bản thân" / "Tell me about yourself" — the opening answer
+
+*(Drafted 2026-08-07 from his stated direction: drawn to Rust, Linux and distributed systems; short-term wants deeper systems understanding; long-term wants to be a technical leader within 4–5 years.)*
+
+Almost always the first question. **Four sentences, ~40 seconds** — who you are, the proof, short term, long term. Deliberately short: this is an opener, not the interview. Leave the detail for them to pull out with follow-ups; a long intro gets interrupted and buries the ending.
+
+**Vietnamese — the version he will deliver:**
+
+> Em là fullstack developer khoảng ba năm, làm cả frontend và backend nhưng nghiêng nhiều về backend với Go; ở AIONtech em sở hữu thiết kế hệ thống — mô hình dữ liệu và backend stack — cho nền tảng bất động sản SkyReality và hệ thống document-AI cho C06. Trước đó ở dự án Sacombank STM, luồng export bị OOM-kill, em tìm ra nguyên nhân là query không giới hạn kết quả cộng với bản ghi trùng, phân trang lại và lọc trùng, cùng tập dữ liệu giảm từ 167.8 MB xuống 16 MB. Ngắn hạn em muốn đi sâu xuống tầng dưới của Kafka, gRPC, worker pool — hiểu đến mức giải thích được vì sao chúng hỏng và tune được; em cũng đang tự học Rust, ở mức cá nhân, chưa ship trong công việc. Dài hạn bốn đến năm năm, em muốn là người chịu trách nhiệm kiến trúc của một hệ thống lớn hơn — technical lead theo nghĩa chiều sâu kỹ thuật, không phải quản lý con người.
+
+**English — for written forms or an English round:**
+
+> I'm a fullstack developer with about three years of experience, across frontend and backend but leaning backend in Go; at AIONtech I've owned the system design — data model and backend stack — for the SkyReality real-estate platform and a document-AI system for C06. Before that, on Sacombank's Smart Teller Machine, the export path was being OOM-killed; I traced it to unbounded query result sets plus duplicate rows, paginated the queries and de-duplicated the output, and the same dataset went from 167.8 MB to 16 MB. Short term I want to go a layer below the tools I use daily — Kafka, gRPC, worker pools — understanding them well enough to explain why they fail and to tune them; I'm also learning Rust on my own time, nothing shipped professionally. Longer term, in four or five years, I want to be responsible for the architecture of a larger system — technical leadership in the depth sense, not people management.
+
+**Four rules for delivering it:**
+
+- **Say "chưa ship trong công việc" about Rust, in the same sentence.** He has zero Rust on his record. Volunteering it costs nothing and removes the trap; letting the interviewer find it costs the credibility of everything else. Same principle as the self-study boundary on the `challenges` repo.
+- **Never say "em thích Linux".** At three years it reads junior, and Linux is already on the CV. It lives inside the systems-depth clause or not at all.
+- **Stop after the fourth sentence.** Do not expand into the STM story — one clause is the hook; the diagnosis belongs in the dedicated answer if they ask. Reusing the 167.8 MB → 16 MB figure twice in one interview is fine, but state it the same way both times.
+- **The order matters:** depth first, leadership second. Technical depth is what earns architectural authority, and that authority is what a tech lead has. Said in that order the two halves reinforce each other instead of pulling apart.
+
+**Follow-ups to have ready:**
+
+1. *"Em đã làm gì với Rust rồi?"* — **most likely, and there is currently no strong answer.** Say what's true: reading and small exercises, nothing shipped. Bridge to real systems depth — gRPC built from the protocol up through TLS/AEAD/Diffie-Hellman (gap table below). **Best fix: one small public Rust repo before interviewing** — a weekend, and it turns the sentence from aspiration into evidence.
+2. *"Tech lead với em nghĩa là gì?"* — architecture ownership and technical direction, versus headcount and performance reviews. He wants the first. This is what keeps the opener consistent with the 5-year answer below.
+3. *"Đi sâu hệ thống thì sao lại ứng tuyển vị trí này?"* — tie to the role in front of him; if it has no scale story, drop the depth framing and lead with architecture ownership instead.
+4. *"Fullstack thì phần frontend em làm gì?"* — the opener says fullstack, so this follow-up is fair game and he has a real answer: he built the Next.js frontends for SkyReality (Shadcn UI, TanStack Query) and the Sacombank STM admin UI himself, on the same projects where he owned the backend. Say that plainly — the project titles read "Backend Developer", so without this sentence the frontend half of the claim looks unevidenced.
+
 ### "Why are you leaving AIONtech after only ~9 months?"
 
 This is the version you will actually be asked — you started 11/2025 and are looking in 08/2026. Do not wait for the softer "why did you leave your previous company"; short tenure is visible on the CV and the interviewer will go straight at it.
@@ -132,11 +160,15 @@ This is the version you will actually be asked — you started 11/2025 and are l
 
 ### "Where do you see yourself in 5 years?"
 
-> I want to be the person who owns the architecture of a system end to end — the data model, the service boundaries, the failure modes — and can defend those decisions to a team that pushes back on them. I have already made those calls on two systems at a small scale; in five years I want to be making them on something considerably larger, and to be the person other engineers bring their designs to. I care more about technical depth and ownership than about a management title.
+> I want to be the person who owns the architecture of a system end to end — the data model, the service boundaries, the failure modes — and can defend those decisions to a team that pushes back on them. I have already made those calls on two systems at a small scale; in five years I want to be making them on something considerably larger, and to be the person other engineers bring their designs to. That's the technical-leadership track rather than the management one — I want to be trusted with the technical direction, not to be managing headcount.
 
-**Why this works for you:** it matches your stated direction (architecture ownership), it is honest about where you are now (small scale), and the closing line quietly rules out the Lead/Manager track you have excluded — without sounding uninterested in growth.
+**Why this works for you:** it matches your stated direction (architecture ownership), it is honest about where you are now (small scale), and the closing line picks a track — technical leadership, not people management — instead of sounding uninterested in growth.
 
-**Adjust per posting:** if the role explicitly has a tech-lead path, soften the last sentence to "growing into technical leadership" rather than rejecting it outright.
+> **Keep this consistent with the opening answer** *(updated 2026-08-07)*. He has stated he wants to be a technical leader within 4–5 years, and the "tell me about yourself" answer above says so. This answer must therefore name the *tech-lead* track, not decline leadership altogether. The distinction to hold in both: **tech lead = architectural authority, still hands-on; engineering manager = people, reviews, hiring.** He wants the first. An earlier version of this answer closed by rejecting "a management title" outright, which contradicted the opening answer — do not restore that phrasing.
+>
+> **This does not conflict with the search filter.** CLAUDE.md excludes Lead/Senior/Staff/Principal titles from the *job scrape* because at ~3 years those postings are not realistic and dilute the results. That is about which roles to apply for now, not about ambition. Saying "tech lead in 4–5 years" while applying to mid-level roles is coherent, and interviewers read it as intent to stay.
+
+**Adjust per posting:** if the role has no visible technical-leadership path, keep the emphasis on architecture ownership and let the lead ambition sit implicit — do not press a growth track the company cannot offer.
 
 ### "What's your biggest weakness?"
 
