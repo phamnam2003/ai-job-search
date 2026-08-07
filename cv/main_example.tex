@@ -57,17 +57,17 @@
 \vspace{1pt}
 \begin{itemize}
 
-\item \textbf{Frontend}: TypeScript/JavaScript with ReactJS, Next.js, Vue.js and component-based architecture; Redux, Redux Toolkit, Recoil; Tailwind CSS, Ant Design.
-
 \item \textbf{Backend}: Go (Gin, gRPC with mutual TLS, interceptors and streaming, Worker Pool, dependency injection with uber-go/dig and Fx) and Node.js (Express, Strapi); RESTful APIs, WebSocket, Server-Sent Events; background workers and cron jobs; microservices.
+
+\item \textbf{Frontend}: TypeScript/JavaScript with ReactJS, Next.js, Vue.js and component-based architecture; Redux, Redux Toolkit, Recoil, TanStack Query; Tailwind CSS, Ant Design, Shadcn UI.
 
 \item \textbf{Distributed \& event-driven}: Apache Kafka and RabbitMQ messaging, Redis (cache, pub/sub, streams), Asynq, Ristretto; asynchronous import/export pipelines and background processing.
 
-\item \textbf{Data}: PostgreSQL (incl. PostGIS), MySQL, Oracle, SQLite, MongoDB, ScyllaDB/Cassandra; database modeling and transaction management; sqlc for type-safe queries; object storage over S3-compatible APIs (MinIO, RustFS, SeaweedFS).
+\item \textbf{Data}: PostgreSQL (incl. PostGIS), MySQL, Oracle, SQLite, MongoDB, ScyllaDB/Cassandra; database modeling, transaction management, sqlc; S3-compatible object storage (MinIO, RustFS, SeaweedFS).
 
-\item \textbf{Infrastructure \& observability}: Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress); OpenTelemetry, Prometheus, Grafana, Loki; GitHub Actions, self-hosted GitLab Runners, ArgoCD; Linux (Ubuntu, Arch, CentOS).
+\item \textbf{Infrastructure \& observability}: Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress); OpenTelemetry, Prometheus, Grafana, Loki; GitHub Actions, self-hosted GitLab Runners, ArgoCD, Helm; Linux (Ubuntu, Arch, CentOS).
 
-\item \textbf{Testing, security \& AI-assisted development}: unit and integration tests for business logic, REST APIs, WebSocket, cron jobs and database interactions in Go and Node.js; PASETO, TOTP/2FA, TLS/mTLS and crypto fundamentals; Python (Selenium, Scrapy) for crawling and automation; Claude Code, GitHub Copilot, Spec-Kit.
+\item \textbf{Testing, security \& AI-assisted development}: unit and integration tests across REST APIs, WebSocket, cron jobs and database interactions in Go and Node.js; JWT/PASETO, TOTP/2FA, TLS/mTLS; Python (Scrapy, Selenium) for e-commerce data crawling; Claude Code, GitHub Copilot, Spec-Kit.
 
 \end{itemize}
 
@@ -140,7 +140,8 @@
     \item Architected the system: database modeling and backend stack decisions.
     \item Integrated webhook event processing from Zalo, Slack, and Telegram bots; implemented OAuth2 Google Sign-In and multipart upload with checksum verification.
     \item Delivered realtime client updates over WebSocket and SSE, with background task workers and cron jobs for recurring work.
-    \item Stack: Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig.
+    \item Built the platform's Next.js frontend (Shadcn UI, TanStack Query); deployed to Kubernetes with ArgoCD.
+    \item Stack: Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig, MinIO; Kubernetes, ArgoCD; Next.js.
 \end{itemize}}}
 
 \vspace{3pt}
@@ -149,8 +150,8 @@
 \item{\cventry{11/2025 - 01/2026}{Backend Developer, team of 8}{Sacombank Smart Teller Machine (STM)}{}{}{\vspace{1pt}
 \begin{itemize}
     \item Diagnosed a failing export (OOM kills and timeouts) as unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output, cutting the same dataset from 167.8 MB to 16 MB and eliminating OOM kills.
-    \item Built asynchronous import/export pipelines, step-level transaction logging, realtime updates over WebSocket and SSE, and cron-scheduled background jobs; applied dependency injection for testability.
-    \item Stack: Go (Gin), Kafka, Oracle, SQLite, Prometheus, Grafana, Docker.
+    \item Built async import/export pipelines, step-level transaction logging, realtime WebSocket/SSE updates and cron-scheduled jobs; applied dependency injection for testability, and built the admin frontend in Next.js.
+    \item Stack: Go (Gin), Kafka, Oracle, SQLite, Prometheus, Grafana, Docker; Next.js.
 \end{itemize}}}
 
 \vspace{3pt}
@@ -158,9 +159,9 @@
 \needspace{4\baselineskip}
 \item{\cventry{12/2025 - Present}{Backend Developer, team of 9}{Document AI for C06, Ministry of Public Security}{}{}{\vspace{1pt}
 \begin{itemize}
-    \item Architected the system: database modeling and backend stack decisions for an AI document-summarization and task-generation platform.
-    \item Implemented realtime client updates over WebSocket and SSE, with background workers and cron jobs for recurring and long-running processing.
-    \item Stack: Go (Gin), Kafka, PostgreSQL, Python, Docker, Kubernetes.
+    \item Architected the system: database modeling and backend stack decisions for an AI document-summarization and task-generation platform, now being positioned for customers beyond C06.
+    \item Implemented realtime client updates over WebSocket and SSE, with background workers and cron jobs for recurring and long-running processing; deployed to Kubernetes with ArgoCD.
+    \item Stack: Go (Gin), Kafka, PostgreSQL, Redis, MinIO, Docker, Kubernetes, ArgoCD.
 \end{itemize}}}
 
 \vspace{3pt}
@@ -168,7 +169,7 @@
 \needspace{4\baselineskip}
 \item{\cventry{Open source}{github.com/phamnam2003}{Go references \& study repositories}{}{}{\vspace{1pt}
 \begin{itemize}
-    \item gRPC reference built from the protocol up (all four method types, interceptors, insecure/TLS/mTLS); \texttt{challenges} repo with 20 Gang-of-Four patterns in Go; \texttt{go-2fa} TOTP implementation.
+    \item gRPC reference built from the protocol up (all four method types, interceptors, TLS/mTLS); \texttt{challenges} repo with 20 Gang-of-Four patterns in Go; \texttt{go-2fa} TOTP implementation.
 \end{itemize}}}
 
 \end{itemize}

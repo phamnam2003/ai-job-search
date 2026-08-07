@@ -42,6 +42,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
   - Background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows
   - Realtime client push over WebSocket and SSE; background task workers and scheduled cron jobs
   - Architected system design (DB modeling + backend stack) on the SkyReality real-estate platform and the C06 document-AI system; backend work on Sacombank's Smart Teller Machine
+  - Fullstack on those same projects: built the Next.js/Shadcn UI frontends for SkyReality and the STM admin UI, and deployed SkyReality and C06 to Kubernetes via ArgoCD
 - **Frontend and Backend Developer** (06/2024 – 10/2025) - **Leeon Group** (Ha Noi)
   - Took ownership of an existing Go codebase from departing team members — maintained, debugged, and enhanced production projects wired into CI/CD
   - RabbitMQ, Redis (cache/pub-sub/streams), Ristretto, Worker Pool pattern, gRPC with mutual TLS
@@ -52,8 +53,8 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
   - Redux Core/Toolkit, Ant Design; internal tools as Chrome Extensions
 
 ### Technical Skills
-- **Primary:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), TypeScript/JavaScript (ReactJS, Next.js, Vue.js, Redux/Redux Toolkit, Recoil), Node.js (Express, Strapi), RESTful APIs, WebSocket/SSE, background workers & cron jobs, microservices
-- **Secondary:** Kafka, RabbitMQ, Redis, PostgreSQL/MySQL/Oracle/MongoDB/ScyllaDB, Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress), OpenTelemetry, Prometheus/Grafana/Loki, ArgoCD, GitHub Actions, GitLab Runners, Nginx, Python (Selenium, Scrapy)
+- **Primary:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), TypeScript/JavaScript (ReactJS, Next.js, Vue.js, Redux/Redux Toolkit, Recoil, TanStack Query, Shadcn UI), Node.js (Express, Strapi), RESTful APIs, WebSocket/SSE, JWT/PASETO, background workers & cron jobs, microservices
+- **Secondary:** Kafka, RabbitMQ, Redis, PostgreSQL/MySQL/Oracle/MongoDB/ScyllaDB, Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress), OpenTelemetry, Prometheus/Grafana/Loki, ArgoCD, Helm, GitHub Actions, GitLab Runners, Nginx, Python (Selenium, Scrapy)
 - **Domain:** Fintech/banking (Sacombank STM, AION Bank), government/public sector (C06 — Ministry of Public Security), real-estate CRM, geospatial (PostGIS, Mapbox)
 - **Software:** Claude Code, GitHub Copilot, Spec-Kit, Git, Linux (Ubuntu/Arch/CentOS), MinIO/SeaweedFS/RustFS
 

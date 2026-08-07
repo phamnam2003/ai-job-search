@@ -79,15 +79,19 @@ Platform for managing real-estate leads across marketing campaigns.
 - Integrated webhook-based event processing from Zalo, Slack, and Telegram bots to automate data collection and workflow triggers
 - Implemented OAuth2 authentication with Google Sign-In
 - Delivered realtime client updates over WebSocket and Server-Sent Events (SSE); ran recurring and long-running work through background task workers and cron jobs
-- Implemented multipart object upload with checksum verification
-- **Stack:** Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig
+- Implemented multipart object upload with checksum verification against MinIO object storage
+- Built the platform's frontend in Next.js with Shadcn UI and TanStack Query
+- Deployed to Kubernetes with ArgoCD GitOps
+- **Stack:** Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig, MinIO; Kubernetes, ArgoCD; Next.js, Shadcn UI, TanStack Query
 
 ### VB — Document AI for C06, Ministry of Public Security (12/2025 – Present) — Backend Developer, team of 9
-AI-powered document summarization and task-generation system.
+AI-powered document summarization and task-generation system. Built for C06 and now being positioned for other customers — it is a product, not a one-client build.
 - Architected the system: database modeling and backend technology stack decisions
 - Developed and structured core backend modules for scalability and maintainability
 - Implemented realtime client updates over WebSocket and Server-Sent Events (SSE), with background task workers and cron jobs for recurring and long-running processing
-- **Stack:** Go (Gin), Kafka, PostgreSQL, Python, Docker, Kubernetes
+- Deployed to Kubernetes with ArgoCD GitOps; integrated MinIO object storage
+- **Stack:** Go (Gin), Kafka, PostgreSQL, Redis, MinIO, Docker, Kubernetes, ArgoCD
+- *(No Python on his side — the AI/Python services are another team's. Confirmed 2026-08-07; an earlier version of this profile wrongly listed Python in this stack.)*
 
 ### STM (Smart Teller Machine) — Sacombank (11/2025 – 01/2026) — Backend Developer, team of 8
 Self-service banking system: cash deposit, withdrawal, and account services.
@@ -97,7 +101,8 @@ Self-service banking system: cash deposit, withdrawal, and account services.
 - Built asynchronous import/export pipelines to improve scalability and reliability
 - Added realtime client updates over WebSocket and Server-Sent Events (SSE), plus cron-scheduled background jobs alongside the async import/export workers
 - Applied dependency injection to decouple core components and improve testability
-- **Stack:** Go (Gin), Kafka, Oracle Database, SQLite, Prometheus, Grafana, Docker
+- Built the admin frontend in Next.js with Shadcn UI
+- **Stack:** Go (Gin), Kafka, Oracle Database, SQLite, Prometheus, Grafana, Docker; Next.js, Shadcn UI
 
 ## Independent / Open-Source Projects
 
@@ -106,7 +111,7 @@ Self-service banking system: cash deposit, withdrawal, and account services.
 ### `go-http-server/temp` — Go backend template (own GitHub org)
 Production-shaped Gin backend template used as the foundation for later projects.
 - User registration with `validator/v10`, email verification codes dispatched through a Redis queue (**Asynq**), HTML email templates over SMTP
-- **PASETO** token signing with asymmetric keys; Bearer-token middleware; CORS
+- **JWT** and **PASETO** token signing with asymmetric keys; Bearer-token middleware; CORS
 - Database transactions with explicit commit/rollback; **sqlc** for type-safe query codegen
 - Async pattern: return the HTTP response early, complete mail dispatch in a background worker
 - Layered architecture (`api/`, `cmd/`, `internal/`, `worker/`, `plugin/pkg/`); API docs via redoc-cli; GitHub Actions CI
@@ -160,8 +165,9 @@ A structured, self-authored curriculum rather than a scratch repo.
 
 ### Frontend
 - **TypeScript / JavaScript** (strong): ReactJS, Next.js, Vue.js
-- State management: Redux, Redux Toolkit, Recoil
-- UI: Tailwind CSS, Ant Design; HTML, CSS
+- State management: Redux, Redux Toolkit, Recoil; **TanStack Query** for server state *(CV — SkyReality)*
+- UI: Tailwind CSS, Ant Design, **Shadcn UI**; HTML, CSS
+- **Fullstack on flagship projects:** built the Next.js frontends for SkyReality and the Sacombank STM admin UI himself, alongside owning their backends — this is the evidence behind the fullstack positioning, since the project titles read "Backend Developer"
 
 ### Data & Messaging
 - **Databases:** PostgreSQL (incl. PostGIS), MySQL, Oracle, SQLite, MongoDB, ScyllaDB, **Cassandra** *(GitHub — challenges)*
@@ -175,13 +181,14 @@ A structured, self-authored curriculum rather than a scratch repo.
 
 ### Infrastructure & Observability
 - **Containers/Orchestration:** Docker (CLI, Compose, Buildx), Kubernetes (Calico CNI, Cilium CNI, Envoy Gateway, Nginx Ingress Controller)
-- **CI/CD & GitOps:** GitHub Actions, self-hosted GitLab Runners, ArgoCD
+- **CI/CD & GitOps:** GitHub Actions, self-hosted GitLab Runners, ArgoCD, **Helm charts**
+  - Deployed SkyReality and the VB/C06 document-AI system to Kubernetes via ArgoCD himself *(CV — Projects)*
 - **Observability:** OpenTelemetry (SDK + Collector), Prometheus, Grafana, Loki, **Jaeger** *(GitHub — profile bio)*, **ELK stack** *(GitHub — challenges)*
 - **Web/Infra:** Nginx, Certbot, SSL/TLS, OpenSSL
 - **OS:** Linux (Ubuntu, Arch, CentOS), Windows
 
 ### Other
-- **Python:** Selenium, Scrapy, crawlers
+- **Python:** Scrapy and Selenium for web crawling — used to scrape e-commerce product data (Shopee). This is where his Python experience actually is; do **not** attribute Python to the VB/C06 document-AI project.
 - **Git**, Spec-Kit
 - **AI-assisted development:** **Claude Code**, GitHub Copilot, spec-driven workflows
 - **Integrations:** SMTP/Gmail mailer with HTML email templates, email-verification flows; Telegram, Zalo, and Slack bot webhooks *(GitHub — go-http-server/temp; CV — SkyReality)*
