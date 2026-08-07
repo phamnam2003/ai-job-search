@@ -95,18 +95,25 @@ This is the version you will actually be asked — you started 11/2025 and are l
 
 **Three rules:** answer the tenure question directly instead of dodging into a general career story; frame it as moving *toward* something, never away from a problem; never criticise AIONtech, a manager, or a colleague. Also do not volunteer that you are applying broadly or that an earlier round went badly.
 
-**Recommended framing — role scope (grounded in your actual title):**
-> My title at AIONtech is Frontend and Backend Developer, and the work genuinely spans both. The part I want to build a career on is the backend and the architecture: on SkyReality and the C06 document-AI system I owned the database model and the backend stack decisions, and that is the work I want to do full-time rather than half-time. I'm not leaving because something went wrong — I'm looking for a role where backend architecture is the whole job, not half of it.
+**Recommended framing — system scale. This is your actual reason** *(confirmed 2026-08-07)*: you want to work on systems at a larger scale than your current scope allows.
 
-This works because it is checkable: the split title is on your CV, and the architecture ownership is on your CV too. It explains the timing without blaming anyone.
+> At AIONtech I've owned the database model and the backend stack decisions on two systems — the SkyReality real-estate platform and the C06 document-AI system for the Ministry of Public Security. Making those calls is exactly the work I want. What I'm looking for now is to make them on something bigger: SkyReality is still at demo stage, so the designs I've built haven't been tested by real production load yet. I want to be working on distributed, event-driven systems where the scale is the hard part — where the data model and the service boundaries have to hold up under real traffic. That's not something wrong with AIONtech; it's the next thing I want to learn.
 
-**Alternative framings if the above is not your real reason** — pick the true one and rewrite in your own words:
-- *System depth:* you want to work on distributed/event-driven systems at a larger scale than your current scope allows.
-- *Compensation/stability:* legitimate, but weak as the *stated* reason. Use only if asked directly about salary motivation.
+**Why this framing is strong for you.** It is the *true* reason, so it survives follow-up questions. It is forward-looking rather than a complaint. And it is honest about the one thing an interviewer would find out anyway — that your production-scale exposure is limited — while turning that into the motivation rather than hiding it.
+
+**Two follow-ups you will get. Have answers ready:**
+
+1. *"What scale have you actually worked at?"* — Answer plainly. Sacombank STM is your production-load story: a live self-service banking system where the export path was being OOM-killed, and you paginated the queries and de-duplicated the output to take the same dataset from 167.8 MB to 16 MB. SkyReality and C06 are architecture-ownership stories, not scale stories. **Do not blur the two.** Saying "STM is where I've met real production constraints; SkyReality is where I've owned the design" is a much better answer than a vague claim to both.
+2. *"What does 'bigger' mean to you?"* — Have something concrete: more traffic, more services, harder consistency requirements, real failure modes. Vague ambition reads as restlessness; a specific technical appetite reads as direction. Tie it to what you already reach for — Kafka, gRPC, worker pools, async pipelines.
+
+**Alternative framing if the posting is clearly not a scale story** (a small team, an internal tool, an early-stage product) — use role scope instead, which is equally true and checkable from your CV:
+> My title at AIONtech is Frontend and Backend Developer, and the work genuinely spans both. The part I want to build a career on is the backend and the architecture — that's what I owned on SkyReality and the C06 system, and I want it to be the whole job rather than half of it.
+
+*Compensation/stability* is legitimate but weak as the *stated* reason. Use only if asked directly about salary motivation.
 
 **Do not use:** "there was no growth", "the process was chaotic", "I didn't get along with…". All three read as risk, whether or not they are true.
 
-> ⚠️ **Confirm before using.** The recommended framing above is built from your CV, not from a reason you have told me. If it is not the true one, replace it — an invented motive collapses under one follow-up question.
+> ⚠️ **One thing to watch with the scale framing.** If the role you are interviewing for is *also* small-scale, this answer invites "so why us?" Check the posting first: if there is no scale story on their side, switch to the role-scope framing above. Do not tell a company you are leaving for scale they cannot offer.
 
 ### "You don't have [specific skill/experience]."
 
