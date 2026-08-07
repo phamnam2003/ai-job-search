@@ -107,13 +107,13 @@ Ranked <N> new postings (<Z> expired/unfetchable listed below).
 | 1 | 77 · Strong | ... | ... | **Fit:** <what matches JD↔CV>. **Gap:** <what's honestly missing>. |
 
 _Expired / unfetchable (not scored):_ <Title> at <Company> - <reason>; ...
-_Excluded (location FAIL):_ <Title> at <Company> - requires relocation; ...
+_Excluded (location / language FAIL):_ <Title> at <Company> - requires relocation; <Title> at <Company> - requires fluent Polish (not in your Languages table); ...
 ```
 
-- **Score cell** carries both the number and the verdict band, e.g. `77 · Strong`, `48 · Moderate`, `29 · Poor`. Add a `⚠` after the band for a location `FLAG` or a level/deal-breaker stretch, and `🔥` for a deadline within 7 days.
-- **Note cell** merges the agent's strengths and gaps into one `**Fit:** … **Gap:** …` sentence pair - this is the "what matches vs. what's missing between JD and CV" column. Keep it to ~1-2 sentences each.
+- **Score cell** carries both the number and the verdict band, e.g. `77 · Strong`, `48 · Moderate`, `29 · Poor`. Add a `⚠` after the band for a location `FLAG`, a `language_gate: FLAG`, or a level/deal-breaker stretch, and `🔥` for a deadline within 7 days.
+- **Note cell** merges the agent's strengths and gaps into one `**Fit:** … **Gap:** …` sentence pair - this is the "what matches vs. what's missing between JD and CV" column. Keep it to ~1-2 sentences each. When a job carries `language_gate: FLAG`, quote its `language_note` in this cell - the compact view is the one the user actually reads, so a language-level gap must be visible here and not only under `--detailed`.
 - **Note language follows the user's working language for chat** (e.g. Vietnamese), since the table is an on-screen triage aid, not an application artifact - this does not touch the English-only CV/cover-letter rule.
-- `expired`/unfetchable jobs go on the one-line list below the table (never scored, never guessed). Location `FAIL` jobs are still vetoed from the ranking - list them on the excluded line with the reason, do not rank them.
+- `expired`/unfetchable jobs go on the one-line list below the table (never scored, never guessed). Location `FAIL` **and `language_gate: FAIL`** jobs are still vetoed from the ranking - list them on the excluded line with the reason, do not rank them.
 
 **`--detailed` view — full layout.** When the user passes `--detailed`, use the three-section layout instead, which adds the per-job narrative:
 
