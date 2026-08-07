@@ -23,7 +23,6 @@
     { "token": "sysdig", "name": "Sysdig", "region": "Global remote", "tags": ["remote-first", "kubernetes", "infra", "go"] },
     { "token": "sonarsource", "name": "SonarSource", "region": "Europe (EU hours)", "tags": ["eu-hours", "devtools"] },
     { "token": "ledger", "name": "Ledger", "region": "Europe (EU hours)", "tags": ["eu-hours", "fintech", "crypto"] },
-    { "token": "voodoo", "name": "Voodoo", "region": "Europe (EU hours)", "tags": ["eu-hours", "mobile"] },
     { "token": "spotify", "name": "Spotify", "region": "Europe / Global (hybrid hubs)", "tags": ["eu-hours", "backend"] },
     { "token": "palantir", "name": "Palantir", "region": "US / Europe (hybrid)", "tags": ["backend"] },
     { "token": "ro", "name": "Ro", "region": "United States (US hours)", "tags": ["us-hours", "health"] }
