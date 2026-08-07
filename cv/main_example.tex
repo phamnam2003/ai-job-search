@@ -47,7 +47,7 @@
 % ============================================================
 
 \vspace{6pt}
-\small{Backend engineer with around two years building production Go services (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across fintech and public-sector systems. Owned architecture and database modeling end to end on a real-estate lead platform and a document-AI system for the Ministry of Public Security. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD). Also ships the React/Next/Vue frontends that consume these APIs.}
+\small{Fullstack developer with around three years across frontend and backend, strongest on Go backend services --- Gin, gRPC, Worker Pool, and dependency injection with uber-go/dig and Fx. Owns system design end to end, from database modeling to backend stack decisions, and builds the event-driven pipelines behind it with Kafka, RabbitMQ, and Redis, along with the observability and CI/CD around them. Also ships the ReactJS, Next.js, and Vue.js frontends that consume those APIs. Experience spans fintech and banking, government and public sector, real-estate CRM, and geospatial platforms.}
 
 % ============================================================
 %     CORE COMPETENCIES
@@ -57,17 +57,17 @@
 \vspace{1pt}
 \begin{itemize}
 
-\item \textbf{Go backend}: Gin, gRPC (mutual TLS, interceptors, streaming), Worker Pool, dependency injection (uber-go/dig, Fx); RESTful APIs and microservices; unit and integration testing.
+\item \textbf{Frontend}: TypeScript/JavaScript with ReactJS, Next.js, Vue.js and component-based architecture; Redux, Redux Toolkit, Recoil; Tailwind CSS, Ant Design.
+
+\item \textbf{Backend}: Go (Gin, gRPC with mutual TLS, interceptors and streaming, Worker Pool, dependency injection with uber-go/dig and Fx) and Node.js (Express, Strapi); RESTful APIs, WebSocket, Server-Sent Events; background workers and cron jobs; microservices.
 
 \item \textbf{Distributed \& event-driven}: Apache Kafka and RabbitMQ messaging, Redis (cache, pub/sub, streams), Asynq, Ristretto; asynchronous import/export pipelines and background processing.
 
-\item \textbf{Data}: PostgreSQL (incl. PostGIS), MySQL, Oracle, SQLite, MongoDB, ScyllaDB/Cassandra; database modeling and transaction management; sqlc for type-safe queries.
+\item \textbf{Data}: PostgreSQL (incl. PostGIS), MySQL, Oracle, SQLite, MongoDB, ScyllaDB/Cassandra; database modeling and transaction management; sqlc for type-safe queries; object storage over S3-compatible APIs (MinIO, RustFS, SeaweedFS).
 
-\item \textbf{Infrastructure \& observability}: Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress); OpenTelemetry, Prometheus, Grafana, Loki; GitHub Actions, GitLab Runners, ArgoCD; object storage (MinIO, SeaweedFS, S3-compatible).
+\item \textbf{Infrastructure \& observability}: Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress); OpenTelemetry, Prometheus, Grafana, Loki; GitHub Actions, self-hosted GitLab Runners, ArgoCD; Linux (Ubuntu, Arch, CentOS).
 
-\item \textbf{Frontend}: TypeScript/JavaScript with ReactJS, Next.js, Vue.js; Redux, Redux Toolkit, Recoil; Tailwind CSS, Ant Design.
-
-\item \textbf{Security \& AI-assisted development}: PASETO, TOTP/2FA, TLS/mTLS and crypto fundamentals; Claude Code, GitHub Copilot, and Spec-Kit spec-driven workflows.
+\item \textbf{Testing, security \& AI-assisted development}: unit and integration tests for business logic, REST APIs, WebSocket, cron jobs and database interactions in Go and Node.js; PASETO, TOTP/2FA, TLS/mTLS and crypto fundamentals; Python (Selenium, Scrapy) for crawling and automation; Claude Code, GitHub Copilot, Spec-Kit.
 
 \end{itemize}
 
@@ -86,6 +86,7 @@
     \item Implemented dependency injection with uber-go/dig and Fx to improve scalability and maintainability of Go backend services.
     \item Refactored and optimized internal packages to improve performance and strengthen application safety.
     \item Built background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows.
+    \item Pushed realtime updates to clients over WebSocket and Server-Sent Events; built background task workers and scheduled cron jobs for recurring and long-running operations.
     \item Contributed to the design of scalable software systems and architectures.
 \end{itemize}}}
 
@@ -96,8 +97,7 @@
 \item{\cventry{06/2024 - 10/2025}{Frontend and Backend Developer}{Leeon Group}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
     \item Took ownership of an inherited production Go codebase from departing team members; maintained, debugged, and enhanced projects wired into CI/CD.
-    \item Implemented messaging and caching: RabbitMQ, Redis (cache/pub-sub/streams), Ristretto, and the Worker Pool pattern for background tasks.
-    \item Worked with gRPC in depth (mutual TLS, metadata, interceptors, streaming); secured services with SSL/TLS certificates in Docker.
+    \item Implemented messaging and caching: RabbitMQ, Redis (cache/pub-sub/streams), Ristretto, and the Worker Pool pattern for background tasks; worked with gRPC in depth (mutual TLS, metadata, interceptors, streaming).
     \item Stood up the observability stack: Prometheus, Grafana, Loki, and OpenTelemetry for unified traces, metrics, and logs.
     \item Built ReactJS web applications with Tailwind CSS and Ant Design.
 \end{itemize}}}
@@ -109,8 +109,7 @@
 \item{\cventry{07/2023 - 02/2024}{Full-stack Developer}{TLGEO}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
     \item Built UIs with Vue.js and Next.js; developed and consumed APIs with ExpressJS and Strapi.
-    \item Contributed to system design using PostgreSQL with the PostGIS extension for spatial data; used Mapbox for government mapping and agriculture projects.
-    \item Handled deployment on Linux/Ubuntu Server with SSH and Nginx.
+    \item Contributed to system design using PostgreSQL with the PostGIS extension for spatial data; used Mapbox for government mapping and agriculture projects; deployed on Linux/Ubuntu Server with SSH and Nginx.
 \end{itemize}}}
 
 \vspace{3pt}
@@ -119,8 +118,7 @@
 \needspace{5\baselineskip}
 \item{\cventry{04/2023 - 06/2023}{Frontend Intern}{Lalasoft}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
-    \item Applied Redux Core, Redux Toolkit, and Ant Design to ongoing company projects.
-    \item Researched and built small internal tools as Chrome Extensions.
+    \item Applied Redux Core, Redux Toolkit, and Ant Design to ongoing company projects; built small internal tools as Chrome Extensions.
 \end{itemize}}}
 
 \end{itemize}
@@ -134,38 +132,43 @@
 \begin{itemize}
 
 \needspace{4\baselineskip}
-\item{\cventry{03/2026 - Present}{SkyReality --- Real-estate lead platform}{Backend Developer, team of 7}{}{}{\vspace{1pt}
+% Project entries put the project name in the third argument on purpose: moderncv's
+% banking style renders argument 3 in bold and argument 2 in italics, so the project
+% name has to sit third to be the line a reader scans first.
+\item{\cventry{03/2026 - Present}{Backend Developer, team of 7}{SkyReality --- Real-estate lead platform}{}{}{\vspace{1pt}
 \begin{itemize}
     \item Architected the system: database modeling and backend stack decisions.
     \item Integrated webhook event processing from Zalo, Slack, and Telegram bots; implemented OAuth2 Google Sign-In and multipart upload with checksum verification.
+    \item Delivered realtime client updates over WebSocket and SSE, with background task workers and cron jobs for recurring work.
     \item Stack: Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig.
 \end{itemize}}}
 
 \vspace{3pt}
 
 \needspace{4\baselineskip}
-\item{\cventry{11/2025 - 01/2026}{Sacombank Smart Teller Machine (STM)}{Backend Developer, team of 8}{}{}{\vspace{1pt}
+\item{\cventry{11/2025 - 01/2026}{Backend Developer, team of 8}{Sacombank Smart Teller Machine (STM)}{}{}{\vspace{1pt}
 \begin{itemize}
-    \item Built asynchronous import/export pipelines and added step-level transaction logging across STM workflows.
-    \item Resolved duplicate-data issues and removed background-processing bottlenecks; applied dependency injection for testability.
+    \item Diagnosed a failing export (OOM kills and timeouts) as unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output, cutting the same dataset from 167.8 MB to 16 MB and eliminating OOM kills.
+    \item Built asynchronous import/export pipelines, step-level transaction logging, realtime updates over WebSocket and SSE, and cron-scheduled background jobs; applied dependency injection for testability.
     \item Stack: Go (Gin), Kafka, Oracle, SQLite, Prometheus, Grafana, Docker.
 \end{itemize}}}
 
 \vspace{3pt}
 
 \needspace{4\baselineskip}
-\item{\cventry{12/2025 - Present}{Document AI for C06, Ministry of Public Security}{Backend Developer, team of 9}{}{}{\vspace{1pt}
+\item{\cventry{12/2025 - Present}{Backend Developer, team of 9}{Document AI for C06, Ministry of Public Security}{}{}{\vspace{1pt}
 \begin{itemize}
     \item Architected the system: database modeling and backend stack decisions for an AI document-summarization and task-generation platform.
+    \item Implemented realtime client updates over WebSocket and SSE, with background workers and cron jobs for recurring and long-running processing.
     \item Stack: Go (Gin), Kafka, PostgreSQL, Python, Docker, Kubernetes.
 \end{itemize}}}
 
 \vspace{3pt}
 
 \needspace{4\baselineskip}
-\item{\cventry{Open source}{github.com/phamnam2003}{Go references \& study repos}{}{}{\vspace{1pt}
+\item{\cventry{Open source}{github.com/phamnam2003}{Go references \& study repositories}{}{}{\vspace{1pt}
 \begin{itemize}
-    \item gRPC reference built from the protocol up (all four method types, interceptors, insecure/TLS/mTLS); \texttt{challenges} repo with 20 Gang-of-Four patterns and 18+ algorithm solutions in Go; \texttt{go-2fa} TOTP implementation.
+    \item gRPC reference built from the protocol up (all four method types, interceptors, insecure/TLS/mTLS); \texttt{challenges} repo with 20 Gang-of-Four patterns in Go; \texttt{go-2fa} TOTP implementation.
 \end{itemize}}}
 
 \end{itemize}
