@@ -47,7 +47,7 @@
 % ============================================================
 
 \vspace{6pt}
-\small{Fullstack developer with around three years across frontend and backend, strongest on Go backend services --- Gin, gRPC, Worker Pool, and dependency injection with uber-go/dig and Fx. Owns system design end to end, from database modeling to backend stack decisions, and builds the event-driven pipelines behind it with Kafka, RabbitMQ, and Redis, along with the observability and CI/CD around them. Also ships the ReactJS, Next.js, and Vue.js frontends that consume those APIs. Experience spans fintech and banking, government and public sector, real-estate CRM, and geospatial platforms.}
+\small{Fullstack developer with around three years across frontend and backend, strongest on Go backend services --- Gin, gRPC, Worker Pool, and dependency injection with uber-go/dig and Fx. Proposes and owns the database modeling and backend stack decisions for the modules he is responsible for, and builds the event-driven pipelines behind them with Kafka, RabbitMQ, and Redis, along with the observability and CI/CD around them. Also ships the ReactJS, Next.js, and Vue.js frontends that consume those APIs. Experience spans fintech and banking, government and public sector, real-estate CRM, and geospatial platforms.}
 
 % ============================================================
 %     CORE COMPETENCIES
@@ -69,6 +69,8 @@
 
 \item \textbf{Testing, security \& AI-assisted development}: unit and integration tests across REST APIs, WebSocket, cron jobs and database interactions in Go and Node.js; JWT/PASETO, TOTP/2FA, TLS/mTLS; Python (Scrapy, Selenium) for e-commerce data crawling; Claude Code, GitHub Copilot, Spec-Kit.
 
+\item \textbf{Public Go references} at \href{https://github.com/phamnam2003}{github.com/phamnam2003}: gRPC built from the protocol up (all four method types, interceptors, TLS/mTLS); 20 Gang-of-Four patterns in Go; TOTP two-factor implementation; Gin backend template with PASETO, sqlc and GitHub Actions CI.
+
 \end{itemize}
 
 % ============================================================
@@ -87,7 +89,6 @@
     \item Refactored and optimized internal packages to improve performance and strengthen application safety.
     \item Built background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows.
     \item Pushed realtime updates to clients over WebSocket and Server-Sent Events; built background task workers and scheduled cron jobs for recurring and long-running operations.
-    \item Contributed to the design of scalable software systems and architectures.
 \end{itemize}}}
 
 \vspace{3pt}
@@ -135,9 +136,9 @@
 % Project entries put the project name in the third argument on purpose: moderncv's
 % banking style renders argument 3 in bold and argument 2 in italics, so the project
 % name has to sit third to be the line a reader scans first.
-\item{\cventry{03/2026 - Present}{Backend Developer, team of 7}{SkyReality --- Real-estate lead platform}{}{}{\vspace{1pt}
+\item{\cventry{03/2026 - Present}{Backend Developer, team of 7}{SkyReality --- Real-estate lead platform}{AIONtech}{}{\vspace{1pt}
 \begin{itemize}
-    \item Architected the system: database modeling and backend stack decisions.
+    \item Proposed the lead and campaign data model plus the backend stack for the modules I owned; the design was reviewed and approved by the team before build.
     \item Integrated webhook event processing from Zalo, Slack, and Telegram bots; implemented OAuth2 Google Sign-In and multipart upload with checksum verification.
     \item Delivered realtime client updates over WebSocket and SSE, with background task workers and cron jobs for recurring work.
     \item Built the platform's Next.js frontend (Shadcn UI, TanStack Query); deployed to Kubernetes with ArgoCD.
@@ -147,7 +148,7 @@
 \vspace{3pt}
 
 \needspace{4\baselineskip}
-\item{\cventry{11/2025 - 01/2026}{Backend Developer, team of 8}{Sacombank Smart Teller Machine (STM)}{}{}{\vspace{1pt}
+\item{\cventry{11/2025 - 01/2026}{Backend Developer, team of 8}{Sacombank Smart Teller Machine (STM)}{AIONtech}{}{\vspace{1pt}
 \begin{itemize}
     \item Diagnosed a failing export (OOM kills and timeouts) as unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output, cutting the same dataset from 167.8 MB to 16 MB and eliminating OOM kills.
     \item Built async import/export pipelines, step-level transaction logging, realtime WebSocket/SSE updates and cron-scheduled jobs; applied dependency injection for testability, and built the admin frontend in Next.js.
@@ -157,19 +158,11 @@
 \vspace{3pt}
 
 \needspace{4\baselineskip}
-\item{\cventry{12/2025 - Present}{Backend Developer, team of 9}{Document AI for C06, Ministry of Public Security}{}{}{\vspace{1pt}
+\item{\cventry{12/2025 - Present}{Backend Developer, team of 9}{Document AI for C06, Ministry of Public Security}{AIONtech}{}{\vspace{1pt}
 \begin{itemize}
-    \item Architected the system: database modeling and backend stack decisions for an AI document-summarization and task-generation platform, now being positioned for customers beyond C06.
-    \item Implemented realtime client updates over WebSocket and SSE, with background workers and cron jobs for recurring and long-running processing; deployed to Kubernetes with ArgoCD.
+    \item Built and structured the core backend modules of this document-summarization and task-generation platform, contributing the data model and stack choices for that scope; now being generalized for customers beyond C06.
+    \item Implemented realtime client updates over WebSocket and SSE, with background workers and cron jobs for long-running processing; deployed to Kubernetes with ArgoCD.
     \item Stack: Go (Gin), Kafka, PostgreSQL, Redis, MinIO, Docker, Kubernetes, ArgoCD.
-\end{itemize}}}
-
-\vspace{3pt}
-
-\needspace{4\baselineskip}
-\item{\cventry{Open source}{github.com/phamnam2003}{Go references \& study repositories}{}{}{\vspace{1pt}
-\begin{itemize}
-    \item gRPC reference built from the protocol up (all four method types, interceptors, TLS/mTLS); \texttt{challenges} repo with 20 Gang-of-Four patterns in Go; \texttt{go-2fa} TOTP implementation.
 \end{itemize}}}
 
 \end{itemize}
@@ -184,7 +177,7 @@
 
 \needspace{3\baselineskip}
 \item{\cventry{2021 - 2026}{Engineer's degree, Information Technology}{Hanoi Open University (HOU)}{Ha Noi, Vietnam}{}{\vspace{1pt}
-Graduated 2026. Software engineering, data structures \& algorithms, databases, computer networks, web development.
+Graduated 2026. Full-time programme, studied while working professionally from early 2023, with a concentrated study block in spring 2024. Software engineering, data structures \& algorithms, databases, computer networks, web development.
 }}
 
 \end{itemize}

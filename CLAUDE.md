@@ -35,13 +35,14 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 ### Education
 - **Engineer's degree (Kỹ sư) in Information Technology** (2021 – 2026, **graduated**) — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
   - Topics: software engineering, data structures & algorithms, databases, computer networks, web development
+  - **Full-time (chính quy) programme, studied while working professionally from early 2023.** Confirmed 2026-08-08. State this on CVs: without it the 2026 graduation date anchors readers to "fresher" and silently discounts ~3 years of real experience sitting above it.
 
 ### Professional Experience
 - **Frontend and Backend Developer** (11/2025 – Present) - **AIONtech** (Ha Noi)
   - Dependency injection with Uber Dig and Fx to improve scalability and maintainability of Go backend services
   - Background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows
   - Realtime client push over WebSocket and SSE; background task workers and scheduled cron jobs
-  - Architected system design (DB modeling + backend stack) on the SkyReality real-estate platform and the C06 document-AI system; backend work on Sacombank's Smart Teller Machine
+  - Proposed the DB modeling and backend stack for the modules he owned on the SkyReality real-estate platform and the C06 document-AI system, with designs reviewed and approved before build; backend work on Sacombank's Smart Teller Machine. *(Scope corrected 2026-08-08 — this is not end-to-end architecture ownership of a whole platform; never write "architected the system".)*
   - Fullstack on those same projects: built the Next.js/Shadcn UI frontends for SkyReality and the STM admin UI, and deployed SkyReality and C06 to Kubernetes via ArgoCD
 - **Frontend and Backend Developer** (06/2024 – 10/2025) - **Leeon Group** (Ha Noi)
   - Took ownership of an existing Go codebase from departing team members — maintained, debugged, and enhanced production projects wired into CI/CD

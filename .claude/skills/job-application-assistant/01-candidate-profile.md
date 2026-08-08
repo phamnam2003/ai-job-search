@@ -34,6 +34,14 @@ a hard no, not a gap to smooth over. -->
 |--------|--------|-------------|------------|
 | **Engineer's degree (Kỹ sư), Information Technology** | 2021 – 2026 (**graduated**) | **Hanoi Open University (HOU) — Trường Đại học Mở Hà Nội** | Software engineering, data structures & algorithms, databases, computer networks, web development |
 
+**Full-time (chính quy) programme, studied while working from early 2023.** Confirmed by the
+candidate 2026-08-08. He arranged his class schedule so that large blocks were free, and used
+that time to work. This is the explanation for the pattern a reader otherwise finds implausible:
+a 2026 graduation date sitting above roughly three years of professional experience beginning
+04/2023. **Say this on CVs** — without it, the graduation year anchors readers to "2026 fresher"
+and every seniority claim above it gets silently discounted. *(How hard he worked to make it fit,
+including weekends, is context for interviews only — he asked that it stay off the CV.)*
+
 ## Professional Experience
 
 ### Frontend and Backend Developer — AIONtech (11/2025 – Present)
@@ -64,6 +72,12 @@ Ha Noi, Vietnam
 - Contributed to system design using PostgreSQL with the PostGIS extension for spatial data
 - Handled deployment: Linux/Ubuntu Server, SSH, Nginx
 
+### Gap: 03/2024 – 05/2024
+Between TLGEO and Leeon Group. **Concentrated on university coursework in order to finish the
+degree faster** (confirmed 2026-08-08). Not idle time and not a layoff. Worth one line on a CV
+where the gap is visible, since an unexplained gap compounds the credibility problem the 2026
+graduation date already creates.
+
 ### Frontend Intern — Lalasoft (04/2023 – 06/2023)
 Ha Noi, Vietnam
 - Applied Redux Core, Redux Toolkit, and Ant Design to ongoing company projects
@@ -72,9 +86,20 @@ Ha Noi, Vietnam
 
 ## Key Projects
 
-### Real Estate — SkyReality (03/2026 – Present) — Backend Developer, team of 7
+**All three projects below are AIONtech projects** (confirmed 2026-08-08). Always attribute them
+to AIONtech on a CV. Left unattributed they read either as concurrent outside work or as an
+impossibly fast ramp, and both readings damage credibility.
+
+**Scope of the design work — corrected 2026-08-08 by the candidate.** Earlier versions of this
+profile, the master CV and CLAUDE.md all said he "architected the system" end to end. That
+overstates it. What he actually did: **proposed design options, which were reviewed and approved
+before he built them, and the design he owned covered the modules assigned to him, not the whole
+platform.** Use that framing. Do not write "architected the system", "owned the architecture end
+to end", or "sole architect" in any future document.
+
+### Real Estate — SkyReality (03/2026 – Present) — AIONtech — Backend Developer, team of 7
 Platform for managing real-estate leads across marketing campaigns.
-- Architected the system: database modeling and backend technology stack decisions
+- Proposed the database model and backend stack for the modules he owned; designs were reviewed and approved by the team before implementation
 - Developed and structured core backend modules for scalability and maintainability
 - Integrated webhook-based event processing from Zalo, Slack, and Telegram bots to automate data collection and workflow triggers
 - Implemented OAuth2 authentication with Google Sign-In
@@ -84,16 +109,16 @@ Platform for managing real-estate leads across marketing campaigns.
 - Deployed to Kubernetes with ArgoCD GitOps
 - **Stack:** Go (Gin), Kafka, Redis, PostgreSQL, uber-go/dig, MinIO; Kubernetes, ArgoCD; Next.js, Shadcn UI, TanStack Query
 
-### VB — Document AI for C06, Ministry of Public Security (12/2025 – Present) — Backend Developer, team of 9
+### VB — Document AI for C06, Ministry of Public Security (12/2025 – Present) — AIONtech — Backend Developer, team of 9
 AI-powered document summarization and task-generation system. Built for C06 and now being positioned for other customers — it is a product, not a one-client build.
-- Architected the system: database modeling and backend technology stack decisions
+- Proposed the database model and backend stack for the modules he owned; designs were reviewed and approved by the team before implementation
 - Developed and structured core backend modules for scalability and maintainability
 - Implemented realtime client updates over WebSocket and Server-Sent Events (SSE), with background task workers and cron jobs for recurring and long-running processing
 - Deployed to Kubernetes with ArgoCD GitOps; integrated MinIO object storage
 - **Stack:** Go (Gin), Kafka, PostgreSQL, Redis, MinIO, Docker, Kubernetes, ArgoCD
 - *(No Python on his side — the AI/Python services are another team's. Confirmed 2026-08-07; an earlier version of this profile wrongly listed Python in this stack.)*
 
-### STM (Smart Teller Machine) — Sacombank (11/2025 – 01/2026) — Backend Developer, team of 8
+### STM (Smart Teller Machine) — Sacombank (11/2025 – 01/2026) — AIONtech — Backend Developer, team of 8
 Self-service banking system: cash deposit, withdrawal, and account services.
 - Refactored STM data export to Excel, improving operational reporting and reconciliation
 - Diagnosed a failing export (OOM kills and timeouts) down to unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output — **same dataset went from 167.8 MB to 16 MB (~90% smaller), OOM kills eliminated and timeouts stopped**
