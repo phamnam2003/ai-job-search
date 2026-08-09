@@ -16,6 +16,12 @@ framework_version: 1.1.1
 - **LinkedIn:** https://www.linkedin.com/in/pham-nam-153ab9259/
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **Constraints:** Ha Noi onsite/hybrid, or remote (VN and offshore). Not relocating to HCMC/Da Nang unless fully remote.
+- **Current compensation:** 15–20M VND/month gross at AIONtech (confirmed 2026-08-09). Use this
+  for negotiation calibration only — **never disclose it to a prospective employer**, and never
+  let it become the anchor. The relevant anchor is the published market band for Go backend at
+  ~3 years in Ha Noi, which his own 2026 scrapes put at **25–40M** (SAVA META up to 40M, iKame up
+  to ~$1500, KiotViet 20–30M, Digital Innovation 15–28M NET, LoogIX up to 25M). The 15M figure in
+  CLAUDE.md is a *filter floor* for the scrape, not a target.
 
 ### Languages
 <!-- Every language you can work in professionally, with your honest level. Used by the
