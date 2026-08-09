@@ -60,9 +60,7 @@ export function feedUrls(keys: string[]): string[] {
   return keys.map((k) => CATEGORY_FEEDS[k]).filter((u): u is string => Boolean(u))
 }
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+const UA = "Mozilla/5.0 (compatible; weworkremotely-cli/1.0)"
 
 export function writeError(error: string, code: string): void {
   process.stderr.write(JSON.stringify({ error, code }) + "\n")

@@ -15,9 +15,7 @@ export const API_URL = "https://remoteok.com/api"
 // pagination on the main feed, so `--page` is applied client-side over this size.
 export const PAGE_SIZE = 20
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+const UA = "Mozilla/5.0 (compatible; remoteok-cli/1.0)"
 
 export function writeError(error: string, code: string): void {
   process.stderr.write(JSON.stringify({ error, code }) + "\n")

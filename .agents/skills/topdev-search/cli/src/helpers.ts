@@ -22,9 +22,7 @@ export const SEARCH_FIELDS_COMPANY = "id,display_name,slug,image_logo"
 export const DETAIL_FIELDS_JOB =
   "title,content,responsibilities_original,requirements_original,benefits_original,salary,addresses,company,skills_str,detail_url,slug"
 
-const UA =
-  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
-  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+const UA = "Mozilla/5.0 (compatible; topdev-cli/1.0)"
 
 export function writeError(error: string, code: string): void {
   process.stderr.write(JSON.stringify({ error, code }) + "\n")
