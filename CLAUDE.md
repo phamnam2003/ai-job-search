@@ -103,7 +103,8 @@ gate would only FLAG an English-fluency bar, and Pham wants those excluded outri
 2. **Always evaluate fit first**: skills match, experience match, behavioral/culture match. Present this assessment to the user before proceeding.
 3. If good fit: create targeted CV (`cv/main_<company>_<role>.tex`) and cover letter (`cover_letters/cover_<company>_<role>.tex`)
 4. **Verify both documents** (see Verification Checklist below)
-5. Prepare interview talking points based on the role requirements and your strengths
+5. **Record the application in `job_search_tracker.csv`** — once both documents exist, write the row per `/apply` Step 6b (`.claude/commands/apply.md`), which the job-application-assistant skill mirrors as its Step 3b. Status starts at `drafted`; `/outcome` moves it to `applied` and overwrites `date` with the real submission date. Never skip this: `/gmail-sync`, `/html-report` and `/notion-sync` all build their view of the pipeline from this file, so an application missing here is invisible to every one of them.
+6. Prepare interview talking points based on the role requirements and your strengths
 
 **Important:** When mentioning agentic coding or AI tooling in CVs/cover letters, explicitly reference **Claude Code** by name.
 
