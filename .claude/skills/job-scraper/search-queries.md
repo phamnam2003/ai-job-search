@@ -102,8 +102,14 @@ The remaining Vietnamese portals have no CLI, so `/scrape` hits them via `WebSea
 **Cake** (`cake.me`) was evaluated 2026-07-17 but can't get a zero-dependency CLI — its job and
 detail pages are behind a Cloudflare JS challenge (403). Reach it via `site:cake.me` WebSearch only.
 
-The Danish CLIs already in `.agents/skills/` (jobindex, jobbank, jobdanmark, jobnet, freehire)
-are **not applicable** to this profile - `/scrape` should skip them.
+The four Danish CLIs in `.agents/skills/` (jobindex, jobbank, jobdanmark, jobnet) are **not
+applicable** to this profile and ship `enabled: false`, so `/scrape` skips them.
+
+**freehire is not one of them** (corrected 2026-08-09). It was grouped with the Danish boards by
+mistake: it is a country-agnostic aggregator over ~50 ATS platforms, and `-q "backend engineer"
+--country VN` / `--region apac` return live Vietnamese and APAC roles. It is enabled. Its weakness
+is the opposite of a Danish board's - it returns plenty of India/Singapore/HCMC postings that the
+Location Filter below then drops, so pair it with `--country VN` rather than a bare region query.
 
 ---
 
