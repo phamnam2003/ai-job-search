@@ -14,6 +14,7 @@ description: >
   IT, tuyển dụng lập trình viên, việc làm lập trình Hà Nội, việc làm Golang,
   tuyển dụng IT, việc làm có thưởng giới thiệu.
 context: fork
+enabled: true  # set to false to keep this portal installed but have /scrape skip it
 allowed-tools: Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts *)
 ---
 
@@ -26,6 +27,13 @@ Hanoi-based backend/fullstack search.
 
 Zero runtime dependencies — plain `bun` + `fetch` + regex over the server-rendered
 HTML.
+
+## Courtesy note
+
+Devwork's `robots.txt` is a single record — `User-agent: *` with `Disallow: /admin?*` — so
+the search and job-detail paths this CLI uses are **allowed**, and no crawler is singled out.
+Verified 2026-08-09 with `python tools/robots_check.py`. Devwork is a small board; keep
+request volume low and polite (personal use, no bulk scraping).
 
 ## What makes this portal worth running
 

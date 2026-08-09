@@ -11,7 +11,7 @@ description: >
   jobs, engineering vacancies, data/ML jobs, DevOps roles, remote developer jobs,
   "are there any <tech role> jobs in <place>", look up this freehire job posting.
 context: fork
-enabled: false  # Danish portal - not applicable to this VN/remote profile (search-queries.md)
+enabled: true  # country-agnostic ATS aggregator, not a Danish board - query it with --country VN / --region apac / remote
 allowed-tools: Bash(bun run .agents/skills/freehire-search/cli/src/cli.ts *)
 ---
 

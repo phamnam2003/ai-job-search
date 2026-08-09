@@ -12,6 +12,7 @@ description: >
   Vietnam. Trigger phrases (Vietnamese): việc làm, tuyển dụng, tìm việc làm Hà Nội,
   việc làm IT, việc làm lập trình viên, tuyển dụng backend.
 context: fork
+enabled: true  # set to false to keep this portal installed but have /scrape skip it
 allowed-tools: Bash(bun run .agents/skills/joboko-search/cli/src/cli.ts *)
 ---
 

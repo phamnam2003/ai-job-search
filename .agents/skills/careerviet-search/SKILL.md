@@ -14,6 +14,7 @@ description: >
   (Vietnamese): việc làm, tuyển dụng, tìm việc làm Hà Nội, việc làm IT, việc làm
   lập trình, tuyển lập trình viên, kỹ sư phần mềm, việc làm ngân hàng.
 context: fork
+enabled: true  # set to false to keep this portal installed but have /scrape skip it
 allowed-tools: Bash(bun run .agents/skills/careerviet-search/cli/src/cli.ts *)
 ---
 
@@ -27,6 +28,16 @@ miss.
 
 Zero runtime dependencies — plain `bun` + `fetch` + regex over the server-rendered
 HTML. Nothing to install beyond the repo clone.
+
+## Courtesy note
+
+CareerViet's `robots.txt` **allows** the search and job-detail paths. Its `User-agent: *`
+record only disallows account and utility paths (`/qckiemviec/`, `/vi|/en/jobseekers/jobs/save`,
+`/vi|/en/jobseekers/jobs/print?id=*`, `/counter/*`, `/check-matching`), none of which this CLI
+touches. It names several crawlers explicitly — `ClaudeBot` and `GPTBot` are among those
+`Allow: /`; `CCBot`, `Amazonbot`, `Bytespider`, `Diffbot`, `ia_archiver` and `YouBot` are
+blocked outright. Verified 2026-08-09 with `python tools/robots_check.py`. Intended for
+**personal use**: keep request volume low and polite, no bulk scraping.
 
 ## What makes this portal worth running
 
