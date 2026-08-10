@@ -1,7 +1,7 @@
 {
   "name": "joboko-cli",
   "version": "1.0.0",
-  "description": "CLI for searching jobs on CareerViet Vietnam (joboko.vn) public pages — no authentication, zero runtime dependencies.",
+  "description": "CLI for searching jobs on Joboko Vietnam (vn.joboko.com) public pages — no authentication, zero runtime dependencies.",
   "type": "module",
   "main": "src/cli.ts",
   "bin": {
