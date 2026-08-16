@@ -113,12 +113,14 @@ Write 5-7 lines that function as an "elevator pitch": a concise, compelling intr
 
 When the role sits outside your home domain, **lead with the domain-transfer argument** - the one or two sentences connecting your background to their problem (e.g. wave physics to radar signal processing) belong in the profile statement's opening, not buried in the cover letter. It is the strongest card a domain-changer holds; play it first.
 
+Where the posting allows it, **open on the shape of the problem rather than the language you solve it in**. A posting about payments, orders, inventory or booking is screening for someone who has kept money and state correct under load; naming that problem lands harder than naming a stack, and it survives a partial stack mismatch in a way "3 years of Go" does not.
+
 **Create 2-3 profile statement templates for your main role types:**
 
 <!-- Populated by /setup on 2026-07-15 for Pham Hai Nam. Tune per posting; keep to 3-4 lines. -->
 
 **For Backend / architecture-ownership roles (primary):**
-> Backend engineer with ~2 years building production Go services (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across fintech and public-sector systems. Owned architecture and database modeling end to end on a real-estate lead platform and a document-AI system for the Ministry of Public Security. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD).
+> Backend engineer with ~3 years building production services, the last two in Go (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across fintech and public-sector systems. Proposed the database model and backend stack for owned modules on a real-estate lead platform and a document-AI system for the Ministry of Public Security; those designs were reviewed and approved before build. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD).
 
 **For pure-backend / distributed-systems roles:**
 > Go backend developer focused on distributed, event-driven systems: Kafka and RabbitMQ messaging, Redis cache/pub-sub/streams, gRPC with mutual TLS and interceptors, and the Worker Pool pattern for background processing. Delivered async import/export pipelines and traceability improvements on Sacombank's Smart Teller Machine, and maintains open-source Go references covering gRPC down to the TLS layer and 20 Gang-of-Four patterns.
@@ -126,7 +128,12 @@ When the role sits outside your home domain, **lead with the domain-transfer arg
 **For Fullstack (React + Go) roles:**
 > Fullstack developer who has shipped both sides of production systems: ReactJS/Next.js/Vue frontends (Redux, Redux Toolkit, Recoil, Tailwind, Ant Design) and Go/Node.js backends (Gin, gRPC, Express, Strapi). Strongest on the backend — event-driven microservices, PostgreSQL data modeling, and system-design ownership — while staying fluent in the component-based frontend architecture that consumes those APIs.
 
+**For money-critical / transactional backend roles** *[Used for: dayladau_backend_developer_golang_mysql_cloud]*:
+> Backend developer with around three years building production services, the last two of them in Go (Golang) with Gin, gRPC, Worker Pool and dependency injection via uber-go/dig and Fx. My work sits in fintech and public-sector systems where money and state have to stay correct: Sacombank's Smart Teller Machine for cash deposits, withdrawals and reconciliation, plus lead and document platforms at AIONtech. I proposed the database model and backend stack for the modules I owned on two of those platforms, and my designs were reviewed and approved before I built them. I read and fix slow queries rather than route around them, write unit and integration tests as part of the work, and deploy what I build to Kubernetes myself with ArgoCD.
+
 Statements labeled *[Used for: <company>_<role>]* were extracted from archived application drafts by `/setup` Path A. They are **phrasing references, never fact sources**: when drafting from one, every factual claim still comes from `01-candidate-profile.md` - a past tailored draft does not vouch for its own accuracy.
+
+**Re-check every statement you reuse against the current scope and phrasing rules** in `01-candidate-profile.md` and CLAUDE.md - including the statements already on this page, which were written against the rules in force on the day they were extracted. A tailored draft that drifted into overclaiming is precisely what must not become the template the next application starts from, and nothing in an archived `.tex` file marks it as having drifted. Where a rule names a banned formulation, that formulation is banned here too, not only in the drafts it was written about.
 
 ### Core Competencies / Skills Section (Best Practice)
 Reorder and emphasize based on the role. Use bold category labels.

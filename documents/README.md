@@ -20,6 +20,8 @@ documents/
 │       ├── cover_letter.tex     # The cover letter you submitted
 │       ├── cv_draft.tex         # The CV variant you submitted
 │       └── outcome.md           # Result + notes (fill in after hearing back)
+├── negotiations/                # Salary and offer negotiation prep, one file per negotiation
+│   └── <company>_<topic>_<YYYY-MM>.md
 └── README.md                    # This file
 ```
 
@@ -163,6 +165,24 @@ Application folders may also contain **`interview_prep_<stage>.md`** files writt
 - Which role types and companies have led to interviews (signals strong fit areas)
 - Which applications did not progress (informs the experience match calibration in `04-job-evaluation.md`)
 - Interview feedback, if you recorded it, can surface new STAR candidates
+
+---
+
+## negotiations/
+
+Preparation and notes for salary and offer negotiations — internal raises as well as offers from a prospective employer. One file per negotiation.
+
+**Supported formats:** `.md`, `.txt`
+
+**Naming:** `<company>_<topic>_<YYYY-MM>.md`, e.g. `acme_salary_raise_2026-08.md`, `bigcorp_offer_2026-11.md`. The month keeps repeat negotiations with the same employer distinct.
+
+**What `/setup` extracts:**
+- Compensation calibration — current figures, market bands you researched, and your own floor (feeds the compensation bullet in `01-candidate-profile.md`)
+- Behavioral signal — how you actually perform under pressure, which is often visible here in a way it never is in a CV (feeds the growth areas in `02-behavioral-profile.md`)
+
+**What `/setup` does not extract:** the tactics. Opening asks, walk-away floors, who the counterparty is, and what not to say are live campaign details that belong to one negotiation. They stay in this folder and are never copied into the skill files, which hold only what generalizes to the next negotiation.
+
+**Privacy boundary:** this is the most sensitive folder here. Nothing in it — your current salary, your floor, your read of a colleague or manager — may reach a CV, a cover letter, an application form, or a prospective employer. `01-candidate-profile.md` already carries the standing rule never to disclose current compensation; this folder is why that rule exists.
 
 ---
 

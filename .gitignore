@@ -81,6 +81,9 @@ documents/postings/**
 # Interview prep and experience records: these name the employers applied to,
 # quote what was submitted, and set out the candidate's weak points.
 documents/interview/**
+# Negotiation prep: current salary, walk-away floors, and the candidate's read of
+# a named manager. The most damaging folder here to publish by accident.
+documents/negotiations/**
 !documents/**/.gitkeep
 
 # Personal job search tracking

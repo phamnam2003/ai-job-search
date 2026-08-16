@@ -10,7 +10,7 @@ There are three paths into setup. Step 0 picks the right one; all three converge
 
 If `$ARGUMENTS` contains `--section <name>`, skip directly to that section in Path C for an update-only flow. Do not run the path-selection prompt below.
 
-Otherwise, before greeting the user, scan the `documents/` folder. Use Glob with `documents/**/*` and count files per subfolder (`cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`).
+Otherwise, before greeting the user, scan the `documents/` folder. Use Glob with `documents/**/*` and count files per subfolder (`cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`, `negotiations/`).
 
 Then welcome the user with a single message that lists three paths. The wording changes based on what was found.
 
@@ -68,6 +68,7 @@ Use Glob with `documents/**/*` to scan the full tree. Print:
 **diplomas/**: [list files, or "(empty)"]
 **references/**: [list files, or "(empty)"]
 **applications/**: [list subfolders with their files, or "(empty)"]
+**negotiations/**: [list files, or "(empty)"]
 
 I will read these and cross-reference before proposing any changes.
 ```
@@ -90,7 +91,7 @@ Hold this content in context throughout Path A. Do not re-read.
 
 ### Step A3: Parse Documents
 
-Read each document found in Step A1. Process subfolders in this order: `cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`.
+Read each document found in Step A1. Process subfolders in this order: `cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`, `negotiations/`.
 
 **`cv/` documents:** name, contact (email, phone, LinkedIn, GitHub), education (degree, institution, dates, thesis), work experience (title, company, dates, location, bullets), skills, languages (with any stated proficiency), publications, awards, profile/summary.
 
@@ -105,6 +106,10 @@ Read each document found in Step A1. Process subfolders in this order: `cv/`, `l
 - `cover_letter.tex`: opening structure, body structure, bullet style, closing, recurring phrases
 - `cv_draft.tex`: profile statement, section ordering, framing for this role type
 - `outcome.md`: status (in_progress/hired/offer_declined/rejected/no_response/interview_only), interview stages, notes. Skip `in_progress` applications for calibration — they have no final signal yet.
+
+**`negotiations/` documents:** extract exactly two things. **Compensation calibration** — current figures, researched market bands, and the user's own floor (feeds the compensation bullet in `01-candidate-profile.md`). **Behavioral signal** — how the user performs under pressure, which these notes expose in a way a CV never does (feeds the growth areas in `02-behavioral-profile.md`), generalized into a trait and a counter-move, never quoted verbatim.
+
+Do **not** extract the tactics: opening asks, walk-away floors, the counterparty's identity, or what the user planned not to say. Those belong to one negotiation and go stale with it; the skill files hold only what carries to the next one. Nothing from this folder may reach a CV, cover letter, or application form — see the privacy boundary in `documents/README.md`.
 
 After reading, proceed to Step A4 without intermediate output. The user sees a complete picture in Step A6.
 

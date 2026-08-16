@@ -21,7 +21,11 @@ framework_version: 1.1.1
   let it become the anchor. The relevant anchor is the published market band for Go backend at
   ~3 years in Ha Noi, which his own 2026 scrapes put at **25–40M** (SAVA META up to 40M, iKame up
   to ~$1500, KiotViet 20–30M, Digital Innovation 15–28M NET, LoogIX up to 25M). The 15M figure in
-  CLAUDE.md is a *filter floor* for the scrape, not a target.
+  CLAUDE.md is a *filter floor* for the scrape, not a target. Whenever compensation changes, update
+  this figure and that filter floor in the same pass — a floor he has already cleared silently
+  narrows every `/scrape` run without ever announcing that it is doing so. Preparation and notes
+  for a live negotiation belong in `documents/negotiations/`, not here: this bullet holds the
+  settled number, never the campaign.
 
 ### Languages
 <!-- Every language you can work in professionally, with your honest level. Used by the

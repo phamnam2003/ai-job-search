@@ -86,6 +86,16 @@ calls on real projects at ~3 years of experience.
 - **No formal leadership or mentoring track yet** *[Inferred + CV]* — has led architecture
   decisions but has no people-management title. *Frame as:* has owned technical direction and is
   ready to grow into mentorship.
+- **Concedes value pre-emptively under pushback** *[Self-reported — see `documents/negotiations/`]*
+  — Challenged on a claim, he discounts it before being asked to, usually through a hedge ("cũng",
+  "chỉ là", "chưa hẳn", "em nghĩ chắc"), and will name the bottom of his own range unprompted. In
+  a technical discussion this passes for modesty; in a negotiation or a competency interview it is
+  unforced self-damage. *Counter-move:* when a hedge is forming, drop it and pause instead — the
+  unqualified fact is already strong enough.
+
+> **Drift runs both ways.** Written artifacts drift toward overstatement — CV drafts have had to be
+> caught inflating claims in review — while live conversation drifts toward understatement. Check
+> for both: a guard against one is not a guard against the other.
 
 ## Mapping to Job Posting Language
 

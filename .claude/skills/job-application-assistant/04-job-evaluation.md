@@ -214,6 +214,36 @@ Present the evaluation as:
 - **Weak Fit** (30-44): Probably skip unless strategic reasons
 - **Poor Fit** (<30): Skip
 
+## Calibrating the Score Against Outcomes
+
+<!-- Method, not a snapshot. /setup Path A regenerates the actual correlation on demand from the
+     resolved outcome.md files under documents/applications/. Read this before trusting a score. -->
+
+The dimensions above are a triage tool, not a validated predictor. Until there is at least one
+positive outcome to correlate against, read the overall number as **a ranking of where to spend
+effort**, never as a probability of getting a response — and never let a high score buy an
+exemption from the channel and follow-up work below. An unvalidated framework is "unknown", not
+"working"; those are different claims and only one of them is honest.
+
+**Before concluding a score was wrong, rule out the three variables that usually decide the
+outcome and are the easiest to leave silently untested:**
+
+1. **Channel.** Cold portal submission, or a referral, warm intro, or named contact? Portal-cold
+   from an unknown-brand candidate is a low-yield channel by construction, so a portal-only
+   history tells you about the channel before it tells you anything about fit. `/scrape` Step 4.5
+   generates LinkedIn recruiter and peer search links on every run precisely so this gets tested.
+2. **Follow-up.** Was one sent? Standard practice is one to two after 10-14 days. Silence
+   following no follow-up is not evidence about the application.
+3. **Document delivery.** Did the tailored CV and cover letter actually reach the employer? Portal
+   forms routinely take the CV and drop the cover letter, and some sends go out with neither. An
+   application whose tailoring never arrived says nothing about whether tailoring works.
+
+**Refreshing this.** `/setup` Path A reads every resolved `outcome.md` under
+`documents/applications/` and compares recorded scores against recorded results. Report that
+correlation at the time it is run and keep it out of this file — a table of company names and
+scores is stale the moment the next application resolves, and a stale table reads as evidence.
+Once real signal exists, what belongs here is the conclusion drawn from it, not the rows.
+
 ## Pre-Application: Call the Employer (Best Practice)
 
 Before writing the application, consider whether the candidate should call the contact person listed in the posting. **Only call if there are substantive questions** - never call just to "be remembered."
