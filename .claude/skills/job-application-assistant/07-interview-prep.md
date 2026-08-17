@@ -25,9 +25,10 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 3. **Leeon Group** — taking over a codebase with no handover. Use it for ambiguity and onboarding questions, and for Go concurrency (race conditions in live services).
 4. **gRPC / challenges** — this is a *learning* answer, not an achievement answer. Never present it as work experience.
 
-### Architecture ownership on SkyReality (system design & DB modeling)
+### Design ownership on SkyReality (system design & DB modeling)
 **Source:** CV — SkyReality, backend developer, team of 7 (03/2026–present)
-**What happened:** Given a new real-estate lead-management platform, you owned the database model and backend stack decisions, then built the core modules and webhook-based event ingestion from Zalo/Slack/Telegram.
+**What happened:** Given a new real-estate lead-management platform, you proposed the lead and campaign data model plus the backend stack for the modules you owned — the design was reviewed and approved by the team before build — then built the core modules and webhook-based event ingestion from Zalo/Slack/Telegram.
+**Scope guard (corrected 2026-08-08):** this is design ownership of *your modules*, reviewed and approved by others. Never say "architected the system", "owned the architecture end to end" or "sole architect" — not on paper, not in the room. If an interviewer restates it that way, correct them immediately: *"Để em nói chính xác hơn: em đề xuất, team review và duyệt trước khi build."*
 **Why it matters:** Best evidence for "you will own the backend" / system-design / data-modeling questions, and for how you make architectural decisions (your stated "research deeply, then commit" style).
 **S/T/A/R:**
 - Situation: New real-estate lead platform, greenfield backend, team of 7. The product had to reach a partner demo, and the business requirements were not fully specified up front.
