@@ -1,5 +1,5 @@
 ---
-framework_version: 1.2.2
+framework_version: 1.2.3
 ---
 
 # Job Evaluation Framework
@@ -84,7 +84,7 @@ How well do the required/preferred skills align with the candidate's capabilitie
 **Weak match areas:** Rust (interest only, no shipped work), formal people-leadership/mentoring, live-English/client-facing roles, cloud-provider-native stacks (AWS/GCP/Azure managed services — infra experience is self-hosted/on-prem), mobile, data engineering/ML
 
 ### 2. Experience Match (0-100)
-Does work history align with what they're looking for?
+Does work history align with what they're looking for? Match on the function and nature of the work performed, not the literal job title - a "Data Consultant" and a "Data Scientist" role can be functionally identical.
 
 | Score | Meaning |
 |-------|---------|

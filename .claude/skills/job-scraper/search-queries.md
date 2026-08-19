@@ -117,6 +117,8 @@ Location Filter below then drops, so pair it with `--country VN` rather than a b
 
 Queries are grouped by priority. Priority 1-3 run by default; `/scrape broad` runs all. Write **each category in both Vietnamese and English** (the two languages on the Languages table — see Language scope above and the Language Note table at the bottom of this file). Combine each query with the Ha Noi location terms where the site supports it.
 
+**Organize by function, not job title.** The same underlying work carries different titles across companies and markets (a "Data Scientist" role at one employer may be posted as "Insights Analyst" or "Data Consultant" at another). Name each priority category after the function it covers, and list several plausible job titles as query variants within that category rather than betting an entire priority tier on one exact title string.
+
 ### Priority 1: Backend Developer (Go / Node.js)
 
 Strongest and most desired direction. Go + Gin + gRPC + Kafka + microservices is the sharpest
