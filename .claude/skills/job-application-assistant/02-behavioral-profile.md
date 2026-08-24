@@ -86,7 +86,9 @@ calls on real projects at ~3 years of experience.
 - **No formal leadership or mentoring track yet** *[Inferred + CV]* — has led architecture
   decisions but has no people-management title. *Frame as:* has owned technical direction and is
   ready to grow into mentorship.
-- **Concedes value pre-emptively under pushback** *[Self-reported — see `documents/negotiations/`]*
+- **Concedes value pre-emptively under pushback** *[Self-reported — see
+  `documents/interview/2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md`; the `documents/negotiations/`
+  folder this used to cite was never created, and the signal now lives with the interview plans]*
   — Challenged on a claim, he discounts it before being asked to, usually through a hedge ("cũng",
   "chỉ là", "chưa hẳn", "em nghĩ chắc"), and will name the bottom of his own range unprompted. In
   a technical discussion this passes for modesty; in a negotiation or a competency interview it is

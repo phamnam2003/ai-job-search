@@ -24,8 +24,15 @@ framework_version: 1.1.1
   CLAUDE.md is a *filter floor* for the scrape, not a target. Whenever compensation changes, update
   this figure and that filter floor in the same pass — a floor he has already cleared silently
   narrows every `/scrape` run without ever announcing that it is doing so. Preparation and notes
-  for a live negotiation belong in `documents/negotiations/`, not here: this bullet holds the
-  settled number, never the campaign.
+  for a live negotiation belong with the interview plans in `documents/interview/`, not here:
+  this bullet holds the settled number, never the campaign.
+- **Effective floor has moved to 17M** (recorded 2026-08-24). A referral-sourced role has **17M
+  on the table** ahead of an interview on 01/10/2026 — an offer he can decline but no longer has
+  to beat from zero. The number itself is the only part that belongs here; the plan for raising
+  it is in `documents/interview/2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md`.
+  Consequence for the search: the **15M filter floor in CLAUDE.md is now below a number he has
+  already been offered**, so every `/scrape` run is still admitting roles he would not accept.
+  Raise it when he confirms the offer is firm — the two must move together, per the bullet above.
 
 ### Languages
 <!-- Every language you can work in professionally, with your honest level. Used by the
