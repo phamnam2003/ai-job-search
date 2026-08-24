@@ -137,7 +137,7 @@ Does this role advance career goals and contain tasks that energize?
 - Decision style: **researches deeply, then commits** — friction with "ship first, refactor later" cultures
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: employed at AIONtech (11/2025–present), searching from a position of stability — no pressure to take the first offer. Salary floor **15M VND/month, negotiable**; flag postings clearly below this in `/rank`.
+- **Security**: employed at AIONtech (11/2025–present), searching from a position of stability — no pressure to take the first offer. Salary filter band **17–40M VND/month, negotiable** (floor raised from 15M on 2026-08-24); flag postings clearly below the floor in `/rank`. A filter only — see `01-candidate-profile.md` for why no actual or expected figure is recorded anywhere in this repository. The floor is duplicated in CLAUDE.md's deal-breakers and in that file; change all three together or the scrape filter and the rank flag will disagree.
 - **Flexibility**: Ha Noi onsite/hybrid or remote (VN + offshore). **Not** relocating to HCMC/Da Nang unless fully remote. English is technical reading/writing only — exclude roles requiring live English or US-hours timezone overlap.
 - **Professional development**: wants to deepen backend/distributed-systems expertise and grow toward broader architecture ownership; open to mentorship but does not require it
 

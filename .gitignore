@@ -79,10 +79,15 @@ documents/references/**
 documents/applications/**
 documents/postings/**
 # Interview prep and experience records: these name the employers applied to,
-# quote what was submitted, and set out the candidate's weak points.
+# quote what was submitted, and set out the candidate's weak points. Since
+# 2026-08-24 this folder also absorbs what negotiations/ was for — current
+# salary, offers on the table, walk-away floors, who referred the candidate,
+# and their read of a named manager. The most damaging folder here to publish
+# by accident, so this rule matters more than the others.
 documents/interview/**
-# Negotiation prep: current salary, walk-away floors, and the candidate's read of
-# a named manager. The most damaging folder here to publish by accident.
+# Kept as a backstop: negotiations/ was never created and its role moved into
+# interview/ above, but an ignore rule costs nothing and a folder created later
+# under the old name would otherwise be tracked.
 documents/negotiations/**
 !documents/**/.gitkeep
 

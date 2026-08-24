@@ -29,7 +29,7 @@ visibility cannot be determined — warn now and wait:
 Wait for the user's confirmation before showing the path prompt. A private origin, no
 origin, or a non-fork remote needs no warning — continue silently.
 
-Then, before greeting the user, scan the `documents/` folder. Use Glob with `documents/**/*` and count files per subfolder (`cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`, `negotiations/`).
+Then, before greeting the user, scan the `documents/` folder. Use Glob with `documents/**/*` and count files per subfolder (`cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`, `postings/`, `interview/`).
 
 Then welcome the user with a single message that lists three paths. The wording changes based on what was found.
 
@@ -87,7 +87,8 @@ Use Glob with `documents/**/*` to scan the full tree. Print:
 **diplomas/**: [list files, or "(empty)"]
 **references/**: [list files, or "(empty)"]
 **applications/**: [list subfolders with their files, or "(empty)"]
-**negotiations/**: [list files, or "(empty)"]
+**postings/**: [list files, or "(empty)"]
+**interview/**: [list files, or "(empty)"]
 
 I will read these and cross-reference before proposing any changes.
 ```
@@ -110,7 +111,7 @@ Hold this content in context throughout Path A. Do not re-read.
 
 ### Step A3: Parse Documents
 
-Read each document found in Step A1. Process subfolders in this order: `cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`, `negotiations/`.
+Read each document found in Step A1. Process subfolders in this order: `cv/`, `linkedin/`, `diplomas/`, `references/`, `applications/`, `postings/`, `interview/`.
 
 **`cv/` documents:** name, contact (email, phone, LinkedIn, GitHub), education (degree, institution, dates, thesis), work experience (title, company, dates, location, bullets), skills, languages (with any stated proficiency), publications, awards, profile/summary.
 
@@ -126,9 +127,13 @@ Read each document found in Step A1. Process subfolders in this order: `cv/`, `l
 - `cv_draft.tex`: profile statement, section ordering, framing for this role type
 - `outcome.md`: status (in_progress/hired/offer_declined/rejected/no_response/interview_only), interview stages, notes. Skip `in_progress` applications for calibration — they have no final signal yet.
 
-**`negotiations/` documents:** extract exactly two things. **Compensation calibration** — current figures, researched market bands, and the user's own floor (feeds the compensation bullet in `01-candidate-profile.md`). **Behavioral signal** — how the user performs under pressure, which these notes expose in a way a CV never does (feeds the growth areas in `02-behavioral-profile.md`), generalized into a trait and a counter-move, never quoted verbatim.
+**`postings/` documents:** saved job postings not yet turned into an application. Treat as market signal only — recurring required skills, seniority bands, and stated salary ranges worth reflecting in `search-queries.md` or the compensation calibration. Never extract a claim about the candidate from a posting.
 
-Do **not** extract the tactics: opening asks, walk-away floors, the counterparty's identity, or what the user planned not to say. Those belong to one negotiation and go stale with it; the skill files hold only what carries to the next one. Nothing from this folder may reach a CV, cover letter, or application form — see the privacy boundary in `documents/README.md`.
+**`interview/` documents:** dated preparation plans and question banks for specific interview rounds. This folder replaces the `negotiations/` folder earlier versions of this file named: salary strategy in practice lives inside an interview plan, not in a separate document, so both kinds of signal are extracted here. Extract exactly two things. **Compensation calibration** — current figures, researched market bands, offers already on the table, and the user's own floor (feeds the compensation bullet in `01-candidate-profile.md`). **Behavioral signal** — how the user performs under pressure, which these plans expose in a way a CV never does (feeds the growth areas in `02-behavioral-profile.md`), generalized into a trait and a counter-move, never quoted verbatim.
+
+Also **register, do not copy**: add each file to the pointer table in `07-interview-prep.md` with a one-line description of what it holds, so a later run finds the existing plan instead of rewriting it. The plan's own content stays in `documents/interview/`.
+
+Do **not** extract the tactics: opening asks, walk-away floors, the counterparty's identity, or what the user planned not to say. Those belong to one round and go stale with it; the skill files hold only what carries to the next one. Nothing from this folder may reach a CV, cover letter, or application form — see the privacy boundary in `documents/README.md`.
 
 After reading, proceed to Step A4 without intermediate output. The user sees a complete picture in Step A6.
 

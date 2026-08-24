@@ -96,7 +96,7 @@ gate would only FLAG an English-fluency bar, and Pham wants those excluded outri
 - English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups). Overrides the Language Gate's FLAG verdict to a hard exclude.
 - **Not** a DevOps/Platform/SRE job title (has the skills and enjoys the work, but does not want it as the role)
 - Drains to avoid: ticket-only work with no design input; legacy maintenance with no new build
-- Salary floor: **15M VND/month, negotiable** — flag postings clearly below this
+- Salary filter band: **17–40M VND/month, negotiable** — flag postings clearly below the floor. A search filter only; no actual or expected figure is recorded in this repository (it is public). The floor is duplicated in `01-candidate-profile.md` and `04-job-evaluation.md` — change all three together or `/scrape` and `/rank` will enforce different bars
 
 ## Workflow for New Job Applications
 1. User provides a job posting (URL or text)

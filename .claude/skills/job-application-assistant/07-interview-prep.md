@@ -10,16 +10,19 @@ framework_version: 1.0.0
 
 <!-- Registered by /setup on 2026-08-24. These are working documents written for specific
      interviews, not framework files. This file holds the reusable answers; those hold the
-     dated plan, the salary strategy and the drill schedule for one particular round. -->
+     dated plan and drill schedule for one particular round.
+     Deliberately kept out of the table below: figures, referrer identities, and anything
+     naming what is on the table. This repository is public — read the plan itself for those. -->
 
 Interview-specific plans live in `documents/interview/`, not in this file. Check there before
-building anything new — the material is usually already written:
+building anything new — the material is usually already written. The table says only what each
+file *is*, not what is in it:
 
 | File | What it holds |
 |------|---------------|
-| `2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md` | 45-day drill plan for the 01/10/2026 interview (traceability/barcode SME, referral). Format: project deep-dive + live Go coding + system design. Interviewers: tech lead **and** his cousin — two people with two different purposes. **17M already on the table**; the plan's thesis is that the prep *is* the salary strategy, since the remaining leverage is the tech lead's own valuation, not the cousin pushing again. |
+| `2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md` | The active plan — a dated drill schedule running to the 01/10/2026 interview. Format that round tests for: project deep-dive, live Go coding, system design. Read it in full when preparing; it also carries that round's compensation approach, which is not repeated here. |
 | `2026-10-01_ngan-hang-cau-hoi.md` | The question bank that plan drills against — one exercise per evening, spoken aloud and timed at 60–90s, self-scored. Not a document to read through. |
-| `2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md` | Earlier plan (10/08) for the same company, **not executed**. The speaking script and the salary-negotiation half are still usable. Also the source for the "concedes value pre-emptively" trait in `02-behavioral-profile.md`. |
+| `2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md` | Earlier plan (10/08) for the same company, **not executed**. The speaking script and the compensation half are still usable. Also the source for the "concedes value pre-emptively" trait in `02-behavioral-profile.md`. |
 
 **One standing instruction carried out of those plans:** fix an overstated CV line *on paper,
 before the room*. Correcting yourself in front of an interviewer who was vouched for you costs

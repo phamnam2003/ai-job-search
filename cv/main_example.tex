@@ -40,7 +40,7 @@
     % value here would win and open every CV in fullscreen presentation mode.
     pdfpagemode=UseNone,
 }}
-\usepackage[scale=0.86]{geometry}
+\usepackage[scale=0.80]{geometry}
 \usepackage{import}
 
 % personal data
@@ -198,6 +198,10 @@ Graduated 2026. Full-time programme, studied while working professionally from e
 %     AWARDS
 % ============================================================
 
+% Stretch page 2 by a few lines so References does not spill to a page 3 on its
+% own. The standard near-miss rescue per 05-cv-templates.md - compressing the
+% geometry or the \vspace values instead is explicitly ruled out there.
+\enlargethispage{4\baselineskip}
 \section{Awards}
 \vspace{1pt}
 \begin{itemize}

@@ -16,23 +16,16 @@ framework_version: 1.1.1
 - **LinkedIn:** https://www.linkedin.com/in/pham-nam-153ab9259/
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **Constraints:** Ha Noi onsite/hybrid, or remote (VN and offshore). Not relocating to HCMC/Da Nang unless fully remote.
-- **Current compensation:** 15–20M VND/month gross at AIONtech (confirmed 2026-08-09). Use this
-  for negotiation calibration only — **never disclose it to a prospective employer**, and never
-  let it become the anchor. The relevant anchor is the published market band for Go backend at
-  ~3 years in Ha Noi, which his own 2026 scrapes put at **25–40M** (SAVA META up to 40M, iKame up
-  to ~$1500, KiotViet 20–30M, Digital Innovation 15–28M NET, LoogIX up to 25M). The 15M figure in
-  CLAUDE.md is a *filter floor* for the scrape, not a target. Whenever compensation changes, update
-  this figure and that filter floor in the same pass — a floor he has already cleared silently
-  narrows every `/scrape` run without ever announcing that it is doing so. Preparation and notes
-  for a live negotiation belong with the interview plans in `documents/interview/`, not here:
-  this bullet holds the settled number, never the campaign.
-- **Effective floor has moved to 17M** (recorded 2026-08-24). A referral-sourced role has **17M
-  on the table** ahead of an interview on 01/10/2026 — an offer he can decline but no longer has
-  to beat from zero. The number itself is the only part that belongs here; the plan for raising
-  it is in `documents/interview/2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md`.
-  Consequence for the search: the **15M filter floor in CLAUDE.md is now below a number he has
-  already been offered**, so every `/scrape` run is still admitting roles he would not accept.
-  Raise it when he confirms the offer is firm — the two must move together, per the bullet above.
+- **Salary filter band:** **17–40M VND/month**. This is a search filter and nothing else — the
+  floor flags postings to skip, the top reflects the published market band for Go backend at
+  ~3 years in Ha Noi. It is deliberately *not* a record of what he earns now or of any offer he
+  holds; those figures are not kept in this repository, which is public. Do not reconstruct them
+  here, do not ask for them in order to fill this bullet in, and **never state a current salary
+  or an expected number to a prospective employer** — if an application form demands one, surface
+  the question to him rather than answering it from any file.
+  The floor is duplicated in CLAUDE.md's deal-breakers and in `04-job-evaluation.md`'s Life
+  situation alignment. Change all three together: two floors that disagree make `/scrape` and
+  `/rank` enforce different bars, silently.
 
 ### Languages
 <!-- Every language you can work in professionally, with your honest level. Used by the
