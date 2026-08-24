@@ -29,6 +29,11 @@ salary_data.json
 # Per-run scratch: batch/detail JSON, .err logs and the ad-hoc scripts that
 # process them. Holds scraped postings, so it is personal data too.
 **/job_scraper/tmp/
+# Same thing under a different name: /scrape and /rank runs write dated run
+# folders, fetched posting HTML and one-off ranking scripts here. The tmp/ rule
+# above does not cover it, so it would otherwise show up as untracked on every
+# scrape and eventually get swept into a commit.
+**/job_scraper/.run/
 *_BehavioralReport.pdf
 linkedin_Profile.pdf
 
