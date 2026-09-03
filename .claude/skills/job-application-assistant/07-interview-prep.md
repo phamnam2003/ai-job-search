@@ -107,6 +107,44 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 >
 > If a question goes past what you did, the safe move is the boundary sentence: *"That part I know from building it myself rather than from production — here's what I understand about it."* That answer never loses you a role. A bluff that collapses does.
 
+### Event-ticketing thesis: designing for the sales-open spike (system design)
+
+*(Added by /setup 2026-09-03.)*
+
+**Source:** Final-year thesis, Hanoi Open University — university work, not employment.
+**What happened:** You built an event-ticket sales platform, and made the *engineering* subject of
+the thesis surviving the traffic spike at the moment tickets go on sale rather than the CRUD
+around it.
+**Why it matters:** This is the one item on your record where high-concurrency design is the stated
+subject, and "ticket sales spike" is a system-design scenario an interviewer recognises instantly —
+it is a standard whiteboard problem you have actually built. Use it for *"design a system that
+handles a traffic burst"*, *"how do you prevent double-booking?"*, and *"tell me about a technical
+decision you made"*. Pair it with the STM export fix as evidence the interest in load is not
+theoretical.
+**S/T/A/R:**
+- Situation: Ticket sales for an event open at a fixed moment, so essentially all of the day's
+  traffic arrives in the first minutes — and the same seat can be requested by many people at once.
+- Task: Keep the system correct (no seat sold twice) and available (no collapse) through that
+  window.
+- Action: Put a queue / virtual waiting room in front of the booking path so the burst is flattened
+  before it reaches the database; used distributed locking with a TTL-based temporary hold on seat
+  reservation so a seat under consideration cannot be taken by a second buyer, and is released
+  automatically if checkout is abandoned; cached the seat and inventory map in Redis so the read
+  path did not touch the database, and rate-limited the purchase endpoint with bot/spam protection
+  to stop scripted buying consuming the capacity.
+- Result: A design that holds correctness under concurrency and degrades by making people wait
+  rather than by failing. **State it as a design, not as a measurement.**
+
+> ⚠️ **Two boundaries to say out loud.**
+> **This is university work** — name it as the thesis before describing it, the same way you name
+> the GitHub repos as self-study. The credibility comes from volunteering the boundary.
+> **It was not load-tested.** You have no throughput numbers, so never say "handled N concurrent
+> users" or quote a latency figure. If asked how you'd verify it, that is a good question to answer
+> rather than dodge: load-generate against the booking endpoint, watch queue depth and lock
+> contention, and find where it breaks. Saying "I designed for it but didn't measure it, and here's
+> how I'd measure it" is a stronger answer than an invented number, and an interviewer who has
+> built this kind of system will know the difference immediately.
+
 ## Common Tough Questions
 
 <!-- Drafted by /setup on 2026-08-05. Written in English to match this file; the interviews these
@@ -196,14 +234,54 @@ This is the version you will actually be asked — you started 11/2025 and are l
 
 ### "What's your biggest weakness?"
 
-**Use this one — it is genuine and it has a real mitigation:**
-> My instinct is to research a problem down to its foundations before I commit to a design. On expensive-to-reverse decisions — a data model, a service boundary — that is exactly right, and it is why the designs I have shipped have not needed rewriting. But I have applied it to decisions that did not deserve it, and been slower to start than I should have been. What I do now is timebox the research and ship a thin vertical slice early to validate the shape, then save the deep pass for the decisions that genuinely cannot be undone.
+> **Read this first — revised 2026-09-03.** Asked in `/setup` to name his growth areas from four
+> options, he picked exactly one: **spoken English**. He explicitly did *not* claim
+> over-engineering, poor estimation, or neglecting tests and docs. So there are now two different
+> questions here, and conflating them is what went wrong in the previous version of this section:
+> **what his real weakness is** (English) and **what he should say out loud in a
+> Vietnamese-language interview** (not English — see the warning below). Both answers must be true;
+> only one of them is the one to volunteer.
 
-This is a real trait from your behavioral profile, not a disguised strength, and the mitigation is specific rather than "I'm working on it".
+**Primary answer for a Vietnamese-language interview** — the collaboration record, which is real and
+verifiable from his GitHub:
+> Most of what I've built, I've built alone or nearly alone — my own projects, and modules I owned
+> end to end at work. My technical record is stronger than my collaboration record: I haven't spent
+> much time in a team with a serious code-review culture, and I want that, because the designs I'm
+> most confident about are the ones somebody has argued with. That's specifically what I'm looking
+> for in the next role, and it's why I ask about the review process in every interview.
 
-**Backup answer if they push for a second one:** most of your visible work has been solo or near-solo, so your code-review and collaboration record is thinner than your technical record. Mitigation: you actively want a team with a strong review culture, and you treat design pushback as the point rather than an obstacle.
+This is honest (the public open-source record is genuinely light — Pull Shark ×2), it is not a
+disguised strength, and the mitigation is a thing he actually does rather than "I'm working on it".
+It also aligns with the environment he says he wants, so it reads as coherent rather than
+rehearsed.
 
-> ⚠️ **Do not use English as your weakness answer** in a Vietnamese-language interview. It is a real limitation, but volunteering it invites the interviewer to reconsider the role's language requirements — a scope you have already filtered out at the search stage. Answer honestly if asked directly; do not raise it yourself.
+**Second answer if they push** — self-advocacy under pushback, from
+`documents/interview/2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md`:
+> When someone challenges something I've claimed, my instinct is to soften it before they've even
+> made the argument. I'll hedge a result I'm actually sure of. I've learned to notice the hedge
+> forming and just stop talking instead — the plain fact is usually stronger than the qualified one.
+
+Use this one sparingly and never in a salary conversation, where naming the trait invites the
+behaviour.
+
+**Retired answer — do not use as written.** Earlier versions offered "I research too deeply before
+committing." He did not select over-research as a weakness in 2026-09-03, and he described his
+decision style as *situational* — depth-first only on expensive-to-reverse choices,
+working-version-then-iterate when a demo is due. The old answer's "mitigation" (timebox the
+research, ship a thin slice early) is something he **already does by default**, which makes the
+whole answer a disguised strength. If a live conversation drifts there anyway, tell the truth about
+both modes rather than reciting the old script.
+
+> ⚠️ **Do not volunteer English as your weakness answer** in a Vietnamese-language interview. It is
+> the honest answer and it is what he'd say if pressed — but raising it unprompted invites the
+> interviewer to reconsider the role's language requirements, a scope already filtered out at the
+> search stage. Answer honestly if asked directly; never raise it yourself.
+>
+> **Exception:** for a posting kept alive by the exceptional-match carve-out in
+> `04-job-evaluation.md` (live English required, stack too good to drop), the calculation inverts.
+> There, English *is* the live risk, and it is better named early and on his own terms — technical
+> reading and writing are solid, speaking is the gap, and a written take-home is the format that
+> shows his actual level — than discovered in round three.
 
 ### "Why this company specifically?"
 > Customize per company. Must reference: specific projects, company values, market position, or team structure. Never give a generic answer.

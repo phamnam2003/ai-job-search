@@ -140,10 +140,29 @@ Where the posting allows it, **open on the shape of the problem rather than the 
 > Go backend developer focused on distributed, event-driven systems: Kafka and RabbitMQ messaging, Redis cache/pub-sub/streams, gRPC with mutual TLS and interceptors, and the Worker Pool pattern for background processing. Delivered async import/export pipelines and traceability improvements on Sacombank's Smart Teller Machine, and maintains open-source Go references covering gRPC down to the TLS layer and 20 Gang-of-Four patterns.
 
 **For Fullstack (React + Go) roles:**
-> Fullstack developer who has shipped both sides of production systems: ReactJS/Next.js/Vue frontends (Redux, Redux Toolkit, Recoil, Tailwind, Ant Design) and Go/Node.js backends (Gin, gRPC, Express, Strapi). Strongest on the backend — event-driven microservices, PostgreSQL data modeling, and system-design ownership — while staying fluent in the component-based frontend architecture that consumes those APIs.
+> Fullstack developer who has shipped both sides of production systems: ReactJS/Next.js/Vue frontends (Redux, Redux Toolkit, Recoil, Tailwind, Ant Design) and Go/Node.js backends (Gin, gRPC, Express, Strapi). Strongest on the backend — event-driven microservices, PostgreSQL data modeling, and owning the design of the modules I build — while staying fluent in the component-based frontend architecture that consumes those APIs.
+
+<!-- "owning the design of the modules I build" replaced "system-design ownership" on 2026-09-03.
+     The old phrasing was ambiguous about scope in exactly the direction the 2026-08-08 correction
+     bans: it can be read as owning the system's design. Module scope is the accurate claim, and
+     it is also what he said he wants — see 02-behavioral-profile.md, "owns a module end to end". -->
 
 **For money-critical / transactional backend roles** *[Used for: dayladau_backend_developer_golang_mysql_cloud]*:
 > Backend developer with around three years building production services, the last two of them in Go (Golang) with Gin, gRPC, Worker Pool and dependency injection via uber-go/dig and Fx. My work sits in fintech and public-sector systems where money and state have to stay correct: Sacombank's Smart Teller Machine for cash deposits, withdrawals and reconciliation, plus lead and document platforms at AIONtech. I proposed the database model and backend stack for the modules I owned on two of those platforms, and my designs were reviewed and approved before I built them. I read and fix slow queries rather than route around them, write unit and integration tests as part of the work, and deploy what I build to Kubernetes myself with ArgoCD.
+
+**Two additions from the 2026-09-03 `/setup` run:**
+
+- **High-load / booking / ticketing postings have a dedicated opener now.** The final-year thesis
+  was an event-ticket platform designed around the sales-open spike — queue/waiting room,
+  distributed seat locking with a TTL hold, Redis inventory cache, rate limiting. That is precisely
+  the "kept state correct under load" card described three paragraphs above, and it is worth an
+  opening clause on any posting about booking, inventory, orders, or flash traffic. **Two rules:**
+  label it as the thesis (it is university work, not employment), and claim only the design — it
+  was never load-tested, so no throughput or latency figure may appear.
+- **Rust belongs in an interests / currently-learning line, never in the skills list.** He is
+  studying it deliberately and wants it named, but there is no shipped Rust. A skills-section entry
+  invites an interview question he cannot yet answer. Java Core and .NET/Entity Framework stay off
+  entirely — his decision, see `01-candidate-profile.md`.
 
 Statements labeled *[Used for: <company>_<role>]* were extracted from archived application drafts by `/setup` Path A. They are **phrasing references, never fact sources**: when drafting from one, every factual claim still comes from `01-candidate-profile.md` - a past tailored draft does not vouch for its own accuracy.
 

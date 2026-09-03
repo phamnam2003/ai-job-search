@@ -65,6 +65,13 @@ Judge the level comparison the same way you judge everything else in this framew
 
 **Profile override for Pham (from CLAUDE.md deal-breakers):** English is declared as *technical reading/writing only, not live/conversational*. A posting that requires **live** English as a job condition — client-facing communication, English-first interviews, US-hours standups with an English-speaking team — escalates from **FLAG** to **FAIL**. A posting that merely requires reading English docs, writing English code comments/tickets, or states an unspecified "English" requirement still **PASSES**. Vietnamese-language postings always pass.
 
+**Exceptional-match carve-out (added 2026-09-03, at his request).** He chose "hard exclude, *except* for a posting that fits unusually well". So before recording a live-English FAIL, check whether the posting is an exceptional technical match — Go plus Kafka/gRPC/event-driven, a genuine performance or distributed-systems brief, or fintech/banking backend. If it is, **downgrade FAIL to FLAG**, keep the posting, and say plainly in the note both *why* it survived and *what* he would have to be willing to do (a live English interview, English standups). He decides; the framework does not decide for him.
+
+Three guardrails, because this carve-out is the easiest rule in the file to erode:
+- **It is not "the stack is fine, so keep it."** Most Vietnamese backend postings mention Go and Kafka. Exceptional means it would be near the top of a `/rank` run on its own merits, not merely relevant.
+- **US-hours timezone overlap stays a hard FAIL regardless.** That is a separate deal-breaker about sleep, not about language, and this carve-out does not touch it.
+- **The note must name the English requirement verbatim.** A downgraded posting that reaches him without the quoted requirement line has defeated the point of the gate.
+
 ## Scoring Dimensions
 
 Evaluate each job posting against these five dimensions:
@@ -81,7 +88,7 @@ How well do the required/preferred skills align with the candidate's capabilitie
 
 **Strong match areas:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), microservices & RESTful APIs, event-driven systems (Kafka, RabbitMQ), Redis (cache/pub-sub/streams), PostgreSQL/MySQL/Oracle, system design & DB modeling, Docker/Kubernetes, observability (OpenTelemetry, Prometheus/Grafana/Loki), CI/CD (GitHub Actions, GitLab Runners, ArgoCD), ReactJS/Next.js/Vue with Redux/Recoil
 **Moderate match areas:** Node.js (Express, Strapi), MongoDB/ScyllaDB/Cassandra, gRPC mTLS/security & crypto fundamentals, object storage (MinIO/SeaweedFS/S3), Python (Selenium/Scrapy), unit/integration testing
-**Weak match areas:** Rust (interest only, no shipped work), formal people-leadership/mentoring, live-English/client-facing roles, cloud-provider-native stacks (AWS/GCP/Azure managed services — infra experience is self-hosted/on-prem), mobile, data engineering/ML
+**Weak match areas:** Rust (active self-study since ~2026, no shipped work — score a Rust-required posting as a weak match, not a match), Java / .NET-Entity Framework (known at a basic level, deliberately kept off CVs — a .NET-primary posting is a weak match), formal people-leadership/mentoring, live-English/client-facing roles, cloud-provider-native stacks (AWS/GCP/Azure managed services — infra experience is self-hosted/on-prem), mobile, data engineering/ML
 
 ### 2. Experience Match (0-100)
 Does work history align with what they're looking for? Match on the function and nature of the work performed, not the literal job title - a "Data Consultant" and a "Data Scientist" role can be functionally identical.
@@ -125,21 +132,25 @@ Does this role advance career goals and contain tasks that energize?
 | 40-59 | Decent job but doesn't build toward career goals |
 | 0-39 | Dead end or backwards step |
 
-**Career goals:**
-- Grow as a **backend engineer who owns architecture** — system design and DB modeling, not ticket execution
+**Career goals** *(re-confirmed 2026-09-03 — he selected the first two together, not one or the other)*:
+- Grow as a **backend engineer with design authority over the module he owns** — proposing the data model and the stack, not executing tickets. Note the deliberate scoping: authority over *his area*, not over a platform
+- Stay **fullstack but backend-weighted** — keep Next.js so he can deliver a whole feature end to end, with the centre of gravity firmly in the backend
 - Go deeper on **distributed, event-driven systems** (Kafka, gRPC, worker pools) at real scale
 - Keep infra/observability (K8s, OpenTelemetry) as a strength, without pivoting into a DevOps/Platform job title
 
 **Motivation filter:** Evaluate not just whether you *can* do the tasks, but whether the tasks will *energize* you. Consider:
-- Tasks that energize: **system design & DB modeling; distributed / event-driven systems; performance profiling & optimization; infra, Kubernetes & observability**
-- Tasks that drain: **ticket-only work with no design input; legacy maintenance with no new build.** Treat both as red flags to research in a posting.
-- Non-task factors: **adaptable** on team size (small-own-a-subsystem through larger specialized org) and on manager style (hands-off through actively mentoring) — but wants real technical pushback on his designs somewhere in the loop, not a rubber stamp
-- Decision style: **researches deeply, then commits** — friction with "ship first, refactor later" cultures
+- Tasks that energize *(re-confirmed 2026-09-03)*: **proposing the DB model and stack for his own area; large event-driven systems; performance profiling & optimization.** Infra/Kubernetes/observability was **dropped from this list on 2026-09-03** — he did not select it as an energiser this round. It stays a real capability to sell inside a backend role, but do not award Career Alignment points for a posting that is mostly infra work.
+- Tasks that drain *(extended 2026-09-03)*: **ticket-only work with no design input; legacy maintenance with no new build; meeting-heavy and process-heavy environments.** Treat all three as red flags to research in a posting. The third is new — score visible ceremony (daily sync plus grooming plus planning plus retro, mandatory rituals, heavyweight approval chains) as a genuine negative under Behavioral/Culture Fit rather than a neutral.
+- Environment: wants **autonomy, a clean spec, and close collaboration simultaneously** — asked to choose one, he refused and named all three. Practical reading: the *what* should be pinned down before work starts, the *how* left to him, and colleagues near enough to argue a design with. A posting that offers only one of the three is a partial fit, not a good one.
+- Manager style: works best with a manager who **states the goal and the why, then leaves the method alone** and is available to unblock. *(This supersedes the earlier "fully adaptable on manager style" note — asked to pick, he picked.)* Poor fit with micromanagement of the *how*, or with an environment where designs are never challenged.
+- Team role: most effective **owning a module end to end** (schema → API). Less drawn to being the team's fixer-of-last-resort or to setting technical direction for others — which is consistent with the Seniority Gate excluding Lead titles.
+- Decision style: **situational** — depth-first on expensive-to-reverse choices (schema, public API, stack), working-version-then-iterate when a pilot or demo is due. *(Corrected 2026-09-03; the earlier flat "researches deeply, then commits" overstated it.)* This softens but does not remove the friction with "ship first, refactor later" cultures — the friction is real when that mode is the *only* mode on offer.
+- Under pressure: **follows telemetry to root cause** rather than patching blind or escalating first. Strong signal for teams that run their own on-call.
 
 **Life situation alignment:** Consider personal constraints:
 - **Security**: employed at AIONtech (11/2025–present), searching from a position of stability — no pressure to take the first offer. Salary filter band **17–40M VND/month, negotiable** (floor raised from 15M on 2026-08-24); flag postings clearly below the floor in `/rank`. A filter only — see `01-candidate-profile.md` for why no actual or expected figure is recorded anywhere in this repository. The floor is duplicated in CLAUDE.md's deal-breakers and in that file; change all three together or the scrape filter and the rank flag will disagree.
-- **Flexibility**: Ha Noi onsite/hybrid or remote (VN + offshore). **Not** relocating to HCMC/Da Nang unless fully remote. English is technical reading/writing only — exclude roles requiring live English or US-hours timezone overlap.
-- **Professional development**: wants to deepen backend/distributed-systems expertise and grow toward broader architecture ownership; open to mentorship but does not require it
+- **Flexibility**: Ha Noi onsite/hybrid or remote (VN + offshore). **Not** relocating to HCMC/Da Nang unless fully remote. English is technical reading/writing only — exclude roles requiring live English, subject to the exceptional-match carve-out in the Language Gate above. US-hours timezone overlap is excluded outright and the carve-out does not apply to it.
+- **Professional development**: wants to deepen backend/distributed-systems expertise and grow toward design authority over larger areas; open to mentorship but does not require it. Currently teaching himself **Rust** with the intent of making it a third mainstream language alongside Go and TypeScript — an employer using Rust is a genuine draw for him, even though it scores as a weak *match* today.
 
 ### 6. Salary Benchmark (Optional)
 

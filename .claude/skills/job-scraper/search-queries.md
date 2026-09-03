@@ -8,6 +8,20 @@
      backend/fullstack roles, NOT a target job title — Priority 5 stays opt-in/off-target. -->
 <!-- 2026-07-17: installed CLIs for ITviec (itviec-search) + TopDev (topdev-search) via /add-portal;
      Cake skipped (Cloudflare-walled, WebSearch-only). -->
+<!-- Reconfirmed 2026-09-03 (/setup full re-interview). Four decisions worth not relitigating:
+     (1) KEEP all three nets — Backend, Fullstack, Frontend all stay in the default pass. He was
+         offered the option to demote Frontend to opt-in and declined, so Priority 3 is deliberate
+         breadth, not stale config.
+     (2) NO Rust queries. He is learning Rust and it goes on the CV under "currently learning",
+         but he chose not to spend scrape budget on it — VN Rust volume is near zero. Do not add
+         Rust query lines on the strength of the CV entry alone.
+     (3) Outsourcing/offshore-services companies are now explicitly IN SCOPE as a sector, alongside
+         fintech, product/startup, and public sector. See the Sector Weighting note below — in
+         scope is not the same as unfiltered.
+     (4) Live-English roles gain a narrow exceptional-match carve-out. See Language Filter. -->
+<!-- Drain signal added 2026-09-03: meeting-heavy / process-heavy environments now rank alongside
+     ticket-only work and legacy-only maintenance as a stated drain. It is not filterable from a
+     search query, so it is scored later — `04-job-evaluation.md`, Behavioral/Culture Fit. -->
 
 ## Installed portal CLIs (primary for `/scrape`)
 
@@ -309,6 +323,30 @@ and are **not** presented in the Step 5 table. `/rank` therefore never sees them
 ## Language Filter
 
 Your working languages and levels are in CLAUDE.md's Languages table. When filtering scraped results, apply `04-job-evaluation.md`'s Language Gate: a posting requiring a language you haven't declared at all is excluded; a posting requiring a higher level than you declared in a language you do work in is not excluded, flag it clearly instead (see `job-scraper/SKILL.md`'s Step 3 "Quick Fit Assessment" for how the flag surfaces in `/scrape` output). Postings simply *written* in a language you don't work in, that don't require it on the job, are fine.
+
+**Live-English carve-out (2026-09-03).** Roles requiring *live* English (client-facing, English-first
+interviews, English standups) are still excluded by default — that is a CLAUDE.md deal-breaker
+overriding the gate's FLAG verdict. The one exception he asked for: when a posting is an
+**exceptional** technical match (Go + Kafka/gRPC/event-driven, a real performance or
+distributed-systems brief, or fintech/banking backend), keep it, mark it `english-flag`, and let him
+judge. "Exceptional" means it would rank near the top on its own merits — not merely that the stack
+is relevant, which is true of most VN backend ads. **US-hours timezone overlap is a separate
+deal-breaker and stays a hard exclude**; the carve-out does not reach it.
+
+## Sector Weighting
+
+*(Confirmed 2026-09-03. All four are in scope; they are not equal.)*
+
+- **Fintech / banking** — aim here first. Strongest domain evidence (Sacombank STM, AION Bank).
+- **Product companies & startups** — Go/microservices teams with room to design.
+- **Digital transformation / public sector** — real experience (C06, Ministry of Public Security).
+  Expect heavier process, which is a stated drain: weigh the ceremony, not just the stack.
+- **Outsourcing / offshore services** — newly in scope, and by far the largest source of Vietnamese
+  postings. This is the sector most likely to be ticket-only delivery against a client's fixed
+  spec, which is his **top** drain. Do not filter it out at scrape time, but at `/rank` time look
+  for evidence of design input — "you will own the module", "propose the solution", product team
+  rather than staff-augmentation — and mark its absence. Volume from this sector should not be
+  allowed to crowd the shortlist.
 
 ## Date Filter
 

@@ -52,6 +52,38 @@ a 2026 graduation date sitting above roughly three years of professional experie
 and every seniority claim above it gets silently discounted. *(How hard he worked to make it fit,
 including weekends, is context for interviews only — he asked that it stay off the CV.)*
 
+### Final-year thesis — event ticketing platform under peak load
+
+*(Added by /setup 2026-09-03 — not previously recorded.)* The graduation project was an
+event-ticket sales system, and the part he chose to make the thesis about was **engineering it to
+survive the sales-open spike** rather than the CRUD around it. The three techniques he applied:
+
+- **Queue / virtual waiting room** in front of the booking path, to flatten the burst instead of
+  letting it hit the database
+- **Distributed locking on seat reservation**, with a TTL-based temporary hold, to stop the same
+  seat being sold twice under concurrency
+- **Redis caching of the seat/inventory map, plus rate limiting and bot/spam protection** on the
+  purchase endpoint
+
+**Why this matters for positioning.** It is the one piece of his record where high-concurrency
+design is the *stated subject*, not a side effect — and ticket-sales spike handling is a
+recognisable, easily-explained system-design story. It pairs naturally with the STM export fix
+(167.8 MB → 16 MB, OOM kills eliminated) as evidence that the interest is not theoretical.
+
+**Two limits to respect.** He did *not* say it was load-tested or benchmarked with real numbers, so
+**claim the design, never a throughput figure** — no "handled N concurrent users" unless he later
+supplies a measurement. And it is university work: on a CV it belongs in Education as a one-line
+thesis note, not in Professional Experience.
+
+### Certifications
+
+- **ScyllaDB certification(s)** — held and listed on his LinkedIn profile. **Exact course names and
+  issue dates are not yet confirmed here**: `documents/linkedin/` was still empty at 2026-09-03, so
+  nothing was extracted. Do **not** invent a course title (ScyllaDB University runs several tracks).
+  Either write it generically or ask him for the exact names before it goes on a CV. Corroborating
+  signal that the knowledge is real: the ScyllaDB/Cassandra `gocqlx` deep dive in
+  `phamnam2003/challenges`.
+
 ## Professional Experience
 
 ### Frontend and Backend Developer — AIONtech (11/2025 – Present)
@@ -230,6 +262,27 @@ A structured, self-authored curriculum rather than a scratch repo.
 - **API documentation:** redoc-cli; Mermaid diagrams for architecture docs *(GitHub — go-http-server/temp, challenges)*
 - **Open source:** merged pull requests to third-party repositories (GitHub Pull Shark ×2) *(GitHub — profile)*
 
+### Learning — declare as learning, never as delivery experience
+
+*(Recorded by /setup 2026-09-03.)*
+
+- **Rust** — in active self-study, and his stated intent is to bring it up alongside Go and
+  TypeScript as a mainstream language for him. **This is the only learning-stage language he wants
+  on a CV**, and it belongs in an "Interests / currently learning" line, never in the skills list a
+  reader will interview against. No production Rust, no Rust project on GitHub yet.
+  *(This supersedes the 2026-07-15 note that Rust was "bio interest only" — it is now deliberate
+  study, but the ban on claiming it as working experience is unchanged.)*
+
+**Deliberately excluded from CVs — do not reintroduce.** He knows both and mentioned both, then
+chose to leave them off:
+- **Java Core** — learned to work through OOP fundamentals, not to build with.
+- **.NET / Entity Framework** — self-study plus a personal project, database-first and code-first
+  API work. Real but shallow, and listing a second backend ecosystem dilutes the Go-backend
+  positioning that the whole search is built around.
+Record them here so a future run does not "discover" them as a gap and add them back. If a
+specific posting genuinely runs on .NET, that is a reason to reconsider for that one application —
+surface the choice to him rather than adding it silently.
+
 ## Domain Expertise
 - **Fintech / banking** — Sacombank STM (self-service banking), AION Bank systems
 - **Government / public sector** — C06 (Ministry of Public Security) document AI; TLGEO mapping & agriculture projects
@@ -247,4 +300,17 @@ A structured, self-authored curriculum rather than a scratch repo.
 
 
 ## References
-*(none listed — drop reference letters into `documents/references/` and re-run `/setup` to fold them in)*
+
+**Deliberate decision, 2026-09-03: no referees are recorded here.** Asked during `/setup`, he chose
+not to declare any — this repository is a public fork, and a referee's name, employer, and role is
+someone else's personal data, published without their consent.
+
+- **On a CV, write:** "References available upon request." (`05-cv-templates.md` carries the
+  boilerplate line and its per-language variants.)
+- **When an application form demands referee details:** surface the request to him and let him
+  supply them directly to the employer. Do not fill them in from any file, and do not write them
+  back into this repository afterwards.
+- Reference *letters* dropped into `documents/references/` are still read by `/setup` for
+  behavioral signal — that folder is gitignored, so the letters themselves never leave the
+  machine. Only generalised traits reach `02-behavioral-profile.md`; names and contact details
+  stay out.

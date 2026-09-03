@@ -36,6 +36,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **Engineer's degree (Kỹ sư) in Information Technology** (2021 – 2026, **graduated**) — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
   - Topics: software engineering, data structures & algorithms, databases, computer networks, web development
   - **Full-time (chính quy) programme, studied while working professionally from early 2023.** Confirmed 2026-08-08. State this on CVs: without it the 2026 graduation date anchors readers to "fresher" and silently discounts ~3 years of real experience sitting above it.
+  - **Thesis: event-ticketing platform engineered for the sales-open spike** (recorded 2026-09-03) — queue/virtual waiting room in front of the booking path, distributed locking with a TTL hold on seat reservation, Redis inventory cache plus rate limiting and bot protection. One line in Education on a CV; a strong system-design talking point in interviews. **Claim the design, never a throughput number** — it was not load-tested.
 
 ### Professional Experience
 - **Frontend and Backend Developer** (11/2025 – Present) - **AIONtech** (Ha Noi)
@@ -58,9 +59,10 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **Secondary:** Kafka, RabbitMQ, Redis, PostgreSQL/MySQL/Oracle/MongoDB/ScyllaDB, Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress), OpenTelemetry, Prometheus/Grafana/Loki, ArgoCD, Helm, GitHub Actions, GitLab Runners, Nginx, Python (Selenium, Scrapy)
 - **Domain:** Fintech/banking (Sacombank STM, AION Bank), government/public sector (C06 — Ministry of Public Security), real-estate CRM, geospatial (PostGIS, Mapbox)
 - **Software:** Claude Code, GitHub Copilot, Spec-Kit, Git, Linux (Ubuntu/Arch/CentOS), MinIO/SeaweedFS/RustFS
+- **Learning (declare as learning, never as experience):** **Rust** — active self-study, intended to become mainstream for him alongside Go and TS/JS. Goes in an "Interests / currently learning" line only. *(Java Core and .NET/Entity Framework are known but were deliberately left off CVs on 2026-09-03 — they dilute the Go-backend positioning. Do not re-add them without asking.)*
 
 ### Certifications
-*(none on file — add if applicable)*
+- **ScyllaDB certification(s)** — held, listed on his LinkedIn. Exact course names and dates **not yet confirmed** (`documents/linkedin/` is empty). Never invent a course title; ask him or write it generically.
 
 ### Publications
 *(none)*
@@ -71,31 +73,46 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - *(GPA 3.09/4.0 on record but omitted from CVs — below the ~3.2 threshold and low weight given ~3 yrs experience; supply only if an application form requires it)*
 
 ### Behavioral Profile
-*(Assessed via /setup 2026-07-15 — full profile: `.claude/skills/job-application-assistant/02-behavioral-profile.md`)*
+*(Re-elicited from scratch via /setup 2026-09-03, replacing the 2026-07-15 assessment — full profile: `.claude/skills/job-application-assistant/02-behavioral-profile.md`)*
+- Owns a **module** end to end (schema → API) and integrates at the boundaries; not "owns the platform"
+- Decision style is **situational**: depth-first on expensive-to-reverse choices, working-version-then-iterate when a pilot or demo is due. The old profile's flat "depth-first builder" was too narrow
+- Wants **all three at once**: a clear goal, autonomy on the *how*, and colleagues to argue a design with
+- Direct and writing-first; will push back on a design, including upward
+- Calm under incidents — follows logs/metrics/traces to root cause (he built that telemetry stack at Leeon)
+- Best under a manager who sets the goal and the why, then leaves the method alone
+- **The one self-named weakness is spoken English.** He explicitly did *not* claim over-engineering, poor estimation, or skipping tests/docs — don't put those in his mouth
+
+### Career Direction
+*(Confirmed via /setup 2026-09-03 — he picked both, not one)*
+- **Backend in depth with real design authority** over the area he owns — data model and stack decisions, not ticket execution
+- **Fullstack, backend-weighted** — keeps Next.js so he can ship a whole feature, but the centre of gravity stays backend
 
 ### What Excites You
-*(Confirmed via /setup 2026-07-15)*
-- Owning system design end-to-end: database modeling and backend stack decisions, not just ticket work
-- Distributed, event-driven systems — Kafka, gRPC, worker pools, async pipelines
-- Performance profiling and optimization
-- Infra, Kubernetes, and observability — enjoyed as a *strength to bring*, NOT as a job title (see deal-breakers)
+*(Re-confirmed via /setup 2026-09-03)*
+- Proposing the **database model and stack** for the part he builds
+- **Large event-driven systems** — Kafka, gRPC, worker pools, async pipelines
+- **Performance optimization** — profiling, latency, high load
+- **Changed 2026-09-03:** infra / Kubernetes / observability is **no longer listed as an energiser** — he left it unselected this round. It remains a genuine *capability to sell inside a backend role*. Sell it; never steer him toward it, and never call it something he's passionate about.
 
 ### Target Sectors
-*(Confirmed via /setup 2026-07-15 — priority: backend with architecture ownership; pure-backend and fullstack are valid nets)*
-- Fintech / banking: strongest domain evidence (Sacombank STM, AION Bank)
-- Product & tech companies, startups: Go/microservices backend teams
+*(Re-confirmed via /setup 2026-09-03 — all four are in scope; the first two are where he should be aimed)*
+- **Fintech / banking** — strongest domain evidence (Sacombank STM, AION Bank)
+- **Product companies & startups** — Go/microservices teams with room to design
+- **Digital transformation / public sector** — has C06 (Ministry of Public Security) experience. Expect slower pace and heavier process, which collides with a stated drain — score the ceremony, not just the stack
+- **Outsourcing / offshore services** — newly opened up this round, and the widest source of Vietnamese postings. **Apply the design-authority check hard here:** outsourcing is the sector most likely to be ticket-only work with no design input, which is his top drain. In scope, not a free pass
 
 ### Deal-breakers
 <!-- Hard constraints on job search. Baseline language requirements are handled separately and
 automatically from the Languages table above (see 04-job-evaluation.md's Language Gate) - don't
 duplicate them here. The live-English line below is a deliberate *override*, not a duplicate: the
-gate would only FLAG an English-fluency bar, and Pham wants those excluded outright. -->
+gate would only FLAG an English-fluency bar, and Pham wants those excluded outright — with the one
+narrow exception added 2026-09-03 and spelled out in that bullet. -->
 - Location: nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation)
 - Level: target is Mid-level (Junior acceptable). Excluded in both directions — no Intern/Fresher/Trainee/Graduate below, and no Senior/Sr./Staff/Principal/Lead/Manager/Architect titles above (~3 yrs experience; senior titles are not realistic yet and dilute the scrape)
 - Remote/offshore roles requiring US-hours timezone overlap
-- English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups). Overrides the Language Gate's FLAG verdict to a hard exclude.
+- English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups). Overrides the Language Gate's FLAG verdict to a hard exclude. **Narrow exception, added 2026-09-03:** where the stack match is exceptional (Go + Kafka/gRPC + fintech, or a genuine event-driven/performance role), keep the posting and mark it `english-flag` instead of dropping it, so he can decide. The exception is for outstanding matches only — it is not a licence to soften the filter generally, and the default on an ordinary match is still exclude
 - **Not** a DevOps/Platform/SRE job title (has the skills and enjoys the work, but does not want it as the role)
-- Drains to avoid: ticket-only work with no design input; legacy maintenance with no new build
+- Drains to avoid *(re-confirmed and extended 2026-09-03)*: ticket-only work with no design input; legacy maintenance with no new build; **meeting-heavy and process-heavy environments** — this third one was missing from earlier versions and he named it alongside the other two, so score ceremony (daily sync + grooming + planning + retro, mandatory office ritual) as a real negative, not a neutral
 - Salary filter band: **17–40M VND/month, negotiable** — flag postings clearly below the floor. A search filter only; no actual or expected figure is recorded in this repository (it is public). The floor is duplicated in `01-candidate-profile.md` and `04-job-evaluation.md` — change all three together or `/scrape` and `/rank` will enforce different bars
 
 ## Workflow for New Job Applications
