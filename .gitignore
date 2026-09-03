@@ -81,6 +81,9 @@ documents/cv/**
 documents/linkedin/**
 documents/diplomas/**
 documents/references/**
+# Also where /interview saves its prep packs (interview_prep_<stage>.md): these
+# name the employers applied to, quote what was submitted, and set out the
+# candidate's weak points.
 documents/applications/**
 documents/postings/**
 # Interview prep and experience records: these name the employers applied to,
@@ -89,6 +92,10 @@ documents/postings/**
 # salary, offers on the table, walk-away floors, who referred the candidate,
 # and their read of a named manager. The most damaging folder here to publish
 # by accident, so this rule matters more than the others.
+# Upstream relabelled this "belt-and-braces, nothing writes here" — true of a
+# fresh clone, false here: /setup and 07-interview-prep.md both file real plans
+# into this folder and three are already on disk. Also pinned by
+# tools/security_guards.py in REQUIRED_IGNORE_RULES, so it cannot be dropped.
 documents/interview/**
 # Kept as a backstop: negotiations/ was never created and its role moved into
 # interview/ above, but an ignore rule costs nothing and a folder created later

@@ -15,6 +15,143 @@ per-file diff commands.
 
 ### Added
 
+- **`/rank` now consumes the `posted_date` #391 persists** (#390, the deferred second
+  half) - Step 3 gains a staleness flag: a posting whose stored `posted_date` is more
+  than 30 days old at rank time carries a visible ⚠ marker with its age spelled out
+  alongside the score ("⚠ posted 2024-05-13, 27 months ago"), the same FLAG treatment as
+  location and language - in the ranking, for the user to judge, never an exclusion (the
+  #390 posting was 27 months old *and still live*; age is a signal, not a veto, and a
+  future stored `deadline` outranks it). Costs no fetch: age is re-derived each run from
+  the stored value and never persisted. Boundary rules carried over verbatim from the
+  schema and rule 6: no `posted_date` or `null` means no flag and no guess (never
+  inferred from `first_seen`), and unparseable values are treated as absent and reported
+  once with their portal. Pinned by four new cases in `test_rank_command.py`, each
+  verified to fail against the rule-less spec.
+
+### Security
+
+- **`settings.json` no longer pre-approves `bun run` on arbitrary files** (#396) - the
+  template's permission allowlist granted `Bash(bun run:*)`, which auto-approved
+  `bun run <any file on disk>` in every fork. It is now one path-scoped entry per shipped
+  portal CLI, matching what each portal SKILL.md already declares. `/scrape` is unaffected
+  for all portals, including ones added by `/add-portal` - the job-scraper skill's own
+  `allowed-tools` carries the path-scoped wildcard that covers them during the workflow.
+  Running a portal CLI ad hoc outside a skill now prompts once, which is the intended
+  behavior for anything not on the reviewed list. Thanks @vkotaru.
+
+### Fixed
+
+- **`jobbank-search` no longer dies over one malformed feed date** (#416) - `new Date()`
+  on a present-but-unparseable `pubDate` yields an Invalid Date whose `toISOString()`
+  throws `RangeError`, and `normalizeSearchItem` runs inside an unguarded `items.map()`,
+  so a single bad RSS item killed the entire search with `{"error": "Invalid Date",
+  "code": "API_ERROR"}` and exit 1 - a whole default-ON portal lost to one item, with
+  the error pointing at the API. The un-CDATA'd fallback capture in `parseRssItems` can
+  deliver exactly such a value. An unparseable `pubDate` now degrades to the same shape
+  as an absent one (`posted` empty, `date: null`, per the `seen_jobs.json` contract that
+  #391 put this field on), and every other item survives. Pinned by three new cases in
+  `search-normalization.test.ts`, each verified to fail on the unfixed code.
+
+- **`linkedin-search` rejects fractional numeric flags instead of silently changing
+  the query** (#371) - bare `parseInt` truncated values before validation, so
+  `--jobage 0.5` became `0` and silently omitted LinkedIn's `f_TPR` freshness filter
+  while the CLI reported no argument error. `--jobage`, `--jobage-minutes`, `--page`,
+  and `--limit` now accept whole numbers >= 1 only and reject fractions and zero with
+  the stderr-JSON `BAD_ARG` contract, matching the other portal CLIs. Pinned by eight
+  cases verified to fail on the unfixed CLI. Reported by @Meet6338-X.
+
+- **`linkedin-search detail` accepts LinkedIn job URLs with trailing slashes** (#411) -
+  passing a job URL with a trailing slash (e.g., `https://www.linkedin.com/jobs/view/<id>/`
+  or a slugged variant with or without query strings) failed validation and exited 1 with
+  `BAD_ID` before any network request because the regex delimiter strictly expected `?`
+  or end-of-string immediately after the numeric ID. The boundary check now matches
+  `[\/?]`, correctly extracting IDs from browser-copied URLs, regional subdomains, and
+  links with tracking parameters. Pinned by eleven new cases in `parsing.test.ts`.
+
+- **The `documents/interview/**` ignore rule no longer claims interview prep is written there**
+  (#336). `/interview` saves its pack to
+  `documents/applications/<company>_<role>/interview_prep_<stage>.md`, already ignored by
+  `documents/applications/**`; nothing has ever written to `documents/interview/`. Nothing leaked -
+  but it was the personal-data block's one dedicated line about interview material, so an auditor
+  checking the framework's most sensitive artifact had every reason to read it and stop, at the
+  only path in the block with no writer. The protection rationale now sits above
+  `documents/applications/**`, the rule that actually provides it, so the next reader finds it
+  where it lives; `documents/interview/**` stays, relabelled belt-and-braces rather than primary
+  guard (`REQUIRED_IGNORE_RULES` pins it, so removing it from `.gitignore` alone fails the guard).
+  Pinned by `tests/test_security_guards.py`, which derives the prep-pack path from
+  `/interview`'s own spec instead of hardcoding it - so moving that path fails CI rather than
+  quietly re-staling the comment.
+
+- **`/scrape` now persists each posting's publication date** (#390) - Step 2's contract guarantees a
+  `date` on every portal CLI's search output (CI enforces it in `test_scrape_contract.py`) and
+  Step 1b uses that date to scope a run to the last 14 days, but Step 4's `seen_jobs.json` schema
+  stored no posting date at all: `first_seen` is when the scraper saw an entry, not when the
+  employer posted it. The freshness window was therefore unauditable the moment a run ended, and
+  `/rank` - which reads the stored entry, not the run - had no age signal to weigh. A
+  `freehire-search` posting dated 2024-05-13 was scraped 27 months later and ranked Strong Fit at
+  position 1 of 133; the scoring note recorded that the listing "may be long stale" in prose
+  nothing reads, and an `/apply` run drafted a tailored CV and cover letter against it. The schema
+  gains `posted_date` (`null` when the portal returned no date, never inferred or backfilled).
+  Pinned by three new cases in `test_scrape_contract.py`, each verified to fail on the unfixed
+  spec. Reported and diagnosed from a real run by @sandunwijerathne.
+
+- **`salary_lookup.py` no longer crashes on a `null` `metadata` or `categories`** - `--validate`
+  treats an explicit `"metadata": null` / `"categories": null` the same as an omitted key (the
+  shape checks are "...must be an object *when provided*" and skip `None`), but the renderer read
+  both through `dict.get(key, {})`, which only substitutes the default for an *absent* key - a
+  present-but-null value passed straight through. `format_entry` then hit `None.get("index_label",
+  ...)` (`AttributeError`) or, via the numeric-field fallback, `None[key] = value` (`TypeError`),
+  so a hand-maintained `salary_data.json` using `null` for "no value here" died with an uncaught
+  traceback right after printing `Found 1 match(es)`. `format_entry` now coerces both to `{}` up
+  front, so `null`, absent, and `{}` behave identically. Pinned by four cases in
+  `test_salary_lookup.py` - two unit calls into `format_entry` and two end-to-end (`main()
+  --validate` blesses the file, then the lookup path renders it), one per null shape, all verified
+  to fail on the unfixed renderer.
+
+## [1.7.0] - 2026-08-29
+
+### Fixed
+
+- **Fork clones no longer point `gh issue create` at the upstream public tracker
+  undetected** (#389) - `gh repo fork --clone`, the exact command SETUP.md's fork step
+  recommends, sets the *upstream* repo as gh's default repository, and gh uses the
+  default for creating issues and PRs - so a user's own automation ("file a tracking
+  issue per application") silently published personal job-search data on the upstream
+  repo, under the user's identity, where they cannot delete it (four live instances from
+  two users in one week). SETUP.md section 2 now adds `gh repo set-default
+  <your-username>/ai-job-search` directly to the fork commands with a warning at the
+  point of decision (the #348 pattern), and a new `.github/ISSUE_TEMPLATE/` carries the
+  same heads-up the PR template already had, for the web-UI path. Blank issues stay
+  enabled - the template warns, it does not gatekeep.
+- **`freehire-search` fractional numeric flags no longer silently change the query** (#373) -
+  `parseIntFlag` used bare `parseInt`, so a fractional value was truncated instead of
+  rejected: `--jobage 0.5` became `0`, failed the `jobage > 0` guard, and the
+  `posted_within_days` freshness filter was silently omitted from the outbound request
+  while the CLI exited 0 - on a default-ON `/scrape` portal, exactly the
+  discarded-filter failure the CLI's own `UNKNOWN_FLAG` guard documents. Numeric flags
+  (`--jobage`/`--page`/`--limit`) now accept whole numbers >= 1 only, mirroring the
+  Danish CLIs' `z.coerce.number().int().min(1)` contract, and reject everything else
+  with the stderr-JSON `BAD_ARG` error. The sibling of #371 (`linkedin-search`), which
+  remains with its reporter. Pinned by five new cases in `cli-flag-validation.test.ts`,
+  each verified to fail on the unfixed code.
+
+### Added
+
+- **`linkedin-search detail` reports closed postings** (#280, adopted with the original
+  author's commit preserved) - a new `isActive` field: `false` when the posting page
+  renders LinkedIn's own "No longer accepting applications" top-card banner. Detection
+  is scoped to the top card and pinned by fixture tests in both directions, including
+  the false-positive case the review required (recruiter boilerplate quoting the closed
+  phrase in a *description* must not flag a live job - on the unscoped first version it
+  did, and the new tests fail there). Only the two markers real closed pages carry are
+  matched (`closed-job__flavor` and the banner text, verified against live guest
+  pages); three speculative phrases from the first version were dropped as
+  false-positive-only risk. `/scrape` Step 2 now consumes the signal: a closed-at-source
+  job is recorded in `seen_jobs.json` as `"status": "expired"` - marked, never silently
+  dropped, per the `/rank` pattern - which is the fix for the ghost-LinkedIn-jobs class
+  in #331 (an expired LinkedIn URL redirects to a *similar live job*, so a stored hit
+  can die unnoticed between scrape and click). `isActive: true` is documented as
+  absence of the banner, not proof the posting is open.
 - **pypdf ATS text-layer fallback** - `/apply` Step 5d and `tools/verify_pdf.py` extract the CV PDF text layer with **pypdf** first (BSD, `pip install pypdf`) so Windows machines without Poppler still get a mechanical parseability check. Poppler `pdftotext -layout -enc UTF-8` remains the fallback; if both are missing the check still degrades to a visual keyword review. No extra cache or installer. `05-cv-templates.md` `framework_version` 1.4.2 → 1.4.3.
 - **CI now tests the full documented Python range** (#370) - the Python tool tests job
   runs a 3.10-3.14 version matrix instead of pinning 3.12, so both the documented 3.10
@@ -960,7 +1097,8 @@ At this baseline the framework provides:
 - **Cross-runtime support** - a root `AGENTS.md` pointer so Codex and Antigravity can
   discover the portable portal skills, with Claude Code as the reference runtime.
 
-[Unreleased]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.3.0...v1.4.0

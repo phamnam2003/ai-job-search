@@ -38,7 +38,36 @@ errors: list[str] = []
 # an entry must add it here too - that is the point: the diff shows both.
 ALLOWED_PERMISSIONS = {
     "Skill(job-application-assistant)",
-    "Bash(bun run:*)",
+    # Narrowed from the upstream template's blanket Bash(bun run:*), which
+    # pre-approved `bun run <any file>`. One entry per shipped portal CLI,
+    # matching what each SKILL.md already declares in its allowed-tools.
+    # A portal added by /add-portal needs its own entry here and in
+    # .claude/settings.json - that review step is the point.
+    "Bash(bun run .agents/skills/jobbank-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/jobdanmark-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/jobindex-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/jobnet-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/linkedin-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/freehire-search/cli/src/cli.ts:*)",
+    # Added by /add-portal on this fork. Upstream ships only the six above; the
+    # Vietnamese boards and the ATS/remote aggregators below are what actually
+    # get scraped here, so they need the same narrowed per-CLI entry rather
+    # than a reinstated blanket Bash(bun run:*).
+    "Bash(bun run .agents/skills/ashby-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/careerviet-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/facebook-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/greenhouse-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/itnavi-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/itviec-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/joboko-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/lever-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/remoteok-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/topcv-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/topdev-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/vietnamdevs-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/vietnamworks-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/weworkremotely-search/cli/src/cli.ts:*)",
     "Bash(python salary_lookup.py:*)",
     "Bash(python3 salary_lookup.py:*)",
     "Bash(python tools/verify_pdf.py:*)",
@@ -70,6 +99,8 @@ REQUIRED_IGNORE_RULES = [
     "documents/references/**",
     "documents/applications/**",
     "documents/postings/**",
+    # Belt-and-braces, not the primary guard: nothing writes here.
+    # /interview's prep packs land under documents/applications/**, above.
     "documents/interview/**",
     "job_search_tracker.csv",
     "gmail_sync/",
