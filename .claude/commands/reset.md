@@ -20,7 +20,7 @@ If `$ARGUMENTS` is empty or does not contain a recognized scope keyword, ask:
 >
 > - **`profile`** — Clears candidate data from the skill files (profile, behavioral, STAR examples, profile statements, personalized evaluation criteria, search queries). The framework structure, scoring framework, and writing rules are preserved. Use this to re-run `/setup` from scratch.
 >
-> - **`documents`** — Deletes all files you've placed in the `documents/` folder (CV PDFs, LinkedIn export, diplomas, references, pasted job postings, past applications). The folder structure and `README.md` are preserved.
+> - **`documents`** — Deletes all files you've placed in the `documents/` folder (CV PDFs, LinkedIn export, diplomas, references, pasted job postings, past applications, and interview prep plans). The folder structure and `README.md` are preserved.
 >
 > - **`all`** — Both of the above.
 >
@@ -83,7 +83,7 @@ cv/main_example.tex. This scope covers skill files only.
 
 ### If scope includes `documents`:
 
-Use Glob to list all files present in `documents/cv/`, `documents/linkedin/`, `documents/diplomas/`, `documents/references/`, `documents/postings/`, and `documents/applications/`. Present as:
+Use Glob to list all files present in `documents/cv/`, `documents/linkedin/`, `documents/diplomas/`, `documents/references/`, `documents/postings/`, `documents/applications/`, and `documents/interview/`. Present as:
 
 ```
 ## Documents reset will delete:
@@ -105,6 +105,9 @@ documents/postings/
 
 documents/applications/
   - [subfolder/filename] or "(empty)"
+
+documents/interview/
+  - [filename] or "(empty)"
 
 documents/README.md — NOT deleted (instructions file)
 ```
@@ -243,7 +246,23 @@ rm -f documents/diplomas/*
 rm -f documents/references/*
 rm -f documents/postings/*
 rm -rf documents/applications/*/
+rm -f documents/applications/*
+rm -f documents/interview/*
 ```
+
+`documents/interview/` holds the dated prep plans and question banks `/setup` and
+`07-interview-prep.md` file there. It is the folder `.gitignore` singles out as the most
+damaging to publish by accident - it names employers, who referred the candidate, walk-away
+salary floors, and the candidate's read of a named manager - so leaving it behind while Step 4
+reports "The `documents/` folder is now empty" is the worst possible failure here. Every one of
+these paths must stay in step with `documents/README.md`; `tests/test_reset_command.py` enforces
+that by listing the tracked subfolders itself and failing when this block or the Step 1 preview
+omits one.
+
+The `applications/` pair is deliberate: `*/` clears the per-application subfolders `/apply` and
+`/interview` create, and the plain `*` catches any loose file sitting at the top of the folder,
+which `*/` alone silently leaves behind. `*` does not match dotfiles in bash, so every
+`.gitkeep` survives and the folder structure is preserved.
 
 ---
 
