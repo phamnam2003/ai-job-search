@@ -30,7 +30,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
   04-job-evaluation.md's Language Gate. -->
 - **CV language:** English <!-- English unless your market expects otherwise; /setup asks -->
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
-- **LinkedIn headline:** "Backend Developer | Go · Kafka · Kubernetes | Fullstack with React"
+- **LinkedIn headline (target, not yet live):** "Backend Developer | Go · Kafka · Kubernetes | Fullstack with React" — the actual profile still reads *"Student at Hanoi Open University"*, lists **no work experience at all**, sets the location to Thái Bình and ends education at 2025. Confirmed 2026-09-03; see `01-candidate-profile.md` → Identity for why this matters at the screening stage.
 
 ### Education
 - **Engineer's degree (Kỹ sư) in Information Technology** (2021 – 2026, **graduated**) — **Hanoi Open University (HOU) / Trường Đại học Mở Hà Nội**
@@ -62,7 +62,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 - **Learning (declare as learning, never as experience):** **Rust** — active self-study, intended to become mainstream for him alongside Go and TS/JS. Goes in an "Interests / currently learning" line only. *(Java Core and .NET/Entity Framework are known but were deliberately left off CVs on 2026-09-03 — they dilute the Go-backend positioning. Do not re-add them without asking.)*
 
 ### Certifications
-- **ScyllaDB certification(s)** — held, listed on his LinkedIn. Exact course names and dates **not yet confirmed** (`documents/linkedin/` is empty). Never invent a course title; ask him or write it generically.
+- **ScyllaDB — five course/event completion certificates** *(names confirmed 2026-09-03 from the LinkedIn export)*: S210: Using ScyllaDB Drivers · S301: ScyllaDB Operations · Alternator Course Completion Certificate · ScyllaDB Labs 2025 Completion Certificate · LIVE Fall 2024 Advanced Track Completion Certificate. **Issue dates are still unknown** — the export lists titles only, so never state a date. Write the titles verbatim; full detail in `01-candidate-profile.md`.
 
 ### Publications
 *(none)*

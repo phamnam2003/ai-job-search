@@ -102,6 +102,22 @@ to decide the *how*, and colleagues close enough to argue a design with.
   visible mitigation (he works and documents in English in writing every day).
   Note what he did **not** claim as weaknesses: over-engineering, estimation, or skipping
   tests/docs. Do not put those in his mouth in a cover letter or a mock interview.
+  **How he closes it — and this applies well past English:** reading silently gives him the feeling
+  of having learned something without the ability to say it, so preparation only counts once it has
+  been spoken aloud. That is his own rule and it holds for interview answers, boundary statements
+  and rehearsed scripts alike. Relevant whenever a mock interview is being planned: reading this
+  file is not preparation.
+
+- **Self-directed plans stall unless they carry a calendar** *[Generalised 2026-09-03 from the
+  planning documents in `documents/interview/`]* — Given a goal he sets for himself he writes a
+  thorough and technically correct list of what needs doing, and then the list does not get
+  started. The failure is neither motivation nor knowledge: an undated task wall gives no answer to
+  "what do I do tonight". The version that worked replaced the wall with a dated day-by-day
+  schedule, one fixed theme per week, and an explicit rule for a missed session — drop it, never
+  roll it forward. *Counter-move:* treat any plan of his as unfinished until it has become a
+  calendar. *Do not offer this as an interview weakness.* It is self-management on his own time,
+  and the delivery record points the other way — he shipped to a demo deadline on SkyReality and
+  fixed a live export failure on STM.
 
 - **Concedes value pre-emptively under pushback** *[Carried over — source:
   `documents/interview/2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md`]* — Challenged on a claim, he
@@ -182,8 +198,16 @@ to decide the *how*, and colleagues close enough to argue a design with.
 
 ## TODO — Strengthen with more signal
 
-- [ ] Add a LinkedIn export to `documents/linkedin/` — About section, recommendations, and the
-      ScyllaDB certification names/dates. Still empty as of 2026-09-03.
+- [x] ~~Add a LinkedIn export to `documents/linkedin/`~~ — supplied 2026-09-03. It closed the
+      certification gap (five ScyllaDB titles, now in `01-candidate-profile.md`) and **nothing
+      else**: the profile carries no About section, no recommendations, no Languages section and no
+      Experience entries, so there was no behavioral signal in it to extract.
+- [ ] **Fix the live LinkedIn profile. Highest-value item on this list.** The headline still reads
+      "Student at Hanoi Open University", the location is Thái Bình, education ends 2025, and no
+      jobs are listed at all. The previous application round was ten sent with no offers and the
+      bottleneck sits at screening — this is a screening-stage asset currently working against him.
+      Order of repair: Experience entries first, then the headline, then the location, then the
+      2026 graduation date.
 - [ ] Add reference letters to `documents/references/` — referee competency language is the
       strongest behavioral evidence available. (No referees are recorded by name in this repo by
       the candidate's decision — it is public.)

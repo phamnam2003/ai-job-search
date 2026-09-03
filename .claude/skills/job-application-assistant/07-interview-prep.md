@@ -29,6 +29,13 @@ before the room*. Correcting yourself in front of an interviewer who was vouched
 the person who vouched, not just you. See the "Architected the system" issue logged under
 Key Projects in `01-candidate-profile.md`.
 
+> **Status of that specific line, checked 2026-09-03.** All four `cv/*.tex` files are clean — the
+> word does not appear in any of them. It survives only in the f8.edu.vn-built PDF under
+> `documents/cv/`, which is a source document for building CVs rather than one he submits. So
+> there is nothing in circulation to retract. The prepared script for "what if the referrer
+> remembers the old wording" (§4.1 of the 01/10 plan) is still worth rehearsing, but it is now a
+> courtesy rather than a repair.
+
 ## STAR Format
 
 Structure answers as: **Situation** (context), **Task** (your responsibility), **Action** (what you did), **Result** (outcome).
@@ -144,6 +151,31 @@ theoretical.
 > contention, and find where it breaks. Saying "I designed for it but didn't measure it, and here's
 > how I'd measure it" is a stronger answer than an invented number, and an interviewer who has
 > built this kind of system will know the difference immediately.
+
+## STAR Candidates (Complete Manually)
+
+<!-- Added by /setup Path A on 2026-09-03. Stubs only — Path A does not draft STAR answers.
+     Fill in situation/task/action/result in your own words before using this in a room. -->
+
+### Standing up a Kubernetes cluster from scratch on VMware
+**Source:** His own infrastructure work — recorded in `01-candidate-profile.md` under
+Infrastructure & Observability, and named as a lead story in the 01/10 interview plan.
+**What happened:** He built a Kubernetes cluster himself on VMware — control plane, both CNIs
+(Calico on iptables and Cilium on eBPF), Envoy Gateway and Nginx Ingress — then deployed real
+workloads onto it through ArgoCD with OpenTelemetry, Prometheus, Grafana and Loki on top.
+**Why it matters:** Every ready-made example above is application-layer. This is the only
+infrastructure story, and it is the strongest available answer to *"you haven't used
+AWS/GCP/Azure"* — assembling a cluster is a harder thing than consuming a managed one. At a small
+company where nobody owns this layer it is also the clearest differentiator he has.
+**Two boundaries to hold:** it is self-built infrastructure, not production operations at scale —
+say so unprompted, the same way the GitHub repos are named as self-study. And do not let it turn
+the conversation into a DevOps interview: infra is a capability he brings, not the role he wants
+(see `02-behavioral-profile.md` → Mapping to Job Posting Language).
+**S/T/A/R stub:**
+- Situation:
+- Task:
+- Action:
+- Result:
 
 ## Common Tough Questions
 

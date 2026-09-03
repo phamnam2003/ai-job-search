@@ -6,6 +6,16 @@ framework_version: 1.1.1
 
 <!-- Populated by /setup on 2026-07-12 from documents/cv/CV_Pham_Hai_Nam_Software_Engineer.pdf -->
 
+> **Reading `documents/cv/` — one guard.** The PDFs in that folder are built on **f8.edu.vn** as a
+> *source* for this profile and for the LaTeX CVs. They are **not** the documents he submits.
+> `CV_Pham_Hai_Nam_Software_Engineer-1.pdf` still contains *"Architected the system: database
+> modeling and backend stack decisions"* on SkyReality and *"Architected system design"* on VB/C06.
+> He retracted that phrasing on 2026-08-08 and it is banned everywhere else in this repository —
+> **never carry it out of that PDF.** All four `cv/*.tex` files were verified clean of it on
+> 2026-09-03. Same file, same check: the SkyReality block duplicates the OAuth2 Google Sign-In
+> bullet and leaves *"and multipart upload with checksum verification."* dangling outside any
+> bullet. Both are artefacts of the f8 builder, not facts about the work.
+
 ## Identity
 - **Name:** Pham Hai Nam (Phạm Hải Nam)
 - **Date of birth:** 15/07/2003
@@ -14,6 +24,15 @@ framework_version: 1.1.1
 - **Email:** namphamhai7@gmail.com
 - **GitHub:** https://github.com/phamnam2003
 - **LinkedIn:** https://www.linkedin.com/in/pham-nam-153ab9259/
+  **The live profile is stale and nearly empty** — checked 2026-09-03 against
+  `documents/linkedin/Linkedin.pdf`. The headline reads *"Student at Hanoi Open University"*, the
+  location is set to **Thái Bình** rather than Ha Noi, education shows *2021 – 2025*, and there is
+  **no Experience section at all**; he confirmed he has never filled it in. Two consequences.
+  *(a)* Infer nothing about him from that profile — every fact in this file comes from his CV, his
+  GitHub, or his own answers. *(b)* Treat it as a live job-search problem rather than a cosmetic
+  one: a Ha Noi recruiter filtering by location and title never surfaces him, and a recruiter who
+  opens it after reading a CV claiming three years finds a student with no jobs listed. The fix
+  list is in `02-behavioral-profile.md`'s TODO.
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **Constraints:** Ha Noi onsite/hybrid, or remote (VN and offshore). Not relocating to HCMC/Da Nang unless fully remote.
 - **Salary filter band:** **17–40M VND/month**. This is a search filter and nothing else — the
@@ -77,12 +96,33 @@ thesis note, not in Professional Experience.
 
 ### Certifications
 
-- **ScyllaDB certification(s)** — held and listed on his LinkedIn profile. **Exact course names and
-  issue dates are not yet confirmed here**: `documents/linkedin/` was still empty at 2026-09-03, so
-  nothing was extracted. Do **not** invent a course title (ScyllaDB University runs several tracks).
-  Either write it generically or ask him for the exact names before it goes on a CV. Corroborating
-  signal that the knowledge is real: the ScyllaDB/Cassandra `gocqlx` deep dive in
-  `phamnam2003/challenges`.
+*(Names confirmed 2026-09-03 from `documents/linkedin/Linkedin.pdf`, replacing the earlier
+"exact titles unknown" placeholder. Five ScyllaDB credentials, all listed on his LinkedIn.)*
+
+| Certificate | What it is |
+|---|---|
+| **S210: Using ScyllaDB Drivers** | ScyllaDB University course |
+| **S301: ScyllaDB Operations** | ScyllaDB University course |
+| **Alternator Course Completion Certificate** | ScyllaDB University course — Alternator is ScyllaDB's DynamoDB-compatible API |
+| **ScyllaDB Labs 2025 Completion Certificate** | Hands-on lab event |
+| **LIVE Fall 2024 Advanced Track Completion Certificate** | ScyllaDB University LIVE, advanced track |
+
+**Write the titles exactly as above** on anything that is checked against a record — application
+forms, LinkedIn, a certifications field. They were parsed from a line-wrapped LinkedIn sidebar and
+he confirmed the split on 2026-09-03; do not re-derive them from the PDF. **Issue dates remain
+unknown** — the export lists titles only. The "2025" and "Fall 2024" inside two of the titles are
+part of the event names, not issue dates; never convert them into one.
+
+**On a CV, short forms are allowed and `cv/main_example.tex` uses them:** `S210 Drivers; S301
+Operations; Alternator; Labs 2025; LIVE Fall 2024 Advanced Track`. Written out in full the five run
+to two printed lines, and on 2026-09-03 that second line was what pushed the CV onto a third page.
+The S210/S301 codes are the official identifiers, so a verifier can still find all five. Keep the
+full titles for the form; keep the short forms for the page budget.
+
+All five are **course- and event-completion certificates** rather than a proctored professional
+exam — describe them that way if an application form asks what kind of credential they are.
+Corroborating signal that the underlying knowledge is real: the ScyllaDB/Cassandra `gocqlx` deep
+dive in `phamnam2003/challenges`.
 
 ## Professional Experience
 
@@ -248,6 +288,14 @@ A structured, self-authored curriculum rather than a scratch repo.
 
 ### Infrastructure & Observability
 - **Containers/Orchestration:** Docker (CLI, Compose, Buildx), Kubernetes (Calico CNI, Cilium CNI, Envoy Gateway, Nginx Ingress Controller)
+- **Built the Kubernetes cluster himself, on VMware** *(recorded 2026-09-03)* — not a managed
+  service and not an inherited cluster. He stood the cluster up from scratch and worked through
+  **both** CNIs (Calico on iptables, Cilium on eBPF), Envoy Gateway and Nginx Ingress, then
+  deployed to it through ArgoCD with the OpenTelemetry/Prometheus/Grafana/Loki stack on top.
+  Earlier versions of this file listed the CNI names as if they were only tools he had used, which
+  undersells it by a wide margin. This is also the honest bridge for the **managed-cloud gap**
+  (AWS/GCP/Azure): the concepts transfer directly and what is missing is the console and the
+  service names — plenty of engineers run EKS without ever having configured a CNI.
 - **CI/CD & GitOps:** GitHub Actions, self-hosted GitLab Runners, ArgoCD, **Helm charts**
   - Deployed SkyReality and the VB/C06 document-AI system to Kubernetes via ArgoCD himself *(CV — Projects)*
 - **Observability:** OpenTelemetry (SDK + Collector), Prometheus, Grafana, Loki, **Jaeger** *(GitHub — profile bio)*, **ELK stack** *(GitHub — challenges)*

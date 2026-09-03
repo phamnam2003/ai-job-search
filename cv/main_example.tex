@@ -129,7 +129,11 @@
 \needspace{5\baselineskip}
 \item{\cventry{04/2023 - 06/2023}{Frontend Intern}{Lalasoft}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
-    \item Applied Redux Core, Redux Toolkit, and Ant Design to ongoing company projects; built small internal tools as Chrome Extensions.
+    % One printed line, deliberately. This is the lowest-signal bullet on the CV - a
+    % three-month 2023 internship - and the words trimmed out of it ("ongoing",
+    % "small", "tools as") were the cheapest line available on page 2. Page 2 has a
+    % hard height ceiling beyond the 2-page rule: see the \enlargethispage note below.
+    \item Applied Redux Core, Redux Toolkit, and Ant Design to company projects; built internal Chrome Extensions.
 \end{itemize}}}
 
 \end{itemize}
@@ -207,15 +211,52 @@
 % there. Placement matters: \enlargethispage only affects the page current when it
 % is issued, so this has to sit ahead of the Education heading. Left further down
 % (at Awards, where it used to live) it enlarges the very page 3 it should prevent.
+%
+% Page 2 has a second, quieter ceiling on top of the 2-page rule, and it bites before
+% page 3 does. moderncv writes the \label{lastpage} behind the "n/m" footer from inside
+% the footer box on the final page. Let page-2 content descend into that box - which is
+% exactly what this \enlargethispage invites it to do - and the label is never written;
+% \pageref{lastpage} then comes back undefined and the footer disappears from *every*
+% page, page 1 included. It fails silently: no warning, no error, and the numbers are
+% gone from the text layer as well, so the PDF still reads as fine.
+%
+% The trigger is how far page-2 content actually reaches, not this number on its own,
+% so raising or lowering it is not a reliable fix - 4 with a full page 2 fails just as
+% 5 does. Buy the room with a content cut, then check by grepping the extraction for
+% both footers, not by eyeballing the PDF:
+%   pdftotext -enc UTF-8 main_example.pdf - | grep -oE "\b[12]/2\b"   -> 1/2 and 2/2
 \enlargethispage{4\baselineskip}
-\section{Education}
+\section{Education \& Certifications}
 \vspace{1pt}
 \begin{itemize}
 
 \needspace{3\baselineskip}
 \item{\cventry{2021 - 2026}{Engineer's degree, Information Technology}{Hanoi Open University (HOU)}{Ha Noi, Vietnam}{}{\vspace{1pt}
-Graduated 2026. Full-time programme, studied while working professionally from early 2023, with a concentrated study block in spring 2024. Software engineering, data structures \& algorithms, databases, computer networks, web development.
+Graduated 2026. Full-time programme, studied while working professionally from early 2023, with a concentrated study block in spring 2024. Thesis: an event-ticketing platform built for the sales-open traffic spike --- virtual waiting room ahead of the booking path, TTL-based distributed seat locking, Redis inventory cache.
 }}
+% The generic coursework list that used to close this entry (software engineering,
+% data structures, databases, networks, web development) was cut to buy the thesis
+% line its room. Relevance-weighted: for a developer with three years of shipped
+% backend work, named coursework is the lowest-signal content on the page, while the
+% thesis is a system-design story an interviewer can actually open a conversation on.
+% Claim the design only - the platform was never load-tested, so no throughput,
+% concurrency, or user-count figure may ever be added to this line.
+
+% Certifications share the Education heading rather than taking one of their own. A
+% moderncv section heading costs more vertical space than the line beneath it, and this
+% page is already running on an \enlargethispage rescue - the same trade already made
+% for "Languages, Interests & References" below. The heading still carries the word an
+% ATS scans for. No issue dates exist for any of these, so none are stated.
+%
+% Short forms, not the registered titles. In full they are "S210: Using ScyllaDB
+% Drivers", "S301: ScyllaDB Operations", "Alternator Course Completion Certificate",
+% "ScyllaDB Labs 2025 Completion Certificate" and "LIVE Fall 2024 Advanced Track
+% Completion Certificate" - see 01-candidate-profile.md, which holds the verbatim list
+% for application forms. Written out here they run to two lines, and the second line is
+% the one that puts this CV on a third page. The S210/S301 codes are the official
+% identifiers, so a verifier can still find all five. "2025" and "Fall 2024" are parts
+% of event names, not issue dates - never rewrite either into a date column.
+\item \textbf{ScyllaDB} --- S210 Drivers; S301 Operations; Alternator; Labs 2025; LIVE Fall 2024 Advanced Track.
 
 \end{itemize}
 
@@ -226,7 +267,10 @@ Graduated 2026. Full-time programme, studied while working professionally from e
 \section{Awards}
 \vspace{1pt}
 \begin{itemize}
-\item \textbf{2nd prize, Faculty-level Student Scientific Research} (2024), Hanoi Open University --- research topic: Agile in software development.
+% "Hanoi Open University" is deliberately not repeated here - it is on the scholarship
+% line directly below and on the Education entry above, and dropping the third copy is
+% what pulls this award back onto a single line.
+\item \textbf{2nd prize, Faculty-level Student Scientific Research} (2024) --- topic: Agile in software development.
 \item \textbf{Encouragement (merit) scholarship}, Hanoi Open University, awarded for three terms.
 \end{itemize}
 
@@ -234,16 +278,23 @@ Graduated 2026. Full-time programme, studied while working professionally from e
 %     LANGUAGES & REFERENCES
 % ============================================================
 
-% Languages and References share one heading on purpose. Each was a section
-% holding a single line, and a moderncv section heading costs far more vertical
-% space than the line under it - merging them reclaimed the room the
-% Open-Source Projects section needed without dropping a word of either. Split
-% them back into two sections if a tailored copy has the space.
-\section{Languages \& References}
+% Languages, Interests and References share one heading on purpose. Each was a
+% section holding a single line, and a moderncv section heading costs far more
+% vertical space than the line under it - merging them reclaimed the room the
+% Open-Source Projects section needed without dropping a word of any of them.
+% Split them back into separate sections if a tailored copy has the space.
+%
+% Rust belongs on this line and nowhere else. It is active self-study with nothing
+% shipped, so it must never appear in Core Competencies, where a reader would
+% reasonably interview against it. The "nothing shipped" clause is not optional -
+% see 01-candidate-profile.md, "Learning". It rides on the References line rather
+% than taking an \item of its own purely for space; give it its own line first if a
+% tailored copy has the room.
+\section{Languages, Interests \& References}
 \vspace{1pt}
 \begin{itemize}
 \item Vietnamese (native); English (professional working --- technical reading and writing).
-\item{References available upon request.}
+\item Currently learning Rust (self-study, nothing shipped). References available upon request.
 \end{itemize}
 
 \end{document}
