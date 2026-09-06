@@ -100,7 +100,7 @@ Does work history align with what they're looking for? Match on the function and
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** Go backend engineering (~2 yrs production Go across Leeon Group + AIONtech), backend architecture ownership (SkyReality, C06 — DB modeling + stack decisions), fintech/banking backends (Sacombank STM, AION Bank), event-driven microservices
+**Strong:** Go backend engineering (~2 yrs production Go across Leeon Group + AIONtech), module-level design authority (SkyReality, C06 — proposed the DB modeling + stack decisions for the modules he owned, reviewed and approved before build; never "architected the system" — see `01-candidate-profile.md`, Scope of the design work), fintech/banking backends (Sacombank STM, AION Bank), event-driven microservices
 **Moderate:** Fullstack (React/Next/Vue frontends alongside backend at every role), government/public-sector systems (C06, TLGEO), geospatial (PostGIS, Mapbox), self-hosted infra/observability & CI/CD (Leeon Group)
 **Entry-level:** Formal DevOps/Platform/SRE titles (has the skills, no title), team lead / engineering management, roles requiring live English fluency
 
