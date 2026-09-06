@@ -41,6 +41,82 @@ per-file diff commands.
 
 ### Fixed
 
+- **`/rank` now bounds each scoring batch** (#395) - a bare run scores at most 10
+  eligible jobs instead of attempting the entire backlog. `--limit <N>` controls
+  scoring independently of `--top`, and the report makes deferred work visible so
+  re-running `/rank` can continue it.
+
+- **The portal CLIs' unknown-flag guard no longer lets a single-dash flag through** (#426) -
+  the guard in the four bunli-based CLIs (`jobnet`, `jobbank`, `jobindex`, `jobdanmark`) inspected
+  only tokens starting with `--`, so an undefined *short* flag bypassed it entirely: bunli
+  discarded it, the search ran unfiltered, and the CLI exited 0 with no error. Live against
+  jobnet, `search -q "sygeplejerske"` returned all 18,179 ads as a successful search against 667
+  for the real `--search-string` query - the same shape as review finding F13 (jobdanmark, 13,862
+  results) that motivated the guard in the first place, reached by the likelier route: `-q` is the
+  documented short for the keyword search in `linkedin-search`, `freehire-search` and
+  `jobindex-search`, so a cross-portal habit produces it. Both dash forms are now checked, with
+  declared shorts (`jobindex`'s `-q`) and bunli's built-in `-h`/`-v` still valid. A negative number
+  is rejected too rather than skipped: bunli does not consume a `-`-prefixed token as the previous
+  flag's value, so `--radius -5` silently fell back to the default radius instead of failing its
+  own `min(1)` schema - erroring on it is the trade `linkedin-search` already makes, and a value
+  that must begin with a dash uses the `--flag=value` form. `linkedin-search` and
+  `freehire-search` were unaffected; they normalize `-x` to a long name before checking it. Pinned
+  by thirteen new cases across the four CLIs' `cli-flag-validation.test.ts`, network-free because
+  the guard runs before dispatch: eight bug-pinning cases (the short flag and the negative number,
+  per CLI), each verified to fail on the unfixed guard, plus five regression guards that pass on
+  both and exist to keep the fix from over-rejecting - `-h` in each CLI, and `jobindex`'s declared
+  `-q`.
+
+- **`jobdanmark-search` autocomplete no longer dies over one suggestion without text**
+  (#421, closing out the #416/#418 audit - every other deref site in the six CLIs
+  checked and confirmed guarded) - the filter derefed `item.text.toLowerCase()` from a
+  cast API response on the same line that already guards `g.items ?? []`, so one item
+  with a null or missing `text` threw `TypeError` and the whole command exited 1 as
+  `API_ERROR`. The filter now lives in an exported `filterAutocompleteGroups` (the
+  jobnet testability pattern), `text` is typed nullable so the compiler enforces the
+  guard, and an item without usable text is skipped - it can never match the required
+  non-empty query, so downstream output never sees one. Pinned by three cases in the
+  new `autocomplete-filtering.test.ts`; the null-text case fails against the verbatim
+  unguarded extraction with the exact production TypeError.
+
+- **`jobnet-search` no longer dies over one ad with a null publication date** (#418, the
+  sibling of #416 from the same audit) - `date: job.publicationDate.slice(0, 10)` trusted
+  a TypeScript interface claim (`publicationDate: string`) that nothing validates at
+  runtime: `apiFetch` casts the JSON body, so one `null` threw `TypeError` inside the
+  `jobAds` map and the whole search of a default-ON portal exited 1 as `API_ERROR` - while
+  the neighboring `applicationDeadline` field was already null-guarded with a `1900-01-01`
+  sentinel check. The field is now typed nullable (so the compiler enforces the guard) and
+  degrades per-item to `date: null`, the shape the `seen_jobs.json` contract documents.
+  Pinned by a new case in `search-normalization.test.ts`, verified to fail on the unfixed
+  code with the exact production TypeError.
+
+- **Placeholder-integrity tests in `python-tests` now skip on forks** (#405) - the dedicated
+  `placeholder-integrity` job already gates on the upstream repo name, but `python-tests` ran
+  `unittest discover` with no such guard, so forks that personalized files via `/setup` failed
+  three sentinel checks permanently. Both test classes now use `@unittest.skipIf` on
+  `GITHUB_REPOSITORY` (defaulting to upstream when unset so local pristine-template runs still
+  execute).
+- **`convert_salary_excel.py` no longer mistakes a title/citation row for the header row**
+  (#414) - header-row detection accepted the first row in the first 10 where *any* cell merely
+  contained a company-pattern word, with no check that the row actually looked like a header. A
+  source-citation line above the real header table - standard in real Danish union/statistics
+  exports, e.g. "Kilde: ... opdelt efter arbejdsgiver ..." - tripped it purely because
+  "arbejdsgiver" (employer) appeared in prose. The real header row then got parsed as a data row
+  (its "Firma" cell became a bogus company entry), and every genuine company lost all its salary
+  data, silently: exit 0, "Done! Wrote N company entries," with `categories: {}` on every one. A
+  candidate row is now accepted only when a *different* cell in the same row also matches a
+  city/count/index pattern - same-cell corroboration doesn't count, since a citation sentence can
+  pack a count-pattern word into the same sentence as the company-pattern one (e.g. "...opdelt
+  efter arbejdsgiver, antal svar 1234"). Sheets whose only real header has purely untyped salary
+  columns (e.g. "Base pay 2025" / "Bonus 2025", neither of which matches a known city/count/index
+  pattern) have nothing to corroborate against in any row, so detection falls back to the original
+  any-cell-mentions-company rule when the strict pass finds nothing in the first 10 rows. As a
+  backstop independent of either pass, a sheet that ends up with zero detected salary columns now
+  prints a warning instead of reporting success silently. Pinned by four cases in
+  `tests/test_convert_salary_excel.py`: the original citation-row and zero-columns cases fail
+  against the pre-fix script; the same-cell-corroboration and untyped-column-fallback cases each
+  fail against the single-pass version of this fix that came before the fallback was added.
+
 - **`jobbank-search` no longer dies over one malformed feed date** (#416) - `new Date()`
   on a present-but-unparseable `pubDate` yields an Invalid Date whose `toISOString()`
   throws `RangeError`, and `normalizeSearchItem` runs inside an unguarded `items.map()`,
