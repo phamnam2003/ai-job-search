@@ -15,6 +15,54 @@ per-file diff commands.
 
 ### Added
 
+- **`/expand` project and portfolio expansion** (`.claude/commands/expand.md`,
+  `tests/test_expand_command.py`) - expands candidate discovery
+  to technical projects from public GitHub repositories, extracting structured summaries
+  (problem domain, tech stack, key technical challenges, and verifiable outcomes) to
+  populate the `## Independent Projects` section of `01-candidate-profile.md`.
+
+- **Stale sweep branch in `/outcome`** (`.claude/commands/outcome.md`,
+  `tests/test_outcome_stale.py`) - introduces `/outcome stale [N]` (and `/outcome sweep [N]`)
+  to batch-resolve open applications quiet for 60+ (or N) days. Displays a numbered summary
+  of qualifying applications, requires explicit user confirmation (`all`, `select`, or `skip`),
+  resolves confirmed rows to `no_response`, logs dated entries to `notes`, updates archive
+  `outcome.md` files, and hands off to calibration when 3+ applications are resolved.
+
+### Fixed
+
+- **`jobnet-search detail` no longer reports an externally hosted ad as not found** (#432) -
+  Jobnet's `/FindJob/JobAdDetails/<id>` returns 404 for ads with `isExternal: true`, so `detail`
+  on an ad `search` had just listed exited 1 with `NOT_FOUND`, and `/scrape` read the posting as
+  gone rather than hosted elsewhere (2 of 3 ads in a fresh sample). On that 404 the command now
+  falls back to the search endpoint, which does carry the ad's description and the external
+  application URL, and returns the record marked `isExternal: true` with a stderr note; fields the
+  search payload does not carry (`views`, `approvalStatus`, the boolean flags) are `null`, never
+  guessed. Verified live on two external ads.
+
+- **`09-web-research.md`'s curl snippets no longer write into the repo when `$SCRATCHPAD`
+  is unset** - both runnable blocks in the 403-escalation path start with `cd "$SCRATCHPAD"`,
+  and nothing in the repository ever sets that variable (`git grep 'SCRATCHPAD='` returns
+  nothing). Unset, it expands to `cd ""`, which succeeds and leaves the shell where it
+  started, so the `&&` chain proceeds and `curl -o page.html` writes to the working
+  directory - in practice the checkout, which is exactly what the paragraph directly beneath
+  the curl block forbids ("Write to the session scratchpad directory, never into the repo").
+  The file's instruction and its own snippet disagreed, and the snippet won silently.
+  Both expansions are now guarded with `${SCRATCHPAD:?...}`, turning a silent repo write into
+  an immediate failure whose message names where the value comes from. Behaviour is unchanged
+  wherever the variable is set. The same undefined reference in `.claude/commands/rank.md`
+  was removed by #425 as a side effect of rewriting Step 2/4; this is the remaining instance.
+
+## [1.7.1] - 2026-09-06
+
+### Added
+
+- **CHANGELOG structure guard** (`tests/test_changelog_structure.py`) - every PR edits this one
+  shared file by hand near the same line, and nothing checked the result: a second `### Fixed`
+  heading landed directly under `[Unreleased]`, above `### Added`, on #425 and was fixed by hand
+  at merge time. The `[Unreleased]` section is now checked on every PR for duplicate headings,
+  headings outside the Keep a Changelog set, entries above any heading, and leftover conflict
+  markers. Released sections are history and are not inspected.
+
 - **`/rank` now consumes the `posted_date` #391 persists** (#390, the deferred second
   half) - Step 3 gains a staleness flag: a posting whose stored `posted_date` is more
   than 30 days old at rank time carries a visible ⚠ marker with its age spelled out
@@ -40,6 +88,38 @@ per-file diff commands.
   behavior for anything not on the reviewed list. Thanks @vkotaru.
 
 ### Fixed
+
+- **`/setup` now fills the contact blocks inside `05-cv-templates.md` and
+  `06-cover-letter-templates.md`, and `/reset` restores them** - Step 3 personalised
+  `cv/main_example.tex` but never the LaTeX contact blocks embedded in the two template files
+  `/apply` actually compiles from, so a full Path B or C run left `[YOUR_NAME]`, `[YOUR_EMAIL]`
+  and `[YOUR_PHONE]` in both, and whether they reached a document depended on the drafter
+  noticing (a real user ran `/setup` and then hand-edited both files, #420).
+  `06-cover-letter-templates.md` was not a Step 3 target at all. Step 3.5 now names the `05`
+  contact tokens, a new Step 3.6 covers the `06` contact line and signature (Path A never fills
+  it, so it runs for every path), the completion summary lists `06`, and `/reset` clears both
+  blocks instead of listing `06` as framework-only. Pinned by `tests/test_setup_command.py`; the
+  existing `/reset` coverage test is what forced the `reset.md` half.
+
+- **`/rank` no longer reads or rewrites the whole of `seen_jobs.json` on every run** (#395) -
+  Step 1 used to read the entire state file into the conversation to select candidates by
+  eye, and Step 4 emitted it back to record scores: a cost paid on every run regardless of
+  batch size, growing for the life of the workspace. `tools/rank_state.py` now owns that
+  traffic - `candidates` selects and projects only the fields a scoring agent needs, `sweep`
+  runs rule 6's expiry pass on disk, and `apply` writes results back atomically and prints
+  the rows Step 5's report is built from. Preserves Step 4's existing write-back rules
+  exactly: the `location` → `location_verdict` legacy migration, the deadline
+  null-is-not-a-correction rule, and verbatim strengths/gaps persistence. No scoring policy
+  changes - no new status value, no new persisted field.
+
+- **`jobbank-search`, `jobdanmark-search`, and `jobnet-search` detail commands now accept full URLs** -
+  the portal contract specifies `detail <id|url>`. Passing a full posting URL (with or without
+  trailing slashes, slug segments, or query parameters) previously caused `jobbank-search` and
+  `jobdanmark-search` to construct invalid double-URL strings, and `jobnet-search` to interpolate the
+  full URL into the API endpoint path. All three detail handlers now extract and normalize the
+  underlying ID or slug via dedicated helper functions, and exit 1 with code `BAD_ID` on unparseable
+  inputs, matching `linkedin-search` and `freehire-search`. Pinned by 24 unit tests across the three
+  CLIs' `detail-url-normalization.test.ts`.
 
 - **`/rank` now bounds each scoring batch** (#395) - a bare run scores at most 10
   eligible jobs instead of attempting the entire backlog. `--limit <N>` controls
@@ -1173,7 +1253,8 @@ At this baseline the framework provides:
 - **Cross-runtime support** - a root `AGENTS.md` pointer so Codex and Antigravity can
   discover the portable portal skills, with Claude Code as the reference runtime.
 
-[Unreleased]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.7.0...HEAD
+[Unreleased]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.7.1...HEAD
+[1.7.1]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/MadsLorentzen/ai-job-search/compare/v1.4.0...v1.5.0
