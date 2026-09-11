@@ -28,7 +28,55 @@ per-file diff commands.
   resolves confirmed rows to `no_response`, logs dated entries to `notes`, updates archive
   `outcome.md` files, and hands off to calibration when 3+ applications are resolved.
 
+- **Mechanical layout verification for compiled PDFs** - `tools/verify_layout.py` measures
+  what `/apply` Step 5b previously only eyeballed: per-page text extent, bottom whitespace,
+  the largest internal vertical gap, footer collisions, and entry headers or section
+  headings stranded at a page break. It exists for a failure that survives every existing
+  check - a moderncv `\cventry` is an unbreakable `tabular`, so an entry that does not fit
+  jumps to the next page and leaves a hole behind (observed at 273pt, roughly 19 blank
+  lines) while the document still compiles, still reports the correct page count, and still
+  passes `tools/verify_pdf.py`. Geometry comes from Poppler `pdftotext -bbox`; Poppler is
+  optional repo-wide (since #369 `verify_pdf.py` prefers pypdf), and word bounding boxes
+  have no pypdf equivalent, so this is the one step that still wants it. A missing Poppler
+  - or the xpdf-based `pdftotext` Git for Windows puts ahead of it in PATH, which rejects
+  `-bbox` - degrades to a `skipped:` exit 2 rather than reporting a phantom layout failure.
+  Page count is deliberately left to `verify_pdf.py --pages` so that one rule keeps one
+  implementation. Thresholds are calibrated for the stock moderncv and `cover.cls`
+  geometry. Tests use synthetic page geometry, so they need neither Poppler nor a
+  LaTeX toolchain.
+
 ### Fixed
+
+- **`jobindex-search detail` no longer fetches arbitrary URLs or invents posting-shaped
+  output** (#447) - the command fetched any `http(s)` input verbatim (no host check) and,
+  when the path didn't match its one pattern, silently used the whole input URL as the job
+  id; the only net was "the fetched page has a title", so a non-posting page came back as
+  a well-formed fake posting with exit 0 (demonstrated with jobindex's own homepage:
+  `id` = the URL, `title` = the site's tagline, `description` = navigation chrome). Every
+  other portal CLI rejects unparseable detail input with `BAD_ID` and constructs its fetch
+  URL from the extracted id; jobindex was the one CLI trusting the raw string - and
+  `/scrape`/`/rank` agents feed it stored URLs, so a ghost or redirected URL (the #331
+  class) yielded plausible garbage instead of an error. `buildUrl` now requires a
+  jobindex.dk host (apex or subdomain - look-alike and userinfo tricks rejected via real
+  URL parsing) plus a `/jobannonce/<id>` path, rebuilds the fetch URL from the extracted
+  id (the canonical short form the bare-id path always used), and exits 1 with the
+  stderr-JSON `BAD_ID` contract otherwise; bare ids stay permissive scheme- and
+  slash-free tokens (the jobnet precedent - the server 404s unknowns loudly). Pinned by
+  eight cases in the new `detail-input.test.ts`; the five rejection/canonicalization
+  cases fail against the verbatim unguarded extraction. Complementary to the `/apply`
+  host-check rule proposed in #431, which stays with its proposer.
+
+- **`/outcome` and `/interview` no longer confuse two roles at the same company** (#443)
+  (`.claude/commands/outcome.md`, `.claude/commands/interview.md`,
+  `tests/test_apply_records_application.py`) - when a tracker row's `cv_file` /
+  `cover_letter_file` columns are empty, both commands fell back to a company-prefix glob
+  (`cv/main_<company>*.tex`). Two roles at one company both match it, so `/outcome` copied
+  whichever the filesystem returned first into the archive as `cv_draft.tex` - the file whose
+  purpose is to record what was actually submitted - and its own "leave an existing archived
+  file" rule then made the wrong copy permanent. Both fallbacks now glob the full
+  `<company>_<role>` stem, derived by the **Subfolder naming** rule in `documents/README.md`
+  rather than restated, and skip with a note instead of widening the search. Dropping the
+  hardcoded `.tex` also makes a template registered by `/add-template` findable.
 
 - **`jobnet-search detail` no longer reports an externally hosted ad as not found** (#432) -
   Jobnet's `/FindJob/JobAdDetails/<id>` returns 404 for ads with `isExternal: true`, so `detail`
@@ -52,6 +100,26 @@ per-file diff commands.
   wherever the variable is set. The same undefined reference in `.claude/commands/rank.md`
   was removed by #425 as a side effect of rewriting Step 2/4; this is the remaining instance.
 
+- **`seen_jobs.json` keys are now a pure function of the posting** - `/scrape` Step 4 described
+  the key as prose (`"<url_or_company_title_key>"`) and nothing said how to derive it, so each
+  run slugified in its own way. Two failures followed, both observed in a live state file. Keys
+  carried characters that break the path they later become: `/apply` and `/outcome` derive an
+  archive folder from the same company+role pair, which is why `documents/README.md` has a
+  subfolder rule, and keys like `deloitte_junior-cybersecurity-analyst-(ot/iot)` and
+  `neverhack-estonia_penetration-tester-/-red-teamer` violate it. And the same posting was
+  stored twice when two runs truncated one title at different points
+  (`deloitte_cyber-intelligence-center-security-analy` and
+  `...-security-analyst-at` are one job, one URL, two entries) - which defeats the dedup the
+  file exists for. `tools/job_key.py` now owns the derivation: the slug is normalised, and
+  truncation is length-capped *and* disambiguated by a hash of the full slug, so a long title
+  always produces the same key and two long titles sharing a prefix cannot collide. Step 4
+  calls the helper instead of describing it. `--audit` reports non-conforming entries in an
+  existing state file and deliberately never rewrites them: stored keys are matched against
+  `job_search_tracker.csv` by company+role elsewhere, so a silent rewrite would break the link
+  between a stored job and its application record.
+  Existing state files need no migration: Step 2's candidate filter matches a posting to a stored
+  entry by URL regardless of that entry's key, so a workspace whose entries predate the helper does
+  not see its still-live postings re-presented as new.
 ## [1.7.1] - 2026-09-06
 
 ### Added
