@@ -21,8 +21,8 @@ file *is*, not what is in it:
 | File | What it holds |
 |------|---------------|
 | `2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md` | The active plan — a dated drill schedule running to the 01/10/2026 interview. Format that round tests for: project deep-dive, live Go coding, system design. Read it in full when preparing; it also carries that round's compensation approach, which is not repeated here. |
-| `2026-10-01_ngan-hang-cau-hoi.md` | The question bank that plan drills against — one exercise per evening, spoken aloud and timed at 60–90s, self-scored. Not a document to read through. |
-| `2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md` | Earlier plan (10/08) for the same company, **not executed**. The speaking script and the compensation half are still usable. Also the source for the "concedes value pre-emptively" trait in `02-behavioral-profile.md`. |
+| `2026-10-01_ngan-hang-cau-hoi_cong-ty-truy-xuat-nguon-goc.md` | The question bank that plan drills against — one exercise per evening, spoken aloud and timed at 60–90s, self-scored. Not a document to read through. |
+| `2026-08-11_ke-hoach-phong-van_cong-ty-truy-xuat-nguon-goc.md` | Earlier plan (written 10/08, for the 11–12/08/2026 round) for the same company, **not executed**. The speaking script and the compensation half are still usable. Also the source for the "concedes value pre-emptively" trait in `02-behavioral-profile.md`. |
 
 **One standing instruction carried out of those plans:** fix an overstated CV line *on paper,
 before the room*. Correcting yourself in front of an interviewer who was vouched for you costs
@@ -288,7 +288,7 @@ It also aligns with the environment he says he wants, so it reads as coherent ra
 rehearsed.
 
 **Second answer if they push** — self-advocacy under pushback, from
-`documents/interview/2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md`:
+`documents/interview/2026-08-11_ke-hoach-phong-van_cong-ty-truy-xuat-nguon-goc.md`:
 > When someone challenges something I've claimed, my instinct is to soften it before they've even
 > made the argument. I'll hedge a result I'm actually sure of. I've learned to notice the hedge
 > forming and just stop talking instead — the plain fact is usually stronger than the qualified one.

@@ -211,7 +211,7 @@ Self-service banking system: cash deposit, withdrawal, and account services.
 - Built the admin frontend in Next.js with Shadcn UI
 - **Stack:** Go (Gin), Kafka, Oracle Database, SQLite, Prometheus, Grafana, Docker; Next.js, Shadcn UI
 
-## Independent / Open-Source Projects
+## Independent Projects
 
 <!-- Added by /expand on 2026-07-12 from github.com/phamnam2003 -->
 

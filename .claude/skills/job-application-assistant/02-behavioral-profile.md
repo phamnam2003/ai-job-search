@@ -120,7 +120,7 @@ to decide the *how*, and colleagues close enough to argue a design with.
   fixed a live export failure on STM.
 
 - **Concedes value pre-emptively under pushback** *[Carried over — source:
-  `documents/interview/2026-08_ke-hoach-phong-van_cong-ty-anh-ho.md`]* — Challenged on a claim, he
+  `documents/interview/2026-08-11_ke-hoach-phong-van_cong-ty-truy-xuat-nguon-goc.md`]* — Challenged on a claim, he
   discounts it before being asked to, usually through a hedge ("cũng", "chỉ là", "chưa hẳn", "em
   nghĩ chắc"), and will name the bottom of his own range unprompted. *This is not a contradiction
   of the frank-pushback style above:* he initiates technical disagreement readily, but when his own
