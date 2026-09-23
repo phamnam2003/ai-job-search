@@ -1,0 +1,267 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+/* --- the two non-negotiables ---------------------------------------------
+   One reading flow, so it stays a single column — but it is the loudest thing
+   on the page, so it gets card padding, a tint bed and the critical accent as
+   a pseudo-element that follows the corner instead of a square-ended border. */
+
+.rule {
+  position: relative;
+  padding: var(--card-pad);
+  padding-inline-start: calc(var(--card-pad) + var(--accent-w));
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--wash-critical), var(--wash-critical));
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+}
+
+.rule::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--accent-w);
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    var(--st-critical),
+    color-mix(in srgb, var(--st-critical) 40%, transparent)
+  );
+}
+
+.ruleH {
+  margin-bottom: var(--card-gap);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* Block flow, not flex: the numbers 1/2 ARE the content here ("hai câu"), and a
+   flex container is the one layout that can cost a list its markers. The spacing
+   between the two rules is a margin between siblings instead of a flex gap. */
+.ruleList {
+  padding-inline-start: var(--sp-5);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.ruleList > li + li {
+  margin-top: var(--card-gap);
+}
+
+/* The lead-in of each rule is the part he has to remember, so it carries the
+   full ink instead of inheriting the body's quieter step. */
+.ruleList strong {
+  color: var(--ink);
+}
+
+/* --- chart ---------------------------------------------------------------- */
+
+.chart {
+  margin: 0;
+  padding: var(--card-pad);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+}
+
+.chartHead {
+  margin-bottom: var(--card-gap);
+}
+
+.chartTitle {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* --- groups --------------------------------------------------------------- */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+}
+
+.groupH {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-2) var(--sp-3);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* It sits inside the <h2>, so it has to opt out of the display face and the
+   heading weight — a long Vietnamese sentence set in bold serif reads as a
+   second title rather than as the note it is. */
+.groupNote {
+  font-family: var(--font-body), system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Two up: the claims are short, independent units, and a single 1100px-wide
+   column left two thirds of every card empty. */
+.claims {
+  list-style: none;
+  display: grid;
+  gap: var(--stack-gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .claims {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.claim {
+  position: relative;
+  --claim-accent: var(--ord-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: var(--card-pad);
+  padding-inline-start: calc(var(--card-pad) + var(--accent-w));
+  background-color: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+}
+
+.claim::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--accent-w);
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+  background: linear-gradient(
+    to bottom,
+    var(--claim-accent),
+    color-mix(in srgb, var(--claim-accent) 40%, transparent)
+  );
+}
+
+/* The ones he is almost certain to be asked about sit a layer higher, and get
+   the tint bed that goes with an accented card — same hue family as the ordinal
+   ramp the stripe is drawn from, so the tier reads without a second legend. */
+.claim[data-risk='high'] {
+  --claim-accent: var(--ord-3);
+  background-image: linear-gradient(var(--wash-speak), var(--wash-speak));
+  box-shadow: var(--shadow-md), var(--edge-hi);
+}
+
+.claim[data-risk='medium'] {
+  --claim-accent: var(--ord-2);
+}
+
+.claim[data-risk='low'] {
+  --claim-accent: var(--ord-1);
+}
+
+/* The quoted line and its source belong together — that pair is the one place
+   on this page where a sub-12px gap is correct. */
+.claimHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+/* The claim is quoted from his own CV, so it wears the display face — it is a
+   line he wrote, not app chrome. */
+.claimText {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 600;
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.where {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.defend {
+  padding: var(--card-pad-sm);
+  background: var(--surface-sunk);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+}
+
+.defendH {
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.defendP {
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* The claims in one row are stretched to a shared height (no align-items on the
+   grid), so the card with the shorter quote carries the slack. It goes here, in
+   front of the drill question — the <details> QA is always the card's last
+   child — which puts every question in the row on the same line instead of
+   leaving a hole under the last card. */
+.claim > details {
+  margin-top: auto;
+}
+
+/* --- closing checks -------------------------------------------------------- */
+
+.close {
+  padding: var(--card-pad);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+}
+
+.closeH {
+  margin-bottom: var(--card-gap);
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.closeChecks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.empty {
+  padding: var(--sp-7) var(--card-pad);
+  text-align: center;
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+  color: var(--ink-2);
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+}

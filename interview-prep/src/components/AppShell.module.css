@@ -1,0 +1,545 @@
+/* ============================================================================
+   The frame.
+
+   One value break carries the whole design: the content plane is light and the
+   rail is deep navy. Chrome and material stop competing, and the rail's spine —
+   a node per section, filling as that section is finished — becomes the one
+   thing you remember.
+
+   The rail REBINDS the ink/surface tokens inside itself rather than restating a
+   colour on every child. That is deliberate: Countdown and anything else dropped
+   into the rail later inherits the dark treatment for free, and a component
+   author never has to know the rail is dark.
+   ============================================================================ */
+
+.shell {
+  min-height: 100dvh;
+  background-color: var(--plane);
+  /* A soft wash at the top of the plane, mixed from the tokens so it is correct
+     in both themes. Flat fills are what made this read as cardboard. */
+  background-image: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface) 62%, transparent) 0,
+    transparent 440px
+  );
+  background-repeat: no-repeat;
+}
+
+/* ------------------------------------------------------------------- rail */
+
+.rail {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 40;
+  width: var(--rail);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: var(--sp-5) var(--sp-3) var(--sp-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
+  /* The rebind. Everything below this line, and every child component, reads
+     these names and lands on the dark material automatically. */
+  --ink: var(--rail-ink);
+  --ink-2: var(--rail-ink-2);
+  --ink-muted: var(--rail-ink-muted);
+  --surface: var(--rail-bg);
+  --surface-sunk: var(--rail-sunk);
+  --surface-raised: var(--rail-sunk);
+  --grid: var(--rail-line);
+  --baseline: var(--rail-line-strong);
+  --hairline: var(--rail-line);
+  --hairline-strong: var(--rail-line-strong);
+  --focus: var(--rail-accent);
+
+  color: var(--rail-ink-2);
+  background-color: var(--rail-bg);
+  /* Two soft lights, not a flat block: a cool one behind the brand and a
+     lift along the very top edge. Both fade out well above the nav. */
+  background-image: radial-gradient(
+      150% 34% at 6% -8%,
+      color-mix(in srgb, var(--rail-accent) 20%, transparent) 0,
+      transparent 72%
+    ),
+    linear-gradient(180deg, var(--rail-bg-2) 0, var(--rail-bg) 38%);
+  box-shadow: inset -1px 0 0 var(--rail-line);
+  scrollbar-color: var(--rail-line-strong) transparent;
+}
+
+.brand {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.brandLink {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: var(--sp-1) 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Three stacked strokes of decreasing width — a record condensing into a
+   summary. The mark, the spine and the meters are all the same gesture. */
+.mark {
+  flex: none;
+  display: grid;
+  gap: 3px;
+  padding-top: 6px;
+  width: 18px;
+}
+.mark > span {
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--rail-accent);
+}
+.mark > span:nth-child(2) {
+  width: 72%;
+  background: var(--series-2);
+}
+.mark > span:nth-child(3) {
+  width: 44%;
+  background: var(--rail-good);
+}
+
+.brandText {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.brandCo {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+  color: var(--rail-ink);
+}
+
+.brandRole {
+  font-size: var(--fs-xs);
+  line-height: 1.45;
+  color: var(--rail-ink-2);
+}
+
+.brandMeta {
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  color: var(--rail-ink-muted);
+}
+
+.clock {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: 11px var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--rail-sunk);
+  box-shadow: inset 0 0 0 1px var(--rail-line);
+  color: var(--rail-ink);
+}
+
+.clockLabel {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rail-ink-muted);
+}
+
+/* ------------------------------------------------------------------- nav */
+
+.nav {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+/* The spine. Sits behind the nodes, aligned to their centres, and fades at
+   both ends so it reads as a continuing record rather than a ruled line. */
+.spine {
+  position: absolute;
+  inset-block: 18px;
+  inset-inline-start: 24px;
+  width: 2px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(
+    180deg,
+    transparent 0,
+    var(--rail-line-strong) 12%,
+    var(--rail-line-strong) 88%,
+    transparent 100%
+  );
+}
+
+.navList {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+
+.navLink {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  align-items: center;
+  column-gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 10px;
+  border-radius: var(--r-md);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 140ms ease;
+}
+
+.navLink:hover {
+  background: var(--rail-hover);
+}
+
+.navLink:hover .navLabel {
+  color: var(--rail-ink);
+}
+
+.navLink:hover .node {
+  border-color: var(--rail-line-strong);
+  color: var(--rail-ink-2);
+}
+
+.node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--rail-line-strong);
+  border-radius: 50%;
+  background: var(--rail-bg);
+  color: var(--rail-ink-muted);
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+.nodeDone {
+  border-color: color-mix(in srgb, var(--rail-good) 55%, transparent);
+  background: color-mix(in srgb, var(--rail-good) 16%, var(--rail-bg));
+  color: var(--rail-good);
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.navText {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.navLabel {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--rail-ink-2);
+}
+
+/* Two lines, then clamp. A one-line ellipsis cut most of these mid-word
+   ("Từng chủ đề JD yêu c…") while the rail had 700px of empty space below the
+   nav — spend the height, keep the words. */
+.navBlurb {
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  color: var(--rail-ink-muted);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.navCount {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rail-ink-muted);
+}
+
+/* The active row is a lit panel with an accent edge. The edge is a positioned
+   pseudo-element inheriting the row's corner, never a border-inline-start —
+   a square-ended stripe inside a rounded box is the thing we set out to kill. */
+.navLinkActive {
+  background: var(--rail-sunk);
+}
+
+.navLinkActive::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 3px;
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    var(--rail-accent),
+    color-mix(in srgb, var(--rail-accent) 35%, transparent)
+  );
+}
+
+.navLinkActive .node {
+  border-color: var(--rail-accent);
+  background: var(--rail-accent);
+  color: #ffffff;
+}
+
+.navLinkActive .navLabel {
+  color: var(--rail-ink);
+  font-weight: 600;
+}
+
+.navLinkActive .navCount {
+  color: var(--rail-ink-2);
+}
+
+/* Per-section meter, aligned to where the label starts. */
+.meter {
+  display: block;
+  height: 3px;
+  /* 10px row padding + 30px node + 12px column gap = where the label starts. */
+  margin: 2px var(--sp-3) var(--sp-2) 52px;
+  border-radius: var(--r-pill);
+  background: var(--rail-line);
+  overflow: hidden;
+}
+
+.meterFill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: var(--rail-accent);
+  transition: width 220ms ease;
+}
+
+/* ------------------------------------------------------------------ foot */
+
+.foot {
+  display: grid;
+  gap: var(--sp-3);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--rail-line);
+}
+
+.overall {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+
+.overallLabel {
+  font-size: var(--fs-micro);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rail-ink-muted);
+}
+
+.overallNum {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--rail-ink);
+}
+
+.overallBar {
+  grid-column: 1 / -1;
+  display: block;
+  height: 5px;
+  border-radius: var(--r-pill);
+  background: var(--rail-line);
+  overflow: hidden;
+}
+
+.overallFill {
+  display: block;
+  height: 100%;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, var(--rail-accent), var(--rail-good));
+  transition: width 260ms ease;
+}
+
+.themeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  font: inherit;
+  font-size: var(--fs-xs);
+  color: var(--rail-ink-2);
+  background: var(--rail-sunk);
+  border: 1px solid var(--rail-line);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: border-color 140ms ease, color 140ms ease;
+}
+
+.themeBtn:hover {
+  border-color: var(--rail-line-strong);
+  color: var(--rail-ink);
+}
+
+/* ------------------------------------------------------------------ main */
+
+.main {
+  margin-inline-start: var(--rail);
+  min-height: 100dvh;
+  padding: var(--sp-7) clamp(var(--sp-4), 3vw, var(--sp-8)) 88px;
+}
+
+/* The content column. Wide enough that a two-up card grid fills it, capped so
+   a 27" monitor does not stretch a paragraph to 200 characters. */
+.inner {
+  max-width: var(--page-max);
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------- mobile chrome */
+
+.bar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 10px var(--sp-4);
+
+  /* Same rebind as the rail: mobile chrome is the same material. */
+  --ink: var(--rail-ink);
+  --ink-2: var(--rail-ink-2);
+  --ink-muted: var(--rail-ink-muted);
+  --surface: var(--rail-bg);
+  --surface-sunk: var(--rail-sunk);
+  --focus: var(--rail-accent);
+
+  color: var(--rail-ink);
+  background: var(--rail-bg);
+  box-shadow: 0 1px 0 var(--rail-line), var(--shadow-sm);
+}
+
+.barTitle {
+  flex: 1 1 auto;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--rail-ink);
+}
+
+.burger {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  background: var(--rail-sunk);
+  border: 1px solid var(--rail-line);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.burgerBars,
+.burgerBars::before,
+.burgerBars::after {
+  display: block;
+  width: 15px;
+  height: 2px;
+  border-radius: var(--r-pill);
+  background: var(--rail-ink-2);
+}
+
+.burgerBars::before,
+.burgerBars::after {
+  content: '';
+  position: relative;
+}
+.burgerBars::before {
+  top: -5px;
+}
+.burgerBars::after {
+  top: 3px;
+}
+
+.scrim {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  padding: 0;
+  border: none;
+  background: color-mix(in srgb, var(--rail-bg) 72%, transparent);
+  cursor: pointer;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 1100px) {
+  .main {
+    padding-inline: clamp(var(--sp-4), 3vw, var(--sp-6));
+  }
+}
+
+@media (max-width: 960px) {
+  .bar {
+    display: flex;
+  }
+
+  .rail {
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .railOpen {
+    transform: none;
+  }
+
+  .scrim {
+    display: block;
+  }
+
+  .main {
+    margin-inline-start: 0;
+    padding: var(--sp-5) clamp(var(--sp-4), 4vw, var(--sp-6)) 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail,
+  .navLink,
+  .node,
+  .themeBtn,
+  .meterFill,
+  .overallFill {
+    transition: none;
+  }
+}
