@@ -223,6 +223,15 @@
   color: var(--ink-2);
 }
 
+/* Two chips, and they say different things: what the session is for, then
+   where the clock is. The second one only exists once the page is on a client
+   that has a clock, so this has to survive being a one-child flex row. */
+.dayTags {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
 .dayTag {
   padding: var(--sp-1) var(--sp-3);
   font-size: var(--fs-xs);

@@ -148,6 +148,36 @@
   background: var(--st-critical);
 }
 
+/* Where the clock is, not what the session is for — filled in on the client, so
+   it is absent (not blank) on the first frame. Green rather than the critical
+   red of the t6 tag: "you are in it" is a good state, not an alarm. */
+.laneNow {
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+  color: var(--ink-muted);
+}
+
+.laneNow[data-phase='live'] {
+  color: #ffffff;
+  background: var(--st-good);
+}
+
+.laneNow[data-phase='future'] {
+  color: var(--ink-2);
+  background: var(--surface-sunk);
+}
+
+/* A finished day keeps its label legible but stops competing for attention. */
+.laneRow[data-phase='past'] .laneDay,
+.laneRow[data-phase='past'] .laneDate,
+.laneRow[data-phase='past'] .laneTotal {
+  color: var(--ink-muted);
+}
+
 .laneTotal {
   margin-inline-start: auto;
   font-family: var(--font-mono), ui-monospace, monospace;
@@ -197,6 +227,20 @@
 
 .blk:hover {
   filter: brightness(1.06);
+}
+
+/* Spent time. Faded, never hidden: an hour that went by untouched is exactly
+   the thing worth seeing, and the tick state still reads through. Single rule,
+   so past-and-done fades once rather than twice into illegibility. */
+.blk[data-phase='past'] {
+  opacity: 0.5;
+}
+
+/* The block the clock is inside. The ring is drawn in two layers — a gap in the
+   lane's own background colour, then the accent — so it survives the 2px fill
+   gap between adjacent bars instead of bleeding into the neighbour. */
+.blk[data-phase='live'] {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--st-good);
 }
 
 .blkDone {
@@ -338,21 +382,34 @@
 
 /* --------------------------------------------------------------- tooltip */
 
+/* Stays BELOW the rail's z-index 40, deliberately. The rail is fixed and owns
+   the left edge of the window; a chart tooltip painting over the navigation
+   would be as wrong as the rail clipping the tooltip. The component keeps the
+   panel inside this card instead (see the clamp in Timeline.tsx), so the two
+   never meet and this only has to beat its own siblings. */
 .tip {
   position: absolute;
-  z-index: 5;
+  z-index: 20;
   transform: translate(-50%, calc(-100% - var(--sp-2)));
   display: grid;
   /* Five distinct lines (kind, title, time, info, hint) — content blocks, so
      they sit on the 12px floor, not on a label/value 8px. */
   gap: var(--sp-3);
   width: max-content;
-  max-width: 340px;
+  /* The 100% is the card, not the viewport: on a narrow window the panel gives
+     up its preferred width rather than hanging over an edge. */
+  max-width: min(340px, 100%);
   padding: var(--card-pad-sm);
   pointer-events: none;
   background: var(--surface-raised);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-lg), var(--edge-hi);
+}
+
+/* Flipped under the bar, for the top lane — there is nothing above it to
+   occupy. `top` already carries the bar's height when this is set. */
+.tip[data-below] {
+  transform: translate(-50%, var(--sp-2));
 }
 
 .tipHead {

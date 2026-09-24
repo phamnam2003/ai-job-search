@@ -27,7 +27,7 @@ export const logistics: LogisticsItem[] = [
   {
     id: 'dung-tai-khoan-google',
     when: 'toi-nay',
-    what: 'Mở thư mời đã pin, bấm thử link một lượt tối nay và nhìn xem trình duyệt đang đăng nhập tài khoản Google nào — phải là tài khoản nhận được thư mời.',
+    what: 'Mở thư mời đã pin, bấm thử link một lượt ngay trong tối 24/09 và nhìn xem trình duyệt đang đăng nhập tài khoản Google nào — phải là tài khoản nhận được thư mời.',
     why: 'Vào nhầm tài khoản thì phía họ trông y hệt như em không đến, và nó chỉ lộ ra khi em đã ngồi trong phòng chờ — lúc đó không còn thời gian để sửa.',
     critical: true,
     unresolved: false,
@@ -67,7 +67,7 @@ export const logistics: LogisticsItem[] = [
   {
     id: 'dung-goc-may-anh-sang',
     when: 'toi-nay',
-    what: 'Dựng sẵn chỗ ngồi tối nay: kê laptop lên sách cho camera ngang tầm mắt, để đèn hoặc cửa sổ ở phía trước mặt, phía sau lưng là mảng tường gọn.',
+    what: 'Dựng sẵn chỗ ngồi từ tối 24/09: kê laptop lên sách cho camera ngang tầm mắt, để đèn hoặc cửa sổ ở phía trước mặt, phía sau lưng là mảng tường gọn.',
     why: 'Camera thấp hơn mặt cho góc nhìn hất từ dưới lên, còn cửa sổ sau lưng biến mặt em thành một vệt tối — cả buổi họ nói chuyện với một cái bóng.',
     critical: false,
     unresolved: false,
@@ -93,7 +93,7 @@ export const logistics: LogisticsItem[] = [
   {
     id: 'dung-40-phut-khong-phai-di-duong',
     when: 'sang-mai',
-    what: 'Phần nói thành tiếng của sáng mai nằm ở hai khối đã có trong lộ trình: 08:15–08:40 nói to phần mở đầu và STAR số 1 một lượt, rồi 09:35–09:50 diễn lại đúng phần mở đầu trước camera. Đừng lấp quãng trống còn lại bằng tài liệu mới.',
+    what: 'Phần nói thành tiếng của sáng 25/09 nằm ở hai khối đã có trong lộ trình: 08:15–08:40 nói to phần mở đầu và STAR số 1 một lượt, rồi 09:35–09:50 diễn lại đúng phần mở đầu trước camera. Đừng lấp quãng trống còn lại bằng tài liệu mới.',
     why: 'Buổi online trả lại quãng đi đường, nhưng lộ trình đã tiêu nó vào tiền trạm thiết bị lúc 09:05 — không có khối 40 phút tự do nào để luyện thêm, và đi tìm nó thì chỉ lỡ mất hai khối trên.',
     critical: false,
     unresolved: false,

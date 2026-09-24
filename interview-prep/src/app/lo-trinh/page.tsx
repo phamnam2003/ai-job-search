@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PageHeader } from '@/components/PageHeader';
+import { NowStrip } from '@/components/NowStrip';
 import { Timeline } from '@/components/Timeline';
 import { Check } from '@/components/Check';
+import { DayPhase } from '@/components/DayPhase';
 import { cutList, meta, roadmap } from '@/content/nanyang-r1';
 import { isBreak } from '@/content/types';
 import { k } from '@/lib/keys';
@@ -25,6 +27,8 @@ export default function Page() {
         title={`Ba buổi, ${total} phút`}
         lede={`Kế hoạch này không dạy bạn thêm thứ gì mới. Nó chỉ quyết định thứ tự — và ưu tiên việc NÓI THÀNH TIẾNG hơn việc đọc, vì buổi phỏng vấn kiểm tra cái thứ nhất. Tổng ${formatMinutes(total)}, trong đó phần lớn là luyện nói.`}
       />
+
+      <NowStrip days={roadmap} startsAt={meta.startsAt} />
 
       <div className={s.warn}>
         <span className={s.warnMark} aria-hidden="true">
@@ -78,8 +82,11 @@ export default function Page() {
                 <h3 className={s.dayTitle}>
                   {day.label} <span className={s.dayDate}>{day.date}</span>
                 </h3>
-                <span className={s.dayTag} data-tag={day.id}>
-                  {day.tag}
+                <span className={s.dayTags}>
+                  <span className={s.dayTag} data-tag={day.id}>
+                    {day.tag}
+                  </span>
+                  <DayPhase day={day} />
                 </span>
               </header>
 
