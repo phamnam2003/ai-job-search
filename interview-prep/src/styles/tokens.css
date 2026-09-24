@@ -1,0 +1,304 @@
+/* ============================================================================
+   Design tokens — Interview Prep
+
+   The direction: a briefing dossier, not a dashboard. Light content planes
+   carrying white cards, and one piece of chrome — the rail — held in a deep
+   navy so navigation never competes with the material it navigates. That value
+   break is the page's signature; everything around it stays quiet.
+
+   The chart colours are NOT chosen by eye. They come from the dataviz reference
+   palette and were run through `dataviz/scripts/validate_palette.js` against
+   these exact surfaces:
+
+     light  surface #ffffff  "#2a78d6,#eb6834,#1baf7a"  --pairs all  -> PASS
+     dark   surface #161c21  "#3987e5,#d95926,#199e70"  --pairs all  -> PASS
+
+   Light mode carries one contrast WARN (aqua #1baf7a at 2.80:1 vs surface).
+   That is not dismissable: everywhere aqua carries meaning it ships with a
+   visible text label or a table view. Same rule for the ordinal ramp's lightest
+   step and for the sub-3:1 status steps.
+
+   Dark mode is a SELECTED set stepped for the dark surface — not an automatic
+   inversion. It is declared under both the media query (OS setting) and the
+   [data-theme] scope (the in-app toggle), so the toggle wins either way.
+   ============================================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* --- elevation ladder ---------------------------------------------------
+     plane < sunk < surface < raised. The gap between plane and surface is what
+     makes a card look like a card; the old set put them 1.5% apart in lightness
+     and every card dissolved into the page. */
+  --plane: #e9ecf1;
+  --surface: #ffffff;
+  --surface-sunk: #eff2f7;
+  --surface-raised: #ffffff;
+
+  /* --- ink -----------------------------------------------------------------
+     Every step clears 4.5:1 on --surface. `--ink-muted` is the one that matters:
+     it carries source lines, hints and captions, so a "quiet" value that fails
+     contrast just makes the app unreadable at night. */
+  --ink: #0d1217; /* 18.9:1 */
+  --ink-2: #454e58; /* 9.0:1  */
+  --ink-muted: #69737d; /* 5.0:1  */
+
+  --grid: #dfe4ea;
+  --baseline: #b9c2cb;
+  --hairline: rgba(13, 18, 23, 0.09);
+  --hairline-strong: rgba(13, 18, 23, 0.17);
+
+  /* --- depth ---------------------------------------------------------------
+     Three layers each: a contact shadow for the edge, a mid spread for the lift,
+     and a wide low-opacity pool for the room. One 5%-alpha blur reads as nothing
+     at all on a light plane. */
+  --shadow-sm: 0 1px 1px rgba(13, 18, 23, 0.04), 0 2px 6px -2px rgba(13, 18, 23, 0.1);
+  --shadow-md: 0 1px 2px rgba(13, 18, 23, 0.05), 0 6px 16px -6px rgba(13, 18, 23, 0.14),
+    0 20px 40px -24px rgba(13, 18, 23, 0.16);
+  --shadow-lg: 0 2px 4px rgba(13, 18, 23, 0.06), 0 12px 28px -10px rgba(13, 18, 23, 0.18),
+    0 36px 64px -32px rgba(13, 18, 23, 0.22);
+  /* A card's top edge catching the light. Light mode only — see the dark scope. */
+  --edge-hi: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  /* --- the rail ------------------------------------------------------------
+     Chrome gets its own material, so these deliberately sit outside the
+     elevation ladder above and do not change between themes except for the two
+     background steps. */
+  --rail-bg: #111823;
+  --rail-bg-2: #171f2c;
+  --rail-ink: #eaeff5;
+  --rail-ink-2: #9dabbb;
+  --rail-ink-muted: #768496;
+  --rail-line: rgba(255, 255, 255, 0.09);
+  --rail-line-strong: rgba(255, 255, 255, 0.16);
+  --rail-sunk: rgba(255, 255, 255, 0.055);
+  --rail-hover: rgba(255, 255, 255, 0.05);
+  --rail-accent: #5598e7;
+  --rail-good: #3fc46b;
+
+  /* --- categorical series (identity, never magnitude) --------------------- */
+  --series-1: #2a78d6; /* slot 1 — blue   */
+  --series-2: #eb6834; /* slot 2 — orange */
+  --series-3: #1baf7a; /* slot 3 — aqua   */
+  --series-n: #8d98a2; /* deliberate neutral: "not one of the series" */
+
+  /* Semantic aliases. Colour follows the ENTITY, so these names — not the slot
+     numbers — are what components reference. Activity type on the roadmap: */
+  --act-speak: var(--series-1);
+  --act-write: var(--series-2);
+  --act-read: var(--series-3);
+  --act-admin: var(--series-n);
+
+  /* --- ordinal ramp (ordered levels: gap < partial < strong) -------------- */
+  /* Blue ramp steps 250 / 450 / 600. Step 250 is 2.11:1 on this surface, so an
+     ordinal chip ALWAYS carries its text label. */
+  --ord-1: #86b6ef; /* gap     */
+  --ord-2: #2a78d6; /* partial */
+  --ord-3: #184f95; /* strong  */
+  --ord-1-ink: #104281;
+  --ord-2-ink: #ffffff;
+  --ord-3-ink: #ffffff;
+
+  /* --- status (reserved — never reused as a series) ----------------------- */
+  --st-good: #0ca30c;
+  --st-warning: #fab219;
+  --st-serious: #ec835a;
+  --st-critical: #d03b3b;
+  --st-idle: #8d98a2;
+  /* Readable text versions of the two that sit under 3:1 on a light surface. */
+  --st-good-ink: #006300;
+  --st-warning-ink: #8a5b00;
+  --st-critical-ink: #a82a2a;
+
+  /* Tinted card washes. A 4%-alpha bed under an accented card — enough to read
+     as "this one is different", not enough to fight the ink on top of it. */
+  --wash-warning: rgba(250, 178, 25, 0.07);
+  --wash-critical: rgba(208, 59, 59, 0.055);
+  --wash-speak: rgba(42, 120, 214, 0.055);
+  --wash-idle: rgba(141, 152, 162, 0.08);
+
+  /* --- sequential (magnitude) -------------------------------------------- */
+  --seq-100: #cde2fb;
+  --seq-250: #86b6ef;
+  --seq-400: #3987e5;
+  --seq-550: #1c5cab;
+  --seq-700: #0d366b;
+
+  /* --- focus & interaction ----------------------------------------------- */
+  --focus: #1c5cab;
+  --selection: rgba(42, 120, 214, 0.18);
+
+  /* --- geometry ------------------------------------------------------------
+     14px read as bubbly on cards this dense. An accent stripe is NEVER a
+     `border-inline-start` — a square-ended border inside a rounded box claws at
+     the corner. Use a positioned ::before that inherits the card's own corner
+     radius; `--accent-w` is its width. */
+  --r-xs: 3px;
+  --r-sm: 5px;
+  --r-md: 9px;
+  --r-lg: 12px;
+  --r-pill: 999px;
+  --accent-w: 4px;
+  --gap-fill: 2px; /* the surface gap between adjacent fills — never a border */
+
+  /* --- spacing scale -------------------------------------------------------
+     One scale, so raising the breathing room is one edit and not forty. */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 22px;
+  --sp-6: 28px;
+  --sp-7: 36px;
+  --sp-8: 48px;
+  --card-pad: 24px;
+  --card-pad-sm: 18px;
+  --card-gap: 18px; /* between blocks INSIDE a card */
+  --stack-gap: 18px; /* between sibling cards */
+  --section-gap: 34px; /* between page sections */
+
+  /* --- typography scale ---------------------------------------------------- */
+  --fs-micro: 11.5px;
+  --fs-mono: 12.5px;
+  --fs-xs: 13px;
+  --fs-sm: 14.5px;
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 22px;
+  --fs-2xl: 28px;
+
+  /* --- layout --------------------------------------------------------------
+     `--measure` is for prose that sits DIRECTLY on the page. Inside a two-up
+     card the card is already the measure, and capping again is what leaves a
+     wide card two-thirds empty. */
+  --rail: 264px;
+  --measure: 70ch;
+  --page-max: 1440px;
+  --col-min: 420px; /* a card narrower than this drops the grid to one column */
+}
+
+/* OS preference. `:not([data-theme="light"])` lets an explicit light stamp from
+   the toggle beat OS-dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --plane: #0b0f14;
+    --surface: #161c21;
+    --surface-sunk: #1c242b;
+    --surface-raised: #202930;
+    --ink: #f3f6f8;
+    --ink-2: #b3bdc6;
+    --ink-muted: #939da7;
+    --grid: #262f36;
+    --baseline: #3a444c;
+    --hairline: rgba(255, 255, 255, 0.11);
+    --hairline-strong: rgba(255, 255, 255, 0.2);
+
+    /* Shadows barely read on a dark plane, so the ladder is carried by surface
+       lightness and a hairline instead. The values stay for depth on overlays. */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5), 0 10px 28px -12px rgba(0, 0, 0, 0.85);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.55), 0 28px 56px -24px rgba(0, 0, 0, 0.95);
+    --edge-hi: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+    --rail-bg: #0f151e;
+    --rail-bg-2: #131b25;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-n: #77828c;
+
+    --ord-1: #184f95;
+    --ord-2: #3987e5;
+    --ord-3: #86b6ef;
+    --ord-1-ink: #cde2fb;
+    --ord-2-ink: #ffffff;
+    --ord-3-ink: #0d366b;
+
+    --st-idle: #77828c;
+    --st-good-ink: #4ec24e;
+    --st-warning-ink: #fab219;
+    --st-critical-ink: #e66767;
+
+    /* Not the stripe colour at low alpha. #fab219 is a green-leaning yellow, and
+       9% of it over the cool #202930 card lands on (52, 53, 46) — R and G equal,
+       i.e. olive, the one muddy patch in the dark theme. Selected rather than
+       flipped: pushed toward orange so the red stays clearly ahead of the green
+       and the bed reads warm. The stripe, icon and ink keep #fab219, so the
+       status colour itself is unchanged. */
+    --wash-warning: rgba(255, 152, 48, 0.12);
+    --wash-critical: rgba(230, 103, 103, 0.09);
+    --wash-speak: rgba(57, 135, 229, 0.1);
+    --wash-idle: rgba(119, 130, 140, 0.12);
+
+    --seq-100: #0d366b;
+    --seq-250: #184f95;
+    --seq-400: #2a78d6;
+    --seq-550: #5598e7;
+    --seq-700: #9ec5f4;
+
+    --focus: #6aa6ec;
+    --selection: rgba(57, 135, 229, 0.26);
+  }
+}
+
+/* Explicit in-app toggle. Same values, higher-specificity scope. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --plane: #0b0f14;
+  --surface: #161c21;
+  --surface-sunk: #1c242b;
+  --surface-raised: #202930;
+  --ink: #f3f6f8;
+  --ink-2: #b3bdc6;
+  --ink-muted: #939da7;
+  --grid: #262f36;
+  --baseline: #3a444c;
+  --hairline: rgba(255, 255, 255, 0.11);
+  --hairline-strong: rgba(255, 255, 255, 0.2);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5), 0 10px 28px -12px rgba(0, 0, 0, 0.85);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.55), 0 28px 56px -24px rgba(0, 0, 0, 0.95);
+  --edge-hi: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+
+  --rail-bg: #0f151e;
+  --rail-bg-2: #131b25;
+
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-n: #77828c;
+
+  --ord-1: #184f95;
+  --ord-2: #3987e5;
+  --ord-3: #86b6ef;
+  --ord-1-ink: #cde2fb;
+  --ord-2-ink: #ffffff;
+  --ord-3-ink: #0d366b;
+
+  --st-idle: #77828c;
+  --st-good-ink: #4ec24e;
+  --st-warning-ink: #fab219;
+  --st-critical-ink: #e66767;
+
+  /* Same orange-leaning bed as the media-query block above, and for the same
+     reason — keep the two dark paths byte-identical or the explicit toggle and
+     the OS preference render different cards. */
+  --wash-warning: rgba(255, 152, 48, 0.12);
+  --wash-critical: rgba(230, 103, 103, 0.09);
+  --wash-speak: rgba(57, 135, 229, 0.1);
+  --wash-idle: rgba(119, 130, 140, 0.12);
+
+  --seq-100: #0d366b;
+  --seq-250: #184f95;
+  --seq-400: #2a78d6;
+  --seq-550: #5598e7;
+  --seq-700: #9ec5f4;
+
+  --focus: #6aa6ec;
+  --selection: rgba(57, 135, 229, 0.26);
+}

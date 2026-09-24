@@ -1,0 +1,272 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+/* --- jump to a stage ------------------------------------------------------ */
+
+/* Plain anchors, so this works with JavaScript still loading — at 09:50 that is
+   not a theoretical concern. Wraps rather than scrolls: a horizontal scroller
+   hides its own last item, and the last item here is the one he needs if the
+   line drops. */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.jumpLink {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--surface);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+  text-decoration: none;
+}
+
+.jumpLink:hover {
+  background: var(--surface-sunk);
+}
+
+.jumpLabel {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* Same monospace clock treatment as the stage headings below, so the two read
+   as the same column of times. */
+.jumpClock {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+/* --- what is still open --------------------------------------------------- */
+
+/* The warning bed, same treatment as the home page's "Còn bỏ ngỏ" card, so an
+   unresolved thing looks the same everywhere in the app. The stripe is a
+   positioned ::before rather than a border-inline-start — a square-ended border
+   inside a rounded box claws at the corner. */
+.open {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: var(--card-pad);
+  padding-inline-start: calc(var(--card-pad) + var(--accent-w));
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--wash-warning), var(--wash-warning));
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md), var(--edge-hi);
+}
+
+.open::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--accent-w);
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    var(--st-warning),
+    color-mix(in srgb, var(--st-warning) 35%, transparent)
+  );
+}
+
+.openH {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: var(--fs-lg);
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* Deliberately NOT two-columned like the home page's warning list: these two
+   rows carry a full sentence of reasoning each, and side by side they would read
+   as a pair of options rather than two separate jobs. */
+.openList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin: 0;
+  padding-inline-start: var(--sp-5);
+  list-style: disc;
+}
+
+.openWhat {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.openWhy {
+  display: block;
+  margin-top: var(--sp-2);
+  font-size: var(--fs-xs);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.openNote {
+  padding-top: var(--card-gap);
+  border-top: 1px solid var(--hairline);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* --- the critical mark ---------------------------------------------------- */
+
+/* Colour is never the only carrier: the mark is a word first and a hue second,
+   which is also what keeps it legible when the wash all but disappears against
+   the dark surface. Both ink values are the theme-corrected ones from
+   tokens.css, so neither is a literal that would have to be re-picked at night. */
+.tag {
+  display: inline-block;
+  padding: 2px var(--sp-2);
+  font-size: var(--fs-micro);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--st-critical-ink);
+  background: var(--wash-critical);
+  border: 1px solid color-mix(in srgb, var(--st-critical) 45%, transparent);
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+/* Sits on the page plane, not in a card — it explains the mark used below and
+   belongs to the whole checklist rather than to the first stage. */
+.legend {
+  max-width: var(--measure);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--ink-2);
+}
+
+/* --- one stage ------------------------------------------------------------ */
+
+.stage {
+  /* Clears the sticky mobile bar when arrived at from the jump row above. */
+  scroll-margin-top: calc(var(--sp-5) + 48px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-gap);
+  padding: var(--card-pad);
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm), var(--edge-hi);
+}
+
+.stageHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3) var(--sp-5);
+}
+
+.stageTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-3);
+  min-width: 0;
+}
+
+.h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-size: var(--fs-xl);
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* Monospace and tabular, because these are clock values read down a column —
+   the same treatment the roadmap gives its times. */
+.clock {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-muted);
+}
+
+.stageNote {
+  max-width: var(--measure);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* One column on purpose. A checkbox list in two columns has no reading order,
+   and this one is worked through top to bottom in clock order. */
+.items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin: 0;
+  padding: 0;
+}
+
+/* The inline padding is on EVERY row, not just the accented one, so the ticks
+   stay on one vertical line whether or not a row carries the stripe. */
+.item {
+  position: relative;
+  padding: var(--sp-2) var(--sp-3);
+  padding-inline-start: calc(var(--sp-3) + var(--accent-w));
+  border-radius: var(--r-md);
+}
+
+.item + .item {
+  border-top: 1px solid var(--hairline);
+}
+
+/* A tinted bed plus the stripe plus the word above it. The bed is the token
+   wash, which is already stepped for each theme — in dark mode it lands as a
+   warm 9% over the card instead of the muddy olive a flat alpha would give. */
+.itemCritical {
+  background-color: var(--surface);
+  background-image: linear-gradient(var(--wash-critical), var(--wash-critical));
+}
+
+/* No hairline on either side of a tinted row: the block already reads as its own
+   object, and a rule running into its rounded corner looks like a mistake.
+   Both selectors are deliberately two-class — `.itemCritical` alone would lose
+   to `.item + .item` on specificity and the rule would silently do nothing. */
+.item + .itemCritical,
+.itemCritical + .item {
+  border-top-color: transparent;
+}
+
+.itemCritical::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: var(--accent-w);
+  border-start-start-radius: inherit;
+  border-end-start-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    var(--st-critical),
+    color-mix(in srgb, var(--st-critical) 40%, transparent)
+  );
+}
+
+/* Aligned with the label column, not with the stripe: the tag is a heading for
+   the sentence beside the checkbox, so it starts where that sentence starts.
+   18px box + the 12px gap Check.module.css sets between them. */
+.itemTag {
+  padding-inline-start: calc(18px + var(--sp-3));
+  padding-bottom: var(--sp-1);
+}

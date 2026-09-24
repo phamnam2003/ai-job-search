@@ -1,0 +1,122 @@
+.wrap {
+  display: grid;
+  gap: var(--card-gap);
+}
+
+.bar {
+  display: flex;
+  /* 2px of surface between fills — the spacer, not a stroke. */
+  gap: var(--gap-fill);
+  height: 48px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+}
+
+.seg {
+  display: grid;
+  align-content: center;
+  padding: 0 var(--sp-3);
+  color: #ffffff;
+  transition: opacity 140ms ease;
+}
+
+.segDim {
+  opacity: 0.45;
+}
+
+.segLabel {
+  display: grid;
+  gap: var(--sp-1);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.segVal {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.segLabelSmall {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-micro);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.legend {
+  display: grid;
+  gap: var(--sp-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: grid;
+  grid-template-columns: 11px 1fr auto;
+  align-items: baseline;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-sm);
+}
+
+.legendOn {
+  background: var(--surface-sunk);
+}
+
+.chip {
+  width: 11px;
+  height: 11px;
+  border-radius: var(--r-xs);
+  transform: translateY(1px);
+}
+
+.legendText {
+  display: grid;
+  /* Label + its note: a label/value pair, so 8px — 4px is the fill spacer, and
+     two wrapping Vietnamese lines at 4px read as one paragraph. */
+  gap: var(--sp-2);
+  min-width: 0;
+}
+
+.legendLabel {
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.legendNote {
+  font-size: var(--fs-xs);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.legendVal {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: var(--fs-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+.legendPct {
+  min-width: 38px;
+  text-align: end;
+  color: var(--ink-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seg {
+    transition: none;
+  }
+}
