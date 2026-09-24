@@ -210,6 +210,47 @@ export interface CutListEntry {
   why: string;
 }
 
+/* --------------------------------------------------------------- logistics */
+
+/** The run-up, as an ORDERED sequence of stages, not a flat list. */
+export type LogisticsStage =
+  | 'toi-nay'
+  | 'sang-mai'
+  | 'truoc-gio'
+  | 'trong-buoi'
+  | 'neu-hong';
+
+/**
+ * One pre-flight action for a remote interview.
+ *
+ * This collection exists because a call is a different job from a room. The
+ * things that can go wrong stop being "which door, how long is the ride" and
+ * become audio, light, network, and whatever else is open on the screen — each
+ * one an action with a deadline, most of them expiring tonight. The app is built
+ * around ticking things off, so they are data with progress keys like everything
+ * else here, not a paragraph of advice nobody can mark as done.
+ */
+export interface LogisticsItem {
+  /** Stable, kebab-case — it becomes a progress key. */
+  id: string;
+  when: LogisticsStage;
+  /** The action, imperative. */
+  what: string;
+  /** One sentence. This app never gives an instruction without its reason. */
+  why: string;
+  /** The few that actually cost him the interview if missed. Sparing by design. */
+  critical: boolean;
+  /**
+   * Depends on something this repo does not hold — a detail that lives in the
+   * invitation, or a decision he has not made yet. Those are repeated at the top
+   * of the page as open questions, with the warning that the app holds no link,
+   * no name and no number of its own — the honest failure mode is ticking a box
+   * over a blank the app invented. They still keep their row and their tick, or
+   * the section could never read as finished once he has actually done them.
+   */
+  unresolved: boolean;
+}
+
 /* -------------------------------------------------------------------- meta */
 
 export interface PrepMeta {
@@ -239,4 +280,5 @@ export interface PrepSet {
   consistency: ConsistencyClaim[];
   roadmap: RoadmapDay[];
   cutList: CutListEntry[];
+  logistics: LogisticsItem[];
 }

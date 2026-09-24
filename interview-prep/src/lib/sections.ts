@@ -13,6 +13,7 @@ import { k } from './keys';
 export type SectionId =
   | 'tong-quan'
   | 'lo-trinh'
+  | 'hau-can'
   | 'ky-thuat'
   | 'star'
   | 'cau-hoi'
@@ -48,6 +49,22 @@ export const SECTIONS: Section[] = [
     label: 'Lộ trình',
     blurb: 'Lịch theo giờ, tick từng việc',
     icon: 'M4 6h16M4 12h10M4 18h13M4 3v18',
+    tracked: true,
+  },
+  /* Second, directly under the schedule and above every revision section. This
+     is the only part of the app whose deadline is tonight: the round moved to
+     Google Meet, and a checklist read on Friday morning is a checklist read too
+     late. Everything below this is revision, and revision can slip an hour and
+     survive — a headset he does not own by tonight cannot. */
+  {
+    id: 'hau-can',
+    href: '/hau-can',
+    label: 'Hậu cần',
+    blurb: 'Buổi này chạy trên Google Meet',
+    // A video camera: rounded body + the lens wedge. Chosen because it is the
+    // one glyph in the rail that cannot be mistaken for "more reading" — and it
+    // reads at 16px, which a signal-bars or a plug icon does not.
+    icon: 'M4.5 6.5h9a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2ZM15.5 11l5-3v8l-5-3Z',
     tracked: true,
   },
   {
@@ -158,6 +175,19 @@ function starKeys(): string[] {
   return out;
 }
 
+/**
+ * The progress key for one logistics row.
+ *
+ * Exported rather than kept private, and deliberately the only key shape that
+ * does not live in `k`: the logistics keys are addressed by exactly one page and
+ * by the fill for exactly one rail node, both defined from this file. Keeping
+ * the shape next to the derivation is the same "one definition, no drift" rule
+ * the rest of this module is built on. Kebab-case ids come straight from the
+ * content, so a renamed item orphans only its own tick.
+ */
+export const logisticsKey = (id: string) => `logi:${id}`;
+
+const logisticsKeys = () => prep.logistics.map((x) => logisticsKey(x.id));
 const bankKeys = () => prep.bank.map((q) => k.bank(q.id));
 const claimKeys = () => prep.consistency.map((c) => k.claim(c.id));
 const companyKeys = () => [
@@ -169,6 +199,7 @@ const companyKeys = () => [
 export const SECTION_KEYS: Record<SectionId, string[]> = {
   'tong-quan': [],
   'lo-trinh': roadmapKeys(),
+  'hau-can': logisticsKeys(),
   'ky-thuat': topicKeys(),
   star: starKeys(),
   'cau-hoi': bankKeys(),
@@ -185,6 +216,11 @@ export const ALL_KEYS: string[] = Object.values(SECTION_KEYS).flat();
  * The keys that represent something he has to SAY, not merely read. The plan's
  * governing rule is that spoken rehearsal is what moves the needle, so the
  * dashboard reports this separately from "read everything".
+ *
+ * Logistics keys are NOT here, and that is a decision rather than an omission:
+ * plugging in a headset is done or not done, never "said out loud". Folding that
+ * many chores into the denominator would halve the one number that measures
+ * rehearsal while he rehearses exactly as much as before.
  */
 export const SPOKEN_KEYS: string[] = [
   ...starKeys(),

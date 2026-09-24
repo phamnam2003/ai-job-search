@@ -33,7 +33,7 @@ const KIND_LABEL: Record<ActivityKind, string> = {
   speak: 'Luyện nói',
   write: 'Viết mới',
   read: 'Đọc & tự kiểm',
-  admin: 'Hậu cần & di chuyển',
+  admin: 'Hậu cần & thiết bị',
 };
 
 const KINDS: ActivityKind[] = ['speak', 'read', 'write', 'admin'];

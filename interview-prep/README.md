@@ -1,6 +1,6 @@
 # interview-prep
 
-A local revision app for one specific interview: **Nanyang Biologics Vietnam — Junior Full Stack Engineer (Patient 360), Round 1, Fri 25/09/2026, 10:00, onsite Hanoi, conducted in Vietnamese.**
+A local revision app for one specific interview: **Nanyang Biologics Vietnam — Junior Full Stack Engineer (Patient 360), Round 1, Fri 25/09/2026, 10:00 Hanoi time, over Google Meet, conducted in Vietnamese.** The interviewer is Mr. Thanh, Senior Software Developer — an engineer, not a recruiter, which is why the answers are pitched at a technical listener. Only the interview is remote; the job itself is onsite.
 
 It is not a roadmap page. The revision material itself lives in here — 11 technical topics, 7 STAR stories, 54 likely questions with model answers, 140 flashcards, 25 CV/cover-letter lines that have to survive a drill, and 19 verified facts about the company. 521 trackable items in total.
 
@@ -41,6 +41,7 @@ npx next build       # 30 routes, mostly static
 | `/mo-phong` | Timed mock: a question, a clock, and no answer until you have said yours |
 | `/ho-so` | Every claim the CV and cover letter made, by how likely it is to be drilled |
 | `/cong-ty` | What could actually be verified about NYB, with the source and the sentence to say |
+| `/hau-can` | Remote pre-flight — audio, network, light, what is on screen, and what to do if the line drops |
 
 ## How it is built
 

@@ -23,9 +23,9 @@ const KIND_META: Record<ActivityKind, { label: string; color: string; note: stri
     note: 'STAR Kubernetes còn trống',
   },
   admin: {
-    label: 'Hậu cần & di chuyển',
+    label: 'Hậu cần & thiết bị',
     color: 'var(--act-admin)',
-    note: 'Mail HR, in CV, đi lại',
+    note: 'Mail HR, chạy thử Meet, thiết bị',
   },
 };
 

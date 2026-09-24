@@ -27,8 +27,9 @@ export interface Slice {
  * alone, and no label is ever clipped by its own segment.
  *
  * "Wide enough" is measured, not assumed. A flat percentage threshold passed
- * "Hậu cần & di chuyển" at 19% of a 420px card and then ellipsised it to
- * "Hậu cầ…", which is the failure the paragraph above claims cannot happen.
+ * the admin slice ("Hậu cần & thiết bị") at 19% of a 420px card and then
+ * ellipsised it to "Hậu cầ…", which is the failure the paragraph above claims
+ * cannot happen.
  */
 
 /** px per character at --fs-xs / 600 weight, rounded up so we never clip. */

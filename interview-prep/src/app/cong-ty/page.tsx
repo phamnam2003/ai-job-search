@@ -142,7 +142,7 @@ export default function CompanyPage() {
           </ul>
           <p className={s.unknownNote}>
             Nếu bị hỏi trúng một trong những chỗ này, câu trả lời đúng là
-            &ldquo;chỗ đó em chưa tra được, anh/chị nói thêm giúp em&rdquo; — rồi
+            &ldquo;chỗ đó em chưa tra được, anh nói thêm giúp em&rdquo; — rồi
             hỏi lại. Đoán bừa là cách nhanh nhất để mất uy tín cho cả những câu
             mình nói đúng.
           </p>

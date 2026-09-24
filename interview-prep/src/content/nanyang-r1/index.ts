@@ -6,6 +6,7 @@ import { stars } from './stars';
 import { bank } from './bank';
 import { company } from './company';
 import { consistency } from './consistency';
+import { logistics } from './logistics';
 
 export const prep: PrepSet = {
   meta,
@@ -16,6 +17,17 @@ export const prep: PrepSet = {
   consistency,
   roadmap,
   cutList,
+  logistics,
 };
 
-export { meta, roadmap, cutList, topics, stars, bank, company, consistency };
+export {
+  meta,
+  roadmap,
+  cutList,
+  topics,
+  stars,
+  bank,
+  company,
+  consistency,
+  logistics,
+};
