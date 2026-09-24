@@ -26,13 +26,20 @@ import type { CutListEntry, RoadmapDay } from '../types';
  * That does not move any block on this schedule, but it changes what the Thursday
  * rehearsal blocks are rehearsing FOR — a technical conversation with a peer, not
  * a screening call. The content files carry that; the clock does not.
+ *
+ * NOTHING IN HERE IS WRITTEN RELATIVE TO NOW. Tags name what a session is for,
+ * and prose says "tối 24/09", never "tối nay" — every relative phrase in the
+ * first draft had gone stale within a day of being written, and a schedule that
+ * is wrong about today is worse than no schedule. Past / running / upcoming is
+ * derived from `iso` + the clock at render time; see `src/lib/schedule.ts`.
  */
 export const roadmap: RoadmapDay[] = [
   {
     id: 't4',
     label: 'Thứ 4',
     date: '23/09',
-    tag: 'Tối nay',
+    iso: '2026-09-23',
+    tag: 'Buổi nền',
     items: [
       {
         s: '20:00',
@@ -40,7 +47,7 @@ export const roadmap: RoadmapDay[] = [
         m: 15,
         kind: 'admin',
         title: 'Trả lời mail HR',
-        info: 'Việc của tối 23/09, đã qua. Giờ chốt là 10:00 thứ 6 và buổi phỏng vấn diễn ra qua Google Meet, nên thứ phải khớp trong thư mời là link Meet + giờ, không còn là địa chỉ văn phòng. Câu hỏi về lương đi chung tin nhắn đó.',
+        info: 'Giờ chốt là 10:00 thứ 6 và buổi phỏng vấn diễn ra qua Google Meet, nên thứ phải khớp trong thư mời là link Meet + giờ, không còn là địa chỉ văn phòng. Câu hỏi về lương đi chung tin nhắn đó.',
         links: [{ label: 'Câu hỏi về lương', href: '/cau-hoi?cat=hr' }],
       },
       {
@@ -58,7 +65,7 @@ export const roadmap: RoadmapDay[] = [
         m: 30,
         kind: 'read',
         title: 'Đọc hết một lượt',
-        info: 'Đọc thôi, chưa luyện. Đánh dấu mọi câu bạn không thể nói ra ngay lúc này — những dấu đó định ưu tiên cho tối mai.',
+        info: 'Đọc thôi, chưa luyện. Đánh dấu mọi câu bạn không thể nói ra ngay lúc này — những dấu đó định ưu tiên cho buổi tối 24/09.',
         links: [
           { label: 'Kiến thức kỹ thuật', href: '/ky-thuat' },
           { label: 'Ngân hàng câu hỏi', href: '/cau-hoi' },
@@ -89,6 +96,7 @@ export const roadmap: RoadmapDay[] = [
     id: 't5',
     label: 'Thứ 5',
     date: '24/09',
+    iso: '2026-09-24',
     tag: 'Buổi chính',
     items: [
       {
@@ -143,7 +151,7 @@ export const roadmap: RoadmapDay[] = [
         m: 15,
         kind: 'admin',
         title: 'Chạy thử Meet một lượt',
-        info: 'Không còn đường đi nào để kiểm tra, nhưng có một buổi tổng duyệt kỹ thuật — và nó phải là tối nay, vì tối nay mới còn thời gian sửa nếu hỏng. Mở thư mời đã pin, bấm đúng link trong đó và vào thử một lượt: camera lên hình, tai nghe CÓ DÂY (loa laptop sẽ vọng tiếng), thử mic, thử luôn chia sẻ màn hình, và sửa tên hiển thị thành "Phạm Hải Nam" chứ không để biệt danh hay địa chỉ mail. Lúc bấm link, nhìn xem trình duyệt đang đăng nhập tài khoản Google nào — phải là tài khoản nhận thư mời; vào nhầm tài khoản thì phía họ trông y hệt như em không đến. Không in gì cả: buổi này không đưa CV cho ai, và thứ duy nhất được phép ra giấy là tờ bốn câu hỏi ngược. Quần áo đủ bộ, kể cả quần dài — có lúc phải đứng lên. 15 phút này chỉ đủ khi mọi thứ chạy ngay; vướng cái gì thì xử lý nốt tối nay.',
+        info: 'Không còn đường đi nào để kiểm tra, nhưng có một buổi tổng duyệt kỹ thuật — và nó phải xong trong tối 24/09, vì đó là lúc cuối cùng còn thời gian sửa nếu hỏng. Mở thư mời đã pin, bấm đúng link trong đó và vào thử một lượt: camera lên hình, tai nghe CÓ DÂY (loa laptop sẽ vọng tiếng), thử mic, thử luôn chia sẻ màn hình, và sửa tên hiển thị thành "Phạm Hải Nam" chứ không để biệt danh hay địa chỉ mail. Lúc bấm link, nhìn xem trình duyệt đang đăng nhập tài khoản Google nào — phải là tài khoản nhận thư mời; vào nhầm tài khoản thì phía họ trông y hệt như em không đến. Không in gì cả: buổi này không đưa CV cho ai, và thứ duy nhất được phép ra giấy là tờ bốn câu hỏi ngược. Quần áo đủ bộ, kể cả quần dài — có lúc phải đứng lên. 15 phút này chỉ đủ khi mọi thứ chạy ngay; vướng cái gì thì xử lý nốt ngay trong tối đó, đừng để sang sáng.',
         links: [{ label: 'Checklist hậu cần', href: '/hau-can#toi-nay' }],
       },
     ],
@@ -159,6 +167,7 @@ export const roadmap: RoadmapDay[] = [
     id: 't6',
     label: 'Thứ 6',
     date: '25/09',
+    iso: '2026-09-25',
     tag: 'Ngày phỏng vấn',
     items: [
       {
@@ -187,7 +196,7 @@ export const roadmap: RoadmapDay[] = [
         m: 20,
         kind: 'admin',
         title: 'Kiểm tra máy, mạng, phòng',
-        info: 'Làm lúc 09:05 chứ không phải 09:45: hỏng cái gì thì bạn còn gần một tiếng để xoay, thay vì năm phút. Mở lại thư mời để lấy đúng link và đối chiếu lại giờ, rồi mở màn hình kiểm tra thiết bị của Meet — chưa bấm vào phòng. Chạy hết mục “Sáng mai, trước 9h30” và phần còn sót của “Tối nay” trong Hậu cần; khối này chỉ giữ chỗ thời gian cho nó. Một thứ không nằm trong checklist: nói với người trong nhà rằng từ 10h em bận một tiếng, cửa đóng.',
+        info: 'Làm lúc 09:05 chứ không phải 09:45: hỏng cái gì thì bạn còn gần một tiếng để xoay, thay vì năm phút. Mở lại thư mời để lấy đúng link và đối chiếu lại giờ, rồi mở màn hình kiểm tra thiết bị của Meet — chưa bấm vào phòng. Chạy hết mục “Sáng phỏng vấn, trước 9h30” và phần còn sót của “Tối trước ngày phỏng vấn” trong Hậu cần; khối này chỉ giữ chỗ thời gian cho nó. Một thứ không nằm trong checklist: nói với người trong nhà rằng từ 10h em bận một tiếng, cửa đóng.',
         links: [{ label: 'Checklist hậu cần', href: '/hau-can#sang-mai' }],
       },
       { brk: 'nghỉ 10′' },

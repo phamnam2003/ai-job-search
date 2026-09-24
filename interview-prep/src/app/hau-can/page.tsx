@@ -16,6 +16,11 @@ export const metadata: Metadata = { title: 'Hậu cần' };
  * words belong to the view. Driving the page from this array rather than from
  * the order rows happen to sit in means a row added to the middle of the content
  * file still lands under the right heading.
+ *
+ * The labels name a DAY, not a distance from today. The stage ids are still
+ * `toi-nay` / `sang-mai` — they are anchors and progress keys and must not move
+ * — but the words next to them were read at 07:00 on the morning of the
+ * interview, when "sáng mai" pointed at the day after it was any use.
  */
 const STAGES: {
   id: LogisticsStage;
@@ -25,13 +30,13 @@ const STAGES: {
 }[] = [
   {
     id: 'toi-nay',
-    label: 'Tối nay',
+    label: 'Tối trước ngày phỏng vấn',
     clock: 'Thứ 5, 24/09',
-    note: 'Gần hết việc hậu cần nằm ở đây. Sáng mai không còn thời gian để mua, sửa hay quyết định bất cứ thứ gì.',
+    note: 'Gần hết việc hậu cần nằm ở đây. Sáng hôm sau không còn thời gian để mua, sửa hay quyết định bất cứ thứ gì.',
   },
   {
     id: 'sang-mai',
-    label: 'Sáng mai, trước 9h30',
+    label: 'Sáng phỏng vấn, trước 9h30',
     clock: 'Thứ 6, 25/09',
     note: 'Dọn đường trước 9h30. Sau đó lộ trình còn đúng hai việc: diễn thử một lượt trước camera lúc 9h35, rồi vào phòng.',
   },
@@ -72,7 +77,7 @@ export default function LogisticsPage() {
       <PageHeader
         eyebrow="Hậu cần"
         title="Buổi phỏng vấn chuyển sang Google Meet"
-        lede="Hôm qua vòng này còn là onsite ở Trần Xuân Soạn. Giờ nó diễn ra qua Google Meet, nên toàn bộ rủi ro chuyển từ đường đi sang cái bàn em ngồi: tiếng, mạng, ánh sáng, và những gì còn mở trên màn hình. Công việc thì không đổi — vị trí vẫn là onsite 5 ngày một tuần; chỉ buổi phỏng vấn là online."
+        lede="Đến hết 23/09 vòng này còn là onsite ở Trần Xuân Soạn. Giờ nó diễn ra qua Google Meet, nên toàn bộ rủi ro chuyển từ đường đi sang cái bàn em ngồi: tiếng, mạng, ánh sáng, và những gì còn mở trên màn hình. Công việc thì không đổi — vị trí vẫn là onsite 5 ngày một tuần; chỉ buổi phỏng vấn là online."
         aside={<KeyProgress keys={allKeys} label="đã xong" />}
       />
 
@@ -118,8 +123,8 @@ export default function LogisticsPage() {
         <span className={s.tag}>Không được sót</span> đánh dấu {criticals.length}{' '}
         trên {logistics.length} mục: đó là những mục mà sót một cái là mất buổi
         phỏng vấn, chứ không phải mất điểm. Phần còn lại vẫn nên làm, nhưng nếu
-        tối nay chỉ đủ sức làm {criticalTonight} việc thì làm đúng{' '}
-        {criticalTonight} việc được đánh dấu trong mục “Tối nay”.
+        tối 24/09 chỉ đủ sức làm {criticalTonight} việc thì làm đúng{' '}
+        {criticalTonight} việc được đánh dấu trong mục “{STAGES[0].label}”.
       </p>
 
       {/* --- the checklist, by stage --------------------------------------- */}

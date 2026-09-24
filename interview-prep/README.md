@@ -25,7 +25,7 @@ npm start
 ```bash
 npx tsc --noEmit     # types
 npx eslint src       # lint — `next lint` was removed in Next 16
-npx next build       # 30 routes, mostly static
+npx next build       # 31 routes, mostly static
 ```
 
 ## Routes
@@ -33,7 +33,7 @@ npx next build       # 30 routes, mostly static
 | Route | What it is |
 |---|---|
 | `/` | Countdown, where you stand, how the revision minutes split, what to do first if time runs short |
-| `/lo-trinh` | The three study sessions drawn to scale on a real clock |
+| `/lo-trinh` | The three study sessions drawn to scale, with where the clock has got to — what is finished, what is running, what is next |
 | `/ky-thuat`, `/ky-thuat/[id]` | The 11 topics the JD asks for, weakest first — concepts, drill questions, flashcards |
 | `/star`, `/star/[id]` | 7 STAR stories, each with the scope line it must not overstate |
 | `/cau-hoi` | The 54-question bank, filterable by group, likelihood and spoken/not |
@@ -48,6 +48,7 @@ npx next build       # 30 routes, mostly static
 - **Next.js 16 App Router, React 19, TypeScript. No Tailwind** — CSS Modules over design tokens in `src/styles/tokens.css`.
 - **Content is data, not markup.** Everything authored lives in `src/content/nanyang-r1/*.ts` against the types in `src/content/types.ts`. Pages render it; they do not contain it. To change a question, edit `bank.ts`.
 - **Progress is local only.** `src/lib/progress.tsx` keeps every tick, rating and "said out loud" flag in `localStorage` under `nyb-prep-v1`, via `useSyncExternalStore` so SSR and hydration agree and two tabs stay in sync. There is no server and nothing is sent anywhere. Clearing site data resets it.
+- **Nothing is written relative to now.** The content says "tối 24/09", never "tối nay", and a roadmap day's tag says what the session is *for*. Past / running / upcoming is derived from `day.iso` and the browser clock in `src/lib/schedule.ts` — the first draft labelled a day "Tối nay" and it was lying within a day.
 - **Charts follow one rule set.** Ordered levels (gap/partial/strong, risk high/medium/low, likelihood) are always one hue darkening — never three separate hues — with a legend, direct labels and a table twin. The lightest step carries its own `-ink` token because white is not legible on it.
 - **Dark mode is selected, not flipped** — its own steps against the dark surface, chosen in `tokens.css`.
 

@@ -193,9 +193,20 @@ export interface RoadmapDay {
   id: string;
   /** "Thứ 4" */
   label: string;
-  /** "23/09" */
+  /** "23/09" — for reading. */
   date: string;
-  /** "Tối nay" */
+  /**
+   * The same day, machine-readable: "2026-09-23". Block clock times are resolved
+   * against it, which is what lets the chart say what has already happened
+   * instead of asserting it. Stored rather than derived from `date` because the
+   * display form carries no year.
+   */
+  iso: string;
+  /**
+   * What the session is FOR — a role label, never a relative one. "Tối nay" was
+   * true for about twenty-six hours and then quietly lied; where a day sits
+   * relative to now is derived from `iso` at render time instead.
+   */
   tag: string;
   items: RoadmapItem[];
   /** Optional end marker, e.g. the interview itself. */
