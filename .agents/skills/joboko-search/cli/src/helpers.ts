@@ -110,15 +110,17 @@ export function toIsoDate(raw: string | null | undefined): string | null {
 /**
  * Joboko's search paths are pre-generated keyword slugs — arbitrary text 404s.
  * `backend-developer` and `lap-trinh-vien` exist; `golang` and `nodejs` do not.
- * Verified 2026-08-04; see ../../url-reference.md.
+ * Note there is no English `frontend-developer` slug (nor `front-end-developer`);
+ * the site's own front-end keyword page is `lap-trinh-vien-front-end`.
+ * Every slug below re-verified live 2026-09-27; see ../../url-reference.md.
  */
 export const KNOWN_SLUGS = [
   "backend-developer",
-  "frontend-developer",
+  "lap-trinh-vien-front-end",
   "fullstack-developer",
   "lap-trinh-vien",
   "developer",
-  "it-phan-mem",
+  "phat-trien-phan-mem",
   "ky-su-phan-mem",
   "nhan-vien-kinh-doanh",
 ]

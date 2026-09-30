@@ -95,7 +95,7 @@ bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q golang --match
 bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q engineer -l remote --limit 20 --format table
 
 # Kafka roles at three specific companies
-bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q kafka -c cloudflare,datadog,temporaltechnologies --match full
+bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q kafka -c cloudflare,datadog,cockroachlabs --match full
 
 # Fintech backend roles
 bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q backend --tag fintech --format table

@@ -9,7 +9,13 @@
     "A 200 with a non-empty `jobs` array means the token is good.",
     "",
     "Every token below was verified live on 2026-07-20. Use `tags` with --tag to narrow",
-    "the fan-out; each company costs one HTTP request per search."
+    "the fan-out; each company costs one HTTP request per search.",
+    "",
+    "2026-09-27: removed `clickhouse`, `temporaltechnologies` and `postman` — all three",
+    "404 on the board API. ClickHouse and Temporal migrated to Ashby (live boards at",
+    "jobs.ashbyhq.com/clickhouse and /temporal). Postman's Greenhouse board is gone",
+    "entirely (job-boards.greenhouse.io/postman 404s; its indexed job URLs 302 to",
+    "?error=true); its replacement ATS was not identified. No variant token resolved."
   ],
   "companies": [
     { "token": "gitlab", "name": "GitLab", "region": "Global remote (async)", "tags": ["remote-first", "devtools", "go"] },
@@ -21,10 +27,8 @@
     { "token": "elastic", "name": "Elastic", "region": "Global remote", "tags": ["remote-first", "observability", "go"] },
     { "token": "mongodb", "name": "MongoDB", "region": "Global (hybrid hubs)", "tags": ["database", "go"] },
     { "token": "cockroachlabs", "name": "Cockroach Labs", "region": "Global remote", "tags": ["remote-first", "database", "go"] },
-    { "token": "clickhouse", "name": "ClickHouse", "region": "Global remote", "tags": ["remote-first", "database", "go"] },
     { "token": "yugabyte", "name": "Yugabyte", "region": "Global remote", "tags": ["remote-first", "database", "go"] },
     { "token": "planetscale", "name": "PlanetScale", "region": "Global remote", "tags": ["remote-first", "database", "go"] },
-    { "token": "temporaltechnologies", "name": "Temporal Technologies", "region": "Global remote", "tags": ["remote-first", "distributed-systems", "go"] },
     { "token": "chainguard", "name": "Chainguard", "region": "Global remote", "tags": ["remote-first", "infra", "go"] },
     { "token": "fastly", "name": "Fastly", "region": "Global remote", "tags": ["remote-first", "infra", "go"] },
     { "token": "cribl", "name": "Cribl", "region": "Global remote", "tags": ["remote-first", "observability", "go"] },
@@ -34,7 +38,6 @@
     { "token": "vercel", "name": "Vercel", "region": "Global remote", "tags": ["remote-first", "devtools", "frontend"] },
     { "token": "netlify", "name": "Netlify", "region": "Global remote", "tags": ["remote-first", "devtools", "frontend"] },
     { "token": "prisma", "name": "Prisma", "region": "Global remote (EU-centric)", "tags": ["remote-first", "devtools", "eu-hours"] },
-    { "token": "postman", "name": "Postman", "region": "Global (hybrid hubs)", "tags": ["devtools", "apis"] },
     { "token": "jetbrains", "name": "JetBrains", "region": "Europe (EU hours)", "tags": ["devtools", "eu-hours"] },
     { "token": "contentful", "name": "Contentful", "region": "Europe (EU hours)", "tags": ["eu-hours", "devtools"] },
     { "token": "storyblok", "name": "Storyblok", "region": "Europe remote (EU hours)", "tags": ["remote-first", "eu-hours", "devtools"] },

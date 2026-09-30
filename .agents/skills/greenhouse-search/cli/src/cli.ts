@@ -80,7 +80,7 @@ EXAMPLES
   bun run src/cli.ts search -q "backend engineer" --tag go --format table
   bun run src/cli.ts search -q golang --match full --jobage 30 --format table
   bun run src/cli.ts search -q engineer -l remote --limit 10 --format table
-  bun run src/cli.ts search -q kafka -c cloudflare,datadog,temporaltechnologies --match full
+  bun run src/cli.ts search -q kafka -c cloudflare,datadog,cockroachlabs --match full
   bun run src/cli.ts detail tailscale/4707636005 --format plain
   bun run src/cli.ts companies
 `

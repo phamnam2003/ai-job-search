@@ -31,16 +31,30 @@ Base: `https://vn.joboko.com`
    `/tim-viec-lam-<slug>/2`, `-p2` and `-trang-2` all 404.
 2. **Keyword slugs are pre-generated.** Arbitrary text 404s.
 
-| Slug | Status (2026-08-04) |
-|------|---------------------|
-| `backend-developer` | 200, 2,137 total |
-| `lap-trinh-vien` | 200 |
-| `developer` | 200 |
-| `frontend-developer` | 200 |
-| `golang` | **404** |
-| `nodejs` | **404** |
-| `lap-trinh-vien-backend` | **404** |
-| `it-phan-mem` | **404** |
+| Slug | Status (2026-08-04) | Re-checked 2026-09-27 |
+|------|---------------------|-----------------------|
+| `backend-developer` | 200, 2,137 total | 200, 20 cards |
+| `lap-trinh-vien` | 200 | 200, 20 cards |
+| `developer` | 200 | 200, 20 cards |
+| `frontend-developer` | 200 | **404** — retired by the site |
+| `golang` | **404** | — |
+| `nodejs` | **404** | — |
+| `lap-trinh-vien-backend` | **404** | — |
+| `it-phan-mem` | **404** | **404** (was wrongly in `KNOWN_SLUGS`) |
+
+Added to `KNOWN_SLUGS` on 2026-09-27, all 200 with 20 cards and all harvested from
+Joboko's own `/tim-viec-lam-…` filter links rather than guessed:
+
+| Slug | Note |
+|------|------|
+| `lap-trinh-vien-front-end` | the only working front-end keyword page; replaces `frontend-developer`. `-tai-ha-noi` also 200 |
+| `phat-trien-phan-mem` | replaces the dead `it-phan-mem` |
+
+There is **no** English front-end slug: both `frontend-developer` and
+`front-end-developer` 404, even though `back-end-developer` (200) works alongside
+`backend-developer`. Other site-confirmed slugs seen in those filter links include
+`software-engineer`, `java-developer`, `mobile-developer`, `tester`,
+`business-analyst` and `ky-su-cong-nghe-thong-tin`.
 
 City slugs seen in the site's own filter links: `ha-noi`, `ho-chi-minh`,
 `da-nang`, plus others in the same `-tai-<city>` form.

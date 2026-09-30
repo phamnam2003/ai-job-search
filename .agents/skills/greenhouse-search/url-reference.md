@@ -76,8 +76,9 @@ A missing job returns **404** (handled as `NOT_FOUND`, exit 1).
 1. **`content` is double-encoded.** `&lt;p&gt;Text&lt;/p&gt;` — decode entities first, then strip tags, or you get literal `<p>` in the output.
 2. **Job ids collide across boards.** Two companies can both have job `4707636005`. The board token must travel with the id.
 3. **`absolute_url` is not always a greenhouse.io URL.** Companies with custom careers domains return their own URL. Do not assume the host.
-4. **Board tokens are not guessable.** `grafanalabs` not `grafana`, `temporaltechnologies` not `temporal`, `remotecom` not `remote`. Always verify a new token with a live request before adding it.
-5. **404 vs empty.** A wrong token 404s; a real board with no open roles returns `{"jobs":[]}`. The CLI distinguishes these — 404 lands in `meta.errors`.
+4. **Board tokens are not guessable.** `grafanalabs` not `grafana`, `cockroachlabs` not `cockroach`, `remotecom` not `remote`. Always verify a new token with a live request before adding it.
+5. **Tokens also expire.** A board that worked once can 404 later because the employer left Greenhouse — `clickhouse`, `temporaltechnologies` (both → Ashby) and `postman` all died between 2026-07-20 and 2026-09-27. A 404 on `/v1/boards/<token>/jobs` means re-check the employer's careers page for a new ATS, not that the request was malformed.
+6. **404 vs empty.** A wrong token 404s; a real board with no open roles returns `{"jobs":[]}`. The CLI distinguishes these — 404 lands in `meta.errors`.
 
 ## Verifying a new board token
 

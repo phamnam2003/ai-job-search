@@ -11,7 +11,12 @@
     "Every token below was verified live on 2026-07-20. Note `leverdemo` is Lever's own",
     "demo board — it returns hundreds of fake postings and is deliberately excluded.",
     "",
-    "Lever's public API is thinner on APAC/Vietnam employers than Ashby is; see SKILL.md."
+    "Lever's public API is thinner on APAC/Vietnam employers than Ashby is; see SKILL.md.",
+    "",
+    "2026-09-27: removed `ledger` — the token is dead (`{\"ok\":false,\"error\":\"Document",
+    "not found\"}`, now served as HTTP 404 rather than the 200 SKILL.md describes).",
+    "Variants `ledgerhq`, `ledger-hq` and `ledgerwallet` are dead too; Ledger has",
+    "migrated to Ashby (live board at jobs.ashbyhq.com/ledger)."
   ],
   "companies": [
     { "token": "amanotes", "name": "Amanotes", "region": "Vietnam (Ho Chi Minh City)", "tags": ["vietnam", "apac", "asia-hours", "mobile"] },
@@ -22,7 +27,6 @@
     { "token": "celestia", "name": "Celestia Labs", "region": "Global remote", "tags": ["remote-first", "distributed-systems", "crypto", "go"] },
     { "token": "sysdig", "name": "Sysdig", "region": "Global remote", "tags": ["remote-first", "kubernetes", "infra", "go"] },
     { "token": "sonarsource", "name": "SonarSource", "region": "Europe (EU hours)", "tags": ["eu-hours", "devtools"] },
-    { "token": "ledger", "name": "Ledger", "region": "Europe (EU hours)", "tags": ["eu-hours", "fintech", "crypto"] },
     { "token": "spotify", "name": "Spotify", "region": "Europe / Global (hybrid hubs)", "tags": ["eu-hours", "backend"] },
     { "token": "palantir", "name": "Palantir", "region": "US / Europe (hybrid)", "tags": ["backend"] },
     { "token": "ro", "name": "Ro", "region": "United States (US hours)", "tags": ["us-hours", "health"] }
