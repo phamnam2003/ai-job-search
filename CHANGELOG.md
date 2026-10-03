@@ -13,6 +13,86 @@ per-file diff commands.
 
 ## [Unreleased]
 
+### Fixed
+
+- **`check_framework_version.py`'s git diff read no longer crashes on non-ASCII framework-file
+  content** (`tools/check_framework_version.py`) - `run_git()` called
+  `subprocess.run(text=True)` without an explicit `encoding`, so output decoded via the host
+  locale's default codec instead of UTF-8. On a real Windows checkout (cp1252 default) this
+  raised `UnicodeDecodeError` on any byte cp1252 leaves undefined - Cyrillic Ё/ё, much CJK,
+  Á-class Latin - appearing in a framework file's diff, crashing the version gate before it
+  ever evaluated the change. `run_git()` now passes `encoding="utf-8"` and `errors="replace"`
+  (matching the convention already used elsewhere in this repo, e.g. `robots_check.py`),
+  decoding deterministically regardless of host locale. Pinned by `RunGitEncodingTests` in
+  `tests/test_check_framework_version.py`, which fails against the original un-pinned call.
+
+- **`/rank` still sweeps deadlines when there is nothing new to score** (`.claude/commands/rank.md`
+  Step 1, `tests/test_rank_command.py`) - when `rank_state.py candidates` reported no eligible
+  jobs, Step 1 said "Nothing new to rank" and stopped before Step 3's rule 6 expiry sweep ever
+  ran. Once a backlog has been ranked, that is the path every later `/rank` takes, so
+  past-deadline jobs stayed `ranked` and approaching-deadline reminders were never shown.
+  Reproduced on the real CLI with four `ranked` entries (deadlines 2026-09-22, 2026-09-28,
+  null, `ASAP`): `candidates --today 2026-09-25` returns `eligible: 0` and master stops there,
+  while `sweep --write` on the same state expires the 09-22 entry, lists 09-28 under
+  `closing_soon` and `ASAP` under `unparseable_deadlines`, and leaves the null one alone. The
+  empty-candidate branch of Step 1 now runs `python3 tools/rank_state.py sweep --write`, skips
+  profile loading and Steps 2-4 (nothing to fetch or score; the tracker is untouched), and
+  presents a sweep-only Step 5 summary - `swept`, `newly_expired`, `closing_soon` with deadlines
+  and URLs, `unparseable_deadlines` with portals - before suggesting `/scrape`. An empty batch
+  caused by a focus filter or tracker exclusion takes the same path. Pinned by
+  `test_step1_empty_candidates_still_sweeps_and_reports`, which fails against master's `rank.md`.
+
+- **`robots_check` no longer reads a leading BOM or an undecodable rule as permission**
+  (`tools/robots_check.py`, `tests/test_robots_check.py`) - two decoding edge cases failed
+  open, both flagged as follow-ups in #506. A robots.txt saved with a UTF-8 byte-order mark
+  decodes to a body that starts with U+FEFF, so its first field was not `user-agent`: a
+  leading `User-agent: *` went unseen, every rule in that group was dropped for want of an
+  agent, and the gate read the file as allow-all. Reproduced through the CLI on real hosts:
+  cnnturk.com and sakarya.edu.tr serve `EF BB BF` + `User-agent: *`, and master printed
+  `ALLOWED` for their disallowed `/hesap/` and `/bin/`. `_groups()` and `is_robots_body()`
+  now skip one leading U+FEFF, as Google's reference parser does, so every caller of
+  `allowed()` is covered (a BOM-only body is now the empty file it is, allow-all, rather than
+  a soft 200). Separately, #506's `errors='replace'` turns raw non-ASCII bytes in a
+  non-conformant robots.txt saved in a legacy code page (cp1254, ISO-8859-9) into U+FFFD, so
+  a rule such as `Disallow: /şirket/` could never match and was silently skipped. A
+  User-agent, Allow or Disallow line holding U+FFFD now makes the body unreadable, and the
+  gate prints `UNCONFIRMED`. The field is named with U+FFFD removed, so a stray byte before
+  `Disallow` cannot hide the line either; U+FFFD in a comment or another field stays
+  harmless, and valid UTF-8 rules decide as before. Nine new tests; the seven that pin the
+  fail-opens fail on master.
+
+- **`verify_layout.py` finds an orphaned entry header by where the text starts**
+  (`tools/verify_layout.py`, `tests/test_verify_layout.py`) - the orphan rule compared line
+  left edges against the document margin, and a list marker moves a line's left edge without
+  moving its text. A template that merges each bullet's marker into its first line (#481) got
+  a bullet wrapping across the page break reported as an orphaned header, and a real orphaned
+  header followed by such bullets not reported at all. On the stock CV, when the outer marker
+  extracts as a line of its own, a `[Job Title]` header left at the foot of a page with its
+  bullets overleaf was not reported (its text at x70.4 counted as indented), and a list item
+  whose outer marker is set 1.3pt below its line was reported as a split bullet. The rule now
+  compares where the text of the page's last printed line starts - after any leading bullet
+  glyph from `• ‣ ▪ ● ·` (ASCII, dashes and other glyphs are text) - with where the text of
+  the next page's first printed line starts, and reports an orphaned header when the latter
+  is set further in. Bbox lines whose tops are within 3pt count as one printed line, and a
+  line whose text starts more than 60pt past the margin (a running header, a right-set date)
+  is not where the next page resumes. A lone marker with no text beside it keeps the
+  split-bullet report. On 304 builds of the stock CV (`\vspace*` 0-600pt before four
+  entries) this adds 15 reports, each a `[Job Title]` header at the foot of a page with its
+  bullets overleaf, and the other 289 builds give the same output as before.
+
+- **One posting on a portal without a numeric id no longer gets a second key when its
+  title is re-listed with different casing** (#501, `tools/job_key.py`,
+  `tests/test_job_key.py`) - the key hashed a slugified title alongside the URL whenever
+  `normalizeId` found no six-digit run in the path, which is every freehire posting. The
+  live API returns both `Инженер` and `инженер` across rows, and the slugifier maps those
+  to different slugs, so one URL could be stored under several keys. `/rank` builds its
+  exclusion set from `seen_jobs.json`, so a posting already seen could be presented again.
+  The key is now a hash of the URL alone: the URL is the identity `/scrape` stores, and
+  the title was never a stable half of it. **Entries written before this fix for a
+  non-Latin title on a portal without a numeric id will re-key once on the next scrape.**
+  `python3 tools/job_key.py --audit` reports those entries under
+  `keys_not_matching_current_rule`; it never rewrites them.
+
 ## [1.7.2] - 2026-09-29
 
 ### Added
