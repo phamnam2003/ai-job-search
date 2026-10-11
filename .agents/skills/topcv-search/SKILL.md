@@ -13,7 +13,7 @@ description: >
   làm IT, tuyển dụng lập trình viên, tìm việc backend, việc làm developer, tuyển
   dụng IT Hà Nội, tìm việc làm TopCV, việc làm fullstack, tuyển lập trình viên.
 context: fork
-enabled: true  # set to false to keep this portal installed but have /scrape skip it
+enabled: false  # WAF returns HTTP 403 on every call since 2026-10-02 - covered by site:topcv.vn WebSearch fallback until fixed
 allowed-tools: Bash(bun run .agents/skills/topcv-search/cli/src/cli.ts *)
 ---
 
