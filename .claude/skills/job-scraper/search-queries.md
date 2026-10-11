@@ -22,6 +22,15 @@
 <!-- Drain signal added 2026-09-03: meeting-heavy / process-heavy environments now rank alongside
      ticket-only work and legacy-only maintenance as a stated drain. It is not filterable from a
      search query, so it is scored later — `04-job-evaluation.md`, Behavioral/Culture Fit. -->
+<!-- Retuned 2026-10-11 from five weeks of seen_jobs.json data (2903 entries, 477 ranked), at his
+     request. This supersedes decision (1) above:
+     (a) Frontend (Priority 3) is now OPT-IN. 51 frontend-titled postings were ranked: 1 scored 60+,
+         none 70+, none applied to. Backend titles produced 33 of the 40 postings scoring 70+, so
+         the default pass spends that slot on Priority 6 (backend stack/domain) instead.
+     (b) Low-fit postings are no longer sent to /rank — see Low-Fit Triage below.
+     (c) lever, devwork, vietnamdevs and weworkremotely CLIs are disabled for low yield (0-1 of
+         their results ranked 60+); their site: lines were removed from this file so the WebSearch
+         fallback does not quietly bring them back. -->
 
 ## Installed portal CLIs (primary for `/scrape`)
 
@@ -39,10 +48,10 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 |--------|-----|-------|
 | **ITviec** | `itviec.com` | ⚡ **CLI installed** (`itviec-search`). Highest-signal IT board in VN, curated, English-friendly. Slug URLs: `itviec.com/it-jobs/<skill>/ha-noi` |
 | **TopDev** | `topdev.vn` | ⚡ **CLI installed** (`topdev-search`, open JSON API). IT-only, strong for Go/backend. |
-| **VietnamDevs** | `vietnamdevs.com` | ⚡ **CLI installed** (`vietnamdevs-search`). Hand-verified, English-friendly, offshore/remote-USD roles. `-q` uses fixed category slugs (golang, back-end, nodejs…) |
+| **VietnamDevs** | `vietnamdevs.com` | ⚡ **CLI installed** (`vietnamdevs-search`) — **disabled 2026-10-11** (41 results, all skipped at scrape). Hand-verified, English-friendly, offshore/remote-USD roles. `-q` uses fixed category slugs (golang, back-end, nodejs…) |
 | **ITNavi** | `itnavi.com.vn` | ⚡ **CLI installed** (`itnavi-search`). Small board, decent Go/backend; real Hanoi roles (HDBank, VNG). |
 | **Cake** (ex-CakeResume) | `cake.me` | Taiwan/APAC talent network, English-friendly. **WebSearch-only** — job pages Cloudflare-walled, no CLI. `cake.me/jobs/Vietnam` |
-| **Devwork** | `devwork.vn` | ⚡ **CLI installed** (`devwork-search`). Hanoi IT recruitment/referral network. Small volume but **publishes salary bands on the card**, plus seniority + years-of-experience on detail. `-q` uses fixed technology tags. |
+| **Devwork** | `devwork.vn` | ⚡ **CLI installed** (`devwork-search`) — **disabled 2026-10-11** (56 results, 18 ranked, none 60+). Hanoi IT recruitment/referral network. Small volume but **publishes salary bands on the card**, plus seniority + years-of-experience on detail. `-q` uses fixed technology tags. |
 
 ### Primary (general boards with large IT sections)
 
@@ -66,15 +75,21 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 ### Remote / offshore (USD-paying)
 
 - `linkedin.com/jobs` with `Remote` + `Vietnam` / `Asia` filters
-- `vietnamdevs.com` (remote tag)
 - `wellfound.com` (ex-AngelList) - startup remote roles open to APAC
-- ⚡ **CLI installed:** `remoteok.com` (`remoteok-search`, JSON API — title-precise `-q`, `--tag` for broad; feed skews non-tech day-to-day) and `weworkremotely.com` (`weworkremotely-search`, RSS — detail falls back to feed body since WWR job pages are Cloudflare-walled). Check timezone on both.
+- ⚡ **CLI installed:** `remoteok.com` (`remoteok-search`, JSON API — title-precise `-q`, `--tag` for broad; feed skews non-tech day-to-day) and `weworkremotely.com` (`weworkremotely-search`, RSS — detail falls back to feed body since WWR job pages are Cloudflare-walled; **disabled 2026-10-11**, 134 results and 1 ranked 60+). Check timezone on both.
 - `cake.me/jobs/Vietnam` - APAC network, remote + hybrid, English-friendly
 - `arc.dev/en-vn/remote-jobs` - vetted remote dev roles, global (timezone-check mandatory)
 - `glassdoor.com` - aggregates remote VN dev roles, plus company reviews and salary data (doubles as company research)
 - Freelance/contract USD (only if open to non-permanent work): `toptal.com`, `lemon.io`, `gun.io`, `workana.com`, `vlance.vn`
 
 ### Tooling note
+
+**Disabled for low yield (2026-10-11):** `lever-search`, `devwork-search`, `vietnamdevs-search`,
+`weworkremotely-search`. Unlike `topcv-search` — disabled because its WAF blocks the CLI, and
+deliberately covered by the `site:topcv.vn` fallback — these four were switched off because what
+they return does not fit, so do **not** cover them through the Step 1c WebSearch fallback either.
+The two `site:jobs.lever.co` lines under Priority 1 stay: they reach companies outside the
+curated `companies.json`, a different population from the one the CLI was measured on.
 
 **Installed portal CLIs** (structured results + dedup, faster than WebSearch — prefer these):
 - **LinkedIn** — `.agents/skills/linkedin-search/`
@@ -129,7 +144,9 @@ Location Filter below then drops, so pair it with `--country VN` rather than a b
 
 ## Query Categories
 
-Queries are grouped by priority. Priority 1-3 run by default; `/scrape broad` runs all. Write **each category in both Vietnamese and English** (the two languages on the Languages table — see Language scope above and the Language Note table at the bottom of this file). Combine each query with the Ha Noi location terms where the site supports it.
+Queries are grouped by priority. **The default pass runs Priority 1, 2 and 6** — not "the top
+three": Priority 3 (Frontend) became opt-in on 2026-10-11 and its slot went to Priority 6's
+backend stack/domain queries. `/scrape broad` runs all; `/scrape frontend` runs Priority 3. Write **each category in both Vietnamese and English** (the two languages on the Languages table — see Language scope above and the Language Note table at the bottom of this file). Combine each query with the Ha Noi location terms where the site supports it.
 
 **Organize by function, not job title.** The same underlying work carries different titles across companies and markets (a "Data Scientist" role at one employer may be posted as "Insights Analyst" or "Data Consultant" at another). Name each priority category after the function it covers, and list several plausible job titles as query variants within that category rather than betting an entire priority tier on one exact title string.
 
@@ -147,12 +164,10 @@ site:topcv.vn "Golang Developer" Hà Nội
 site:topcv.vn "Backend Developer" Golang OR NodeJS Hà Nội
 site:vietnamworks.com "Golang" OR "Go Backend" Hà Nội
 site:itnavi.com.vn Golang Hà Nội
-site:vietnamdevs.com Golang backend
 site:linkedin.com/jobs "Golang Developer" Hanoi Vietnam
 site:linkedin.com/jobs "Backend Engineer" Go Vietnam
 site:careerviet.vn Golang OR "Backend Developer" Hà Nội
 site:cake.me "Backend Engineer" OR "Golang" Vietnam
-site:devwork.vn Golang OR Backend
 site:vieclam24h.vn "Backend Developer" OR Golang Hà Nội
 site:jobsgo.vn "Backend Developer" Golang Hà Nội
 site:careerlink.vn "Backend Developer" OR Golang Hà Nội
@@ -173,14 +188,16 @@ site:jobs.ashbyhq.com "Backend Engineer" Kubernetes OR Kafka remote
 Installed-CLI equivalents (preferred over WebSearch — structured, deduped, faster):
 
 ```
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search --keywords "Golang Backend Developer" --location "Hanoi, Vietnam"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search --keywords "Go Backend Engineer" --location "Vietnam" --remote
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Developer" -l "Hanoi, Vietnam"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Go Backend Engineer" -l "Vietnam" --remote remote
 bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
 bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "backend" --limit 20 --format table
-bun run .agents/skills/topcv-search/cli/src/cli.ts search -q "backend" -l "ha-noi" --format table
 bun run .agents/skills/itnavi-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
-bun run .agents/skills/vietnamdevs-search/cli/src/cli.ts search -q "golang" --format table
 ```
+
+(`topcv-search` is disabled — its WAF blocks the CLI — so TopCV runs on the `site:topcv.vn`
+lines above. The LinkedIn lines used `--keywords` and a bare `--remote` until 2026-10-11; the
+CLI rejects both as `UNKNOWN_FLAG` — see its SKILL.md for `-q` and `--remote <mode>`.)
 
 ### Priority 2: Fullstack Developer (React/Next + Go/Node)
 
@@ -194,10 +211,14 @@ site:topcv.vn "Fullstack Developer" ReactJS Hà Nội
 site:vietnamworks.com "Fullstack Developer" React Node Hà Nội
 site:glints.com "Fullstack Engineer" Vietnam
 site:linkedin.com/jobs "Fullstack Engineer" React Node Hanoi
-site:vietnamdevs.com fullstack react golang
 ```
 
-### Priority 3: Frontend Developer (React / Next.js / Vue)
+### Priority 3 (opt-in only): Frontend Developer (React / Next.js / Vue)
+
+**Opt-in since 2026-10-11** — run only on `/scrape frontend` or `/scrape broad`. The experience is
+real, but in five weeks of data 51 frontend-titled postings were ranked, 1 scored 60+ and none 70+,
+so it was spending default-pass budget on roles the fit framework then scores low. React/Next still
+counts inside Fullstack (Priority 2), which stays in the default pass.
 
 Deep, real experience: React, Next.js, Vue, Redux/Redux Toolkit, Recoil, Tailwind, Ant Design.
 
@@ -218,10 +239,8 @@ Remote roles for foreign or offshore companies. Worth a separate pass - the pay 
 ```
 site:linkedin.com/jobs "Golang" remote Vietnam
 site:linkedin.com/jobs "Backend Engineer" remote Asia Go
-site:vietnamdevs.com remote golang OR backend
 site:wellfound.com Golang backend remote
 site:remoteok.com golang backend
-site:weworkremotely.com golang OR "back-end" developer
 site:cake.me "Backend" remote Vietnam OR Asia
 site:arc.dev Golang OR backend remote
 ```
@@ -272,6 +291,21 @@ site:linkedin.com/jobs "Backend Engineer" Kubernetes Go Hanoi
 site:itviec.com "Fullstack" (Docker OR Kubernetes) ha-noi
 ```
 
+Installed-CLI equivalents — this category is in the default pass since 2026-10-11, so these run
+every time, on the three portals with the best record (LinkedIn, ITviec, TopDev: 8-10% of their
+results ranked 60+, against 0-4% elsewhere):
+
+```
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Kafka" -l "Hanoi, Vietnam"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer microservices" -l "Hanoi, Vietnam"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer fintech" -l "Vietnam"
+bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "nodejs" -l "ha-noi" --format table
+bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "kafka" -l "ha-noi" --format table
+bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "golang" --limit 20 --format table
+bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "kafka" -l "Hà Nội" --format table
+bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "nodejs" --limit 20 --format table
+```
+
 **Infra-as-strength, not DevOps-title** (2026-07-17): the four Kubernetes/Docker/CI-CD lines above
 target *backend/fullstack* roles that treat infra as a plus. They are NOT DevOps/SRE-title searches
 (those live in Priority 5, off-target). Match them to backend/fullstack postings; never surface a
@@ -309,6 +343,22 @@ realistically land. Seniority is now a **hard title-level filter**, not a judgem
 so the filter is applied **after fetching**, at `/scrape` Step 2 — excluded postings are written
 to `seen_jobs.json` with `"status": "skipped"` (so dedup still works and they never resurface)
 and are **not** presented in the Step 5 table. `/rank` therefore never sees them.
+
+## Low-Fit Triage (2026-10-11)
+
+Step 3's quick fit signal predicts `/rank`'s score well enough to act on. Across 489 ranked
+postings: **high** → 26 of 65 scored 70+; **medium** → 9 of 139; **low** → 5 of 285. Of the 16
+tracker applications that can be matched to a scraped entry, every one was rated high or medium. Ranking low-fit postings was most of `/rank`'s
+work for almost none of its output.
+
+- **Low** fit → write the entry with `"status": "skipped"` and `"skip_reason": "low fit at
+  scrape"` (keep `fit: "low"` too), so dedup still holds and `/rank` — which only selects `new`
+  — never spends a scoring agent on it.
+- **High / medium** fit → `"status": "new"` as before.
+- In the Step 5 report, leave low-fit postings out of the table and give their count on one
+  line instead (e.g. `low fit, not queued for /rank: 23`), so the cut stays visible.
+
+The Language Gate's low override (an undeclared required language) lands in the same bucket.
 
 ## Location Filter
 
@@ -382,5 +432,6 @@ with the Vietnamese equivalent:
 If the user specifies a focus area, select queries from the matching category and also generate
 2-3 custom queries for that focus. For example:
 - `/scrape golang` -> Priority 1 queries + custom Go-specific queries
+- `/scrape frontend` -> Priority 3 queries (opt-in since 2026-10-11)
 - `/scrape remote` -> Priority 4 queries + remote-filtered variants of Priority 1-2
 - `/scrape devops` -> Priority 5 queries + Kubernetes/ArgoCD/observability variants

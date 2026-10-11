@@ -10,7 +10,7 @@ description: >
   <company>, crypto jobs, fintech jobs, APAC tech jobs, việc làm, tuyển dụng,
   tìm việc, việc làm IT Hà Nội, việc làm backend, tuyển dụng lập trình viên.
 context: fork
-enabled: true  # set to false to keep this portal installed but have /scrape skip it
+enabled: false  # low yield - 0-1 of its results ranked 60+ across 2026-08-27..10-09; re-enable if that changes
 allowed-tools: Bash(bun run .agents/skills/lever-search/cli/src/cli.ts *)
 ---
 

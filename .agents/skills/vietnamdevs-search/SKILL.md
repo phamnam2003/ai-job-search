@@ -15,7 +15,7 @@ description: >
   developer, tìm việc IT Việt Nam, việc làm backend, tuyển dụng IT remote, việc làm
   lập trình viên Hà Nội.
 context: fork
-enabled: true  # set to false to keep this portal installed but have /scrape skip it
+enabled: false  # low yield - 0-1 of its results ranked 60+ across 2026-08-27..10-09; re-enable if that changes
 allowed-tools: Bash(bun run .agents/skills/vietnamdevs-search/cli/src/cli.ts *)
 ---
 

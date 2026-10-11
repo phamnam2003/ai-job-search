@@ -14,7 +14,7 @@ description: >
   IT, tuyển dụng lập trình viên, việc làm lập trình Hà Nội, việc làm Golang,
   tuyển dụng IT, việc làm có thưởng giới thiệu.
 context: fork
-enabled: true  # set to false to keep this portal installed but have /scrape skip it
+enabled: false  # low yield - 0-1 of its results ranked 60+ across 2026-08-27..10-09; re-enable if that changes
 allowed-tools: Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts *)
 ---
 
