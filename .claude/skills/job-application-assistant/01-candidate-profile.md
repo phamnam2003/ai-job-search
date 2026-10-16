@@ -35,6 +35,12 @@ framework_version: 1.1.1
   list is in `02-behavioral-profile.md`'s TODO.
 - **Status:** Employed — Frontend and Backend Developer at AIONtech (11/2025 – present), open to new opportunities
 - **Constraints:** Ha Noi onsite/hybrid, or remote (VN and offshore). Not relocating to HCMC/Da Nang unless fully remote.
+  **Abroad, added 2026-10-12:** Europe (EU/EEA, plus UK and Switzerland), Singapore and Australia
+  are targets, **either remote from Ha Noi or relocating** with visa sponsorship. He accepts the
+  employer's working hours in full, because this is a full-time move rather than a side job. Relocation
+  only works where the employer sponsors: "must have the right to work in X" or "no sponsorship"
+  is a fail unless remote from Vietnam is also offered. Australian employer-sponsored visas carry
+  an English-test condition, so flag that on any AU relocation posting.
 - **Salary filter band:** **17–40M VND/month**. This is a search filter and nothing else — the
   floor flags postings to skip, the top reflects the published market band for Go backend at
   ~3 years in Ha Noi. It is deliberately *not* a record of what he earns now or of any offer he
@@ -55,7 +61,7 @@ a hard no, not a gap to smooth over. -->
 | Language | Level | Notes |
 |----------|-------|-------|
 | Vietnamese | Native | Primary working language |
-| English | Professional working | Technical reading/writing. **Not** live/conversational — roles requiring client-facing English, English-first interviews or US-hours standups are a hard deal-breaker (see CLAUDE.md) |
+| English | Professional working | Technical reading/writing. **Not** live/conversational. On Vietnam-based postings, roles requiring client-facing English, English-first interviews or US-hours standups are a hard deal-breaker (see CLAUDE.md). On Europe/Singapore/Australia postings (2026-10-12) English as the working language is flagged `english-flag` rather than excluded; only an explicit fluent/native/excellent-spoken bar or a client-facing role is excluded there |
 
 ## Education
 

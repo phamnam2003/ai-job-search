@@ -69,8 +69,15 @@ Judge the level comparison the same way you judge everything else in this framew
 
 Three guardrails, because this carve-out is the easiest rule in the file to erode:
 - **It is not "the stack is fine, so keep it."** Most Vietnamese backend postings mention Go and Kafka. Exceptional means it would be near the top of a `/rank` run on its own merits, not merely relevant.
-- **US-hours timezone overlap stays a hard FAIL regardless.** That is a separate deal-breaker about sleep, not about language, and this carve-out does not touch it.
+- **US-hours timezone overlap stays a hard FAIL regardless.** That is a separate deal-breaker about sleep, not about language, and this carve-out does not touch it. (European, Singaporean and Australian hours are accepted in full since 2026-10-12 — he is switching jobs outright, not moonlighting.)
 - **The note must name the English requirement verbatim.** A downgraded posting that reaches him without the quoted requirement line has defeated the point of the gate.
+
+**Foreign postings — Europe, Singapore, Australia (added 2026-10-12, at his request).** For an employer hiring into those markets, whether onsite there or remote from Vietnam, English is the team's working language and an English interview is a given. Excluding on that would empty the market. So on these postings:
+- English as the working language, an English interview, English standups, or an unspecified "good English" → **FLAG** (`english-flag`), keep and score normally.
+- An explicit high spoken bar stated as a requirement ("fluent", "native", "excellent spoken/verbal English", "outstanding communication skills" as must-have), or a client-facing, presenting or consulting role → **FAIL**. The exceptional-match carve-out above applies here as it does to Vietnam-based postings.
+- A required local language (German, Dutch, French, Polish…) → **FAIL** under the main gate; it is not on his table. "Nice to have" is a pass.
+
+Vietnam-based postings keep the stricter Profile override above, unchanged.
 
 ## Scoring Dimensions
 
@@ -119,7 +126,8 @@ Does the role and company culture match the behavioral profile?
 ### 4. Location & Logistics (Pass/Fail + Notes)
 - Within commute range: PASS
 - Remote with occasional office: PASS
-- Requires relocation: FAIL (deal-breaker)
+- Requires relocation: FAIL (deal-breaker) — **except** relocation to Europe (EU/EEA, UK, Switzerland), Singapore or Australia (added 2026-10-12): PASS when the employer sponsors the visa or the sponsorship question is open, FLAG with a note when sponsorship is unstated, FAIL when the posting requires an existing right to work or says it does not sponsor (unless remote from Vietnam is also offered). Australia relocation: also FLAG the visa's English-test condition
+- Remote from Vietnam for a Europe/Singapore/Australia employer: PASS at any working hours (2026-10-12)
 - Frequent international travel: FLAG (discuss with user)
 
 ### 5. Career Alignment & Motivation (0-100)
@@ -149,7 +157,7 @@ Does this role advance career goals and contain tasks that energize?
 
 **Life situation alignment:** Consider personal constraints:
 - **Security**: employed at AIONtech (11/2025–present), searching from a position of stability — no pressure to take the first offer. Salary filter band **17–40M VND/month, negotiable** (floor raised from 15M on 2026-08-24); flag postings clearly below the floor in `/rank`. A filter only — see `01-candidate-profile.md` for why no actual or expected figure is recorded anywhere in this repository. The floor is duplicated in CLAUDE.md's deal-breakers and in that file; change all three together or the scrape filter and the rank flag will disagree.
-- **Flexibility**: Ha Noi onsite/hybrid or remote (VN + offshore). **Not** relocating to HCMC/Da Nang unless fully remote. English is technical reading/writing only — exclude roles requiring live English, subject to the exceptional-match carve-out in the Language Gate above. US-hours timezone overlap is excluded outright and the carve-out does not apply to it.
+- **Flexibility**: Ha Noi onsite/hybrid or remote (VN + offshore). **Not** relocating to HCMC/Da Nang unless fully remote. **Since 2026-10-12, Europe, Singapore and Australia are targets too**, remote from Ha Noi or by relocation with visa sponsorship, at the employer's working hours. English is technical reading/writing only — exclude roles requiring live English, subject to the exceptional-match carve-out in the Language Gate above; on Europe/Singapore/Australia postings English as the working language is flagged, not excluded (see the Foreign postings rule there). US-hours timezone overlap is excluded outright and the carve-out does not apply to it.
 - **Professional development**: wants to deepen backend/distributed-systems expertise and grow toward design authority over larger areas; open to mentorship but does not require it. Currently teaching himself **Rust** with the intent of making it a third mainstream language alongside Go and TypeScript — an employer using Rust is a genuine draw for him, even though it scores as a weak *match* today.
 
 ### 6. Salary Benchmark (Optional)

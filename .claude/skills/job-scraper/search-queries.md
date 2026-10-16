@@ -139,6 +139,8 @@ mistake: it is a country-agnostic aggregator over ~50 ATS platforms, and `-q "ba
 --country VN` / `--region apac` return live Vietnamese and APAC roles. It is enabled. Its weakness
 is the opposite of a Danish board's - it returns plenty of India/Singapore/HCMC postings that the
 Location Filter below then drops, so pair it with `--country VN` rather than a bare region query.
+Since 2026-10-12 Singapore, Australia and Europe are in scope (Priority 7), so `--country SG,AU`
+and `--region eu` are deliberate queries there rather than noise.
 
 ---
 
@@ -311,6 +313,42 @@ target *backend/fullstack* roles that treat infra as a plus. They are NOT DevOps
 (those live in Priority 5, off-target). Match them to backend/fullstack postings; never surface a
 DevOps-Engineer title from this block.
 
+### Priority 7: Abroad - Europe / Singapore / Australia (added 2026-10-12)
+
+He opened these three markets on 2026-10-12, either **remote from Ha Noi or by relocating**
+(visa sponsorship required for the latter). Any working hours are fine: it is a full-time switch.
+Not in the default pass yet. It runs on `/scrape abroad` and `/scrape broad`. Promote it to the
+default pass once a few runs show its yield, the same way Priority 6 was promoted on 2026-10-11.
+English rules differ for these postings. See the Language Filter below: English as the working
+language is flagged, not excluded.
+
+```
+site:linkedin.com/jobs "Golang" OR "Go Engineer" Singapore
+site:linkedin.com/jobs "Backend Engineer" Go Australia
+site:linkedin.com/jobs "Golang" "visa sponsorship" Europe
+site:relocate.me golang OR "backend engineer"
+site:arbeitnow.com golang OR "backend engineer" visa sponsorship
+site:landing.jobs golang OR "backend developer" relocation
+site:nodeflair.com golang OR "backend engineer" singapore
+site:seek.com.au golang OR "go developer"
+```
+
+Installed-CLI equivalents:
+
+```
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Singapore"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Australia"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "European Union"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer visa sponsorship" -l "European Union"
+bun run .agents/skills/freehire-search/cli/src/cli.ts search -q "golang" --country SG,AU
+bun run .agents/skills/freehire-search/cli/src/cli.ts search -q "golang" --region eu
+bun run .agents/skills/ashby-search/cli/src/cli.ts search -q golang -l Singapore
+bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q golang --tag eu-hours
+```
+
+Before keeping a relocation posting, check its sponsorship line. "Must have the right to work in
+X" or "we do not sponsor" is a drop unless remote from Vietnam is also offered.
+
 ---
 
 ## Seniority Filter
@@ -369,6 +407,13 @@ The Language Gate's low override (an undeclared required language) lands in the 
 - **Borderline:** Bac Ninh, Hung Yen, Ha Nam - only if hybrid/mostly-remote, flag the commute
 - **Too far:** Ho Chi Minh City, Da Nang, and all other provinces - **exclude unless the posting
   is explicitly fully remote**
+- **Abroad, in scope since 2026-10-12:** Europe (EU/EEA, plus UK and Switzerland), Singapore,
+  Australia. **Keep** onsite/hybrid postings there as relocation candidates and remote postings open
+  to Vietnam, at any working hours. **Drop** a relocation posting that requires an existing right
+  to work or says it does not sponsor, unless it also allows remote from Vietnam. Flag the
+  English-test condition on Australian relocation postings.
+- **Other countries** (US, India, Japan, Korea, the rest of Asia...) - exclude unless fully remote
+  and open to Vietnam. US-hours overlap still excludes.
 
 ## Language Filter
 
@@ -382,6 +427,14 @@ distributed-systems brief, or fintech/banking backend), keep it, mark it `englis
 judge. "Exceptional" means it would rank near the top on its own merits — not merely that the stack
 is relevant, which is true of most VN backend ads. **US-hours timezone overlap is a separate
 deal-breaker and stays a hard exclude**; the carve-out does not reach it.
+
+**Europe / Singapore / Australia postings (2026-10-12): flag, don't exclude.** English is the
+working language there, so an English interview and English standups are a given. Keep the
+posting and mark it `english-flag`. Exclude it only when it states a high spoken bar as a
+requirement (fluent, native, excellent spoken English) or is client-facing, presenting or
+consulting work, and the exceptional-match carve-out above still applies. A required local language
+(German, Dutch, French...) is undeclared, so the Language Gate excludes it. "Nice to have" is fine.
+The Vietnam-posting rule above is unchanged.
 
 ## Sector Weighting
 
@@ -435,3 +488,4 @@ If the user specifies a focus area, select queries from the matching category an
 - `/scrape frontend` -> Priority 3 queries (opt-in since 2026-10-11)
 - `/scrape remote` -> Priority 4 queries + remote-filtered variants of Priority 1-2
 - `/scrape devops` -> Priority 5 queries + Kubernetes/ArgoCD/observability variants
+- `/scrape abroad` -> Priority 7 queries (Europe / Singapore / Australia, added 2026-10-12)

@@ -16,7 +16,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 
 ### Identity
 - **Name:** Pham Hai Nam (Phạm Hải Nam), b. 15/07/2003
-- **Location:** Ha Noi, Vietnam (Ha Noi onsite/hybrid, or remote — VN and offshore. Not relocating to HCMC/Da Nang unless fully remote.)
+- **Location:** Ha Noi, Vietnam (Ha Noi onsite/hybrid, or remote — VN and offshore. Not relocating to HCMC/Da Nang unless fully remote.) **Since 2026-10-12 also targeting Europe, Singapore and Australia** — remote from Ha Noi *or* relocating there with visa sponsorship (see Deal-breakers).
 - **Contact:** 0346294259 · namphamhai7@gmail.com · https://github.com/phamnam2003 · https://www.linkedin.com/in/pham-nam-153ab9259/
 - **Languages:**
   | Language | Level |
@@ -106,11 +106,13 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 automatically from the Languages table above (see 04-job-evaluation.md's Language Gate) - don't
 duplicate them here. The live-English line below is a deliberate *override*, not a duplicate: the
 gate would only FLAG an English-fluency bar, and Pham wants those excluded outright — with the one
-narrow exception added 2026-09-03 and spelled out in that bullet. -->
-- Location: nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation)
+narrow exception added 2026-09-03 and spelled out in that bullet. The 2026-10-12 abroad rules
+(Location, timezone, English for foreign postings) were chosen by him in one sitting; keep them together. -->
+- Location: inside Vietnam, nothing outside Ha Noi unless fully remote (no HCMC/Da Nang relocation). **Abroad (added 2026-10-12): Europe (EU/EEA, plus UK and Switzerland), Singapore and Australia are in scope, either remote from Ha Noi or relocating.** Relocation depends on visa sponsorship: a posting that requires an existing right to work or says it does not sponsor fails, unless it also allows remote from Vietnam. Other countries stay out of scope unless the role is fully remote
 - Level: target is Mid-level (Junior acceptable). Excluded in both directions — no Intern/Fresher/Trainee/Graduate below, and no Senior/Sr./Staff/Principal/Lead/Manager/Architect titles above (~3 yrs experience; senior titles are not realistic yet and dilute the scrape)
-- Remote/offshore roles requiring US-hours timezone overlap
+- Remote/offshore roles requiring US-hours timezone overlap (the US is not a target market). **European, Singaporean and Australian working hours are accepted in full** (2026-10-12): this is a full-time job switch, not a side job, so he works the employer's hours
 - English: technical reading/writing only — exclude roles requiring live English (client-facing, English-first interviews, US-hours standups). Overrides the Language Gate's FLAG verdict to a hard exclude. **Narrow exception, added 2026-09-03:** where the stack match is exceptional (Go + Kafka/gRPC + fintech, or a genuine event-driven/performance role), keep the posting and mark it `english-flag` instead of dropping it, so he can decide. The exception is for outstanding matches only — it is not a licence to soften the filter generally, and the default on an ordinary match is still exclude
+- **English on foreign postings (Europe/Singapore/Australia, added 2026-10-12): flag, don't exclude.** There, English is simply the working language, so English interviews and standups are expected. Keep the posting and mark it `english-flag`. Still exclude a posting that sets an explicit high spoken bar as a requirement (fluent, native, excellent spoken English) or a client-facing, presenting or consulting role. The 2026-09-03 exceptional-match exception applies to those too. A required local language (German, Dutch, French…) is undeclared and fails the Language Gate. The live-English rule above still governs Vietnam-based postings unchanged
 - **Not** a DevOps/Platform/SRE job title (has the skills and enjoys the work, but does not want it as the role)
 - Drains to avoid *(re-confirmed and extended 2026-09-03)*: ticket-only work with no design input; legacy maintenance with no new build; **meeting-heavy and process-heavy environments** — this third one was missing from earlier versions and he named it alongside the other two, so score ceremony (daily sync + grooming + planning + retro, mandatory office ritual) as a real negative, not a neutral
 - Salary filter band: **17–40M VND/month, negotiable** — flag postings clearly below the floor. A search filter only; no actual or expected figure is recorded in this repository (it is public). The floor is duplicated in `01-candidate-profile.md` and `04-job-evaluation.md` — change all three together or `/scrape` and `/rank` will enforce different bars
