@@ -56,7 +56,7 @@ See `../SKILL.md` for the full flag reference and the personal-use note, and
 | `--query` | `-q` | Keywords. Fuzzy, similarity-ranked — pair with `--strict`. |
 | `--location` | `-l` | Province code or name, accents optional (`ha-noi`, `"Hà Nội"`, `hanoi`, `hcm`). Server-side. |
 | `--jobage` | | Posted within N days (client-side, on `createdAt`). |
-| `--strict` | | Keep only postings whose text contains every query word. |
+| `--strict` | | Keep only postings whose text contains every query word. An accented (Vietnamese) query must occur as one phrase. |
 | `--include-expired` | | Keep closed / past-deadline postings (dropped by default). |
 | `--page` | | 1-indexed page (20 results/page before filtering). |
 | `--limit` | `-n` | Cap results emitted. |

@@ -1,6 +1,6 @@
 ---
 name: joywork-search
-version: 1.0.0
+version: 1.0.1
 description: >
   Use this skill to search jobs in Vietnam on JoyWork (joywork.vn), a general Vietnamese
   job board with culture-focused company profiles, or to look up a specific JoyWork job
@@ -51,7 +51,7 @@ Key flags:
 - `--query <text>` / `-q <text>` — keyword search. **Fuzzy and similarity-ranked** (see Notes), so pair it with `--strict`.
 - `--location <text>` / `-l <text>` — one province, filtered **server-side**. Accepts a code (`ha-noi`) or a name with or without accents (`"Hà Nội"`, `"ha noi"`), plus the aliases `hanoi`, `hcm`, `hcmc`, `saigon` and `danang`. An unknown value exits with `BAD_LOCATION` instead of being sent.
 - `--jobage <days>` — posted within N days. Applied **client-side** on the posting date (the API has no age parameter).
-- `--strict` — keep only postings whose own text (title, mission, tasks, requirements) contains **every** query word, accent-insensitively. This removes the fuzzy-match noise.
+- `--strict` — keep only postings whose own text (title, mission, tasks, requirements) contains **every** query word, accent-insensitively. This removes the fuzzy-match noise. A query written **with Vietnamese accents** must occur as one **phrase** (`"lập trình viên"` keeps "Lập trình viên .NET" but not "Nhân viên kỹ thuật lắp đặt … quy trình"), because single Vietnamese syllables turn up in almost every posting. Keep the accents: unaccented `lap trinh vien` is matched word by word.
 - `--include-expired` — keep closed and past-deadline postings. By default they are **dropped**, because keyword search returns them mixed in with open ones.
 - `--page <n>` — page number (1-indexed, **20 results per page before filtering**).
 - `--limit <n>` / `-n <n>` — cap total results emitted (client-side).

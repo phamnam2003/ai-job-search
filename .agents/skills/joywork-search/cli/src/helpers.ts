@@ -463,13 +463,26 @@ export function searchableText(raw: RawJob): string {
   return foldDiacritics(fields.filter(Boolean).map((f) => htmlToText(f as string)).join("\n"))
 }
 
-/** True when every whitespace-separated query term occurs in the posting's text. */
+/** True when the text carries Vietnamese tone or vowel marks, or đ. */
+function hasDiacritics(s: string): boolean {
+  return /[\u0300-\u036f]/.test(s.normalize("NFD")) || /[đĐ]/.test(s)
+}
+
+/**
+ * True when the posting's text matches the query, accent-insensitively.
+ *
+ * An accented query is Vietnamese, whose words are single syllables, so it must occur
+ * as one phrase within a line, bounded by non-letters. Matched term by term,
+ * "lập trình viên" hits nearly every posting: "lắp đặt", "quy trình" and "nhân viên"
+ * supply the three syllables separately. Any other query needs each
+ * whitespace-separated term somewhere in the text.
+ */
 export function matchesAllTerms(raw: RawJob, query: string): boolean {
   const haystack = searchableText(raw)
-  return foldDiacritics(query)
-    .split(/\s+/)
-    .filter(Boolean)
-    .every((term) => haystack.includes(term))
+  const terms = foldDiacritics(query).split(/\s+/).filter(Boolean)
+  if (!hasDiacritics(query)) return terms.every((term) => haystack.includes(term))
+  const phrase = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("[^\\S\\n]+")
+  return new RegExp(`(?<![a-z0-9])${phrase}(?![a-z0-9])`).test(haystack)
 }
 
 export function mapJobDetail(raw: RawJob, now: number = Date.now()): JobDetail {

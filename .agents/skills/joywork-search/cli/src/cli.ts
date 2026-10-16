@@ -52,6 +52,7 @@ SEARCH FLAGS
                           ("Hà Nội", "ha noi", "hanoi", "HCM", "Da Nang").
   --jobage <days>         Posted within N days (client-side, on the posting date).
   --strict                Keep only postings whose text contains every --query word.
+                          An accented query ("lập trình viên") must occur as one phrase.
   --include-expired       Keep closed and past-deadline postings (dropped by default).
   --page <n>              1-indexed page (${PAGE_SIZE} results/page before filtering). Default 1.
   --limit, -n <n>         Cap results emitted (client-side).

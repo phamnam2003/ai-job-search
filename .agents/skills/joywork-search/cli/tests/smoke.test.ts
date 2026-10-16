@@ -123,6 +123,19 @@ describe("parsers", () => {
     expect(matchesAllTerms({ title: "Giảng viên Graphic Design" }, "golang")).toBe(false)
   })
 
+  test("matchesAllTerms reads an accented query as one phrase, not loose syllables", () => {
+    // Real false positive from 2026-10-16: "lập", "trình" and "viên" each occur, apart.
+    const installer = { title: "NHÂN VIÊN KỸ THUẬT LẮP ĐẶT", tasks: "<p>Lắp đặt thiết bị theo đúng quy trình</p>" }
+    expect(matchesAllTerms(installer, "lập trình viên")).toBe(false)
+    expect(matchesAllTerms({ title: "LẬP TRÌNH VIÊN .NET" }, "lập trình viên")).toBe(true)
+    expect(matchesAllTerms({ title: "Tuyển Lập  trình viên Backend" }, "lập trình viên")).toBe(true)
+    expect(matchesAllTerms({ title: "Lap trinh vien Java" }, "lập trình viên")).toBe(true)
+    expect(matchesAllTerms({ title: "Lập trình viên Golang" }, "lập trình viên golang")).toBe(true)
+    // A phrase does not run across a paragraph break or stop mid-word.
+    expect(matchesAllTerms({ title: "Kỹ sư lập trình", mission: "<p>viên chức</p>" }, "lập trình viên")).toBe(false)
+    expect(matchesAllTerms({ title: "Kỹ thuật viên" }, "kỹ thuật vi")).toBe(false)
+  })
+
   test("buildDescription follows the site's section order and skips empty sections", () => {
     const text = buildDescription({
       mission: "<p>Own the payments API</p>",
