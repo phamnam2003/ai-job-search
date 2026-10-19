@@ -6,35 +6,17 @@ framework_version: 1.0.0
 
 <!-- SETUP: STAR examples are personalized by running /setup based on your actual experience -->
 
-## Live prep material — read these first when an interview is scheduled
+## Standing instruction — correct overstated CV lines before the interview
 
-<!-- Registered by /setup on 2026-08-24. These are working documents written for specific
-     interviews, not framework files. This file holds the reusable answers; those hold the
-     dated plan and drill schedule for one particular round.
-     Deliberately kept out of the table below: figures, referrer identities, and anything
-     naming what is on the table. This repository is public — read the plan itself for those. -->
-
-Interview-specific plans live in `documents/interview/`, not in this file. Check there before
-building anything new — the material is usually already written. The table says only what each
-file *is*, not what is in it:
-
-| File | What it holds |
-|------|---------------|
-| `2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md` | The active plan — a dated drill schedule running to the 01/10/2026 interview. Format that round tests for: project deep-dive, live Go coding, system design. Read it in full when preparing; it also carries that round's compensation approach, which is not repeated here. |
-| `2026-10-01_ngan-hang-cau-hoi_cong-ty-truy-xuat-nguon-goc.md` | The question bank that plan drills against — one exercise per evening, spoken aloud and timed at 60–90s, self-scored. Not a document to read through. |
-| `2026-08-11_ke-hoach-phong-van_cong-ty-truy-xuat-nguon-goc.md` | Earlier plan (written 10/08, for the 11–12/08/2026 round) for the same company, **not executed**. The speaking script and the compensation half are still usable. Also the source for the "concedes value pre-emptively" trait in `02-behavioral-profile.md`. |
-
-**One standing instruction carried out of those plans:** fix an overstated CV line *on paper,
-before the room*. Correcting yourself in front of an interviewer who was vouched for you costs
-the person who vouched, not just you. See the "Architected the system" issue logged under
-Key Projects in `01-candidate-profile.md`.
+Fix an overstated CV line *on paper, before the room*. Correcting yourself in front of an
+interviewer who was vouched for you costs the person who vouched, not just you. See the
+"Architected the system" issue logged under Key Projects in `01-candidate-profile.md`.
 
 > **Status of that specific line, checked 2026-09-03.** All four `cv/*.tex` files are clean — the
 > word does not appear in any of them. It survives only in the f8.edu.vn-built PDF under
 > `documents/cv/`, which is a source document for building CVs rather than one he submits. So
-> there is nothing in circulation to retract. The prepared script for "what if the referrer
-> remembers the old wording" (§4.1 of the 01/10 plan) is still worth rehearsing, but it is now a
-> courtesy rather than a repair.
+> there is nothing in circulation to retract. If a referrer or interviewer remembers the old
+> wording, state the corrected scope plainly — a courtesy now, not a repair.
 
 ## STAR Format
 
@@ -287,8 +269,8 @@ disguised strength, and the mitigation is a thing he actually does rather than "
 It also aligns with the environment he says he wants, so it reads as coherent rather than
 rehearsed.
 
-**Second answer if they push** — self-advocacy under pushback, from
-`documents/interview/2026-08-11_ke-hoach-phong-van_cong-ty-truy-xuat-nguon-goc.md`:
+**Second answer if they push** — self-advocacy under pushback (the "concedes value pre-emptively"
+trait in `02-behavioral-profile.md`):
 > When someone challenges something I've claimed, my instinct is to soften it before they've even
 > made the argument. I'll hedge a result I'm actually sure of. I've learned to notice the hedge
 > forming and just stop talking instead — the plain fact is usually stronger than the qualified one.

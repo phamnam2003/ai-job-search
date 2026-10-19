@@ -21,8 +21,6 @@ documents/
 │       ├── cover_letter.tex     # The cover letter you submitted
 │       ├── cv_draft.tex         # The CV variant you submitted
 │       └── outcome.md           # Result + notes (fill in after hearing back)
-├── interview/                   # Dated prep plans and question banks, one set per interview round
-│   └── <YYYY-MM-DD>_<topic>_<company>.md
 └── README.md                    # This file
 ```
 
@@ -209,26 +207,6 @@ Application folders may also contain **`interview_prep_<stage>.md`** files writt
 - Which role types and companies have led to interviews (signals strong fit areas)
 - Which applications did not progress (informs the experience match calibration in `04-job-evaluation.md`)
 - Interview feedback, if you recorded it, can surface new STAR candidates
-
----
-
-## interview/
-
-Preparation for specific interview rounds: drill plans, question banks, speaking scripts, and the salary strategy for that round. One set of files per round.
-
-This folder replaces the `negotiations/` folder earlier versions of this README described. That folder was never created, because in practice the negotiation is not a separate event — the salary conversation happens inside the interview process and gets planned alongside it. Both kinds of signal are read from here.
-
-**Supported formats:** `.md`, `.txt`
-
-**Naming:** `<YYYY-MM-DD>_<topic>_<company>.md`, e.g. `2026-10-01_ke-hoach-on-luyen_cong-ty-truy-xuat-nguon-goc.md`. The interview date leads so the folder sorts chronologically and a stale plan is obvious at a glance.
-
-**What `/setup` extracts:**
-- Compensation calibration — current figures, market bands you researched, and your own floor (feeds the compensation bullet in `01-candidate-profile.md`)
-- Behavioral signal — how you actually perform under pressure, which is often visible here in a way it never is in a CV (feeds the growth areas in `02-behavioral-profile.md`)
-
-**What `/setup` does not extract:** the tactics. Opening asks, walk-away floors, who the counterparty is, and what not to say are live details that belong to one round. They stay in this folder and are never copied into the skill files, which hold only what generalizes to the next round. `/setup` also *registers* each file in the pointer table in `07-interview-prep.md` rather than copying its content, so a later run finds the plan you already wrote instead of writing a new one.
-
-**Privacy boundary:** this is the most sensitive folder here. Nothing in it — your current salary, your floor, your read of a colleague or manager, who referred you — may reach a CV, a cover letter, an application form, or a prospective employer. `01-candidate-profile.md` already carries the standing rule never to disclose current compensation; this folder is why that rule exists. Note that this is a *public* repository: material here is protected by the rule above from reaching an employer through a document you send, not from being read directly.
 
 ---
 

@@ -109,7 +109,7 @@ to decide the *how*, and colleagues close enough to argue a design with.
   file is not preparation.
 
 - **Self-directed plans stall unless they carry a calendar** *[Generalised 2026-09-03 from the
-  planning documents in `documents/interview/`]* — Given a goal he sets for himself he writes a
+  interview-prep plans he wrote, deleted 2026-10-19]* — Given a goal he sets for himself he writes a
   thorough and technically correct list of what needs doing, and then the list does not get
   started. The failure is neither motivation nor knowledge: an undated task wall gives no answer to
   "what do I do tonight". The version that worked replaced the wall with a dated day-by-day
@@ -120,7 +120,7 @@ to decide the *how*, and colleagues close enough to argue a design with.
   fixed a live export failure on STM.
 
 - **Concedes value pre-emptively under pushback** *[Carried over — source:
-  `documents/interview/2026-08-11_ke-hoach-phong-van_cong-ty-truy-xuat-nguon-goc.md`]* — Challenged on a claim, he
+  his 2026-08-11 interview plan, deleted 2026-10-19]* — Challenged on a claim, he
   discounts it before being asked to, usually through a hedge ("cũng", "chỉ là", "chưa hẳn", "em
   nghĩ chắc"), and will name the bottom of his own range unprompted. *This is not a contradiction
   of the frank-pushback style above:* he initiates technical disagreement readily, but when his own
