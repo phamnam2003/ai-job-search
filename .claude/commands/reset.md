@@ -20,7 +20,7 @@ If `$ARGUMENTS` is empty or does not contain a recognized scope keyword, ask:
 >
 > - **`profile`** — Clears candidate data from the skill files (profile, behavioral, STAR examples, profile statements, personalized evaluation criteria, search queries). The framework structure, scoring framework, and writing rules are preserved. Use this to re-run `/setup` from scratch.
 >
-> - **`documents`** — Deletes all files you've placed in the `documents/` folder (CV PDFs, LinkedIn export, diplomas, references, project summaries, pasted job postings, past applications, and interview prep plans). The folder structure and `README.md` are preserved.
+> - **`documents`** — Deletes all files you've placed in the `documents/` folder (CV PDFs, LinkedIn export, diplomas, references, project summaries, pasted job postings, past applications). The folder structure and `README.md` are preserved.
 >
 > - **`all`** — Both of the above.
 >
@@ -86,7 +86,11 @@ cv/main_example.tex. This scope covers skill files only.
 
 ### If scope includes `documents`:
 
-Use Glob to list all files present in `documents/cv/`, `documents/linkedin/`, `documents/diplomas/`, `documents/references/`, `documents/projects/`, `documents/postings/`, `documents/applications/`, and `documents/interview/`. Present as:
+Use Glob to list all files present in `documents/cv/`, `documents/linkedin/`, `documents/diplomas/`, `documents/references/`, `documents/projects/`, `documents/postings/`, and `documents/applications/`.
+
+Include nested and hidden user entries in the inventory. Each subfolder's tracked `.gitkeep` is a scaffold placeholder: exclude it from the deletion list and from the empty/non-empty decision, and preserve it.
+
+Present as:
 
 ```
 ## Documents reset will delete:
@@ -111,9 +115,6 @@ documents/postings/
 
 documents/applications/
   - [subfolder/filename] or "(empty)"
-
-documents/interview/
-  - [filename] or "(empty)"
 
 documents/README.md — NOT deleted (instructions file)
 ```
@@ -141,7 +142,9 @@ Wait for the user's response.
 
 ### Profile reset
 
-**For `01-candidate-profile.md`**, replace the file content with:
+Every skill file under `.claude/skills/job-application-assistant/` opens with a `---` frontmatter block carrying its `framework_version` marker. That marker is framework data, not candidate data: `tools/check_framework_version.py` fails a file without it, and `tools/check_upstream_updates.py` cannot compare the file against upstream. Never remove or rewrite it - the two full-file replacements below keep it and replace only what follows.
+
+**For `01-candidate-profile.md`**, keep the file's `---` frontmatter block exactly as it is and replace everything below it with:
 
 ```markdown
 # Candidate Profile
@@ -149,6 +152,11 @@ Wait for the user's response.
 <!-- Run /setup to populate this file -->
 
 ## Identity
+
+### Languages
+
+| Language | Level | Notes |
+|----------|-------|-------|
 
 ## Education
 
@@ -165,7 +173,7 @@ Wait for the user's response.
 ## References
 ```
 
-**For `02-behavioral-profile.md`**, replace the file content with:
+**For `02-behavioral-profile.md`**, keep the file's `---` frontmatter block exactly as it is and replace everything below it with:
 
 ```markdown
 # Behavioral Profile
@@ -247,33 +255,28 @@ Leave the rest of the file intact: the portal-CLI and WebSearch-fallback explana
 
 ### Documents reset
 
-For each non-empty document subfolder, delete all files within it using Bash `rm`. Do not delete the folder itself, and do not delete `documents/README.md`.
+For each non-empty document subfolder, delete all user entries, including nested folders and hidden files. Preserve the seven top-level subfolders, their `.gitkeep` placeholders, and `documents/README.md`. Run the following Bash block only after the confirmation above; its glob settings stay inside the subshell. If `documents/` or any of its seven roots is a symbolic link, stop before deleting anything and ask the user to replace that linked root with a local document folder.
 
 ```bash
-rm -f documents/cv/*
-rm -f documents/linkedin/*
-rm -f documents/diplomas/*
-rm -f documents/references/*
-rm -f documents/projects/*
-rm -f documents/postings/*
-rm -rf documents/applications/*/
-rm -f documents/applications/*
-rm -f documents/interview/*
+(
+  set -e
+  for directory in documents documents/{cv,linkedin,diplomas,references,projects,postings,applications}; do
+    if [ -L "$directory" ]; then
+      printf 'Reset stopped: %s is a symbolic link.\n' "$directory" >&2
+      exit 1
+    fi
+  done
+  unset GLOBIGNORE
+  shopt -s dotglob nullglob
+  for directory in documents/cv documents/linkedin documents/diplomas documents/references documents/projects documents/postings documents/applications; do
+    for entry in "$directory"/*; do
+      if [ "${entry##*/}" != ".gitkeep" ]; then
+        rm -rf -- "$entry"
+      fi
+    done
+  done
+)
 ```
-
-`documents/interview/` holds the dated prep plans and question banks `/setup` and
-`07-interview-prep.md` file there. It is the folder `.gitignore` singles out as the most
-damaging to publish by accident - it names employers, who referred the candidate, walk-away
-salary floors, and the candidate's read of a named manager - so leaving it behind while Step 4
-reports "The `documents/` folder is now empty" is the worst possible failure here. Every one of
-these paths must stay in step with `documents/README.md`; `tests/test_reset_command.py` enforces
-that by listing the tracked subfolders itself and failing when this block or the Step 1 preview
-omits one.
-
-The `applications/` pair is deliberate: `*/` clears the per-application subfolders `/apply` and
-`/interview` create, and the plain `*` catches any loose file sitting at the top of the folder,
-which `*/` alone silently leaves behind. `*` does not match dotfiles in bash, so every
-`.gitkeep` survives and the folder structure is preserved.
 
 ---
 
@@ -299,7 +302,7 @@ Then tell the user what to do next based on what was reset:
 > Note that `CLAUDE.md` and `cv/main_example.tex` are outside the `profile` scope and still hold your personal data. If you are handing this fork over or making it public, clear them by hand.
 
 **If documents were reset:**
-> The `documents/` folder is now empty. Add your career documents and run `/setup` to populate your profile. See `documents/README.md` for instructions on what to put where.
+> Your user documents are now cleared. The folder structure, `.gitkeep` placeholders, and `documents/README.md` are preserved. Add your career documents and run `/setup` to populate your profile.
 
 **If both were reset:**
-> Both your profile files and documents folder are now empty. Add documents to `documents/` (or skip and use the CV import / interview path), then run `/setup`.
+> Your profile data and user documents are now cleared; the document folders, `.gitkeep` placeholders, and `documents/README.md` are preserved. Add documents to `documents/` (or skip and use the CV import / interview path), then run `/setup`.
