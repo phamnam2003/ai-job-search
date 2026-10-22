@@ -39,11 +39,26 @@ framework_version: 1.1.1
   are targets, **either remote from Ha Noi or relocating** with visa sponsorship. He accepts the
   employer's working hours in full, because this is a full-time move rather than a side job. Relocation
   only works where the employer sponsors: "must have the right to work in X" or "no sponsorship"
-  is a fail unless remote from Vietnam is also offered. Australian employer-sponsored visas carry
-  an English-test condition, so flag that on any AU relocation posting.
-- **Salary filter band:** **17–40M VND/month**. This is a search filter and nothing else — the
-  floor flags postings to skip, the top reflects the published market band for Go backend at
-  ~3 years in Ha Noi. It is deliberately *not* a record of what he earns now or of any offer he
+  is a fail unless remote from Vietnam is also offered. **Europe is the whole of it** (widened
+  2026-10-22): every EU/EEA country plus the UK and Switzerland, none ranked above another.
+  Australian employer-sponsored visas carry an English-test condition. **He is willing to sit
+  IELTS for it** (confirmed 2026-10-22), so note the condition on an AU relocation posting as
+  information, never as a reason to drop it or score it down.
+- **Employment type (added 2026-10-22):** employment only. No contractor, freelance, B2B or
+  contract-to-hire work, in Vietnam or abroad. Remote work for a foreign employer passes only as
+  an employee, through the employer's own local entity or an Employer of Record (EOR). A
+  contractor engagement through Deel, Remote.com or a similar platform fails. The platform name
+  settles nothing, because the same platforms run both models: read whether the posting says
+  employee/EOR or contractor.
+- **Salary filter band:** **18–40M VND/month** in Vietnam (floor raised from 17M on 2026-10-22).
+  **Abroad (added 2026-10-22)**, gross floors only: **Singapore S$6,000/month** (S$6,600 for a
+  financial-services employer), **Australia A$95,000/year** base excluding super, **remote from
+  Vietnam for an employer based abroad US$2,000/month** (about 50M VND), and **Europe per
+  country** in the table in `04-job-evaluation.md`, which is its only copy. He asked for the
+  floor a mid-level engineer with his experience commands in each market, so each one is the low
+  end of published market pay at ~3 years, never below the visa's own salary threshold. This is
+  a search filter and nothing else — the floor flags postings to skip, the Vietnam top reflects
+  the published market band for Go backend at ~3 years in Ha Noi. It is deliberately *not* a record of what he earns now or of any offer he
   holds; those figures are not kept in this repository, which is public. Do not reconstruct them
   here, do not ask for them in order to fill this bullet in, and **never state a current salary
   or an expected number to a prospective employer** — if an application form demands one, surface

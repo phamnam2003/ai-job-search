@@ -80,6 +80,7 @@ Use `WebSearch` for:
 - Portals listed in `search-queries.md` that do **not** have a corresponding directory under `.agents/skills/`
 - Any portal whose CLI fails at runtime
 - When bun is unavailable (Step 1a failed)
+- Any query block in `search-queries.md` marked **always-run**, even when the matching portal CLI succeeded (this fork's ATS `site:` blocks: the Greenhouse/Lever/Ashby CLIs only search a curated `companies.json`, and the candidate wants every fitting employer reached, not only listed ones)
 
 Use the site-specific query strings from `search-queries.md` directly as WebSearch queries for these portals.
 
@@ -96,6 +97,8 @@ python3 tools/scrape_state.py candidates --results "<temporary search results.js
 Only fetch details for the returned `selected` hits. The helper checks prior URLs (including legacy-key entries), company+title pairs, the application tracker, and duplicates within this run. This avoids repeat detail requests on every scrape. If `invalid` lists malformed hits, report them as portal data errors and continue with the valid hits; never invent a missing company or URL. Keep the returned hits for Step 4; never paste the history file into the agent context.
 
 For each selected result from Step 1:
+
+**Post-fetch hard filters (this fork):** apply `search-queries.md`'s Seniority Filter, Employment Type Filter and Location Filter here, once the title, employment type and location are known. An excluded posting is stored in Step 4 with `"status": "skipped"` and a `skip_reason`, and left out of the Step 5 table.
 
 **From CLI results:** Search output already includes title, company, location, date,
 and URL. For jobs worth a deeper look, fetch full detail with that portal's `detail`

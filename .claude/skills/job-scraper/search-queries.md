@@ -80,7 +80,9 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 - `cake.me/jobs/Vietnam` - APAC network, remote + hybrid, English-friendly
 - `arc.dev/en-vn/remote-jobs` - vetted remote dev roles, global (timezone-check mandatory)
 - `glassdoor.com` - aggregates remote VN dev roles, plus company reviews and salary data (doubles as company research)
-- Freelance/contract USD (only if open to non-permanent work): `toptal.com`, `lemon.io`, `gun.io`, `workana.com`, `vlance.vn`
+- ~~Freelance/contract USD~~ (`toptal.com`, `lemon.io`, `gun.io`, `workana.com`, `vlance.vn`): **out of
+  scope since 2026-10-22.** He takes employment only, so contractor and freelance platforms are not
+  searched at all. See the Employment Type Filter below.
 
 ### Tooling note
 
@@ -117,8 +119,20 @@ is a curated list, not the whole platform. Two consequences for `/scrape`:
 1. A relevant company that is not in `companies.json` will never appear, no matter how well the
    query matches. Add its board token to the file to fix that (each `companies.json` header
    comment explains how to find and verify one).
-2. The `site:` fallback queries below are **not redundant** for these three — they reach
+2. The ATS `site:` queries below are **not redundant** for these three — they reach
    companies outside the curated lists, which is exactly the blind spot the CLIs have.
+
+**No company whitelist (2026-10-22).** He does not want the search limited to named employers:
+any posting that fits the profile is in scope, whoever posts it. So the curated `companies.json`
+lists are a *speed-up*, never a boundary. Two rules follow:
+
+- The ATS `site:` blocks are **always-run**, not fallback-only: run each one whenever its
+  category runs (Priority 1 on every default pass, Priority 7 on `/scrape abroad` and `/scrape
+  broad`), even when the Greenhouse/Lever/Ashby CLIs succeed. SKILL.md Step 1c says the same.
+- When an always-run `site:` query surfaces a fitting employer on Greenhouse, Lever or Ashby that
+  is not yet in that CLI's `companies.json`, add its board token there so later runs reach it
+  through the CLI too. Never drop a fitting posting because its employer is unknown or absent
+  from a list.
 
 The remaining Vietnamese portals have no CLI, so `/scrape` hits them via `WebSearch` with the
 `site:` queries below. To add more CLI coverage, scaffold with:
@@ -175,8 +189,9 @@ site:jobsgo.vn "Backend Developer" Golang Hà Nội
 site:careerlink.vn "Backend Developer" OR Golang Hà Nội
 ```
 
-ATS boards — these reach companies **outside** the curated `companies.json` fan-out lists,
-so run them in addition to the Greenhouse/Lever/Ashby CLIs, not instead of them:
+ATS boards — **always-run** (see "No company whitelist" above). These reach companies
+**outside** the curated `companies.json` fan-out lists, so run them in addition to the
+Greenhouse/Lever/Ashby CLIs on every default pass, not only when a CLI fails:
 
 ```
 site:boards.greenhouse.io "Golang" OR "Go Engineer" remote
@@ -185,6 +200,8 @@ site:jobs.lever.co "Golang" OR "Go Developer" Vietnam OR remote
 site:jobs.lever.co "Backend Engineer" Vietnam
 site:jobs.ashbyhq.com "Golang" OR "Go Engineer" remote
 site:jobs.ashbyhq.com "Backend Engineer" Kubernetes OR Kafka remote
+site:apply.workable.com "Golang" OR "Go Developer" Vietnam OR remote
+site:jobs.smartrecruiters.com "Golang" OR "Backend Engineer" Vietnam
 ```
 
 Installed-CLI equivalents (preferred over WebSearch — structured, deduped, faster):
@@ -248,7 +265,12 @@ site:arc.dev Golang OR backend remote
 ```
 
 Timezone check is mandatory on these - reject anything requiring US-hours overlap unless the
-user explicitly opts in.
+user explicitly opts in. European, Singaporean and Australian employer hours are accepted in full
+(2026-10-12).
+
+Employment-type check is mandatory too (2026-10-22): remote roles for foreign employers are
+often contractor engagements paid through Deel, Remote.com or a similar platform. Keep only
+employment — see the Employment Type Filter below.
 
 ### Priority 5 (opt-in only): DevOps / Platform / Cloud — NOT a target
 
@@ -322,6 +344,12 @@ default pass once a few runs show its yield, the same way Priority 6 was promote
 English rules differ for these postings. See the Language Filter below: English as the working
 language is flagged, not excluded.
 
+**The whole of Europe, no country priority (2026-10-22).** He widened Europe to every EU/EEA
+country plus the UK and Switzerland, with none ranked above another. Do not narrow the Europe
+queries to a few hubs, and do not score a posting up or down for which European country it is
+in. The salary floor does differ by country (see the Salary Filter below), and the local-language
+rule in the Language Filter still applies.
+
 ```
 site:linkedin.com/jobs "Golang" OR "Go Engineer" Singapore
 site:linkedin.com/jobs "Backend Engineer" Go Australia
@@ -333,12 +361,29 @@ site:nodeflair.com golang OR "backend engineer" singapore
 site:seek.com.au golang OR "go developer"
 ```
 
+ATS boards — **always-run** whenever this category runs (see "No company whitelist" above).
+They reach European, Singaporean and Australian employers that no curated list holds:
+
+```
+site:boards.greenhouse.io "Golang" OR "Go Engineer" Europe OR Singapore OR Australia
+site:job-boards.greenhouse.io "Backend Engineer" Go "visa sponsorship"
+site:jobs.lever.co "Golang" OR "Backend Engineer" Europe OR Singapore OR Australia
+site:jobs.ashbyhq.com "Golang" OR "Go Engineer" Europe OR Singapore OR Australia
+site:apply.workable.com "Golang" OR "Go Developer" relocation OR "visa sponsorship"
+site:jobs.smartrecruiters.com "Golang" OR "Go Developer" Europe
+site:recruitee.com "Golang" OR "Go Developer"
+site:jobs.personio.de "Golang" OR "Go Developer"
+site:teamtailor.com "Golang" OR "Backend Engineer" Go
+```
+
 Installed-CLI equivalents:
 
 ```
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Singapore"
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Australia"
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "European Union"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "United Kingdom"
+bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Switzerland"
 bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer visa sponsorship" -l "European Union"
 bun run .agents/skills/freehire-search/cli/src/cli.ts search -q "golang" --country SG,AU
 bun run .agents/skills/freehire-search/cli/src/cli.ts search -q "golang" --region eu
@@ -382,6 +427,46 @@ so the filter is applied **after fetching**, at `/scrape` Step 2 — excluded po
 to `seen_jobs.json` with `"status": "skipped"` (so dedup still works and they never resurface)
 and are **not** presented in the Step 5 table. `/rank` therefore never sees them.
 
+## Employment Type Filter (2026-10-22)
+
+He takes **employment only** — no contractor and no freelance work, in Vietnam or abroad. This is
+a hard filter, enforced the same way as the Seniority Filter: after fetching, at `/scrape` Step 2,
+with excluded postings written to `seen_jobs.json` as `"status": "skipped"` and `"skip_reason":
+"contract/freelance"`. The portal CLIs have no job-type flag, so it cannot be pushed into the
+query.
+
+- **Exclude (hard):** a title or employment-type field saying Contract, Contractor, Freelance,
+  Freelancer, B2B, Independent Contractor, Fixed-term contract, Project-based, Hourly, Daily rate,
+  Gig; or in Vietnamese Cộng tác viên, CTV, Freelancer, Theo dự án, Hợp đồng thời vụ. Also
+  exclude a posting that pays a day rate, an hourly rate, or invoices through Deel,
+  Remote.com, Oyster or a similar platform *as a contractor*.
+- **Keep:** Full-time, Permanent, Chính thức, Toàn thời gian, and postings that state no type at
+  all (most VN ads do not; treat silence as employment and let `/rank` check the detail page).
+- **Remote for a foreign employer:** keep only when it is employment — through the employer's own
+  local entity or an Employer of Record (EOR) that employs him in Vietnam. The same platforms
+  (Deel, Remote.com, Oyster) run both models, so the platform name alone decides nothing: read
+  whether the posting says *employee/EOR* or *contractor*. When it does not say, keep the posting
+  and let `/rank` flag the question.
+- **Unclear wording** ("Contract-to-hire", "6-month contract, extension possible"): exclude.
+  Contract-to-hire starts as a contract, which is what he ruled out.
+
+## Salary Filter
+
+The floors are recorded in three places that must change together: CLAUDE.md's Deal-breakers,
+`01-candidate-profile.md` → Constraints and `04-job-evaluation.md` → Life situation alignment.
+The per-country Europe table exists only in `04-job-evaluation.md`. Do not copy the figures into
+this file — a fourth copy is how the three drift apart. Read them from `04-job-evaluation.md`
+when filtering.
+
+- There is one floor for Vietnam and one per market abroad (per country inside Europe), because
+  a single figure cannot cover Hanoi and Zurich.
+- At `/scrape` time salary is usually missing or sign-in-gated, so **do not drop on salary at
+  Step 2.** Keep the posting. `/rank` applies the floor when the detail page shows a figure: flag
+  a posting clearly below it, and drop it only when the user asks for a hard cut.
+- A posting with no stated salary passes. Most do not state one.
+- The floors are filter bands, not expectations or asking figures. Never write an actual or
+  expected salary into this repository (it is public).
+
 ## Low-Fit Triage (2026-10-11)
 
 Step 3's quick fit signal predicts `/rank`'s score well enough to act on. Across 489 ranked
@@ -402,7 +487,9 @@ The Language Gate's low override (an undeclared required language) lands in the 
 
 - **Ideal:** Ha Noi (all districts) - onsite or hybrid
 - **Ideal:** Remote (Vietnam-based company)
-- **Ideal:** Remote (foreign / offshore, USD) - timezone must be Asia-compatible
+- **Ideal:** Remote (foreign / offshore, USD) - Asian, European or Australian employer hours are
+  all fine (2026-10-12); only a required US-hours overlap excludes. Employment only, never a
+  contractor engagement (see the Employment Type Filter)
 - **Acceptable:** Hybrid roles in Ha Noi with 1-3 office days
 - **Borderline:** Bac Ninh, Hung Yen, Ha Nam - only if hybrid/mostly-remote, flag the commute
 - **Too far:** Ho Chi Minh City, Da Nang, and all other provinces - **exclude unless the posting
@@ -410,8 +497,10 @@ The Language Gate's low override (an undeclared required language) lands in the 
 - **Abroad, in scope since 2026-10-12:** Europe (EU/EEA, plus UK and Switzerland), Singapore,
   Australia. **Keep** onsite/hybrid postings there as relocation candidates and remote postings open
   to Vietnam, at any working hours. **Drop** a relocation posting that requires an existing right
-  to work or says it does not sponsor, unless it also allows remote from Vietnam. Flag the
-  English-test condition on Australian relocation postings.
+  to work or says it does not sponsor, unless it also allows remote from Vietnam. Every European
+  country counts equally (2026-10-22). Australian relocation visas carry an English-test
+  condition; he is willing to sit IELTS (2026-10-22), so note it on the posting as information,
+  never as a reason to drop or score it down.
 - **Other countries** (US, India, Japan, Korea, the rest of Asia...) - exclude unless fully remote
   and open to Vietnam. US-hours overlap still excludes.
 

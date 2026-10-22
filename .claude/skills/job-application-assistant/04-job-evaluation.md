@@ -126,8 +126,9 @@ Does the role and company culture match the behavioral profile?
 ### 4. Location & Logistics (Pass/Fail + Notes)
 - Within commute range: PASS
 - Remote with occasional office: PASS
-- Requires relocation: FAIL (deal-breaker) — **except** relocation to Europe (EU/EEA, UK, Switzerland), Singapore or Australia (added 2026-10-12): PASS when the employer sponsors the visa or the sponsorship question is open, FLAG with a note when sponsorship is unstated, FAIL when the posting requires an existing right to work or says it does not sponsor (unless remote from Vietnam is also offered). Australia relocation: also FLAG the visa's English-test condition
-- Remote from Vietnam for a Europe/Singapore/Australia employer: PASS at any working hours (2026-10-12)
+- Requires relocation: FAIL (deal-breaker) — **except** relocation to Europe (EU/EEA, UK, Switzerland), Singapore or Australia (added 2026-10-12): PASS when the employer sponsors the visa or the sponsorship question is open, FLAG with a note when sponsorship is unstated, FAIL when the posting requires an existing right to work or says it does not sponsor (unless remote from Vietnam is also offered). Every European country counts equally (2026-10-22). Australia relocation: note the visa's English-test condition as information only; he is willing to sit IELTS (2026-10-22), so it is not a FLAG and costs no points
+- Remote from Vietnam for a Europe/Singapore/Australia employer: PASS at any working hours (2026-10-12), as an employee only (see Employment type below)
+- **Employment type (added 2026-10-22):** employment: PASS. Contractor, freelance, B2B, day-rate, hourly or contract-to-hire: FAIL (deal-breaker), in Vietnam and abroad. Remote for a foreign employer passes through the employer's own local entity or an Employer of Record; a contractor engagement through Deel, Remote.com or a similar platform fails. Posting silent on the type: PASS with a note (most Vietnamese ads never state it)
 - Frequent international travel: FLAG (discuss with user)
 
 ### 5. Career Alignment & Motivation (0-100)
@@ -156,9 +157,39 @@ Does this role advance career goals and contain tasks that energize?
 - Under pressure: **follows telemetry to root cause** rather than patching blind or escalating first. Strong signal for teams that run their own on-call.
 
 **Life situation alignment:** Consider personal constraints:
-- **Security**: employed at AIONtech (11/2025–present), searching from a position of stability — no pressure to take the first offer. Salary filter band **17–40M VND/month, negotiable** (floor raised from 15M on 2026-08-24); flag postings clearly below the floor in `/rank`. A filter only — see `01-candidate-profile.md` for why no actual or expected figure is recorded anywhere in this repository. The floor is duplicated in CLAUDE.md's deal-breakers and in that file; change all three together or the scrape filter and the rank flag will disagree.
+- **Security**: employed at AIONtech (11/2025–present), searching from a position of stability — no pressure to take the first offer. Salary filter band **18–40M VND/month, negotiable** in Vietnam (floor raised from 15M on 2026-08-24, from 17M on 2026-10-22); abroad, the floors in the table below. Flag postings clearly below the floor in `/rank`. A filter only — see `01-candidate-profile.md` for why no actual or expected figure is recorded anywhere in this repository. The Vietnam, Singapore, Australia and remote floors are duplicated in CLAUDE.md's deal-breakers and in that file; change all three together or the scrape filter and the rank flag will disagree. The Europe rows live only here.
 - **Flexibility**: Ha Noi onsite/hybrid or remote (VN + offshore). **Not** relocating to HCMC/Da Nang unless fully remote. **Since 2026-10-12, Europe, Singapore and Australia are targets too**, remote from Ha Noi or by relocation with visa sponsorship, at the employer's working hours. English is technical reading/writing only — exclude roles requiring live English, subject to the exceptional-match carve-out in the Language Gate above; on Europe/Singapore/Australia postings English as the working language is flagged, not excluded (see the Foreign postings rule there). US-hours timezone overlap is excluded outright and the carve-out does not apply to it.
 - **Professional development**: wants to deepen backend/distributed-systems expertise and grow toward design authority over larger areas; open to mentorship but does not require it. Currently teaching himself **Rust** with the intent of making it a third mainstream language alongside Go and TypeScript — an employer using Rust is a genuine draw for him, even though it scores as a weak *match* today.
+
+**Salary filter floors abroad (set 2026-10-22).** Gross, from published sources checked that day, for a mid-level backend engineer with ~3 years. Each floor is the low end of market pay at that level, raised to the visa's salary threshold where the threshold is higher, because a relocation offer below it cannot get him a permit. Treat every market figure as ±10%: most of them are all-levels percentiles. A posting with no stated salary passes. † = secondary sources only, not confirmed on an official page.
+
+| Market | Filter floor (gross) | What binds it |
+|---|---|---|
+| Remote from Vietnam, employer based abroad | US$2,000/month (~50M VND) | Market low end; no visa. A foreign employer's Vietnamese subsidiary paying in VND uses the Vietnam floor |
+| Singapore | S$6,000/month; S$6,600 if the employer is classed as financial services | EP minimum at age 23: S$5,600 now, S$6,000 for applications from 1 Jan 2027. At the floor COMPASS awards 0 salary points, so the other criteria must reach 40 |
+| Australia | A$95,000/year base, excluding super | Market low end for mid-level. The visa floor (CSIT A$79,423 from 1 Jul 2026) is lower |
+| Germany | €58,000/year | Market. EU Blue Card €50,700; €45,934.20 for a degree under 3 years old, with BA approval and a recognised degree |
+| Netherlands | €57,000/year incl. 8% holiday allowance (~€4,400/month excl.) | Visa: highly skilled migrant under 30, €4,357/month |
+| Ireland | €53,000/year | Market. Critical Skills permit €40,904 |
+| France | €46,000/year | Market. The Blue Card (€59,373) sits above it, so most mid-level offers need the standard permit and its labour-market test |
+| Spain | €34,000/year | Visa: reduced Blue Card €33,085 † |
+| Portugal | €32,000/year | Market; no Blue Card figure is published † |
+| Italy | €37,000/year | Visa: Blue Card at least €36,278.51 (year not confirmed) † |
+| Austria | €51,000/year incl. 13th and 14th salary | Market. Red-White-Red card, under 30: €3,465/month ×14 |
+| Belgium | €45,000/year | Visa: Brussels €44,441 (2025 figure said to carry over) † |
+| Luxembourg | €66,000/year | Visa: Blue Card €65,652 † |
+| Finland | €47,500/year | Visa: specialist / Blue Card €3,937/month |
+| Estonia | €34,000/year; €38,000 on a Blue Card | Market |
+| Lithuania | €43,500/year; €35,000 if ICT is on the shortage list | Visa: Blue Card €3,617/month |
+| Poland | PLN 161,000/year (13,400/month) on an employment contract | Visa: Blue Card PLN 13,355/month. A B2B offer is a contractor engagement and fails anyway |
+| Czechia | CZK 890,000/year (74,000/month) on a Blue Card; 830,000 on an employee card | Visa / market † |
+| Romania | RON 170,000/year gross (~8,300 net/month; Romanian ads usually quote net) | Market. High-skilled permit ~RON 9,192/month † |
+| Sweden | SEK 500,000/year (42,000/month) | Market. Work permit SEK 34,470/month |
+| Denmark | DKK 555,000/year incl. pension (~500,000 excl.) | Visa: Pay Limit Scheme DKK 552,000 |
+| Norway | NOK 640,000/year | Market. Skilled worker NOK 545,400 |
+| Switzerland | CHF 100,000/year | Market. No fixed floor, but a permit quota and Swiss/EU priority, so non-EU sponsorship at mid level is rare |
+| United Kingdom | £45,000/year | Market. Skilled Worker SOC 2134: £54,700 standard, £38,290 new-entrant rate while under 26 (max 4 years) |
+| Any other EU/EEA country | That country's EU Blue Card salary threshold | Look it up when a posting appears, then add a row here |
 
 ### 6. Salary Benchmark (Optional)
 
