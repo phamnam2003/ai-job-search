@@ -253,6 +253,12 @@ sent, so leave them, but never reuse that phrasing.
 
 <!-- Added by /expand on 2026-07-12 from github.com/phamnam2003 -->
 
+**Not shown on CVs (decided 2026-10-30).** He asked for the Open-Source Projects section to be
+removed: these are study and template repos with no practical value to a hiring reader. Keep them
+here as evidence for the skills they demonstrate (gRPC in depth, design patterns, sqlc), which stay
+in the competencies, and as interview material if asked. Never add an open-source or GitHub-repo
+section, or a repo-by-name line, to a CV or cover letter. The header's GitHub profile link stays.
+
 ### `go-http-server/temp` — Go backend template (own GitHub org)
 Production-shaped Gin backend template used as the foundation for later projects.
 - User registration with `validator/v10`, email verification codes dispatched through a Redis queue (**Asynq**), HTML email templates over SMTP
