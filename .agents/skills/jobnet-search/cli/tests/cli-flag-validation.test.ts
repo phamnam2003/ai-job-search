@@ -21,7 +21,7 @@ describe("Jobnet CLI flag validation", () => {
   test("search --limit=-1 is rejected instead of silently dropping the last result", async () => {
     const result = await runCLI(["search", "--limit=-1"]);
     expectValidationError(result, "limit");
-    expect(JSON.parse(result.stderr).error.message).toContain("expected number to be >=1");
+    expect(JSON.parse(result.stderr).error.message).toContain("greater than or equal to 1");
   });
 
   test("search --page=0 is rejected on the 1-indexed API", async () => {
@@ -37,7 +37,7 @@ describe("Jobnet CLI flag validation", () => {
   test("search --limit=1.5 is rejected as non-integer", async () => {
     const result = await runCLI(["search", "--limit=1.5"]);
     expectValidationError(result, "limit");
-    expect(JSON.parse(result.stderr).error.message).toContain("expected int");
+    expect(JSON.parse(result.stderr).error.message).toContain("Expected integer");
   });
 
   test("search --radius=-10 is rejected", async () => {

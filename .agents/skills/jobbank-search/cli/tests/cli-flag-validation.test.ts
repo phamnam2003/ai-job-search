@@ -21,7 +21,7 @@ describe("Jobbank CLI flag validation", () => {
   test("search --limit=-1 is rejected instead of silently dropping the last result", async () => {
     const result = await runCLI(["search", "--key", "test", "--limit=-1"]);
     expectValidationError(result, "limit");
-    expect(JSON.parse(result.stderr).error.message).toContain("expected number to be >=1");
+    expect(JSON.parse(result.stderr).error.message).toContain("greater than or equal to 1");
   });
 
   test("search --limit=0 is rejected", async () => {
@@ -32,7 +32,7 @@ describe("Jobbank CLI flag validation", () => {
   test("search --limit=1.5 is rejected as non-integer", async () => {
     const result = await runCLI(["search", "--key", "test", "--limit=1.5"]);
     expectValidationError(result, "limit");
-    expect(JSON.parse(result.stderr).error.message).toContain("expected int");
+    expect(JSON.parse(result.stderr).error.message).toContain("Expected integer");
   });
 
   test("search --company=-1 is rejected", async () => {

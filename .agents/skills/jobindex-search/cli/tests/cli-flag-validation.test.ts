@@ -20,7 +20,7 @@ describe("Jobindex CLI flag validation", () => {
   test("--limit=-1 is rejected instead of silently dropping the last result", async () => {
     const result = await runCLI(["search", "--query", "test", "--limit=-1"]);
     expectValidationError(result, "limit");
-    expect(JSON.parse(result.stderr).error.message).toContain("expected number to be >=1");
+    expect(JSON.parse(result.stderr).error.message).toContain("greater than or equal to 1");
   });
 
   test("--limit=0 is rejected", async () => {
@@ -31,7 +31,7 @@ describe("Jobindex CLI flag validation", () => {
   test("--limit=1.5 is rejected as non-integer", async () => {
     const result = await runCLI(["search", "--query", "test", "--limit=1.5"]);
     expectValidationError(result, "limit");
-    expect(JSON.parse(result.stderr).error.message).toContain("expected int");
+    expect(JSON.parse(result.stderr).error.message).toContain("Expected integer");
   });
 
   test("--page=0 is rejected on the 1-indexed portal", async () => {
