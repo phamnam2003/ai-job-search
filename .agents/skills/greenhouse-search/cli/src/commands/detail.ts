@@ -6,6 +6,7 @@ import {
   decodeContent,
   decodeHtmlEntities,
   makeId,
+  stripInvisible,
   writeError,
   type GhJob,
   type JobDetail,
@@ -55,7 +56,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
     }
 
     const url = job.absolute_url || `https://job-boards.greenhouse.io/${token}/jobs/${job.id}`
-    const detail: JobDetail = {
+    const detail: JobDetail = stripInvisible({
       id: makeId(token, job.id),
       title: job.title ? decodeHtmlEntities(job.title).trim() : "(untitled)",
       company: companyName,
@@ -69,7 +70,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       description: job.content ? decodeContent(job.content) : null,
       updatedAt: job.updated_at ?? null,
       applyUrl: url,
-    }
+    })
 
     if (opts.format === "plain") {
       const lines = [

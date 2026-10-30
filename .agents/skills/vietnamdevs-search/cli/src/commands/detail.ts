@@ -1,4 +1,4 @@
-import { htmlFetch, parseJobDetail, resolveDetailTarget, writeError } from "../helpers.js"
+import { htmlFetch, parseJobDetail, resolveDetailTarget, stripInvisible, writeError } from "../helpers.js"
 
 export interface DetailOpts {
   id: string // a bare numeric id, an "<id>/<slug>" fragment, or a full job URL
@@ -17,7 +17,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
   }
   try {
     const html = await htmlFetch(target.url)
-    const job = html ? parseJobDetail(html, target.id) : null
+    const job = html ? stripInvisible(parseJobDetail(html, target.id)) : null
     if (!job) {
       writeError(`Job not found for "${opts.id}"`, "NOT_FOUND")
       return 1

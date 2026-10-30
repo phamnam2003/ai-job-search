@@ -3,6 +3,7 @@ import {
   jsonFetch,
   mapJobDetail,
   extractId,
+  stripInvisible,
   writeError,
   type JobDetail,
   type RawJob,
@@ -48,7 +49,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       writeError(`Job ${id} not found`, "NOT_FOUND")
       return 1
     }
-    const job = mapJobDetail(raw)
+    const job = stripInvisible(mapJobDetail(raw))
 
     if (opts.format === "plain") {
       process.stdout.write(renderPlain(job) + "\n")

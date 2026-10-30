@@ -1,4 +1,4 @@
-import { buildLinks, readGroups, writeError, type FbLink } from "../helpers.js"
+import { buildLinks, readGroups, stripInvisible, writeError, type FbLink } from "../helpers.js"
 
 export interface LinksOpts {
   query: string
@@ -14,7 +14,7 @@ function renderTable(links: FbLink[]): string {
 
 export function runLinks(opts: LinksOpts): number {
   try {
-    const links = buildLinks(opts.query, opts.location, readGroups(opts.groupsPath))
+    const links = stripInvisible(buildLinks(opts.query, opts.location, readGroups(opts.groupsPath)))
     if (opts.format === "table") {
       process.stdout.write(renderTable(links) + "\n")
     } else if (opts.format === "plain") {

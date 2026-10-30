@@ -117,9 +117,9 @@ async function main(): Promise<number> {
   }
 
   if (cmd === "companies") {
-    const { loadCompanies } = await import("./helpers.js")
+    const { loadCompanies, stripInvisible } = await import("./helpers.js")
     try {
-      const list = loadCompanies()
+      const list = stripInvisible(loadCompanies())
       const rows = list.map(
         (c) =>
           `${c.token.padEnd(14)} ${(c.name || "").slice(0, 22).padEnd(22)} ${(c.region || "—").slice(0, 34).padEnd(34)} ${(c.tags ?? []).join(",")}`,

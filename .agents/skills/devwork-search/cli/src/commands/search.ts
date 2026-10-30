@@ -3,6 +3,7 @@ import {
   htmlFetch,
   parseJobCards,
   slugifyTag,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -52,7 +53,7 @@ function renderTable(cards: JobCard[]): string {
 export async function runSearch(opts: SearchOpts): Promise<number> {
   try {
     const html = await htmlFetch(buildUrl(opts))
-    let cards = parseJobCards(html)
+    let cards = stripInvisible(parseJobCards(html))
 
     // Devwork has no location parameter, so -l is a client-side substring match
     // over the card's location text (diacritic-insensitive).

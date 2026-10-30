@@ -1,4 +1,4 @@
-import { htmlFetch, parseJobDetail, resolveDetailTarget, writeError } from "../helpers.js"
+import { htmlFetch, parseJobDetail, resolveDetailTarget, stripInvisible, writeError } from "../helpers.js"
 
 export interface DetailOpts {
   id: string // a full TopCV job URL or a bare numeric job id
@@ -17,7 +17,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
   }
   try {
     const html = await htmlFetch(target.url)
-    const job = html ? parseJobDetail(html, target.url) : null
+    const job = html ? stripInvisible(parseJobDetail(html, target.url)) : null
     if (!job) {
       // A bare id that doesn't resolve to a live posting: reconstruction failed.
       // A full URL that 404s / has no job sections: genuinely not found.

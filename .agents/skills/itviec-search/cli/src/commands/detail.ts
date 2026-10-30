@@ -1,4 +1,4 @@
-import { SEARCH_BASE, extractSlug, htmlFetch, parseJobDetail, writeError } from "../helpers.js"
+import { SEARCH_BASE, extractSlug, htmlFetch, parseJobDetail, stripInvisible, writeError } from "../helpers.js"
 
 export interface DetailOpts {
   id: string // a job slug or full /it-jobs/<slug> URL
@@ -22,7 +22,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
   try {
     // The lightweight `/content` partial returns clean job-description HTML.
     const html = await htmlFetch(`${SEARCH_BASE}/${slug}/content`)
-    const job = html ? parseJobDetail(html, slug) : null
+    const job = html ? stripInvisible(parseJobDetail(html, slug)) : null
     if (!job) {
       writeError(`Job not found for slug "${slug}"`, "NOT_FOUND")
       return 1

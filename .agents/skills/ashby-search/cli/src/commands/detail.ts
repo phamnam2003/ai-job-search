@@ -5,6 +5,7 @@ import {
   parseId,
   normalizeJob,
   jobDescription,
+  stripInvisible,
   writeError,
   type AshbyJob,
   type Company,
@@ -65,11 +66,11 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
     }
 
     const card = normalizeJob(job, company)
-    const detail: JobDetail = {
+    const detail: JobDetail = stripInvisible({
       ...card,
       description: jobDescription(job),
       applyUrl: job.applyUrl ?? null,
-    }
+    })
 
     if (opts.format === "plain") {
       const lines = [

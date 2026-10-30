@@ -4,6 +4,7 @@ import {
   mapJobCard,
   foldDiacritics,
   ageInDays,
+  stripInvisible,
   writeError,
   type JobCard,
   type RawJob,
@@ -84,7 +85,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
       return 1
     }
     const raw = body && Array.isArray(body.data) ? body.data : []
-    let cards = raw.map(mapJobCard)
+    let cards = stripInvisible(raw.map(mapJobCard))
 
     // Location filtering is done client-side (the microservice's own location
     // filter field is undocumented and unreliable), diacritics-insensitively

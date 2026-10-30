@@ -6,6 +6,7 @@ import {
   hyphenate,
   parseJobCards,
   slugSegment,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -99,6 +100,8 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
     if (opts.limit !== undefined && opts.limit >= 0) cards = cards.slice(0, opts.limit)
 
     if (opts.enrich) await enrichCards(cards)
+    // After enrichment, so the fields it fills from the JSON are cleaned too.
+    cards = stripInvisible(cards)
 
     if (opts.format === "table") {
       process.stdout.write(renderTable(cards) + "\n")

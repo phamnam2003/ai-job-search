@@ -1,4 +1,4 @@
-import { BASE, htmlFetch, parseJobDetail, writeError } from "../helpers.js"
+import { BASE, htmlFetch, parseJobDetail, stripInvisible, writeError } from "../helpers.js"
 
 export interface DetailOpts {
   id: string
@@ -39,7 +39,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       writeError("Job not found", "NOT_FOUND")
       return 1
     }
-    const job = parseJobDetail(html, target.id, target.url)
+    const job = stripInvisible(parseJobDetail(html, target.id, target.url))
 
     if (opts.format === "plain") {
       const lines = [

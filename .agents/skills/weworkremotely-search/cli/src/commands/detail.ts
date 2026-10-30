@@ -7,6 +7,7 @@ import {
   descriptionToText,
   htmlToText,
   extractSlug,
+  stripInvisible,
   writeError,
   type FeedItem,
 } from "../helpers.js"
@@ -98,7 +99,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
     const description =
       pageDescription ?? (item ? descriptionToText(item.descriptionHtml) : null)
 
-    const job: JobDetail = {
+    const job: JobDetail = stripInvisible({
       id: slug,
       title: item?.title ?? null,
       company: item?.company ?? null,
@@ -109,7 +110,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       category: item?.category ?? null,
       skills: item?.skills ?? null,
       description: description || null,
-    }
+    })
 
     if (opts.format === "plain") {
       process.stdout.write(renderPlain(job) + "\n")

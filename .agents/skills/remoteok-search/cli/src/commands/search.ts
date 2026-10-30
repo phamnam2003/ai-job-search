@@ -8,6 +8,7 @@ import {
   matchesTag,
   matchesLocation,
   withinJobage,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -71,7 +72,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
       raw = raw.filter((r) => withinJobage(r, opts.jobage as number))
     }
 
-    let cards = raw.map(mapJobCard)
+    let cards = stripInvisible(raw.map(mapJobCard))
 
     // Client-side pagination over the filtered result set (no server paging).
     const page = Math.max(1, opts.page)

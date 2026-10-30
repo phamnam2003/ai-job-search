@@ -45,6 +45,28 @@ export interface FbLink {
 // Text utilities
 // ---------------------------------------------------------------------------
 
+/**
+ * Characters a reader of the posting never sees but a model reading this
+ * output does: C0/C1 controls other than tab, newline and carriage return, the
+ * soft hyphen, bidi marks/embeddings/overrides/isolates, zero-width characters
+ * and invisible operators, the BOM, variation selectors, and Unicode tag
+ * characters (U+E0000-E007F), which can spell out a whole hidden instruction.
+ * Listing text is third-party data, and these arrive raw in a portal's JSON or
+ * markup as easily as through a numeric entity.
+ */
+const INVISIBLE_CHARS =
+  /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F-\u009F­؜᠎​-‏‪-‮⁠-⁯︀-️﻿\u{E0000}-\u{E007F}\u{E0100}-\u{E01EF}]/gu
+
+/** Strip INVISIBLE_CHARS from every string in a result, recursively: the CLI's output boundary. */
+export function stripInvisible<T>(value: T): T {
+  if (typeof value === "string") return value.replace(INVISIBLE_CHARS, "") as T
+  if (Array.isArray(value)) return value.map(stripInvisible) as T
+  if (value !== null && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype) {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, stripInvisible(v)])) as T
+  }
+  return value
+}
+
 /** Strip Vietnamese diacritics so ASCII regexes can match accent-insensitively. */
 export function deaccent(s: string): string {
   return s

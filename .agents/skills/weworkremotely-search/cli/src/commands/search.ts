@@ -5,6 +5,7 @@ import {
   mergeFeeds,
   dateMs,
   foldDiacritics,
+  stripInvisible,
   toCard,
   writeError,
   type FeedItem,
@@ -103,7 +104,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
     const start = (opts.page - 1) * PAGE_SIZE
     let pageItems = items.slice(start, start + PAGE_SIZE)
     if (opts.limit !== undefined && opts.limit >= 0) pageItems = pageItems.slice(0, opts.limit)
-    const cards = pageItems.map(toCard)
+    const cards = stripInvisible(pageItems.map(toCard))
 
     if (opts.format === "table") {
       process.stdout.write(renderTable(cards) + "\n")

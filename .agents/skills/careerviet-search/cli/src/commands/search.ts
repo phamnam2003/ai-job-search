@@ -5,6 +5,7 @@ import {
   slugifyQuery,
   resolveLocation,
   daysAgo,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -64,7 +65,7 @@ function renderTable(cards: JobCard[]): string {
 export async function runSearch(opts: SearchOpts): Promise<number> {
   try {
     const html = await htmlFetch(buildUrl(opts))
-    let cards = parseJobCards(html)
+    let cards = stripInvisible(parseJobCards(html))
 
     // CareerViet has no posting-age URL parameter, so --jobage is applied
     // client-side against the card's "Cập nhật" (last-updated) date. Cards with

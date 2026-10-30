@@ -6,6 +6,7 @@ import {
   composeDescription,
   decodeHtmlEntities,
   makeId,
+  stripInvisible,
   writeError,
   type LeverPosting,
   type JobDetail,
@@ -63,7 +64,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
     }
 
     const cats = p.categories ?? {}
-    const detail: JobDetail = {
+    const detail: JobDetail = stripInvisible({
       id: makeId(token, p.id),
       title: p.text ? decodeHtmlEntities(p.text).trim() : "(untitled)",
       company: companyName,
@@ -80,7 +81,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       description: composeDescription(p),
       allLocations: cats.allLocations ?? [],
       applyUrl: p.applyUrl ?? null,
-    }
+    })
 
     if (opts.format === "plain") {
       const lines = [

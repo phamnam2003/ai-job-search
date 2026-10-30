@@ -4,6 +4,7 @@ import {
   jsonFetch,
   mapJobCard,
   matchesAllTerms,
+  stripInvisible,
   writeError,
   type JobCard,
   type RawJob,
@@ -100,7 +101,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
       })
     }
 
-    let cards = kept.map((k) => k.card)
+    let cards = stripInvisible(kept.map((k) => k.card))
     if (opts.limit !== undefined) cards = cards.slice(0, opts.limit)
 
     if (opts.format === "table") {

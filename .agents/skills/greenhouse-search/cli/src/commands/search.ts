@@ -9,6 +9,7 @@ import {
   withinAge,
   decodeContent,
   pool,
+  stripInvisible,
   writeError,
   type Company,
   type GhJob,
@@ -127,7 +128,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
     })
 
     const start = (opts.page - 1) * PAGE_SIZE
-    let cards = all.slice(start, start + PAGE_SIZE)
+    let cards = stripInvisible(all.slice(start, start + PAGE_SIZE))
     if (opts.limit !== undefined && opts.limit >= 0) cards = cards.slice(0, opts.limit)
 
     if (opts.format === "table") {

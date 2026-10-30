@@ -5,6 +5,7 @@ import {
   isRemoteLocation,
   parseJobCards,
   relativeAgeToDays,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -62,7 +63,7 @@ function renderTable(cards: JobCard[]): string {
 export async function runSearch(opts: SearchOpts): Promise<number> {
   try {
     const html = await htmlFetch(buildUrl(opts))
-    let cards = parseJobCards(html)
+    let cards = stripInvisible(parseJobCards(html))
 
     // "remote" is a card label, not a URL path — filter client-side.
     if (isRemoteLocation(opts.location)) {

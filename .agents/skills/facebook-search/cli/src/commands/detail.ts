@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from "fs"
-import { readInbox, parsePost, writeError, type FbJobDetail } from "../helpers.js"
+import { readInbox, parsePost, stripInvisible, writeError, type FbJobDetail } from "../helpers.js"
 
 export interface DetailOpts {
   idOrFile: string
@@ -26,6 +26,7 @@ export function runDetail(opts: DetailOpts): number {
       )
       return 1
     }
+    job = stripInvisible(job)
 
     if (opts.format === "plain") {
       process.stdout.write(

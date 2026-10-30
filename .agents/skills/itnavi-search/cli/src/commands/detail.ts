@@ -6,6 +6,7 @@ import {
   isNumericId,
   parseJobDetailHtml,
   parseJobDetailJson,
+  stripInvisible,
   writeError,
   type JobDetail,
 } from "../helpers.js"
@@ -39,6 +40,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       job = html ? parseJobDetailHtml(html, slug) : null
     }
 
+    job = stripInvisible(job)
     if (!job) {
       writeError(`Job not found for "${raw}"`, "NOT_FOUND")
       return 1

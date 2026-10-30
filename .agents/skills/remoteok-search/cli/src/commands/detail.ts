@@ -4,6 +4,7 @@ import {
   isJobEntry,
   mapJobDetail,
   extractId,
+  stripInvisible,
   writeError,
   type JobDetail,
 } from "../helpers.js"
@@ -47,7 +48,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       )
       return 1
     }
-    const job = mapJobDetail(found)
+    const job = stripInvisible(mapJobDetail(found))
 
     if (opts.format === "plain") {
       process.stdout.write(renderPlain(job) + "\n")

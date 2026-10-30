@@ -1,4 +1,4 @@
-import { readInbox, deaccent, writeError, type FbJob, type FbJobDetail } from "../helpers.js"
+import { readInbox, deaccent, stripInvisible, writeError, type FbJob, type FbJobDetail } from "../helpers.js"
 
 export interface SearchOpts {
   query?: string
@@ -42,7 +42,7 @@ function renderTable(jobs: FbJob[]): string {
 
 export function runSearch(opts: SearchOpts): number {
   try {
-    let jobs = readInbox(opts.inbox).filter((j) => matches(j, opts.query, opts.location))
+    let jobs = stripInvisible(readInbox(opts.inbox).filter((j) => matches(j, opts.query, opts.location)))
     if (opts.limit !== undefined && opts.limit >= 0) jobs = jobs.slice(0, opts.limit)
 
     if (opts.format === "table") {

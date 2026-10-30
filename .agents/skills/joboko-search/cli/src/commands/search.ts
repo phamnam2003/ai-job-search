@@ -4,6 +4,7 @@ import {
   parseJobCards,
   slugify,
   resolveLocationSlug,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -69,7 +70,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
       return 1
     }
 
-    let cards = parseJobCards(html)
+    let cards = stripInvisible(parseJobCards(html))
 
     if (opts.openOnly) {
       const today = new Date().toISOString().slice(0, 10)

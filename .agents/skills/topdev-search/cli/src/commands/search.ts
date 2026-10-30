@@ -6,6 +6,7 @@ import {
   jsonFetch,
   mapJobCard,
   foldDiacritics,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -79,7 +80,7 @@ export async function runSearch(opts: SearchOpts): Promise<number> {
   try {
     const body = await jsonFetch<SearchResponse>(buildSearchUrl(opts))
     const raw = body && Array.isArray(body.data) ? body.data : []
-    let cards = raw.map((r) => mapJobCard(r as Record<string, unknown>))
+    let cards = stripInvisible(raw.map((r) => mapJobCard(r as Record<string, unknown>)))
 
     // Location filtering is not supported server-side (the API ignores region
     // params), so filter the fetched page client-side, diacritics-insensitively.

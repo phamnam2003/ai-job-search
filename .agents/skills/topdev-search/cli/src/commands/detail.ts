@@ -4,6 +4,7 @@ import {
   jsonFetch,
   mapJobDetail,
   extractId,
+  stripInvisible,
   writeError,
   type JobDetail,
 } from "../helpers.js"
@@ -47,7 +48,7 @@ export async function runDetail(opts: DetailOpts): Promise<number> {
       writeError("Job not found", "NOT_FOUND")
       return 1
     }
-    const job = mapJobDetail(body.data, id)
+    const job = stripInvisible(mapJobDetail(body.data, id))
 
     if (opts.format === "plain") {
       process.stdout.write(renderPlain(job) + "\n")

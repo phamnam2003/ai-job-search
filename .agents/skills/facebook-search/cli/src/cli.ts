@@ -12,7 +12,7 @@ import { readFileSync } from "fs"
 import { runSearch, type SearchOpts } from "./commands/search.js"
 import { runDetail, type DetailOpts } from "./commands/detail.js"
 import { runLinks, type LinksOpts } from "./commands/links.js"
-import { defaultInbox, defaultGroupsPath, parsePost, writeError } from "./helpers.js"
+import { defaultInbox, defaultGroupsPath, parsePost, stripInvisible, writeError } from "./helpers.js"
 
 interface Flags {
   _: string[]
@@ -157,7 +157,7 @@ function main(): number {
       return 1
     }
     try {
-      const job = parsePost(readFileSync(file, "utf8"), file)
+      const job = stripInvisible(parsePost(readFileSync(file, "utf8"), file))
       if (fmt === "plain") {
         process.stdout.write(
           `${job.title}\n${job.company || "—"} · ${job.location || "—"} · ${job.salary || "—"}\n${job.url || "(no link)"}\n`,

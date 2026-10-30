@@ -6,6 +6,7 @@ import {
   parseJobCards,
   resolveCity,
   stripAccents,
+  stripInvisible,
   writeError,
   type JobCard,
 } from "../helpers.js"
@@ -61,7 +62,7 @@ function renderTable(cards: JobCard[]): string {
 export async function runSearch(opts: SearchOpts): Promise<number> {
   try {
     const html = await htmlFetch(buildUrl(opts))
-    let cards = parseJobCards(html)
+    let cards = stripInvisible(parseJobCards(html))
 
     // Client-side location filter: only needed when the city was NOT resolvable
     // to a TopCV filter slug (unknown/typo). Match accent- and separator-
