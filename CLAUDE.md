@@ -57,7 +57,8 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 ### Technical Skills
 - **Primary:** Go (Gin, gRPC, Worker Pool, uber-go/dig, Fx), TypeScript/JavaScript (ReactJS, Next.js, Vue.js, Redux/Redux Toolkit, Recoil, TanStack Query, Shadcn UI), Node.js (Express, Strapi), RESTful APIs, WebSocket/SSE, JWT/PASETO, background workers & cron jobs, microservices
 - **Secondary:** Kafka, RabbitMQ, Redis, PostgreSQL/MySQL/Oracle/MongoDB/ScyllaDB, Docker, Kubernetes (Calico, Cilium, Envoy Gateway, Nginx Ingress), OpenTelemetry, Prometheus/Grafana/Loki, ArgoCD, Helm, GitHub Actions, GitLab Runners, Nginx, Python (Selenium, Scrapy)
-- **Domain:** Fintech/banking (Sacombank STM, AION Bank), government/public sector (C06 — Ministry of Public Security), real-estate CRM, geospatial (PostGIS, Mapbox)
+- **Domain:** Banking (Sacombank STM only: background jobs importing/exporting the machines' transaction and message logs, plus the export fix; engineering in a banking environment, not banking business logic, clarified 2026-10-30), government/public sector (C06 — Ministry of Public Security), real-estate CRM, geospatial (PostGIS, Mapbox)
+- **Ways of working** *(confirmed 2026-10-30)*: Jira, Asana, Trello and other Agile/Scrum tooling; works with BAs, testers and QA/QC. No Redmine claim.
 - **Software:** Claude Code, GitHub Copilot, Spec-Kit, Git, Linux (Ubuntu/Arch/CentOS), MinIO/SeaweedFS/RustFS
 - **Learning (declare as learning, never as experience):** **Rust** — active self-study, intended to become mainstream for him alongside Go and TS/JS. Goes in an "Interests / currently learning" line only. *(Java Core and .NET/Entity Framework are known but were deliberately left off CVs on 2026-09-03 — they dilute the Go-backend positioning. Do not re-add them without asking.)*
 
@@ -96,7 +97,7 @@ Full structured profile: `.claude/skills/job-application-assistant/01-candidate-
 
 ### Target Sectors
 *(Re-confirmed via /setup 2026-09-03 — all four are in scope; the first two are where he should be aimed)*
-- **Fintech / banking** — strongest domain evidence (Sacombank STM, AION Bank)
+- **Fintech / banking** — still a first-choice target, but the evidence is thin: Sacombank STM only, and that is log import/export jobs and a measured export fix, not payments or core-banking logic. Sell the engineering, never banking domain knowledge. *("AION Bank" was removed 2026-10-30: asked about it, he described the same STM work. See `01-candidate-profile.md` → STM.)*
 - **Product companies & startups** — Go/microservices teams with room to design
 - **Digital transformation / public sector** — has C06 (Ministry of Public Security) experience. Expect slower pace and heavier process, which collides with a stated drain — score the ceremony, not just the stack
 - **Outsourcing / offshore services** — newly opened up this round, and the widest source of Vietnamese postings. **Apply the design-authority check hard here:** outsourcing is the sector most likely to be ticket-only work with no design input, which is his top drain. In scope, not a free pass

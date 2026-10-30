@@ -107,9 +107,10 @@ Does work history align with what they're looking for? Match on the function and
 | 40-59 | Adjacent experience, would need to make the case |
 | 0-39 | Unrelated experience |
 
-**Strong:** Go backend engineering (~2 yrs production Go across Leeon Group + AIONtech), module-level design authority (SkyReality, C06 — proposed the DB modeling + stack decisions for the modules he owned, reviewed and approved before build; never "architected the system" — see `01-candidate-profile.md`, Scope of the design work), fintech/banking backends (Sacombank STM, AION Bank), event-driven microservices
+**Strong:** Go backend engineering (~2 yrs production Go across Leeon Group + AIONtech), module-level design authority (SkyReality, C06 — proposed the DB modeling + stack decisions for the modules he owned, reviewed and approved before build; never "architected the system" — see `01-candidate-profile.md`, Scope of the design work), event-driven microservices, bulk data pipelines and export performance in a banking environment (Sacombank STM: transaction/message-log import/export jobs, 167.8 MB → 16 MB export fix)
 **Moderate:** Fullstack (React/Next/Vue frontends alongside backend at every role), government/public-sector systems (C06, TLGEO), geospatial (PostGIS, Mapbox), self-hosted infra/observability & CI/CD (Leeon Group)
 **Entry-level:** Formal DevOps/Platform/SRE titles (has the skills, no title), team lead / engineering management, roles requiring live English fluency
+**Thin (clarified 2026-10-30):** banking/fintech *domain* knowledge. STM is his only banking work and it was log pipelines plus small non-domain bug fixes, not payments, ledger, account or reconciliation logic. A posting that screens for payments or core-banking experience scores Experience on the engineering only; do not credit domain depth
 
 ### 3. Behavioral/Culture Fit (0-100)
 Does the role and company culture match the behavioral profile?

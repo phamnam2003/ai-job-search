@@ -141,10 +141,10 @@ Where the posting allows it, **open on the shape of the problem rather than the 
 <!-- Populated by /setup on 2026-07-15 for Pham Hai Nam. Tune per posting; keep to 3-4 lines. -->
 
 **For Backend / architecture-ownership roles (primary):**
-> Backend engineer with ~3 years building production services, the last two in Go (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across fintech and public-sector systems. Proposed the database model and backend stack for owned modules on a real-estate lead platform and a document-AI system for the Ministry of Public Security; those designs were reviewed and approved before build. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD).
+> Backend engineer with ~3 years building production services, the last two in Go (Gin, gRPC, Worker Pool, dependency injection with uber-go/dig and Fx) across banking and public-sector systems. Proposed the database model and backend stack for owned modules on a real-estate lead platform and a document-AI system for the Ministry of Public Security; those designs were reviewed and approved before build. Comfortable designing event-driven microservices with Kafka, Redis, and PostgreSQL, and standing up the observability and CI/CD around them (OpenTelemetry, Prometheus/Grafana/Loki, GitHub Actions, ArgoCD).
 
 **For pure-backend / distributed-systems roles:**
-> Go backend developer focused on distributed, event-driven systems: Kafka and RabbitMQ messaging, Redis cache/pub-sub/streams, gRPC with mutual TLS and interceptors, and the Worker Pool pattern for background processing. Delivered async import/export pipelines and traceability improvements on Sacombank's Smart Teller Machine, and maintains open-source Go references covering gRPC down to the TLS layer and 20 Gang-of-Four patterns.
+> Go backend developer focused on distributed, event-driven systems: Kafka and RabbitMQ messaging, Redis cache/pub-sub/streams, gRPC with mutual TLS and interceptors, and the Worker Pool pattern for background processing. Built the background jobs that import and export transaction and message logs from Sacombank's Smart Teller Machines, and maintains open-source Go references covering gRPC down to the TLS layer and 20 Gang-of-Four patterns.
 
 **For Fullstack (React + Go) roles:**
 > Fullstack developer who has shipped both sides of production systems: ReactJS/Next.js/Vue frontends (Redux, Redux Toolkit, Recoil, Tailwind, Ant Design) and Go/Node.js backends (Gin, gRPC, Express, Strapi). Strongest on the backend — event-driven microservices, PostgreSQL data modeling, and owning the design of the modules I build — while staying fluent in the component-based frontend architecture that consumes those APIs.
@@ -155,7 +155,14 @@ Where the posting allows it, **open on the shape of the problem rather than the 
      it is also what he said he wants — see 02-behavioral-profile.md, "owns a module end to end". -->
 
 **For money-critical / transactional backend roles** *[Used for: dayladau_backend_developer_golang_mysql_cloud]*:
-> Backend developer with around three years building production services, the last two of them in Go (Golang) with Gin, gRPC, Worker Pool and dependency injection via uber-go/dig and Fx. My work sits in fintech and public-sector systems where money and state have to stay correct: Sacombank's Smart Teller Machine for cash deposits, withdrawals and reconciliation, plus lead and document platforms at AIONtech. I proposed the database model and backend stack for the modules I owned on two of those platforms, and my designs were reviewed and approved before I built them. I read and fix slow queries rather than route around them, write unit and integration tests as part of the work, and deploy what I build to Kubernetes myself with ArgoCD.
+> Backend developer with around three years building production services, the last two of them in Go (Golang) with Gin, gRPC, Worker Pool and dependency injection via uber-go/dig and Fx. On Sacombank's Smart Teller Machine I built the background jobs that import and export the machines' transaction and message logs, and cut a failing export from 167.8 MB to 16 MB for the same dataset; at AIONtech I also build lead and document platforms. I proposed the database model and backend stack for the modules I owned on two of those platforms, and my designs were reviewed and approved before I built them. I read and fix slow queries rather than route around them, write unit and integration tests as part of the work, and deploy what I build to Kubernetes myself with ArgoCD.
+
+<!-- Corrected 2026-10-30. This template used to say his work "sits in fintech ... systems where
+     money and state have to stay correct: Sacombank's Smart Teller Machine for cash deposits,
+     withdrawals and reconciliation". He did not build those flows: his STM work was the
+     transaction/message-log import/export jobs plus small non-domain bug fixes (see
+     01-candidate-profile.md, the STM scope note). For a money-critical posting, lead with the
+     ticketing thesis (state kept correct under load, by design) rather than with STM. -->
 
 **Two additions from the 2026-09-03 `/setup` run:**
 

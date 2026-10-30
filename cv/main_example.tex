@@ -66,7 +66,10 @@
 % ============================================================
 
 \vspace{6pt}
-\small{Fullstack developer with around three years across frontend and backend, strongest on Go backend services --- Gin, gRPC, Worker Pool, and dependency injection with uber-go/dig and Fx. Proposes and owns the database modeling and backend stack decisions for the modules he is responsible for, and builds the event-driven pipelines behind them with Kafka, RabbitMQ, and Redis, along with the observability and CI/CD around them. Also ships the ReactJS, Next.js, and Vue.js frontends that consume those APIs. Experience spans fintech and banking, government and public sector, real-estate CRM, and geospatial platforms.}
+% First person, and module scope only: he proposes the design for the modules he owns, and it is
+% reviewed and approved before build (2026-08-08 correction). "Banking", not "fintech": STM is
+% log import/export work in a bank's system, not payments (2026-10-30).
+\small{Fullstack developer with around three years across frontend and backend, strongest on Go backend services: Gin, gRPC, Worker Pool, and dependency injection with uber-go/dig and Fx. I propose the database model and backend stack for the modules I own, with designs reviewed and approved before build, and build the event-driven pipelines behind them with Kafka, RabbitMQ and Redis, plus their observability and CI/CD. I also ship the ReactJS, Next.js and Vue.js frontends on top. Experience spans banking, government, real-estate CRM and geospatial platforms.}
 
 % ============================================================
 %     CORE COMPETENCIES
@@ -88,6 +91,8 @@
 
 \item \textbf{Testing, security \& AI-assisted development}: unit and integration tests across REST APIs, WebSocket, cron jobs and database interactions in Go and Node.js; JWT/PASETO, TOTP/2FA, TLS/mTLS; Python (Scrapy, Selenium) for e-commerce data crawling; Claude Code, GitHub Copilot, Spec-Kit.
 
+\item \textbf{Ways of working}: Agile/Scrum in Jira, Asana and Trello, working with business analysts, testers and QA/QC.
+
 \end{itemize}
 
 % ============================================================
@@ -102,7 +107,7 @@
 \needspace{5\baselineskip}
 \item{\cventry{11/2025 - Present}{Frontend and Backend Developer}{AIONtech}{Ha Noi, Vietnam}{}{\vspace{1pt}
 \begin{itemize}
-    \item Implemented dependency injection with uber-go/dig and Fx to improve scalability and maintainability of Go backend services.
+    \item Implemented dependency injection with uber-go/dig and Fx for scalable, maintainable Go backend services.
     \item Refactored and optimized internal packages to improve performance and strengthen application safety.
     \item Built background processing with Redis Pub/Sub and Apache Kafka for event-driven business workflows.
     \item Pushed realtime updates to clients over WebSocket and Server-Sent Events; built background task workers and scheduled cron jobs for recurring and long-running operations.
@@ -116,7 +121,7 @@
 \begin{itemize}
     \item Took ownership of an inherited production Go codebase from departing team members; maintained, debugged, and enhanced projects wired into CI/CD.
     \item Implemented messaging and caching: RabbitMQ, Redis (cache/pub-sub/streams), Ristretto, and the Worker Pool pattern for background tasks; worked with gRPC in depth (mutual TLS, metadata, interceptors, streaming).
-    \item Stood up the observability stack: Prometheus, Grafana, Loki and OpenTelemetry --- traces, metrics, logs.
+    \item Stood up Prometheus, Grafana and Loki, and adopted OpenTelemetry for unified traces, metrics and logs.
     \item Built ReactJS web applications with Tailwind CSS and Ant Design.
 \end{itemize}}}
 
@@ -157,7 +162,7 @@
 % Project entries put the project name in the third argument on purpose: moderncv's
 % banking style renders argument 3 in bold and argument 2 in italics, so the project
 % name has to sit third to be the line a reader scans first.
-\item{\cventry{03/2026 - Present}{Backend Developer, team of 7}{SkyReality --- Real-estate lead platform}{AIONtech}{}{\vspace{1pt}
+\item{\cventry{03/2026 - Present}{Backend Developer, team of 7}{SkyReality: real-estate lead platform}{AIONtech}{}{\vspace{1pt}
 \begin{itemize}
     \item Proposed the lead and campaign data model plus the backend stack for the modules I owned; the design was reviewed and approved by the team before build.
     \item Integrated webhook event processing from Zalo, Slack, and Telegram bots; implemented OAuth2 Google Sign-In and multipart upload with checksum verification.
@@ -174,8 +179,13 @@
 \needspace{4\baselineskip}
 \item{\cventry{11/2025 - 01/2026}{Backend Developer, team of 8}{Sacombank Smart Teller Machine (STM)}{AIONtech}{}{\vspace{1pt}
 \begin{itemize}
-    \item Diagnosed a failing export (OOM kills and timeouts) as unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output, cutting the same dataset from 167.8 MB to 16 MB.
-    \item Built async import/export pipelines, step-level transaction logging, realtime WebSocket/SSE updates and cron-scheduled jobs; applied dependency injection for testability, and built the admin frontend in Next.js.
+    \item Diagnosed a failing export (OOM kills, timeouts) as unbounded queries plus duplicate rows; paginating and de-duplicating cut the same dataset from 167.8 MB to 16 MB. Fixed jobs left pending by one Kafka consumer.
+    % The bulk of his STM work (clarified 2026-10-30). The system serves deposits and
+    % withdrawals, but he did not build those flows: never word a bullet as if he did.
+    % "Step-level logging" was dropped 2026-10-30: he did not recognise the claim. The
+    % Kafka fix is confirmed; how it was fixed is not recorded, so no mechanism is named.
+    % WebSocket/SSE here push the import/export results to the client (confirmed 2026-10-30).
+    \item Built the background jobs that import and export the STM machines' transaction and message logs, notifying clients over WebSocket and SSE; built the Next.js admin frontend.
     \item Stack: Go (Gin), Kafka, Oracle, SQLite, Prometheus, Grafana, Docker; Next.js.
 \end{itemize}}}
 
@@ -203,9 +213,9 @@
 \section{Open-Source Projects}
 \vspace{1pt}
 \begin{itemize}
-\item \textbf{go-http-server/grpc} --- gRPC from the protocol up: four method types, interceptors, mTLS.
-\item \textbf{phamnam2003/challenges} --- 20 Gang-of-Four patterns in Go, plus Kafka and ScyllaDB deep dives.
-\item \textbf{go-http-server/temp} --- Gin template: PASETO, Asynq queue, sqlc, transactional writes, CI.
+\item \textbf{go-http-server/grpc}: gRPC from the protocol up, with four method types, interceptors and mTLS.
+\item \textbf{phamnam2003/challenges}: 20 Gang-of-Four patterns in Go, plus Kafka and ScyllaDB deep dives.
+\item \textbf{go-http-server/temp}: Gin template with PASETO, an Asynq queue, sqlc, transactional writes and CI.
 \end{itemize}
 
 % ============================================================
@@ -239,7 +249,7 @@
 
 \needspace{3\baselineskip}
 \item{\cventry{2021 - 2026}{Engineer's degree, Information Technology}{Hanoi Open University (HOU)}{Ha Noi, Vietnam}{}{\vspace{1pt}
-Graduated 2026. Full-time programme, studied while working professionally from early 2023, with a concentrated study block in spring 2024. Thesis: an event-ticketing platform built for the sales-open traffic spike --- virtual waiting room ahead of the booking path, TTL-based distributed seat locking, Redis inventory cache.
+Graduated 2026. Full-time (chính quy) programme, completed alongside professional work from early 2023, with a concentrated study block in spring 2024. Thesis: an event-ticketing platform built for the sales-open traffic spike, with a virtual waiting room, TTL-based distributed seat locking and a Redis inventory cache.
 }}
 % The generic coursework list that used to close this entry (software engineering,
 % data structures, databases, networks, web development) was cut to buy the thesis
@@ -263,7 +273,7 @@ Graduated 2026. Full-time programme, studied while working professionally from e
 % the one that puts this CV on a third page. The S210/S301 codes are the official
 % identifiers, so a verifier can still find all five. "2025" and "Fall 2024" are parts
 % of event names, not issue dates - never rewrite either into a date column.
-\item \textbf{ScyllaDB} --- S210 Drivers; S301 Operations; Alternator; Labs 2025; LIVE Fall 2024 Advanced Track.
+\item \textbf{ScyllaDB}: S210 Drivers; S301 Operations; Alternator; Labs 2025; LIVE Fall 2024 Advanced Track.
 
 \end{itemize}
 
@@ -277,7 +287,7 @@ Graduated 2026. Full-time programme, studied while working professionally from e
 % "Hanoi Open University" is deliberately not repeated here - it is on the scholarship
 % line directly below and on the Education entry above, and dropping the third copy is
 % what pulls this award back onto a single line.
-\item \textbf{2nd prize, Faculty-level Student Scientific Research} (2024) --- topic: Agile in software development.
+\item \textbf{2nd prize, Faculty-level Student Scientific Research} (2024): Agile in software development.
 \item \textbf{Encouragement (merit) scholarship}, Hanoi Open University, awarded for three terms.
 \end{itemize}
 
@@ -300,7 +310,7 @@ Graduated 2026. Full-time programme, studied while working professionally from e
 \section{Languages, Interests \& References}
 \vspace{1pt}
 \begin{itemize}
-\item Vietnamese (native); English (professional working --- technical reading and writing).
+\item Vietnamese (native); English (professional working, technical reading and writing).
 \item Currently learning Rust (self-study, nothing shipped). References available upon request.
 \end{itemize}
 

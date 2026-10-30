@@ -223,11 +223,28 @@ AI-powered document summarization and task-generation system. Built for C06 and 
 
 ### STM (Smart Teller Machine) — Sacombank (11/2025 – 01/2026) — AIONtech — Backend Developer, team of 8
 Self-service banking system: cash deposit, withdrawal, and account services.
+
+**Scope of the banking work — clarified 2026-10-30 by the candidate.** Most of his STM work was
+**background jobs that import and export the transaction logs and message logs from the STM
+machines**; the rest was small bug fixes unrelated to banking business logic. So this is backend
+engineering *in a banking environment* (bulk log pipelines, Oracle, a measured export fix), not
+banking domain work: he did not build payments, ledger, account, KYC or reconciliation rules.
+Sell the engineering; never claim banking business knowledge in a CV, a letter or an interview.
+This is also his **only** banking evidence. Earlier versions listed "AION Bank systems" as a second
+one; asked about it, he described this same STM work, so it was removed rather than kept as a
+separate project. The one-line description above is what the *system* does, not what he built:
+never word a CV bullet or letter line as if he built the deposit, withdrawal or account flows.
+Many tailored CVs from 2026-08 to 2026-10 did ("Backend for self-service banking terminals:
+cash deposit, withdrawal and account services", "systems that move money"); they are already
+sent, so leave them, but never reuse that phrasing.
+
+- Built the background jobs that import and export the transaction logs and message logs from the STM machines (the bulk of his work on STM)
 - Refactored STM data export to Excel, improving operational reporting and reconciliation
-- Diagnosed a failing export (OOM kills and timeouts) down to unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output — **same dataset went from 167.8 MB to 16 MB (~90% smaller), OOM kills eliminated and timeouts stopped**
-- Enhanced transaction traceability with step-level logging across STM workflows
+- Diagnosed a failing export (OOM kills and timeouts) down to unbounded query result sets plus duplicate rows; paginated the query path and de-duplicated the output — **same dataset went from 167.8 MB to 16 MB (~90% smaller), OOM kills eliminated and timeouts stopped**. *(Confirmed 2026-10-30: the duplicates came from the write step, which never checked for records already written, so the exported log file grew to over 160 MB.)*
+- Traced and fixed background jobs that looked broken: they went through Kafka to a **single consumer that processed them strictly in order**, so queued jobs sat pending and users reported them as failures; he got them running *(confirmed 2026-10-30)*. **How the fix was made is not recorded yet** (more consumers, partitioning, something else): never state a mechanism until he gives it.
+- *(Removed 2026-10-30: "step-level logging across STM workflows". Asked about it, he did not recognise the claim. Several tailored CVs and letters from 2026-08 to 2026-10 carry it; they are already sent, so leave them, but never reuse it, and be ready to explain it away in an interview.)*
 - Built asynchronous import/export pipelines to improve scalability and reliability
-- Added realtime client updates over WebSocket and Server-Sent Events (SSE), plus cron-scheduled background jobs alongside the async import/export workers
+- Pushed import/export notifications to clients over both WebSocket and Server-Sent Events (SSE) *(confirmed 2026-10-30: the realtime channel exists to tell the client how its import or export job went)*, plus cron-scheduled background jobs alongside the async import/export workers
 - Applied dependency injection to decouple core components and improve testability
 - Built the admin frontend in Next.js with Shadcn UI
 - **Stack:** Go (Gin), Kafka, Oracle Database, SQLite, Prometheus, Grafana, Docker; Next.js, Shadcn UI
@@ -326,6 +343,8 @@ A structured, self-authored curriculum rather than a scratch repo.
 ### Other
 - **Python:** Scrapy and Selenium for web crawling — used to scrape e-commerce product data (Shopee). This is where his Python experience actually is; do **not** attribute Python to the VB/C06 document-AI project.
 - **Git**, Spec-Kit
+- **Work tracking & Agile/Scrum** *(confirmed 2026-10-30)*: Jira, plus similar platforms (Asana, Trello) and other Agile/Scrum tooling. Answers the "Jira, Redmine or equivalent" and "Agile/Scrum" lines common in Vietnamese postings. Redmine itself is not confirmed: write "Jira or equivalent", never "Redmine". Using the tools does not change the drain on ceremony-heavy processes (see Deal-breakers in CLAUDE.md)
+- **Cross-functional delivery** *(confirmed 2026-10-30)*: coordinates with business analysts (BA), testers and QA/QC. Answers "phối hợp với QA/QC" style requirements; describe it as working with them, not as leading their test phases
 - **AI-assisted development:** **Claude Code**, GitHub Copilot, spec-driven workflows
 - **Integrations:** SMTP/Gmail mailer with HTML email templates, email-verification flows; Telegram, Zalo, and Slack bot webhooks *(GitHub — go-http-server/temp; CV — SkyReality)*
 - **API documentation:** redoc-cli; Mermaid diagrams for architecture docs *(GitHub — go-http-server/temp, challenges)*
@@ -353,7 +372,7 @@ specific posting genuinely runs on .NET, that is a reason to reconsider for that
 surface the choice to him rather than adding it silently.
 
 ## Domain Expertise
-- **Fintech / banking** — Sacombank STM (self-service banking), AION Bank systems
+- **Banking** — Sacombank STM (self-service banking) only: transaction- and message-log import/export jobs and the export fix, not banking business logic (see the STM project's scope note). Thin domain evidence; the transferable part is the engineering.
 - **Government / public sector** — C06 (Ministry of Public Security) document AI; TLGEO mapping & agriculture projects
 - **Real estate / CRM** — SkyReality lead-management platform
 - **Geospatial** — Mapbox, PostGIS

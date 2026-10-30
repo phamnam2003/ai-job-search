@@ -300,7 +300,8 @@ site:vietnamworks.com "DevOps Engineer" Kubernetes Hà Nội
 ### Priority 6: Broader net - domain & stack keywords
 
 Catch postings that describe the stack rather than the title. Also targets the fintech/banking
-domain, where the Sacombank STM and AION Bank work is directly relevant.
+domain, which he wants; his Sacombank STM work (log import/export jobs, an export fix) is
+engineering in a banking environment rather than banking domain experience.
 
 ```
 site:itviec.com Kafka OR gRPC OR microservices ha-noi
@@ -529,7 +530,8 @@ The Vietnam-posting rule above is unchanged.
 
 *(Confirmed 2026-09-03. All four are in scope; they are not equal.)*
 
-- **Fintech / banking** — aim here first. Strongest domain evidence (Sacombank STM, AION Bank).
+- **Fintech / banking** — aim here first (his preference). Domain evidence is thin: Sacombank STM
+  only, and that was log pipelines, not banking business logic (clarified 2026-10-30).
 - **Product companies & startups** — Go/microservices teams with room to design.
 - **Digital transformation / public sector** — real experience (C06, Ministry of Public Security).
   Expect heavier process, which is a stated drain: weigh the ceremony, not just the stack.

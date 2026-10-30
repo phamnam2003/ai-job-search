@@ -52,15 +52,19 @@ Keep answers to 1-2 minutes. Be specific. End with what you learned or would do 
 
 ### Async pipelines & bottleneck removal on Sacombank STM (performance / distributed)
 **Source:** CV — Sacombank Smart Teller Machine, backend developer, team of 8 (11/2025–01/2026)
-**What happened:** On a live self-service banking system, you rebuilt data import/export as async pipelines, added step-level transaction logging, and resolved duplicate-data issues that were causing performance bottlenecks.
+**What happened:** On a live self-service banking system, you built the background jobs that import and export the machines' transaction and message logs, and resolved the duplicate-data and memory issues that were making the export fail.
 **Why it matters:** **Your strongest story, by a wide margin.** It is the only one with hard before/after numbers, it has a real root-cause diagnosis, and it happened on a live banking system. Use it for "tell me about a time you fixed a performance problem", for debugging questions, and for anything about working under production constraints.
 **S/T/A/R:**
 - Situation: STM data export was failing outright, not just running slowly. The export job either timed out or was OOM-killed, so there were times when no file could be produced at all. When it did complete, the output contained heavy duplication.
 - Task: Make export actually finish reliably, and make the output usable for reconciliation.
-- Action: Diagnosed the root cause as memory pressure — the query path was holding far too much data in memory across successive query rounds. Split the queries into pages so memory stayed bounded, and filtered duplicate records out of the export path. Also built asynchronous import/export pipelines, added step-level transaction logging across STM workflows, and applied dependency injection to decouple the components.
+- Action: Diagnosed the root cause as memory pressure — the query path was holding far too much data in memory across successive query rounds. Split the queries into pages so memory stayed bounded, and filtered duplicate records out of the export path: the write step had never checked for records already written, which is what bloated the file. Also built the asynchronous import/export jobs and applied dependency injection to decouple the components.
 - Result: On the same dataset, the export went from **167.8 MB to 16 MB** — roughly a 90% reduction, almost all of it duplicate records that should never have been there. **OOM kills were eliminated** by the query pagination, and timeouts essentially stopped occurring.
 
 > **Delivering this one:** lead with the failure, not the fix — "the export was getting OOM-killed, so sometimes there was simply no file" is a much stronger opening than "I optimized an export". The 167.8 MB → 16 MB figure is your single most quotable number; state it once, clearly, and let them ask the follow-up. Be ready for "how did you find it?" — the answer is that the symptom was memory, and the two causes (unbounded query result sets, and duplicate rows) were separate problems that both showed up as the same crash.
+
+> **Second STM debugging story (confirmed 2026-10-30):** users reported background jobs as broken because they never seemed to run. You traced it to Kafka feeding a single consumer that handled jobs strictly in order, so everything queued behind a slow job sat pending, and you got the jobs running. Good for "a bug that wasn't what it looked like". **Before using it, settle what the fix actually was** (more consumers in a group, more partitions, a separate topic, something else): an interviewer will ask, and the profile does not record it yet.
+>
+> **Don't claim "step-level transaction logging".** Older CVs and letters (2026-08 to 2026-10) said it; he did not recognise it on 2026-10-30. If an interviewer quotes it, say what was actually built: the log import/export jobs and the two fixes above.
 
 ### Taking over an inherited Go codebase (ownership of ambiguous work)
 **Source:** CV — Leeon Group, frontend & backend developer (06/2024–10/2025)
