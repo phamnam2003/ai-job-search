@@ -87,9 +87,13 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 ### Tooling note
 
 **Disabled for low yield (2026-10-11):** `lever-search`, `devwork-search`, `vietnamdevs-search`,
-`weworkremotely-search`. Unlike `topcv-search` — disabled because its WAF blocks the CLI, and
-deliberately covered by the `site:topcv.vn` fallback — these four were switched off because what
-they return does not fit, so do **not** cover them through the Step 1c WebSearch fallback either.
+`weworkremotely-search`. These four were switched off because what they return does not fit, so
+do **not** cover them through the Step 1c WebSearch fallback either. (`topcv-search` was disabled
+from 2026-10-02 because its WAF blocked the CLI, and re-enabled on 2026-10-30 once live probes
+worked again. Its `site:topcv.vn` lines stay as the fallback for a call that still gets a 403.)
+Re-probed 2026-10-30: all four still work and still return little that fits (lever: 0 hits in
+30 days across its 11 boards; vietnamdevs and weworkremotely: mostly Senior, HCMC or US roles;
+devwork: 7 results, one Hanoi Golang role).
 The two `site:jobs.lever.co` lines under Priority 1 stay: they reach companies outside the
 curated `companies.json`, a different population from the one the CLI was measured on.
 
@@ -214,8 +218,9 @@ bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "backend" --limit 
 bun run .agents/skills/itnavi-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
 ```
 
-(`topcv-search` is disabled — its WAF blocks the CLI — so TopCV runs on the `site:topcv.vn`
-lines above. The LinkedIn lines used `--keywords` and a bare `--remote` until 2026-10-11; the
+(`topcv-search` is enabled again since 2026-10-30 and is the primary route to TopCV: run its
+calls one after another, since back-to-back requests can still get a 403. The `site:topcv.vn`
+lines above are the fallback for a call that fails. The LinkedIn lines used `--keywords` and a bare `--remote` until 2026-10-11; the
 CLI rejects both as `UNKNOWN_FLAG` — see its SKILL.md for `-q` and `--remote <mode>`.)
 
 ### Priority 2: Fullstack Developer (React/Next + Go/Node)
