@@ -28,6 +28,19 @@ The second correction: he does not want to pick between autonomy, structure, and
 Asked which environment suits him, he said all three at once — a clear goal and clean spec, room
 to decide the *how*, and colleagues close enough to argue a design with.
 
+## Core Behavioral Drives
+
+<!-- Confirmed by the candidate 2026-10-30. No formal assessment (PI, DISC, MBTI,
+     CliftonStrengths) exists: these four rows summarise his own /setup 2026-09-03 answers,
+     detailed in the sections below. Levels are self-reported, not test scores. -->
+
+| Drive | Level | Meaning |
+|-------|-------|---------|
+| Autonomy over the "how" | High | Wants a clear goal and the reason for it, then room to choose the method himself |
+| Depth vs speed | Situational | Researches to the foundations on choices that are expensive to reverse (schema, public API, stack); builds a working version and iterates when a pilot or demo is due |
+| Directness and pushback | High | Will argue a design on its merits, including with a manager |
+| Verbal and social expression | Low to moderate | Writing-first; spoken English is the one weakness he names |
+
 ## Strongest Behaviors
 
 - **Owns a module end to end** *[Self-reported 2026-09-03]* — Given a defined area he takes it

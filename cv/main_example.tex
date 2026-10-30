@@ -179,11 +179,12 @@
 \needspace{4\baselineskip}
 \item{\cventry{11/2025 - 01/2026}{Backend Developer, team of 8}{Sacombank Smart Teller Machine (STM)}{AIONtech}{}{\vspace{1pt}
 \begin{itemize}
-    \item Diagnosed a failing export (OOM kills, timeouts) as unbounded queries plus duplicate rows; paginating and de-duplicating cut the same dataset from 167.8 MB to 16 MB. Fixed jobs left pending by one Kafka consumer.
+    % The pending-jobs fix was in the SQL and the machine-data writes, not in Kafka
+    % (confirmed 2026-10-30): never word it as a consumer or partition change.
+    \item Traced jobs stuck pending behind a single Kafka consumer, and an export failing with OOM kills, to the SQL queries and machine-data writes; paginating and de-duplicating cut the same dataset from 167.8 MB to 16 MB.
     % The bulk of his STM work (clarified 2026-10-30). The system serves deposits and
     % withdrawals, but he did not build those flows: never word a bullet as if he did.
-    % "Step-level logging" was dropped 2026-10-30: he did not recognise the claim. The
-    % Kafka fix is confirmed; how it was fixed is not recorded, so no mechanism is named.
+    % "Step-level logging" was dropped 2026-10-30: he did not recognise the claim.
     % WebSocket/SSE here push the import/export results to the client (confirmed 2026-10-30).
     \item Built the background jobs that import and export the STM machines' transaction and message logs, notifying clients over WebSocket and SSE; built the Next.js admin frontend.
     \item Stack: Go (Gin), Kafka, Oracle, SQLite, Prometheus, Grafana, Docker; Next.js.
