@@ -15,7 +15,12 @@
     "404 on the board API. ClickHouse and Temporal migrated to Ashby (live boards at",
     "jobs.ashbyhq.com/clickhouse and /temporal). Postman's Greenhouse board is gone",
     "entirely (job-boards.greenhouse.io/postman 404s; its indexed job URLs 302 to",
-    "?error=true); its replacement ATS was not identified. No variant token resolved."
+    "?error=true); its replacement ATS was not identified. No variant token resolved.",
+    "",
+    "2026-10-26: removed `remotecom` (Remote.com) — 404 on the board API since ~2026-10-16.",
+    "Remote replaced Greenhouse with an in-house ATS (roles now listed at remote.com/openings,",
+    "no public API found). `remote` is NOT a substitute: it resolves to General Assembly's",
+    "board. All 32 remaining tokens re-verified 200 the same day."
   ],
   "companies": [
     { "token": "gitlab", "name": "GitLab", "region": "Global remote (async)", "tags": ["remote-first", "devtools", "go"] },
@@ -44,7 +49,6 @@
     { "token": "proton", "name": "Proton", "region": "Europe (EU hours)", "tags": ["eu-hours", "privacy", "go"] },
     { "token": "mozilla", "name": "Mozilla", "region": "Global remote", "tags": ["remote-first", "open-source"] },
     { "token": "wikimedia", "name": "Wikimedia Foundation", "region": "Global remote (async)", "tags": ["remote-first", "non-profit"] },
-    { "token": "remotecom", "name": "Remote.com", "region": "Global remote (async)", "tags": ["remote-first", "hr-tech", "go"] },
     { "token": "turing", "name": "Turing", "region": "Global remote", "tags": ["remote-first", "offshore"] },
     { "token": "stripe", "name": "Stripe", "region": "Global (hybrid hubs)", "tags": ["fintech", "go"] },
     { "token": "affirm", "name": "Affirm", "region": "Global remote", "tags": ["remote-first", "fintech"] },
