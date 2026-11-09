@@ -54,6 +54,7 @@
     { "token": "affirm", "name": "Affirm", "region": "Global remote", "tags": ["remote-first", "fintech"] },
     { "token": "brex", "name": "Brex", "region": "Global (hybrid hubs)", "tags": ["fintech", "go"] },
     { "token": "agoda", "name": "Agoda", "region": "Asia-Pacific (Bangkok HQ)", "tags": ["apac", "travel"] },
-    { "token": "mercari", "name": "Mercari", "region": "Japan (JST — Asia hours)", "tags": ["apac", "asia-hours", "go"] }
+    { "token": "mercari", "name": "Mercari", "region": "Japan (JST — Asia hours)", "tags": ["apac", "asia-hours", "go"] },
+    { "token": "wheely", "name": "Wheely", "region": "Europe (Cyprus, UK) — relocation with visa sponsorship", "tags": ["eu-hours", "go"] }
   ]
 }

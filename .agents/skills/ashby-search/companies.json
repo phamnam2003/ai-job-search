@@ -50,6 +50,7 @@
     { "token": "primer", "name": "Primer", "region": "Global remote", "tags": ["remote-first", "fintech"] },
     { "token": "paxos", "name": "Paxos", "region": "Global remote", "tags": ["remote-first", "fintech", "crypto"] },
     { "token": "clearbank", "name": "ClearBank", "region": "United Kingdom (EU hours)", "tags": ["eu-hours", "fintech"] },
-    { "token": "griffin", "name": "Griffin", "region": "United Kingdom remote (EU hours)", "tags": ["remote-first", "eu-hours", "fintech"] }
+    { "token": "griffin", "name": "Griffin", "region": "United Kingdom remote (EU hours)", "tags": ["remote-first", "eu-hours", "fintech"] },
+    { "token": "thought-machine", "name": "Thought Machine", "region": "Europe / APAC hubs (London, Lisbon, Singapore)", "tags": ["eu-hours", "apac", "fintech", "go"] }
   ]
 }
