@@ -25,7 +25,9 @@
     "2026-11-10: added `straitsx` (StraitsX, Singapore fintech, card issuing) — surfaced by the",
     "always-run site: queries with a Go backend role listed for Kuala Lumpur and Vietnam. Its",
     "absolute_url host is job-boards.eu.greenhouse.io, but boards-api.greenhouse.io serves it (200,",
-    "25 jobs). `prisma` returned 404 on every call that day; left in place pending review."
+    "25 jobs). Same day: removed `prisma` (Prisma) — 404 on the board API on every call. No",
+    "replacement found: `prisma` also 404s on the Ashby and Lever posting APIs, and the",
+    "`prismadata` Greenhouse variant 404s too."
   ],
   "companies": [
     { "token": "gitlab", "name": "GitLab", "region": "Global remote (async)", "tags": ["remote-first", "devtools", "go"] },
@@ -47,7 +49,6 @@
     { "token": "encore", "name": "Encore", "region": "Global remote", "tags": ["remote-first", "devtools", "go"] },
     { "token": "vercel", "name": "Vercel", "region": "Global remote", "tags": ["remote-first", "devtools", "frontend"] },
     { "token": "netlify", "name": "Netlify", "region": "Global remote", "tags": ["remote-first", "devtools", "frontend"] },
-    { "token": "prisma", "name": "Prisma", "region": "Global remote (EU-centric)", "tags": ["remote-first", "devtools", "eu-hours"] },
     { "token": "jetbrains", "name": "JetBrains", "region": "Europe (EU hours)", "tags": ["devtools", "eu-hours"] },
     { "token": "contentful", "name": "Contentful", "region": "Europe (EU hours)", "tags": ["eu-hours", "devtools"] },
     { "token": "storyblok", "name": "Storyblok", "region": "Europe remote (EU hours)", "tags": ["remote-first", "eu-hours", "devtools"] },
