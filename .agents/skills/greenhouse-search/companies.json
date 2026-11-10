@@ -20,7 +20,12 @@
     "2026-10-26: removed `remotecom` (Remote.com) — 404 on the board API since ~2026-10-16.",
     "Remote replaced Greenhouse with an in-house ATS (roles now listed at remote.com/openings,",
     "no public API found). `remote` is NOT a substitute: it resolves to General Assembly's",
-    "board. All 32 remaining tokens re-verified 200 the same day."
+    "board. All 32 remaining tokens re-verified 200 the same day.",
+    "",
+    "2026-11-10: added `straitsx` (StraitsX, Singapore fintech, card issuing) — surfaced by the",
+    "always-run site: queries with a Go backend role listed for Kuala Lumpur and Vietnam. Its",
+    "absolute_url host is job-boards.eu.greenhouse.io, but boards-api.greenhouse.io serves it (200,",
+    "25 jobs). `prisma` returned 404 on every call that day; left in place pending review."
   ],
   "companies": [
     { "token": "gitlab", "name": "GitLab", "region": "Global remote (async)", "tags": ["remote-first", "devtools", "go"] },
@@ -55,6 +60,7 @@
     { "token": "brex", "name": "Brex", "region": "Global (hybrid hubs)", "tags": ["fintech", "go"] },
     { "token": "agoda", "name": "Agoda", "region": "Asia-Pacific (Bangkok HQ)", "tags": ["apac", "travel"] },
     { "token": "mercari", "name": "Mercari", "region": "Japan (JST — Asia hours)", "tags": ["apac", "asia-hours", "go"] },
-    { "token": "wheely", "name": "Wheely", "region": "Europe (Cyprus, UK) — relocation with visa sponsorship", "tags": ["eu-hours", "go"] }
+    { "token": "wheely", "name": "Wheely", "region": "Europe (Cyprus, UK) — relocation with visa sponsorship", "tags": ["eu-hours", "go"] },
+    { "token": "straitsx", "name": "StraitsX", "region": "Southeast Asia (Singapore HQ; Kuala Lumpur, Jakarta, Vietnam)", "tags": ["apac", "fintech", "go"] }
   ]
 }
