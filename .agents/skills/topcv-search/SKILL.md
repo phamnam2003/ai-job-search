@@ -50,6 +50,8 @@ and may rate-limit, so keep request volume low and polite (no bulk scraping).
 bun run .agents/skills/topcv-search/cli/src/cli.ts search [--query "<kw>"] [--location <city>] [flags]
 ```
 
+Query syntax: the query becomes a URL path slug: lowercased, with every run of characters outside a-z and 0-9 (spaces and quotes included) turned into one hyphen (`"backend developer"` → `/tim-viec-lam-backend-developer`), so quoting changes nothing. Vietnamese diacritics are among those characters and break the slug (`Lập trình` → `l-p-tr-nh`): strip the accents yourself (`lap trinh vien`). No OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword (title, skill, role). Multi-word input is hyphenated into the URL slug (`"backend developer"` → `backend-developer`). Defaults to `it` when omitted.
 - `--location <city>` / `-l <city>` — city name/slug (`ha-noi`, `ho-chi-minh`, `da-nang`, …). Mapped to TopCV's server-side city filter (`-tai-<slug>-kl<id>`). An unknown value falls back to a client-side filter on the card's location text.

@@ -47,6 +47,8 @@ responsibility.
 bun run .agents/skills/joywork-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: phrase quoting not honoured (probed 2026-11-13); no OR. The search is fuzzy, so `OR` is read as one more word and pulls in unrelated postings; pass `--strict` to require every query word.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword search. **Fuzzy and similarity-ranked** (see Notes), so pair it with `--strict`.
 - `--location <text>` / `-l <text>` — one province, filtered **server-side**. Accepts a code (`ha-noi`) or a name with or without accents (`"Hà Nội"`, `"ha noi"`), plus the aliases `hanoi`, `hcm`, `hcmc`, `saigon` and `danang`. An unknown value exits with `BAD_LOCATION` instead of being sent.

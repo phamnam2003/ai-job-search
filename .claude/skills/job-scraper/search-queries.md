@@ -168,12 +168,26 @@ Queries are grouped by priority. **The default pass runs Priority 1, 2 and 6** �
 three": Priority 3 (Frontend) became opt-in on 2026-10-11 and its slot went to Priority 6's
 backend stack/domain queries. `/scrape broad` runs all; `/scrape frontend` runs Priority 3. Write **each category in both Vietnamese and English** (the two languages on the Languages table — see Language scope above and the Language Note table at the bottom of this file). Combine each query with the Ha Noi location terms where the site supports it.
 
+Each priority has two kinds of block. **Plain terms** blocks are what the portal CLIs consume: one term per line, one CLI call per term, no `OR`, no `site:` prefix, and no location (the CLI's location flag, or the city in `--query` where that portal's SKILL.md says so, carries it). Quote a multi-word phrase only if the portal's `Query syntax:` line says quoting is honoured. **WebSearch-only** blocks are Google syntax (`site:`, quotes, `OR`) for the fallback path and are never passed to a CLI.
+
 **Organize by function, not job title.** The same underlying work carries different titles across companies and markets (a "Data Scientist" role at one employer may be posted as "Insights Analyst" or "Data Consultant" at another). Name each priority category after the function it covers, and list several plausible job titles as query variants within that category rather than betting an entire priority tier on one exact title string.
 
 ### Priority 1: Backend Developer (Go / Node.js)
 
 Strongest and most desired direction. Go + Gin + gRPC + Kafka + microservices is the sharpest
 edge on the CV (AIONtech, Leeon Group, banking/fintech projects).
+
+#### Plain terms (portal CLIs)
+
+```
+Golang
+Go Developer
+Go Engineer
+Backend Developer
+Backend Engineer
+```
+
+#### WebSearch-only (`site:` fallback)
 
 ```
 site:itviec.com "Golang" OR "Go Developer" ha-noi
@@ -227,6 +241,16 @@ CLI rejects both as `UNKNOWN_FLAG` — see its SKILL.md for `-q` and `--remote <
 
 Matches the current job title exactly ("Frontend and Backend Developer"). Widest realistic net.
 
+#### Plain terms (portal CLIs)
+
+```
+Fullstack Developer
+Fullstack Engineer
+Full-stack Developer
+```
+
+#### WebSearch-only (`site:` fallback)
+
 ```
 site:itviec.com "Fullstack Developer" ha-noi
 site:itviec.com "Full-stack" ReactJS NodeJS ha-noi
@@ -246,6 +270,19 @@ counts inside Fullstack (Priority 2), which stays in the default pass.
 
 Deep, real experience: React, Next.js, Vue, Redux/Redux Toolkit, Recoil, Tailwind, Ant Design.
 
+#### Plain terms (portal CLIs)
+
+```
+Frontend Developer
+Lập trình viên Frontend
+ReactJS
+React Developer
+NextJS
+VueJS
+```
+
+#### WebSearch-only (`site:` fallback)
+
 ```
 site:itviec.com "ReactJS" OR "React Developer" ha-noi
 site:itviec.com "NextJS" OR "VueJS" ha-noi
@@ -259,6 +296,17 @@ site:linkedin.com/jobs "Frontend Developer" React Hanoi Vietnam
 ### Priority 4: Remote / Offshore (USD)
 
 Remote roles for foreign or offshore companies. Worth a separate pass - the pay band is different.
+
+#### Plain terms (portal CLIs)
+
+Remote is carried by the portal's own remote flag (`--remote remote` on LinkedIn), never by the term.
+
+```
+Golang
+Backend Engineer
+```
+
+#### WebSearch-only (`site:` fallback)
 
 ```
 site:linkedin.com/jobs "Golang" remote Vietnam
@@ -293,6 +341,16 @@ The CV genuinely supports this (Docker, Kubernetes + Calico/Cilium/Envoy/Nginx I
 ArgoCD/GitOps, OpenTelemetry, Prometheus/Grafana/Loki, self-hosted GitLab Runners, GitHub
 Actions), but the title mismatch is deliberate — see `04-job-evaluation.md` career goals.
 
+#### Plain terms (portal CLIs)
+
+```
+DevOps Engineer
+Platform Engineer
+Site Reliability Engineer
+```
+
+#### WebSearch-only (`site:` fallback)
+
 ```
 site:itviec.com "DevOps Engineer" Kubernetes ha-noi
 site:topdev.vn "DevOps" Kubernetes Docker Hà Nội
@@ -307,6 +365,23 @@ site:vietnamworks.com "DevOps Engineer" Kubernetes Hà Nội
 Catch postings that describe the stack rather than the title. Also targets the fintech/banking
 domain, which he wants; his Sacombank STM work (log import/export jobs, an export fix) is
 engineering in a banking environment rather than banking domain experience.
+
+#### Plain terms (portal CLIs)
+
+Kubernetes, Docker and CI/CD are left out on purpose: alone they return DevOps titles, and the
+infra-as-strength rule below only wants them as qualifiers on a backend role. They stay in the
+WebSearch lines, where `"Backend" (Kubernetes OR ...)` can express that.
+
+```
+Kafka
+gRPC
+microservices
+NodeJS
+fintech
+Software Engineer
+```
+
+#### WebSearch-only (`site:` fallback)
 
 ```
 site:itviec.com Kafka OR gRPC OR microservices ha-noi
@@ -355,6 +430,20 @@ country plus the UK and Switzerland, with none ranked above another. Do not narr
 queries to a few hubs, and do not score a posting up or down for which European country it is
 in. The salary floor does differ by country (see the Salary Filter below), and the local-language
 rule in the Language Filter still applies.
+
+#### Plain terms (portal CLIs)
+
+The market is carried by the location flag (`-l "Singapore"`, `--country SG,AU`, `--region eu`),
+never by the term. Visa sponsorship is checked on the posting after fetching, not searched for.
+
+```
+Golang
+Go Developer
+Go Engineer
+Backend Engineer
+```
+
+#### WebSearch-only (`site:` fallback)
 
 ```
 site:linkedin.com/jobs "Golang" OR "Go Engineer" Singapore

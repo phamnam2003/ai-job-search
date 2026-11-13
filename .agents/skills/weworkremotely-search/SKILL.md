@@ -49,6 +49,8 @@ category — this is for your own personal job search only, run on your own resp
 bun run .agents/skills/weworkremotely-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: matched client-side against title, company, skills, category and description, case-insensitively; every whitespace-separated word must appear as a substring. Quote characters are not stripped and would be matched literally, so never quote; no OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword search, client-side & case-insensitive over
   title + company + skills + category + description. **All whitespace-separated words must

@@ -55,6 +55,8 @@ needed — but keep request volume sane, since each search costs one request per
 bun run .agents/skills/greenhouse-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: no server-side search; matched client-side and case-insensitively against title and location, plus the description with `--match full` (the default is `title`). Each bare word, or each double-quoted phrase inside the argument (`-q '"backend engineer"'`), is one substring that must appear, so quotes make a contiguous phrase; every term must match; no OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keywords. **All terms must match** (AND); wrap a phrase in quotes: `-q '"site reliability"'`.
 - `--company <tokens>` / `-c <tokens>` — comma-separated board tokens to search **instead of** `companies.json`.

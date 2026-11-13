@@ -53,6 +53,8 @@ bun run .agents/skills/careerviet-search/cli/src/cli.ts search [--query "<kw>"] 
 bun run .agents/skills/careerviet-search/cli/src/cli.ts detail <id|url> [--format json|plain]
 ```
 
+Query syntax: the query becomes a URL path segment: spaces turn into hyphens and everything else is percent-encoded as typed, so a quote character would reach CareerViet as `%22` inside the path: never quote. No OR.
+
 ### Search flags
 
 | Flag | Meaning |

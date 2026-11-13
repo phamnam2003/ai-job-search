@@ -48,6 +48,8 @@ this is for your own personal job search only, run on your own responsibility.
 bun run .agents/skills/remoteok-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: matched client-side against the job title only, accent- and case-insensitively; every whitespace-separated word must appear as a substring. Quote characters are not stripped and would be matched literally, so never quote; no OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword search against the job **title only**,
   **client-side** and case- & accent-insensitive. Every word must match (AND). e.g.

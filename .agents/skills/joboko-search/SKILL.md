@@ -48,6 +48,8 @@ bun run .agents/skills/joboko-search/cli/src/cli.ts detail <url|path> [--format 
 bun run .agents/skills/joboko-search/cli/src/cli.ts slugs
 ```
 
+Query syntax: the query becomes a pre-generated keyword slug: accents are stripped (`đ` → `d`), it is lowercased, and every run of other characters (spaces and quotes included) becomes one hyphen, so quoting changes nothing. A slug Joboko has not generated returns `NO_SLUG`. No OR.
+
 ### Search flags
 
 | Flag | Meaning |

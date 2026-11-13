@@ -52,6 +52,8 @@ bun run .agents/skills/devwork-search/cli/src/cli.ts detail <id|url> [--format j
 bun run .agents/skills/devwork-search/cli/src/cli.ts tags
 ```
 
+Query syntax: `-q` is one of Devwork's fixed technology tags, not free text. It is lowercased, spaces become hyphens and the rest is percent-encoded into the URL path, so a quote character would reach Devwork as `%22`: never quote. No OR.
+
 ### Search flags
 
 | Flag | Meaning |

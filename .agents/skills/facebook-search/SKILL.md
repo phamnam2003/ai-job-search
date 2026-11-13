@@ -70,6 +70,8 @@ Open the returned URLs in your browser to find postings.
 bun run .agents/skills/facebook-search/cli/src/cli.ts search [--query "<kw>"] [--location <city>] [flags]
 ```
 
+Query syntax: matched locally against the posts in `inbox/`, never sent to Facebook. The whole query is one accent- and case-insensitive substring of title, company, tags and description, so a multi-word query already acts as an exact phrase; quote characters would be matched literally, so never quote; no OR.
+
 Reads every `.txt`/`.md` post in `inbox/`, parses each into a job, and prints
 them. This is what `/scrape` runs automatically.
 

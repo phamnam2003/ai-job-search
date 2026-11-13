@@ -50,6 +50,8 @@ for **personal use** — keep request volume low and polite (no bulk scraping).
 bun run .agents/skills/vietnamdevs-search/cli/src/cli.ts search [--query "<kw>"] [--location <slug>] [flags]
 ```
 
+Query syntax: `-q` is one of the fixed category slugs (`golang`, `back-end`, `nodejs`…), not free text. The query is lowercased and every run of characters outside a-z and 0-9 (spaces and quotes included) becomes one hyphen, so quoting changes nothing and Vietnamese diacritics break the slug. No OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — a **category keyword** that maps to a URL path segment. VietnamDevs has a **fixed taxonomy**; use one of: `golang`, `java`, `python`, `php`, `nodejs`, `reactjs`, `vuejs`, `back-end`, `front-end`, `full-stack`, `sre-devops`, `mobile-engineer`, `data-engineer`, `machine-learning`, `qa-qc`, `project-manager`. A keyword outside the taxonomy (e.g. `backend`, `kafka`) returns **no results** (the site 404s that path). Multi-word input is hyphenated (`"back end"` → `back-end`).
 - `--location <slug>` / `-l <slug>` — a city path segment: `ha-noi`, `ho-chi-minh`, `da-nang`. Combines with a keyword as `/jobs/<keyword>/<city>`. The special value `remote` is **not** a URL path (VietnamDevs has no remote path); it is applied as a **client-side filter** keeping only cards labelled "Remote working".

@@ -45,6 +45,8 @@ own personal job search only — run it on your own responsibility.
 bun run .agents/skills/topdev-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: phrase quoting not honoured (quoted and bare `backend developer` returned the same results, probed 2026-11-13); no OR (`golang OR nodejs` returned nothing).
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword search (title, skill, role). Recommended. e.g. `"golang"`, `"backend"`, `"react"`.
 - `--location <text>` / `-l <text>` — filter results by location. Client-side and **accent-insensitive**, so `"Ha Noi"`, `"Hà Nội"`, or `"ha noi"` all match. The API has no server-side region param (see Notes).

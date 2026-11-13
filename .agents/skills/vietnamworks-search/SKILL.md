@@ -49,6 +49,8 @@ touches none of those.)
 bun run .agents/skills/vietnamworks-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: phrase quoting not honoured (quoted and bare `backend developer` returned the same results, probed 2026-11-13); no OR (`golang OR nodejs` returned nothing).
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword search (title, skill, role). e.g. `"golang"`, `"backend"`, `"react"`.
 - `--location <text>` / `-l <text>` — filter results by location. Client-side and **accent-insensitive**, so `"Ha Noi"`, `"Hà Nội"`, or `"ha noi"` all match. Filtered against each posting's working-location city names (see Notes).

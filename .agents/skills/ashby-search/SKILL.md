@@ -55,6 +55,8 @@ and no login wall. Keep request volume sane; each search costs one request per b
 bun run .agents/skills/ashby-search/cli/src/cli.ts search [flags]
 ```
 
+Query syntax: no server-side search; matched client-side and case-insensitively against title and location, plus team, department and description under the default `--match full`. Each bare word, or each double-quoted phrase inside the argument (`-q '"backend engineer"'`), is one substring that must appear, so quotes make a contiguous phrase; every term must match; no OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keywords. **All terms must match** (AND); wrap a phrase in quotes: `-q '"site reliability"'`.
 - `--company <boards>` / `-c <boards>` — comma-separated board names to search **instead of** `companies.json`.

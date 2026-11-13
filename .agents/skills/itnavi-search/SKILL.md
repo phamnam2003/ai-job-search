@@ -47,6 +47,8 @@ keep request volume low and polite (no bulk scraping).
 bun run .agents/skills/itnavi-search/cli/src/cli.ts search [--query "<kw>"] [--location <city>] [flags]
 ```
 
+Query syntax: the query becomes a URL path slug: lowercased, with every run of characters outside a-z and 0-9 (spaces and quotes included) turned into one hyphen (`"backend developer"` → `backend-developer`), so quoting changes nothing. Vietnamese diacritics are among those characters and break the slug (`Lập trình` → `l-p-tr-nh`): strip the accents yourself (`lap trinh vien`). No OR.
+
 Key flags:
 - `--query <text>` / `-q <text>` — keyword (title, skill, role). Multi-word input is hyphenated into the URL path (`"backend developer"` → `backend-developer`). Recommended.
 - `--location <slug>` / `-l <slug>` — city slug path segment: `ha-noi`, `ho-chi-minh`, `da-nang`, `khac`.
