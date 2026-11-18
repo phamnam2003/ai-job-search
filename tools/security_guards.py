@@ -73,10 +73,10 @@ ALLOWED_PERMISSIONS = {
     # narrowed per-CLI entry here and in .claude/settings.json - that review step
     # is the point.
     "Bash(bun run .agents/skills/ashby-search/cli/src/cli.ts:*)",
+    "Bash(bun run .agents/skills/joywork-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/careerviet-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/facebook-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/greenhouse-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/itnavi-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/itviec-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/joboko-search/cli/src/cli.ts:*)",

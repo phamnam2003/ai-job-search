@@ -106,7 +106,6 @@ curated `companies.json`, a different population from the one the CLI was measur
 - **RemoteOK** — `.agents/skills/remoteok-search/` (added 2026-07-17; JSON API; title-precise `-q`, `--tag` for broad)
 - **WeWorkRemotely** — `.agents/skills/weworkremotely-search/` (added 2026-07-17; RSS feeds, remote-only)
 - **VietnamWorks** — `.agents/skills/vietnamworks-search/` (added 2026-07-22; public POST/JSON microservice `ms.vietnamworks.com`; general board — strong for product companies/banks/fintech; newest-first, client-side `-l`/`--jobage`)
-- **Greenhouse** — `.agents/skills/greenhouse-search/` (added 2026-07-20; public Job Board API; **ATS fan-out**)
 - **Lever** — `.agents/skills/lever-search/` (added 2026-07-20; public v0 postings API; **ATS fan-out**; best VN/APAC coverage of the three)
 - **Ashby** — `.agents/skills/ashby-search/` (added 2026-07-20; public Posting API; **ATS fan-out**; densest Go/infra coverage)
 - **CareerViet** — `.agents/skills/careerviet-search/` (added 2026-08-04; SSR HTML, path-based search; **deadline on the search card**; JSON-LD on detail)
@@ -463,7 +462,6 @@ Installed-CLI equivalents:
 
 ```
 bun run .agents/skills/ashby-search/cli/src/cli.ts search -q golang -l Singapore
-bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q golang --tag eu-hours
 ```
 
 Before keeping a relocation posting, check its sponsorship line. "Must have the right to work in
