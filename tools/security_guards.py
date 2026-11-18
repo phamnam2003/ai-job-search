@@ -72,7 +72,6 @@ ALLOWED_PERMISSIONS = {
     # The portals below were added on this fork by /add-portal; each needs its own
     # narrowed per-CLI entry here and in .claude/settings.json - that review step
     # is the point.
-    "Bash(bun run .agents/skills/ashby-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/joywork-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/careerviet-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts:*)",
@@ -80,7 +79,6 @@ ALLOWED_PERMISSIONS = {
     "Bash(bun run .agents/skills/itnavi-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/itviec-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/joboko-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/lever-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/remoteok-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/topcv-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/topdev-search/cli/src/cli.ts:*)",

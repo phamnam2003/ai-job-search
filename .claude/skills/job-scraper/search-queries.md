@@ -86,7 +86,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 
 ### Tooling note
 
-**Disabled for low yield (2026-10-11):** `lever-search`, `devwork-search`, `vietnamdevs-search`,
+**Disabled for low yield (2026-10-11):** `lever-search` (since removed, 2026-11-18, along with `ashby-search` and `greenhouse-search`; ATS boards are reached through WebSearch only), `devwork-search`, `vietnamdevs-search`,
 `weworkremotely-search`. These four were switched off because what they return does not fit, so
 do **not** cover them through the Step 1c WebSearch fallback either. (`topcv-search` was disabled
 from 2026-10-02 because its WAF blocked the CLI, and re-enabled on 2026-10-30 once live probes
@@ -106,8 +106,6 @@ curated `companies.json`, a different population from the one the CLI was measur
 - **RemoteOK** — `.agents/skills/remoteok-search/` (added 2026-07-17; JSON API; title-precise `-q`, `--tag` for broad)
 - **WeWorkRemotely** — `.agents/skills/weworkremotely-search/` (added 2026-07-17; RSS feeds, remote-only)
 - **VietnamWorks** — `.agents/skills/vietnamworks-search/` (added 2026-07-22; public POST/JSON microservice `ms.vietnamworks.com`; general board — strong for product companies/banks/fintech; newest-first, client-side `-l`/`--jobage`)
-- **Lever** — `.agents/skills/lever-search/` (added 2026-07-20; public v0 postings API; **ATS fan-out**; best VN/APAC coverage of the three)
-- **Ashby** — `.agents/skills/ashby-search/` (added 2026-07-20; public Posting API; **ATS fan-out**; densest Go/infra coverage)
 - **CareerViet** — `.agents/skills/careerviet-search/` (added 2026-08-04; SSR HTML, path-based search; **deadline on the search card**; JSON-LD on detail)
 - **Devwork** — `.agents/skills/devwork-search/` (added 2026-08-04; SSR HTML; `-q` = fixed technology tags; **salary bands on the card**, seniority + years on detail)
 - **Joboko** — `.agents/skills/joboko-search/` (added 2026-08-04; SSR HTML + JSON-LD on detail; aggregator — use `--open-only`, `?p=` pagination, pre-generated keyword slugs only)
@@ -461,7 +459,6 @@ site:teamtailor.com "Golang" OR "Backend Engineer" Go
 Installed-CLI equivalents:
 
 ```
-bun run .agents/skills/ashby-search/cli/src/cli.ts search -q golang -l Singapore
 ```
 
 Before keeping a relocation posting, check its sponsorship line. "Must have the right to work in
