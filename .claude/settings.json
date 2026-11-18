@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "Skill(job-application-assistant)",
+      "Bash(bun run .agents/skills/linkedin-search/cli/src/cli.ts:*)",
       "Bash(bun run .agents/skills/joywork-search/cli/src/cli.ts:*)",
       "Bash(bun run .agents/skills/careerviet-search/cli/src/cli.ts:*)",
       "Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts:*)",
