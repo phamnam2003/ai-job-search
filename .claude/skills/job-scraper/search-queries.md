@@ -60,7 +60,7 @@ The `site:` query templates in this file are the **WebSearch fallback** — for 
 | **TopCV** | `topcv.vn` | ⚡ **CLI installed** (`topcv-search`). Largest volume in VN; strong Hanoi backend/fintech results. (Shells out to curl to pass TopCV's WAF.) |
 | **VietnamWorks** | `vietnamworks.com` | ⚡ **CLI installed** (`vietnamworks-search`, public POST/JSON microservice). Largest general portal, good for product companies & banks. Newest-first; client-side `-l`/`--jobage`. |
 | **CareerViet** | `careerviet.vn` | ⚡ **CLI installed** (`careerviet-search`). Rebrand of CareerBuilder VN (`careerbuilder.vn` redirects here). **Search results carry the application deadline (`Hạn nộp`)**, so `--open-only` filters with no detail fetches. Strong on banking/fintech engineering. |
-| **LinkedIn** | `linkedin.com/jobs` | **Has an installed CLI** (`.agents/skills/linkedin-search/`) - use it as the primary mechanism. Best channel for remote/offshore |
+| **LinkedIn** | `linkedin.com/jobs` | **No CLI installed** (the `linkedin-search` skill was dropped when upstream moved portals to community-portals, 2026-11-18). Reach it via `site:linkedin.com/jobs` WebSearch, or reinstall it from community-portals `portals/global/linkedin-search`. Best channel for remote/offshore |
 | **Indeed VN** | `vn.indeed.com` | Aggregator - useful for catching what the others miss |
 | **Glints** | `glints.com/vn` | Startup-heavy, SEA regional, remote-friendly |
 | **Vieclam24h** | `vieclam24h.vn` | High volume; absorbed MyWork, TimViecNhanh, Viectotnhat. Broad - filter hard to IT |
@@ -98,7 +98,6 @@ The two `site:jobs.lever.co` lines under Priority 1 stay: they reach companies o
 curated `companies.json`, a different population from the one the CLI was measured on.
 
 **Installed portal CLIs** (structured results + dedup, faster than WebSearch — prefer these):
-- **LinkedIn** — `.agents/skills/linkedin-search/`
 - **ITviec** — `.agents/skills/itviec-search/` (SSR HTML; salary sign-in-gated)
 - **TopDev** — `.agents/skills/topdev-search/` (open JSON API `api.topdev.vn`)
 - **TopCV** — `.agents/skills/topcv-search/` (added 2026-07-17; SSR HTML via curl; largest VN volume, strong Hanoi backend)
@@ -149,16 +148,10 @@ The remaining Vietnamese portals have no CLI, so `/scrape` hits them via `WebSea
 **Cake** (`cake.me`) was evaluated 2026-07-17 but can't get a zero-dependency CLI — its job and
 detail pages are behind a Cloudflare JS challenge (403). Reach it via `site:cake.me` WebSearch only.
 
-The four Danish CLIs in `.agents/skills/` (jobindex, jobbank, jobdanmark, jobnet) are **not
-applicable** to this profile and ship `enabled: false`, so `/scrape` skips them.
-
-**freehire is not one of them** (corrected 2026-08-09). It was grouped with the Danish boards by
-mistake: it is a country-agnostic aggregator over ~50 ATS platforms, and `-q "backend engineer"
---country VN` / `--region apac` return live Vietnamese and APAC roles. It is enabled. Its weakness
-is the opposite of a Danish board's - it returns plenty of India/Singapore/HCMC postings that the
-Location Filter below then drops, so pair it with `--country VN` rather than a bare region query.
-Since 2026-10-12 Singapore, Australia and Europe are in scope (Priority 7), so `--country SG,AU`
-and `--region eu` are deliberate queries there rather than noise.
+The Danish CLIs (jobindex, jobbank, jobdanmark, jobnet) and `freehire-search` were removed on 2026-11-18, when upstream
+moved all portal skills to community-portals. The Danish boards do not apply to this profile. `linkedin-search` and
+`freehire-search` can be reinstalled from community-portals (`portals/global/`) if wanted; until then `/scrape` reaches
+LinkedIn through `site:linkedin.com/jobs` WebSearch.
 
 ---
 
@@ -225,8 +218,6 @@ site:jobs.smartrecruiters.com "Golang" OR "Backend Engineer" Vietnam
 Installed-CLI equivalents (preferred over WebSearch — structured, deduped, faster):
 
 ```
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Developer" -l "Hanoi, Vietnam"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Go Backend Engineer" -l "Vietnam" --remote remote
 bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
 bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "backend" --limit 20 --format table
 bun run .agents/skills/itnavi-search/cli/src/cli.ts search -q "golang" -l "ha-noi" --format table
@@ -401,9 +392,6 @@ every time, on the three portals with the best record (LinkedIn, ITviec, TopDev:
 results ranked 60+, against 0-4% elsewhere):
 
 ```
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Kafka" -l "Hanoi, Vietnam"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer microservices" -l "Hanoi, Vietnam"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer fintech" -l "Vietnam"
 bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "nodejs" -l "ha-noi" --format table
 bun run .agents/skills/itviec-search/cli/src/cli.ts search -q "kafka" -l "ha-noi" --format table
 bun run .agents/skills/topdev-search/cli/src/cli.ts search -q "golang" --limit 20 --format table
@@ -474,14 +462,6 @@ site:teamtailor.com "Golang" OR "Backend Engineer" Go
 Installed-CLI equivalents:
 
 ```
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Singapore"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Australia"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "European Union"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "United Kingdom"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Golang Backend Engineer" -l "Switzerland"
-bun run .agents/skills/linkedin-search/cli/src/cli.ts search -q "Backend Engineer visa sponsorship" -l "European Union"
-bun run .agents/skills/freehire-search/cli/src/cli.ts search -q "golang" --country SG,AU
-bun run .agents/skills/freehire-search/cli/src/cli.ts search -q "golang" --region eu
 bun run .agents/skills/ashby-search/cli/src/cli.ts search -q golang -l Singapore
 bun run .agents/skills/greenhouse-search/cli/src/cli.ts search -q golang --tag eu-hours
 ```
