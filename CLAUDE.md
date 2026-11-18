@@ -119,6 +119,12 @@ narrow exception added 2026-09-03 and spelled out in that bullet. The 2026-10-12
 - Drains to avoid *(re-confirmed and extended 2026-09-03)*: ticket-only work with no design input; legacy maintenance with no new build; **meeting-heavy and process-heavy environments** — this third one was missing from earlier versions and he named it alongside the other two, so score ceremony (daily sync + grooming + planning + retro, mandatory office ritual) as a real negative, not a neutral
 - Salary filter floors *(raised 2026-10-22)*: **Vietnam 18–40M VND/month, negotiable** (floor raised from 17M). **Abroad**, gross floors set from published market data for a mid-level backend engineer with ~3 years, and never below the visa's own salary threshold: **Singapore S$6,000/month** (S$6,600 for a financial-services employer) · **Australia A$95,000/year** base excluding super · **remote from Vietnam for an employer based abroad US$2,000/month** (about 50M VND) · **Europe per country**, in the table in `04-job-evaluation.md` (its only copy). Flag postings clearly below the floor. A search filter only; no actual or expected figure is recorded in this repository (it is public). The floors are duplicated in `01-candidate-profile.md` and `04-job-evaluation.md` — change all three together or `/scrape` and `/rank` will enforce different bars
 
+## Repo Structure
+- `cv/` - LaTeX CV variants (moderncv template, banking style)
+- `cover_letters/` - LaTeX cover letters (custom cover.cls template)
+- `.claude/skills/` - AI skill definitions for the application workflow
+- `.agents/skills/` - Job portal CLIs copied in from community-portals (none shipped)
+
 ## Workflow for New Job Applications
 1. User provides a job posting (URL or text)
 2. **Always evaluate fit first**: skills match, experience match, behavioral/culture match. Present this assessment to the user before proceeding.

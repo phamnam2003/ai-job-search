@@ -67,21 +67,11 @@ errors: list[str] = []
 # an entry must add it here too - that is the point: the diff shows both.
 ALLOWED_PERMISSIONS = {
     "Skill(job-application-assistant)",
-    # Narrowed from the upstream template's blanket Bash(bun run:*), which
-    # pre-approved `bun run <any file>`. One entry per shipped portal CLI,
-    # matching what each SKILL.md already declares in its allowed-tools.
-    # A portal added by /add-portal needs its own entry here and in
-    # .claude/settings.json - that review step is the point.
-    "Bash(bun run .agents/skills/jobbank-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/jobdanmark-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/jobindex-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/jobnet-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/linkedin-search/cli/src/cli.ts:*)",
-    "Bash(bun run .agents/skills/freehire-search/cli/src/cli.ts:*)",
-    # Added by /add-portal on this fork. Upstream ships only the six above; the
-    # Vietnamese boards and the ATS/remote aggregators below are what actually
-    # get scraped here, so they need the same narrowed per-CLI entry rather
-    # than a reinstated blanket Bash(bun run:*).
+    # No portal CLI ships upstream (they live in ai-job-search-dev/community-portals),
+    # and no blanket Bash(bun run:*), which pre-approved `bun run <any file>`.
+    # The portals below were added on this fork by /add-portal; each needs its own
+    # narrowed per-CLI entry here and in .claude/settings.json - that review step
+    # is the point.
     "Bash(bun run .agents/skills/ashby-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/careerviet-search/cli/src/cli.ts:*)",
     "Bash(bun run .agents/skills/devwork-search/cli/src/cli.ts:*)",
@@ -735,8 +725,6 @@ def check_package_manifests() -> None:
     manifests = [
         p for p in ROOT.glob(".agents/**/package.json") if "node_modules" not in p.parts
     ]
-    if not manifests:
-        errors.append(".agents: no package.json files found - glob roots are wrong or the tree moved")
     for manifest in manifests:
         relpath = manifest.relative_to(ROOT)
         try:
