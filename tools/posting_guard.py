@@ -53,9 +53,10 @@ for a saved page and --text for portal CLI output, pasted or archived text;
 without either the mode is guessed from the content, which is a fallback, not
 a documented path. Output: the verdict line, a `--- findings ---` block (JSON
 with --json), then `--- text ---` and the cleaned text, or `saved=<path>` when
---out is given. Exit 0 whenever the input could be read; 2 when --in cannot or
---out points inside this repository (the cleaned posting is untrusted text and
-belongs in the session scratchpad, never next to the workflow's own files).
+--out is given. Exit 0 when a posting is evaluated; 1 when the input has no text
+to evaluate; 2 when --in cannot be read or --out points inside this repository
+(the cleaned posting is untrusted text and belongs in the session scratchpad,
+never next to the workflow's own files).
 """
 
 import argparse
@@ -70,6 +71,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from page_decode import decode_page  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
+
+NO_TEXT_VERDICT = "posting_guard: refused (no text to evaluate)"
 
 
 def _inside_repo(path: Path) -> bool:
@@ -131,13 +134,14 @@ VARIATION_RUN = re.compile("[︀-️\U000E0100-\U000E01EF]{2,}")
 
 HIDDEN_STYLE = re.compile(
     r"(?:^|;)\s*(?:display\s*:\s*none"
-    r"|visibility\s*:\s*hidden"
+    r"|visibility\s*:\s*(?:hidden|collapse)"
     r"|opacity\s*:\s*0(?![.\d]*[1-9])"
-    r"|font-size\s*:\s*0(?:\.0+)?(?:px|pt|em|rem|%)?(?![\d.])"
+    r"|font-size\s*:\s*(?:0(?:\.0+)?(?:px|pt|em|rem|%)?(?![\d.])|[012](?:\.\d+)?px(?![\w.%]))"
+    r"|transform\s*:[^;]*\bscale(?:[XYZ]|3d)?\(\s*0(?![.\d]*[1-9])"
     r"|color\s*:\s*transparent"
     r"|clip\s*:\s*rect\(\s*0"
-    r"|clip-path\s*:\s*inset\(\s*100%"
-    r"|(?:(?:margin-)?(?:left|top)|text-indent)\s*:\s*-\d{4,}px)",
+    r"|clip-path\s*:\s*inset\(\s*(?:100%|(?:5\d|[6-9]\d|100)(?:\.\d+)?%\s*\))"
+    r"|(?:(?:margin-)?(?:left|top)|text-indent)\s*:\s*-(?:99\d+|\d{4,})(?:px|em|rem))",
     re.I,
 )
 PRESTRIP = re.compile(r"<!DOCTYPE[^>]*>|<\?[^>]*\?>", re.I)
@@ -442,6 +446,8 @@ def _plural(n: int, one: str, many: str) -> str:
 
 
 def verdict(findings: dict) -> str:
+    if findings.get("verdict") == NO_TEXT_VERDICT:
+        return NO_TEXT_VERDICT
     alarms = []
     n = len(findings.get("instruction_like") or [])
     if n:
@@ -497,7 +503,11 @@ def guard(raw: str, mode: str):
     tf["invisible_text"] += hidden_tf["invisible_text"]
     hidden_text = "\n".join([hidden_text, *tf["invisible_text"]])
     findings = {"hidden_blocks": hidden_blocks, **tf, **scan(text, hidden_text)}
-    findings["verdict"] = verdict(findings)
+    verdict_line = verdict(findings)
+    if not text and verdict_line == "posting_guard: clean":
+        findings["verdict"] = NO_TEXT_VERDICT
+    else:
+        findings["verdict"] = verdict_line
     return text, findings
 
 
@@ -568,13 +578,14 @@ def main(argv=None) -> int:
                 file=sys.stderr,
             )
             return 2
-        args.out.parent.mkdir(parents=True, exist_ok=True)
-        args.out.write_text(cleaned + "\n", encoding="utf-8")
-        print(f"saved={args.out}")
+        if findings["verdict"] != NO_TEXT_VERDICT:
+            args.out.parent.mkdir(parents=True, exist_ok=True)
+            args.out.write_text(cleaned + "\n", encoding="utf-8")
+            print(f"saved={args.out}")
     else:
         print("--- text ---")
         print(cleaned)
-    return 0
+    return 1 if findings["verdict"] == NO_TEXT_VERDICT else 0
 
 
 if __name__ == "__main__":
