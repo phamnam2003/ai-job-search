@@ -194,9 +194,9 @@ to decide the *how*, and colleagues close enough to argue a design with.
 - **Cover letters:** Lead with module ownership and the design authority he actually had —
   proposing the data model and backend stack for his SkyReality and C06 modules, reviewed and
   approved before build. Pair with the depth signal from GitHub (gRPC down to the TLS/AEAD layer,
-  20 GoF patterns in Go), which is concrete and rare at mid-level. Link the GitHub.
+  20 GoF patterns in Go), which is concrete and rare at mid-level.
 - **CV:** Emphasise module ownership, the inherited-codebase turnaround at Leeon Group, and the
-  event-driven/performance work. The side projects earn a real "Projects" section.
+  event-driven/performance work. Do not add an open-source or side-project section (decided 2026-10-30).
 - **Interviews:** The `challenges` repo is direct ammunition for design-pattern and DSA rounds; the
   gRPC repo for a system-design round; the incident answer is "follow the telemetry to root cause,"
   backed by having built the telemetry. On English, prefer written take-homes over live English

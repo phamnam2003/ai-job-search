@@ -145,3 +145,9 @@ posting's original terms (see `05-cv-templates.md`); only the *output* is Englis
 - **Honest-gap paragraph** (10/10): every letter names the genuine gaps rather than hiding them
   (Flink, SignalR, Firebase, managed cloud, C/C++), each bridged to the nearest real experience.
   Keep this — it is consistent with the no-overstatement rule above.
+
+*(Added 2026-11-25 from the archived letters.)*
+- **Gap paragraph label:** "<N> gaps, stated plainly" recurs across many letters. It is now a
+  tic, and a reviewer read a variant as apologetic. State gaps in one or two sentences, once.
+- **Location close:** letters end on a concrete commute or on-site sentence.
+- **Length:** letters since 2026-10-11 run about 300-340 words, down from about 400-500.

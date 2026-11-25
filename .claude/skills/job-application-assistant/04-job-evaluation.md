@@ -350,6 +350,15 @@ correlation at the time it is run and keep it out of this file — a table of co
 scores is stale the moment the next application resolves, and a stale table reads as evidence.
 Once real signal exists, what belongs here is the conclusion drawn from it, not the rows.
 
+## Calibration from Past Applications
+*(2026-11-25. A small sample: read as leads to test, not as rules.)*
+- The fit score has not yet predicted who gets an interview: the roles that reached one scored
+  no higher than the typical rejected one. Do not adjust weights on this evidence.
+- Interviews so far came from mid-level fullstack-titled roles. No backend-titled application
+  has produced one yet; too few to prefer either, and the Career Alignment goals stand.
+- No follow-up has been logged on any application, and most rejections were closed in one batch
+  with no stage or date. Channel, follow-up and timing remain untested variables.
+
 ## Pre-Application: Call the Employer (Best Practice)
 
 Before writing the application, consider whether the candidate should call the contact person listed in the posting. **Only call if there are substantive questions** - never call just to "be remembered."

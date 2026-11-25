@@ -202,6 +202,7 @@ to end", or "sole architect" in any future document.
 
 ### Real Estate — SkyReality (03/2026 – Present) — AIONtech — Backend Developer, team of 7
 Platform for managing real-estate leads across marketing campaigns.
+- **Built new from the start (0→1)** *(confirmed 2026-11-25)*: the starting point was an interface to clone, and he worked out the system design underneath it from that interface. The scope note above still applies: designs were reviewed and approved, and cover his own modules. Say "built from the start" and "worked out the backend design from a reference interface"; leave the word "clone" for an interview, where he can explain it. Confirmed for SkyReality only, **not** for C06.
 - Proposed the database model and backend stack for the modules he owned; designs were reviewed and approved by the team before implementation
 - Developed and structured core backend modules for scalability and maintainability
 - Integrated webhook-based event processing from Zalo, Slack, and Telegram bots to automate data collection and workflow triggers
@@ -296,7 +297,7 @@ A structured, self-authored curriculum rather than a scratch repo.
 - **Go** (strong): Gin, gRPC (mTLS, interceptors, streaming), Worker Pool, dependency injection (uber-go/dig, Fx)
 - **Node.js**: Express, Strapi
 - RESTful API design; microservices architecture
-- **Testing:** unit and integration tests for business logic, REST APIs, and database interactions in Go and Node.js *(CV — Overview)*
+- **Testing:** unit, integration and HTTP tests in Go and Node.js, covering business logic, REST APIs, WebSocket, cron jobs and database interactions *(CV — Overview; scope confirmed 2026-11-25)*
 - **gRPC / Protocol Buffers (in depth):** all four method types — unary, server streaming, client streaming, bidirectional streaming; interceptors for rate-limiting, authentication, and authorization; `protoc` toolchain (`protoc-gen-go`, `protoc-gen-go-grpc`); HTTP/2 transport *(GitHub — go-http-server/grpc)*
 - **Go concurrency patterns:** goroutines, channels, `sync` package, PubSub, multiplexing/fan-in *(GitHub — phamnam2003/challenges)*
 - **Software design:** 20 Gang-of-Four design patterns implemented in Go — 9 behavioral, 4 creational, 7 structural *(GitHub — phamnam2003/challenges)*
@@ -345,6 +346,10 @@ A structured, self-authored curriculum rather than a scratch repo.
 - **Observability:** OpenTelemetry (SDK + Collector), Prometheus, Grafana, Loki, **Jaeger** *(GitHub — profile bio)*, **ELK stack** *(GitHub — challenges)*
 - **Web/Infra:** Nginx, Certbot, SSL/TLS, OpenSSL
 - **OS:** Linux (Ubuntu, Arch, CentOS), Windows
+
+### Confirmed gaps *(2026-11-25)*
+- **AWS / GCP / Azure:** no real-work use yet.
+- **OWASP Top 10:** not applied in real work yet. Never list it as a skill.
 
 ### Other
 - **Python:** Scrapy and Selenium for web crawling — used to scrape e-commerce product data (Shopee). This is where his Python experience actually is; do **not** attribute Python to the VB/C06 document-AI project.

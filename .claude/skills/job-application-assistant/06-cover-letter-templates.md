@@ -165,6 +165,11 @@ Escape these wherever they appear in body text:
   PDF; fall back to the undiacriticised spelling the company itself uses in Latin script.
 - Keep the English date format and the English closing (`Sincerely,`).
 
+## Short portal note (500 characters or fewer)
+For a portal message box. Order: salutation; role applied for; years and core stack; one measured
+result; at most one gap; one-line close; name. Plain text, English. Count characters including
+spaces and line breaks. Archive what was actually sent.
+
 ## Checklist Before Finalizing
 - [ ] No em-dashes (use commas or periods instead)
 - [ ] No cliches or empty filler

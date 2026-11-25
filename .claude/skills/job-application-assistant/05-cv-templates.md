@@ -171,6 +171,9 @@ Where the posting allows it, **open on the shape of the problem rather than the 
      01-candidate-profile.md, the STM scope note). For a money-critical posting, lead with the
      ticketing thesis (state kept correct under load, by design) rather than with STM. -->
 
+**For fullstack roles at security or infrastructure products** *[Used for: bluecyber_fullstack_developer]*:
+> Fullstack developer with around three years building production web systems on both sides: Go (Gin, gRPC) and Node.js (Express, Strapi) backends behind RESTful APIs, and ReactJS, Next.js and Vue.js frontends. At AIONtech I proposed the database model and backend stack for the modules I own on SkyReality and the Ministry of Public Security's C06 system, each reviewed and approved before build. On the security side I have implemented OAuth2 Google Sign-In and gRPC over mutual TLS at work, and JWT/PASETO token signing and TOTP two-factor authentication in my own Go projects. I run what I build on Linux, Docker and Kubernetes, and code with Claude Code and GitHub Copilot.
+
 **Two additions from the 2026-09-03 `/setup` run:**
 
 - **High-load / booking / ticketing postings have a dedicated opener now.** The final-year thesis
