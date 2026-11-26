@@ -345,6 +345,7 @@ A structured, self-authored curriculum rather than a scratch repo.
   - Deployed SkyReality and the VB/C06 document-AI system to Kubernetes via ArgoCD himself *(CV — Projects)*
 - **Observability:** OpenTelemetry (SDK + Collector), Prometheus, Grafana, Loki, **Jaeger** *(GitHub — profile bio)*, **ELK stack** *(GitHub — challenges)*
 - **Web/Infra:** Nginx, Certbot, SSL/TLS, OpenSSL
+- **Networking:** basic knowledge only. Not a network engineering background *(confirmed 2026-11-25)*
 - **OS:** Linux (Ubuntu, Arch, CentOS), Windows
 
 ### Confirmed gaps *(2026-11-25)*
