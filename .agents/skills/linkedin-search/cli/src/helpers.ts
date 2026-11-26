@@ -4,9 +4,9 @@
 // is unnecessary and node-html-parser has known nesting bugs on LinkedIn cards).
 
 export const SEARCH_URL =
-  "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
+  "https://vn.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search"
 export const DETAIL_URL =
-  "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting"
+  "https://vn.linkedin.com/jobs-guest/jobs/api/jobPosting"
 
 export function writeError(error: string, code: string): void {
   process.stderr.write(JSON.stringify({ error, code }) + "\n")
@@ -273,7 +273,7 @@ export function parseJobCards(html: string): JobCard[] {
       companyUrl,
       location,
       date,
-      url: url || `https://www.linkedin.com/jobs/view/${id}`,
+      url: url || `https://vn.linkedin.com/jobs/view/${id}`,
     })
   }
 
@@ -344,7 +344,7 @@ export function parseJobDetail(html: string, id: string): JobDetail {
     companyUrl,
     location,
     date: null,
-    url: `https://www.linkedin.com/jobs/view/${id}`,
+    url: `https://vn.linkedin.com/jobs/view/${id}`,
     description,
     seniority: criteria["seniority level"] ?? null,
     employmentType: criteria["employment type"] ?? null,

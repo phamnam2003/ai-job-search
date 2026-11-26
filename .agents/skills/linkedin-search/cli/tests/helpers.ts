@@ -43,7 +43,7 @@ export async function runSearchFixture(args: string[]): Promise<{ result: CLIRes
     const originalFetch = globalThis.fetch;
     globalThis.fetch = (input, init) => {
       const url = new URL(input instanceof Request ? input.url : String(input));
-      if (url.origin !== "https://www.linkedin.com" || url.pathname !== "/jobs-guest/jobs/api/seeMoreJobPostings/search") {
+      if (url.origin !== "https://vn.linkedin.com" || url.pathname !== "/jobs-guest/jobs/api/seeMoreJobPostings/search") {
         throw new Error("Unexpected search fixture request");
       }
       return originalFetch(${JSON.stringify(server.url.origin)} + url.pathname + url.search, init);

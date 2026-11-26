@@ -29,7 +29,7 @@ const HIDDEN_MARKUP = [
 const LEAKED = /HIDDEN|WordDocument|MsoNormal|alert/;
 const INVISIBLE_CHAR = /[\u{E0000}-\u{E007F}‮​⁦\u001B﻿]/u;
 
-const endpoint = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/4345841651";
+const endpoint = "https://vn.linkedin.com/jobs-guest/jobs/api/jobPosting/4345841651";
 const cliPath = join(import.meta.dir, "../src/cli.ts");
 const fixturePath = join(import.meta.dir, "fixtures/detail-orbis-excerpt.html");
 

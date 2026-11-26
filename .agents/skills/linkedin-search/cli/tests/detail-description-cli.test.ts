@@ -3,7 +3,7 @@ import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-const endpoint = "https://www.linkedin.com/jobs-guest/jobs/api/jobPosting/4345841651";
+const endpoint = "https://vn.linkedin.com/jobs-guest/jobs/api/jobPosting/4345841651";
 const cliPath = join(import.meta.dir, "../src/cli.ts");
 const fixture = Bun.file(join(import.meta.dir, "fixtures/detail-orbis-excerpt.html"));
 
