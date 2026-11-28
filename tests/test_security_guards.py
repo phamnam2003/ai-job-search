@@ -14,7 +14,7 @@ sys.path.insert(0, str(REPO_ROOT / "tools"))
 import security_guards  # noqa: E402  (imported for its allowlist constants)
 
 
-def run_guards(root: Path, repository=None) -> subprocess.CompletedProcess:
+def run_guards(root: Path, repository=None, **extra_env) -> subprocess.CompletedProcess:
     """Run the guard script in ``root``.
 
     ``repository`` pins GITHUB_REPOSITORY for the subprocess so results do not
@@ -25,6 +25,7 @@ def run_guards(root: Path, repository=None) -> subprocess.CompletedProcess:
         env.pop("GITHUB_REPOSITORY", None)
     else:
         env["GITHUB_REPOSITORY"] = repository
+    env.update(extra_env)
     return subprocess.run(
         [sys.executable, str(root / "tools" / "security_guards.py")],
         capture_output=True,
@@ -218,7 +219,25 @@ class AskDenyRuleTests(GuardRepoFixture):
         # one must prompt - otherwise a steered session could add
         # `allowed-tools: Bash` to apply.md with no prompt and the next /apply
         # would be pre-approved for bare Bash.
-        self.assertIn("Edit(.claude/commands/*.md)", security_guards.REQUIRED_ASK_RULES)
+        # GHSA-7hw2: Claude Code loads namespaced commands from subfolders of
+        # .claude/commands/, so the rule covers every depth, not only *.md at
+        # the top.
+        self.assertIn("Edit(.claude/commands/**)", security_guards.REQUIRED_ASK_RULES)
+        self.assertNotIn("Edit(.claude/commands/*.md)", security_guards.REQUIRED_ASK_RULES)
+        # GHSA-hf4m: Bun reads bunfig.toml (whose `preload` runs code before any
+        # portal CLI) and .npmrc from the folder it runs in, with no path on the
+        # command line, so writing either must prompt.
+        self.assertIn("Edit(**/bunfig.toml)", security_guards.REQUIRED_ASK_RULES)
+        self.assertIn("Edit(**/.npmrc)", security_guards.REQUIRED_ASK_RULES)
+        # A root node_modules/<package> answers a bare import a portal has not
+        # installed itself; it is gitignored, so only a prompt stops it.
+        self.assertIn("Edit(node_modules/**)", security_guards.REQUIRED_ASK_RULES)
+        # A .env NODE_PATH does the same. Claude Code refuses writes to a file
+        # under a Read deny rule (probed on 2.1.332 in auto mode: "File is
+        # covered by a Read deny rule ... cannot be written"), so these two deny
+        # rules are what keep .env and .env.* from being planted.
+        self.assertIn("Read(.env)", security_guards.REQUIRED_DENY_RULES)
+        self.assertIn("Read(.env.*)", security_guards.REQUIRED_DENY_RULES)
         self.assertIn("Bash(git push:*)", security_guards.REQUIRED_ASK_RULES)
         # The posting integrity gate runs inside fetch agents with no prompt.
         self.assertIn("Bash(python tools/posting_guard.py:*)", security_guards.ALLOWED_PERMISSIONS)
@@ -843,6 +862,252 @@ class SubdirectoryGitignoreTests(GuardRepoFixture):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
 
+class GitignoreReadLikeGitTests(GuardRepoFixture):
+    """The guard must read a .gitignore line for line as `git check-ignore` does:
+    a rule git ignores must count as present, a rule git does not apply must not."""
+
+    def setUp(self):
+        super().setUp()
+        subprocess.run(["git", "init", "-q", str(self.root)], check=True, capture_output=True)
+
+    def _git_ignores(self, path):
+        return subprocess.run(
+            ["git", "-C", str(self.root), "check-ignore", "-q", "--no-index", path],
+            capture_output=True,
+        ).returncode == 0
+
+    def _root_gitignore_with(self, replacement):
+        rules = [r for r in security_guards.REQUIRED_IGNORE_RULES if r != "salary_data.json"]
+        self.gitignore.write_bytes(("\n".join(rules) + "\n" + replacement + "\n").encode("utf-8"))
+
+    def test_trailing_tab_or_nbsp_is_part_of_the_pattern(self):
+        for line in ("salary_data.json\t", "salary_data.json\xa0", "salary_data.json \t"):
+            with self.subTest(line=line):
+                self._root_gitignore_with(line)
+                self.assertFalse(self._git_ignores("salary_data.json"))
+                result = run_guards(self.root)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn("required personal-data rule missing: 'salary_data.json'", result.stdout)
+
+    def test_only_newline_separates_lines(self):
+        for sep in ("\x0b", "\x0c", "\r", "\x1c", "\x1d", "\x1e", "\x85", "\u2028", "\u2029"):
+            with self.subTest(sep=repr(sep)):
+                self._root_gitignore_with("x" + sep + "salary_data.json")
+                self.assertFalse(self._git_ignores("salary_data.json"))
+                result = run_guards(self.root)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+
+    def test_only_one_trailing_carriage_return_is_dropped(self):
+        self._root_gitignore_with("salary_data.json\r\r")
+        self.assertFalse(self._git_ignores("salary_data.json"))
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("required personal-data rule missing: 'salary_data.json'", result.stdout)
+
+    def test_symlinked_root_gitignore_fails(self):
+        target = self.root / "gitignore-rules.txt"
+        self.gitignore.rename(target)
+        try:
+            os.symlink(target.name, self.gitignore)
+        except OSError:
+            self.skipTest("symlinks are unavailable on this platform")
+        if self._git_ignores("salary_data.json"):
+            self.skipTest("git on this host reads a symlinked .gitignore")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn(".gitignore is a symlink", result.stdout)
+
+    def test_symlinked_root_gitignore_still_lists_subdirectory_negations(self):
+        target = self.root / "gitignore-rules.txt"
+        self.gitignore.rename(target)
+        try:
+            os.symlink(target.name, self.gitignore)
+        except OSError:
+            self.skipTest("symlinks are unavailable on this platform")
+        sub = self.root / "documents" / "cv"
+        sub.mkdir(parents=True)
+        (sub / ".gitignore").write_text("!personal_cv.pdf\n", encoding="utf-8")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn(".gitignore is a symlink", result.stdout)
+        self.assertIn("documents/cv/.gitignore", result.stdout.replace("\\", "/"))
+
+    def test_symlinked_subdirectory_gitignore_fails_without_reading_it(self):
+        sub = self.root / "documents" / "cv"
+        sub.mkdir(parents=True)
+        (self.root / "negations.txt").write_text("!personal_cv.pdf\n", encoding="utf-8")
+        try:
+            os.symlink(os.path.join("..", "..", "negations.txt"), sub / ".gitignore")
+        except OSError:
+            self.skipTest("symlinks are unavailable on this platform")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("documents/cv/.gitignore is a symlink", result.stdout.replace("\\", "/"))
+        self.assertNotIn("negation rule", result.stdout)
+
+    def test_non_utf8_gitignore_is_reported(self):
+        rules = "\n".join(security_guards.REQUIRED_IGNORE_RULES) + "\n# caf\xe9\n"
+        self.gitignore.write_bytes(rules.encode("latin-1"))
+        sub = self.root / "documents"
+        sub.mkdir()
+        (sub / ".gitignore").write_bytes("# caf\xe9\n".encode("latin-1"))
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        self.assertIn("- .gitignore: unreadable (must be UTF-8)", result.stdout)
+        self.assertIn("documents/.gitignore: unreadable (must be UTF-8)", result.stdout.replace("\\", "/"))
+
+    def test_gitignore_messages_survive_a_cp1252_stdout(self):
+        self._root_gitignore_with("!caf\u0107")
+        result = run_guards(self.root, PYTHONIOENCODING="cp1252", PYTHONUTF8="0")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        self.assertIn("'!caf\\u0107'", result.stdout)
+
+    def test_crlf_line_endings_pass(self):
+        rules = [r for r in security_guards.REQUIRED_IGNORE_RULES if r != "salary_data.json"]
+        text = "\r\n".join(rules + ["salary_data.json \r\n"])
+        self.gitignore.write_bytes(text.encode("utf-8"))
+        self.assertTrue(self._git_ignores("salary_data.json"))
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_utf8_bom_on_root_gitignore_is_skipped(self):
+        rules = ["salary_data.json"] + [
+            r for r in security_guards.REQUIRED_IGNORE_RULES if r != "salary_data.json"
+        ]
+        self.gitignore.write_bytes(b"\xef\xbb\xbf" + ("\n".join(rules) + "\n").encode("utf-8"))
+        self.assertTrue(self._git_ignores("salary_data.json"))
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_utf8_bom_does_not_hide_a_subdirectory_negation(self):
+        sub = self.root / "documents" / "cv"
+        sub.mkdir(parents=True)
+        self.assertTrue(self._git_ignores("documents/cv/personal_cv.pdf"))
+        (sub / ".gitignore").write_bytes(b"\xef\xbb\xbf!personal_cv.pdf\n")
+        self.assertFalse(self._git_ignores("documents/cv/personal_cv.pdf"))
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("documents/cv/.gitignore", result.stdout.replace("\\", "/"))
+
+
+class TrackedLocalSettingsTests(GuardRepoFixture):
+    def _git(self, *args, **kwargs):
+        return subprocess.run(
+            ["git", *args], cwd=self.root, capture_output=True, encoding="utf-8",
+            check=False, **kwargs
+        )
+
+    def _stage_exact(self, name, mode="100644"):
+        """Index `name` byte for byte, whatever spellings the filesystem folds together."""
+        sha = self._git("hash-object", "-w", "--stdin", input="{}").stdout.strip()
+        self._git(
+            "-c", "core.protectNTFS=false",
+            "update-index", "--add", "--cacheinfo", f"{mode},{sha},{name}",
+        )
+        entries = self._git("ls-files", "-s", "-z").stdout.split("\x00")
+        self.assertIn(f"{mode} {sha} 0\t{name}", entries)
+
+    def setUp(self):
+        super().setUp()
+        self._git("init", "-q")
+        self.local = self.root / ".claude" / "settings.local.json"
+        self.local.write_text(json.dumps({"env": {"PYTHONPATH": "/tmp/x"}}), encoding="utf-8")
+
+    def test_force_added_settings_local_fails(self):
+        self._git("add", "-f", ".claude/settings.local.json")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn(".claude/settings.local.json", result.stdout)
+
+    def test_force_added_settings_local_in_other_case_fails(self):
+        self._stage_exact(".Claude/Settings.local.json")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("tracked '.Claude/Settings.local.json'", result.stdout)
+
+    def test_force_added_settings_local_with_a_case_folded_letter_fails(self):
+        self._stage_exact(".claude/\u017fettings.local.json")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("tracked '.claude/\\u017fettings.local.json'", result.stdout)
+
+    def test_case_folded_settings_local_message_survives_a_cp1252_stdout(self):
+        self._stage_exact(".claude/\u017fettings.local.json")
+        result = run_guards(self.root, PYTHONIOENCODING="cp1252", PYTHONUTF8="0")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertNotIn("Traceback", result.stderr)
+        self.assertIn("tracked '.claude/\\u017fettings.local.json'", result.stdout)
+
+    def test_claude_tracked_as_symlink_file_or_submodule_fails(self):
+        for mode in ("100644", "120000", "160000"):
+            with self.subTest(mode=mode):
+                self._stage_exact(".claude", mode)
+                result = run_guards(self.root)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn("tracked '.claude' is a symlink, file or submodule", result.stdout)
+
+    def test_paths_that_land_in_claude_on_windows_or_macos_fail(self):
+        for name in (
+            "CLAUDE~1/settings.local.json",
+            "CLAUDE~1/settings.json",
+            ".CLAUDE/agents/x.md",
+            ".Claude/skills/x/SKILL.md",
+            ".claude/SETTIN~1.JSO",
+            ".claude/Agents/x.md",
+            ".claude/SKILLS/x/SKILL.md",
+            ".claude/Commands/x.md",
+            ".claude/skills/x/skill.md",
+            ".claude/\u017fettings.json",
+            ".claude./settings.json",
+            ".claude /settings.json",
+            ".Claude./agents/x.md",
+            ".claude/settings.json.",
+            ".claude/agents./x.md",
+            ".claude/agents/x.md ",
+            ".claude/skills/x/SKILL.md.",
+            ".claude/agents/evil.MD",
+            ".claude/agents/sub/evil.Md",
+            ".claude/commands/evil.mD",
+            ".claude/commands/ns/evil.MD",
+        ):
+            with self.subTest(name=name):
+                self._git("read-tree", "--empty")
+                self._stage_exact(name)
+                result = run_guards(self.root)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn(f"tracked {name!a}", result.stdout)
+
+    def test_trailing_dot_settings_local_and_claude_file_get_their_own_errors(self):
+        for name, error in (
+            (".claude./settings.local.json", "it is machine-local"),
+            (".claude/settings.local.json. ", "it is machine-local"),
+            (".claude.", "is a symlink, file or submodule"),
+            (".CLAUDE ", "is a symlink, file or submodule"),
+        ):
+            with self.subTest(name=name):
+                self._git("read-tree", "--empty")
+                self._stage_exact(name)
+                result = run_guards(self.root)
+                self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                self.assertIn(f"tracked {name!a}", result.stdout)
+                self.assertIn(error, result.stdout)
+
+    def test_exactly_spelled_claude_paths_pass(self):
+        for name in (
+            ".claude/settings.json", ".claude/agents/x.md", ".claude/agents/sub/x.md",
+            ".claude/commands/ns/x.md", ".claude/skills/x/SKILL.md",
+        ):
+            self._stage_exact(name)
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+    def test_untracked_settings_local_passes(self):
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
+
 class SettingsKeyAllowlistTests(GuardRepoFixture):
     """GHSA-cqcv-crx7-x7q7: the guard checked allow, ask, deny and hooks and
     nothing else, so a settings.json could add keys that run commands or turn
@@ -1043,6 +1308,32 @@ class ManifestGuardTests(GuardRepoFixture):
                 self.assertEqual(result.returncode, 1, result.stdout)
                 self.assertIn(name, result.stdout)
                 self.assertIn("example-search/cli/" + name, result.stdout.replace("\\", "/"))
+
+    # GHSA-hf4m: Bun also reads bunfig.toml from the folder it runs in, and
+    # every portal CLI runs from the repo root, so a root bunfig.toml with
+    # `preload` runs its script before any portal. The template ships no
+    # bunfig.toml or .npmrc anywhere, so any copy fails, in any letter case
+    # (a Windows or macOS checkout opens BUNFIG.TOML as bunfig.toml).
+    def test_install_config_file_anywhere_fails(self):
+        for rel in ("bunfig.toml", ".npmrc", "BUNFIG.TOML", ".agents/skills/bunfig.toml", "docs/.npmrc"):
+            with self.subTest(path=rel):
+                config = self.root / rel
+                config.parent.mkdir(parents=True, exist_ok=True)
+                config.write_text('preload = ["./x.js"]\n', encoding="utf-8")
+                try:
+                    result = run_guards(self.root)
+                finally:
+                    config.unlink()
+                self.assertEqual(result.returncode, 1, result.stdout)
+                self.assertIn(rel, result.stdout.replace("\\", "/"))
+
+    def test_install_config_file_inside_node_modules_passes(self):
+        # A dependency's own config file is not repo code, as with manifests.
+        config = self.manifest.parent / "node_modules" / "some-dep" / "bunfig.toml"
+        config.parent.mkdir(parents=True)
+        config.write_text('preload = ["./x.js"]\n', encoding="utf-8")
+        result = run_guards(self.root)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_malformed_manifest_shape_fails_cleanly(self):
         for data, message in [

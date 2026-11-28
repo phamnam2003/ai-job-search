@@ -18,21 +18,32 @@ Checks:
    permission. No other top-level key, and no `permissions` key beyond allow,
    ask and deny, may appear: `env`, `apiKeyHelper`, a `statusLine` command or
    `permissions.defaultMode` would run code or switch prompts off behind the
-   lists this guard reads.
+   lists this guard reads. A tracked .claude/settings.local.json, which Claude
+   Code applies on top of settings.json, is refused outright, and so is a
+   tracked .claude that is not a directory (symlink, file or submodule), and
+   a tracked path that can land inside .claude on a Windows or macOS
+   checkout under another spelling (.CLAUDE/, the 8.3 name CLAUDE~1/, a
+   ~<digit> name inside .claude, a trailing dot or space Windows drops, a
+   case variant of agents/, commands/, skills/, settings.json or a skill's
+   SKILL.md, or an agent or command whose .md extension is in another case).
 2. .gitignore — the personal-data ignore rules must all still be present,
    and no un-allowlisted negation (!pattern) may re-include them. Catches
    weakening that would make future users silently commit their tracker,
    profile exports, or application archives. Lines are read as git reads
-   them (leading whitespace is part of the pattern), and every .gitignore in
-   a subdirectory, which outranks the root file, is checked for negations.
+   them (BOM skipped, split on newline only, one trailing CR dropped, only
+   unescaped trailing spaces trimmed), and every .gitignore in a
+   subdirectory, which outranks the root file, is checked for negations. A
+   symlinked .gitignore is refused without being read: git 2.32 and later
+   do not read it. A .gitignore must be UTF-8.
 3. .agents/**/package.json — no npm/bun lifecycle scripts (preinstall,
    install, postinstall, preprepare, prepare, postprepare, prepack), no
-   trustedDependencies, no workspaces, and no bunfig.toml or .npmrc beside
-   the manifest. Catches code execution smuggled into `bun install`, and a
-   registry swap.
+   trustedDependencies, no workspaces, and no bunfig.toml or .npmrc anywhere
+   in the repo outside node_modules. Catches code execution smuggled into
+   `bun install`, a registry swap, and a root bunfig.toml whose `preload`
+   would run before every portal CLI.
 4. Skill and command frontmatter — every `allowed-tools` entry in
    .claude/skills/*/SKILL.md, .agents/skills/*/SKILL.md and
-   .claude/commands/*.md must be in ALLOWED_SKILL_TOOLS (a portal skill may
+   .claude/commands/**/*.md must be in ALLOWED_SKILL_TOOLS (a portal skill may
    instead grant exactly its own CLI). Claude Code pre-approves these for the
    turn that invokes the skill, with no prompt, regardless of workspace trust,
    so the frontmatter is a second permission allowlist. Catches bare Bash and
@@ -128,7 +139,10 @@ REQUIRED_ASK_RULES = [
     "Edit(.claude/settings.local.json)",
     "Edit(.claude/skills/*/SKILL.md)",
     # A command's frontmatter may carry allowed-tools too (check 4 reads it).
-    "Edit(.claude/commands/*.md)",
+    # Every depth: Claude Code loads namespaced commands from subfolders, and
+    # auto mode wrote .claude/commands/<dir>/<name>.md with no prompt under a
+    # top-level-only *.md rule (GHSA-7hw2).
+    "Edit(.claude/commands/**)",
     "Edit(.claude/agents/**)",
     "Edit(.github/**)",
     "Edit(tools/security_guards.py)",
@@ -138,6 +152,19 @@ REQUIRED_ASK_RULES = [
     "Edit(tools/**)",
     "Edit(.agents/**)",
     "Edit(salary_lookup.py)",
+    # Files Bun loads by itself from the folder it runs in, with no path on the
+    # command line: a bunfig.toml `preload` runs before any portal CLI, and
+    # .npmrc reconfigures installs. Portal CLIs run from the repo root, so
+    # writing either is the same widening (GHSA-hf4m). check 3 refuses any copy.
+    "Edit(**/bunfig.toml)",
+    "Edit(**/.npmrc)",
+    # Also read by `bun run` from the repo root with no prompt: a root
+    # node_modules/<package> answers a bare import the portal's own
+    # cli/node_modules does not have (a portal copied in but not yet installed).
+    # It is gitignored, so CI never sees it; only a prompt can. A .env NODE_PATH
+    # does the same, but needs no ask rule: the Read(.env) and Read(.env.*) deny
+    # rules below also refuse writes to those files, in every mode.
+    "Edit(node_modules/**)",
     "Bash(git push:*)",
 ]
 
@@ -287,7 +314,9 @@ FORBIDDEN_SCRIPTS = {
 # beside the manifest reconfigures the install itself (registry, scopes,
 # cache), so every dependency can come from a server the portal's author
 # picked; both are refused for the same reason. tools/install_portal_clis.py
-# skips all of these.
+# skips all of these. Bun also reads a bunfig.toml from the folder it runs in,
+# which for every portal CLI is the repo root, so the guard refuses either file
+# anywhere in the repo (check_install_config_files).
 FORBIDDEN_MANIFEST_KEYS = {"trustedDependencies", "workspaces"}
 INSTALL_CONFIG_FILES = ("bunfig.toml", ".npmrc")
 
@@ -595,14 +624,16 @@ def check_permissions() -> None:
 def _gitignore_lines(path: Path) -> list[str]:
     """The patterns in a .gitignore, read the way git reads them.
 
-    git drops only unescaped trailing whitespace; leading whitespace is part of
-    the pattern. The guard used to strip both ends, so ` salary_data.json`
-    satisfied the required-rule check while git had stopped ignoring the file
-    (it now matched only a name beginning with a space).
+    git skips a leading UTF-8 BOM, splits on ``\\n`` only, drops one trailing
+    ``\\r`` and then only unescaped trailing spaces (not tabs or other
+    whitespace); leading whitespace is part of the pattern. The guard used to
+    strip both ends, so ` salary_data.json` satisfied the required-rule check
+    while git had stopped ignoring the file (it now matched only a name
+    beginning with a space).
     """
     return [
-        re.sub(r"(?<!\\)\s+$", "", line)
-        for line in path.read_text(encoding="utf-8").splitlines()
+        re.sub(r"(?<!\\)((?:\\\\)*) +$", r"\1", line.removesuffix("\r"))
+        for line in path.read_bytes().decode("utf-8-sig").split("\n")
     ]
 
 
@@ -675,10 +706,17 @@ def check_local_negations_absent_upstream() -> None:
 
 def check_gitignore() -> None:
     path = ROOT / ".gitignore"
+    if path.is_symlink():
+        errors.append(
+            ".gitignore is a symlink: git refuses to read an in-tree .gitignore that is a "
+            "symlink, so none of its rules apply and personal data is no longer ignored. "
+            "Commit it as a regular file."
+        )
+        return
     try:
         lines = _gitignore_lines(path)
-    except OSError as exc:
-        errors.append(f".gitignore: unreadable: {exc}")
+    except (OSError, UnicodeDecodeError) as exc:
+        errors.append(f".gitignore: unreadable (must be UTF-8): {exc}")
         return
     rules = set(lines)
     for rule in REQUIRED_IGNORE_RULES:
@@ -701,6 +739,9 @@ def check_gitignore() -> None:
                 "ALLOWED_IGNORE_NEGATIONS in tools/security_guards.py in the same PR "
                 "(on a fork, list it in .github/security-guards-local.txt instead)."
             )
+
+
+def check_subdirectory_gitignores() -> None:
     # A .gitignore in a subdirectory outranks the root file for paths under it,
     # so a negation there re-includes personal data the root rules excluded.
     # The allowlist above is written for the root file (a pattern is relative
@@ -708,10 +749,17 @@ def check_gitignore() -> None:
     # as "<dir>/.gitignore:!pattern". None is shipped.
     for sub in _other_gitignores():
         rel = sub.relative_to(ROOT).as_posix()
+        if sub.is_symlink():
+            errors.append(
+                f"{rel} is a symlink: git 2.32 and later do not read an in-tree .gitignore "
+                "that is a symlink and older git does, so its rules depend on the git version. "
+                "Commit it as a regular file."
+            )
+            continue
         try:
             sub_lines = _gitignore_lines(sub)
-        except OSError as exc:
-            errors.append(f"{rel}: unreadable: {exc}")
+        except (OSError, UnicodeDecodeError) as exc:
+            errors.append(f"{rel}: unreadable (must be UTF-8): {exc}")
             continue
         for line in sub_lines:
             if line.startswith("!") and f"{rel}:{line}" not in ALLOWED_IGNORE_NEGATIONS:
@@ -758,18 +806,67 @@ def check_package_manifests() -> None:
                 f"{relpath}: workspaces is forbidden - each workspace package brings its own "
                 "lifecycle scripts, which this check never reads, into `bun install`."
             )
-        for name in INSTALL_CONFIG_FILES:
-            config = manifest.parent / name
-            if config.exists():
+
+
+def check_install_config_files() -> None:
+    """No bunfig.toml or .npmrc anywhere in the repo, outside node_modules.
+
+    Bun reads both from the folder it runs in, with no path on the command
+    line. Every portal CLI runs from the repo root (`bun run
+    .agents/skills/<name>/cli/src/cli.ts`), so a root bunfig.toml with
+    `preload` runs its script before any portal, under the portal's own grant
+    (GHSA-hf4m). One beside a portal manifest reconfigures `bun install`
+    (registry, scopes, trusted packages) for every fork user (GHSA-wq7j). The
+    template ships neither, so any copy fails, tracked or not. Names compare
+    case-insensitively: a Windows or macOS checkout opens BUNFIG.TOML as
+    bunfig.toml.
+    """
+    wanted = {name.casefold() for name in INSTALL_CONFIG_FILES}
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d.casefold() not in (".git", "node_modules")]
+        for name in filenames:
+            if name.casefold() in wanted:
+                rel = (Path(dirpath) / name).relative_to(ROOT).as_posix()
                 errors.append(
-                    f"{config.relative_to(ROOT)}: a {name} beside a portal manifest is forbidden - "
-                    "it reconfigures `bun install` itself (registry, scopes, trusted packages) for "
-                    "every fork user."
+                    f"{rel}: a {name} in the repo is forbidden - Bun reads it by itself from the "
+                    "folder it runs in, so at the repo root its `preload` runs code before every "
+                    "portal CLI, and beside a portal manifest it reconfigures `bun install` "
+                    "(registry, scopes) for every fork user."
                 )
 
 
-def check_tracked_node_modules() -> None:
-    """Fail on any tracked path with a ``node_modules`` component.
+_CLAUDE_ENTRIES = {"agents", "commands", "skills", "settings.json"}
+
+
+def _win_spelling(rel: str) -> str:
+    return "/".join(part.rstrip(". ") for part in rel.split("/"))
+
+
+def _claude_alias(rel: str) -> bool:
+    """A tracked path that a case-insensitive, 8.3-name or Win32 checkout folds
+    into a .claude path the checks here read only under its exact spelling."""
+    parts = rel.split("/")
+    if parts[0] != ".claude":
+        return _win_spelling(parts[0]).casefold() == ".claude" or bool(re.search(r"~\d", parts[0]))
+    if re.search(r"~\d", rel) or _win_spelling(rel) != rel:
+        return True
+    if len(parts) > 1 and parts[1].casefold() in _CLAUDE_ENTRIES and parts[1] not in _CLAUDE_ENTRIES:
+        return True
+    if (
+        len(parts) > 2 and parts[1] in ("agents", "commands")
+        and parts[-1].casefold().endswith(".md") and not parts[-1].endswith(".md")
+    ):
+        return True
+    return (
+        len(parts) == 4 and parts[1] == "skills"
+        and parts[3].casefold() == "skill.md" and parts[3] != "SKILL.md"
+    )
+
+
+def check_tracked_paths() -> None:
+    """Fail on any tracked path with a ``node_modules`` component, a tracked
+    ``.claude/settings.local.json`` (machine-local, read on top of settings.json),
+    or a tracked ``.claude`` that is not a directory (symlink, file or submodule).
 
     ``.gitignore``'s old ``node_modules/`` rule matched directories only, so a
     symlink or plain file named ``node_modules`` (a contributor's local symlink
@@ -788,9 +885,32 @@ def check_tracked_node_modules() -> None:
     if proc.returncode != 0:
         return
     for rel in proc.stdout.decode("utf-8", errors="replace").split("\x00"):
+        folded = _win_spelling(rel).casefold()
+        if _claude_alias(rel):
+            errors.append(
+                f"tracked {rel!a}: its letter case (extension included), a trailing dot or "
+                "space, or a `~<digit>` that can be an 8.3 short name can make it a .claude "
+                "path on a Windows or macOS checkout, where it can replace settings.json or add "
+                "settings.local.json, agents, commands or skills that the checks here, which "
+                "read the exact spellings, never see. Rename or `git rm --cached` it."
+            )
+        if folded == ".claude":
+            errors.append(
+                f"tracked {rel!a} is a symlink, file or submodule, not a directory: Claude Code "
+                "loads settings.json, settings.local.json, agents and skills from wherever it "
+                "points on each machine (a link target, a submodule checkout), which need not "
+                "be what CI read. Commit .claude as a real directory."
+            )
+        if folded == ".claude/settings.local.json":
+            errors.append(
+                f"tracked {rel!a}: it is machine-local and ignored, and its env, "
+                "apiKeyHelper, statusLine, hooks and permissions apply on top of "
+                "settings.json without passing this guard's allowlists. Run `git rm --cached` "
+                "on it and move any shared setting into .claude/settings.json."
+            )
         if rel and "node_modules" in rel.split("/"):
             errors.append(
-                f"tracked path inside node_modules: {rel!r}. Installed dependencies "
+                f"tracked path inside node_modules: {rel!a}. Installed dependencies "
                 "(or a symlink standing in for them) must never be committed: run "
                 "`git rm --cached` on it; .gitignore's `node_modules` rule keeps it out."
             )
@@ -848,10 +968,13 @@ def check_agent_tool_grants() -> None:
 
 
 def main() -> int:
+    sys.stdout.reconfigure(errors="backslashreplace")
     check_permissions()
     check_gitignore()
+    check_subdirectory_gitignores()
     check_package_manifests()
-    check_tracked_node_modules()
+    check_install_config_files()
+    check_tracked_paths()
     check_skill_tool_grants()
     check_agent_tool_grants()
     if errors:
@@ -861,7 +984,8 @@ def main() -> int:
         return 1
     print(
         "security_guards: OK (permissions allowlist, hooks allowlist, gitignore rules, "
-        "package manifests, no tracked node_modules, skill/command allowed-tools, "
+        "no symlinked .gitignore, package manifests, no bunfig.toml/.npmrc, no tracked node_modules, "
+        "settings.local.json, non-directory or aliased .claude, skill/command allowed-tools, "
         "load-time commands, agent tools and modes)"
     )
     return 0
